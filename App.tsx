@@ -6,7 +6,7 @@ import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'
 import Navigation from './navigation'
 
-export default function App() {
+export default function App(): null | JSX.Element {
   const isLoadingComplete = useCachedResources()
   const colorScheme = useColorScheme()
 

@@ -18,7 +18,7 @@ export default function Navigation({
   colorScheme,
 }: {
   colorScheme: ColorSchemeName
-}) {
+}): JSX.Element {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
