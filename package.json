@@ -56,9 +56,10 @@
     }
   },
   "lint-staged": {
-    "*": [
+    "**/*.ts": [
       "prettier --write",
-      "yarn run lint"
+      "yarn run lint",
+      "yarn run test"
     ]
   }
 }
