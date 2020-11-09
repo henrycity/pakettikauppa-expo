@@ -57,7 +57,7 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
+    "*.{tsx,ts}": [
       "prettier --write",
       "yarn run lint"
     ]
