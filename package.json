@@ -59,8 +59,7 @@
   "lint-staged": {
     "*": [
       "prettier --write",
-      "yarn run lint",
-      "yarn run test"
+      "yarn run lint"
     ]
   }
 }
