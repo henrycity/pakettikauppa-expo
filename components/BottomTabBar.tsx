@@ -29,7 +29,10 @@ export default function BottomTabBar(): JSX.Element {
       <TabBarItem
         text={ScreenNames.Shipments}
         active={activeScreen === ScreenNames.Shipments}
-        onPress={() => handleLinkPress(ScreenNames.Shipments)}
+        onPress={() => {
+          setActiveScreen(ScreenNames.Shipments)
+          navigation.navigate(ScreenNames.Shipments)
+        }}
       />
     </TabBar>
   )
