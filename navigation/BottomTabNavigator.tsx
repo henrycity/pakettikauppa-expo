@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
-
+import HeaderLinks from '../components/HeaderLinks'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import TabOneScreen from '../screens/TabOneScreen'
@@ -51,13 +51,13 @@ function TabBarIcon(props: { name: string; color: string }) {
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const TabOneStack = createStackNavigator<TabOneParamList>()
 
-function TabOneNavigator() {
+function TabOneNavigator({ navigation }) {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        options={{ ...headerOptions(navigation) }}
       />
     </TabOneStack.Navigator>
   )
@@ -65,14 +65,21 @@ function TabOneNavigator() {
 
 const TabTwoStack = createStackNavigator<TabTwoParamList>()
 
-function TabTwoNavigator() {
+function TabTwoNavigator({ navigation }) {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        options={{ ...headerOptions(navigation) }}
       />
     </TabTwoStack.Navigator>
   )
+}
+
+function headerOptions(navigation) {
+  return {
+    headerTitle: 'App',
+    headerRight: () => <HeaderLinks navigation={navigation} />,
+  }
 }
