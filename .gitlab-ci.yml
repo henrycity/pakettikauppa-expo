@@ -13,16 +13,16 @@ before_script:
 #  stage: test
 #  script:
     #- yarn run jest --ci
-netlify-deployment:
-  stage: deploy-netlify
-  script:
-    - yarn add netlify-cli
-    - yarn global add expo-cli
-    - yarn expo build:web
-    - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
-#expo-deployments:
-#  stage: deploy-expo
+#netlify-deployment:
+#  stage: deploy-netlify
 #  script:
-#    - apk add --no-cache bash
-#    - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-#    - yarn run expo publish --non-interactive
+#    - yarn add netlify-cli
+#    - yarn global add expo-cli
+#    - yarn expo build:web
+    #- yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+expo-deployments:
+  stage: deploy-expo
+  script:
+    - apk add --no-cache bash
+    - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+    - yarn run expo publish --non-interactive
