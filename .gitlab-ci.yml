@@ -1,30 +1,26 @@
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e .yarn -e .jest -e node_modules/
 image: node:14.15.0-alpine
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - ~/.npm
-    - .jest
-    - node_modules/
 stages:
   - test
-  - deploy-expo
-  - deploy-netlify
+  - deploy
 before_script:
-  - yarn install --frozen-lockfile
-  - yarn global add expo-cli
+  - yarn install --cache-folder .yarn --frozen-lockfile
 jest-tests:
   stage: test
   script:
-    - yarn run jest --ci
+    - yarn jest --ci --cacheDirectory .jest
 expo-deployments:
-  stage: deploy-expo
+  stage: deploy
   script:
-    - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-    - yarn run expo publish --non-interactive
+    - yarn global add expo-cli --cache-folder .yarn
+    - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+    - yarn expo publish --non-interactive
 netlify-deployment:
-  stage: deploy-netlify
+  stage: deploy
   script:
-    - yarn add netlify-cli
+    - yarn global add expo-cli --cache-folder .yarn
+    - yarn global add netlify-cli --cache-folder .yarn
     - yarn expo build:web
     - echo "/*    /index.html   200" > web-build/_redirects
-    - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+    - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
