@@ -6,16 +6,23 @@ cache:
     - .jest
 stages:
   - test
-  - deploy
+  - deploy-expo
+  - deploy-netlify
 before_script:
   - yarn install --frozen-lockfile
 jest-tests:
   stage: test
   script:
     - yarn run jest --ci
-expo-deployments:
-  stage: deploy
+netlify-deployment:
+  stage: deploy-netlify
   script:
-    - apk add --no-cache bash
-    - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-    - yarn run expo publish --non-interactive
+    - yarn add netlify-cli
+    - expo build:web
+    - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+#expo-deployments:
+#  stage: deploy-expo
+#  script:
+#    - apk add --no-cache bash
+#    - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+#    - yarn run expo publish --non-interactive

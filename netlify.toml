@@ -1,0 +1,4 @@
+# Netlify build folder name
+
+[build]
+  publish = "web-build"
