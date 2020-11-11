@@ -1,11 +1,7 @@
 import * as Linking from 'expo-linking'
 
 export default {
-  prefixes: [
-    Linking.makeUrl('/'),
-    'localhost:5000',
-    'https://aalto-pakettikauppa.netlify.app',
-  ],
+  prefixes: [Linking.makeUrl('/'), 'https://aalto-pakettikauppa.netlify.app'],
   config: {
     screens: {
       Root: {
