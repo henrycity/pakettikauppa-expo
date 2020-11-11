@@ -1,0 +1,21 @@
+image: node:14.15.0
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - ~/.npm
+    - .jest
+stages:
+  - test
+  - deploy
+before_script:
+  - yarn install --frozen-lockfile
+jest-tests:
+  stage: test
+  script:
+    - yarn run jest --ci
+expo-deployments:
+  stage: deploy
+  script:
+    - apk add --no-cache bash
+    - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+    - yarn run expo publish --non-interactive
