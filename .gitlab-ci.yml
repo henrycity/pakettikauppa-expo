@@ -6,21 +6,23 @@ cache:
     - .jest
     - node_modules/
 stages:
+  - test
   - deploy-expo
+  - deploy-netlify
 before_script:
   - yarn install --frozen-lockfile
   - yarn global add expo-cli
-#jest-tests:
-#  stage: test
-#  script:
-    #- yarn run jest --ci
-#netlify-deployment:
-#  stage: deploy-netlify
-#  script:
-#    - yarn add netlify-cli
-#    - yarn global add expo-cli
-#    - yarn expo build:web
-    #- yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+jest-tests:
+  stage: test
+  script:
+    - yarn run jest --ci
+netlify-deployment:
+  stage: deploy-netlify
+  script:
+    - yarn add netlify-cli
+    - yarn global add expo-cli
+    - yarn expo build:web
+    - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
 expo-deployments:
   stage: deploy-expo
   script:
