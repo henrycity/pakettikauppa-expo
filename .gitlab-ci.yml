@@ -1,4 +1,4 @@
-image: node:14.15.0
+image: node:14.15.0-alpine
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -14,15 +14,16 @@ before_script:
 jest-tests:
   stage: test
   script:
-    - yarn run jest --ci
-netlify-deployment:
-  stage: deploy-netlify
-  script:
-    - yarn add netlify-cli
-    - yarn expo build:web
-    - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+    - yarn jest --ci
 expo-deployments:
   stage: deploy-expo
   script:
-    - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-    - yarn run expo publish --non-interactive
+    - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+    - yarn expo publish --non-interactive
+netlify-deployment:
+  stage: deploy-netlify
+  script:
+    - yarn global add netlify-cli
+    - yarn expo build:web
+    - echo "/*    /index.html   200" > web-build/_redirects
+    - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
