@@ -4,18 +4,26 @@ cache:
   paths:
     - ~/.npm
     - .jest
+    - node_modules/
 stages:
   - test
-  - deploy
+  - deploy-expo
+  - deploy-netlify
 before_script:
   - yarn install --frozen-lockfile
+  - yarn global add expo-cli
 jest-tests:
   stage: test
   script:
     - yarn run jest --ci
 expo-deployments:
-  stage: deploy
+  stage: deploy-expo
   script:
-    - apk add --no-cache bash
     - yarn run expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
     - yarn run expo publish --non-interactive
+netlify-deployment:
+  stage: deploy-netlify
+  script:
+    - yarn add netlify-cli
+    - yarn expo build:web
+    - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
