@@ -20,7 +20,6 @@ netlify-deployment:
   stage: deploy-netlify
   script:
     - yarn add netlify-cli
-    - yarn global add expo-cli
     - yarn expo build:web
     - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
 expo-deployments:
