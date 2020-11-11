@@ -9,10 +9,10 @@ stages:
   - deploy-netlify
 before_script:
   - yarn install --frozen-lockfile
-jest-tests:
-  stage: test
-  script:
-    - yarn run jest --ci
+#jest-tests:
+#  stage: test
+#  script:
+    #- yarn run jest --ci
 netlify-deployment:
   stage: deploy-netlify
   script:
