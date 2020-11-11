@@ -17,6 +17,7 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['web-build/*'],
   rules: {
     'no-console': ['error', { allow: ['warn'] }],
   },

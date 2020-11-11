@@ -26,4 +26,5 @@ netlify-deployment:
   script:
     - yarn add netlify-cli
     - yarn expo build:web
+    - echo "/*    /index.html   200" > web-build/_redirects
     - yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
