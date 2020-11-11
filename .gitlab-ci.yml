@@ -4,6 +4,7 @@ cache:
   paths:
     - ~/.npm
     - .jest
+    - node_modules/
 stages:
   - test
   - deploy-expo
