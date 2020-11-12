@@ -24,12 +24,8 @@ export default function HeaderLinks({ navigation }): JSX.Element {
         onPress={() => navigation.navigate('Profile')}
       />
       <HeaderLink
-        text="Tab One"
-        onPress={() => navigation.navigate('TabOne')}
-      />
-      <HeaderLink
-        text="Tab Two"
-        onPress={() => navigation.navigate('TabTwo')}
+        text="Shipments"
+        onPress={() => navigation.navigate('Shipments')}
       />
     </View>
   )
