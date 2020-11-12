@@ -2,16 +2,18 @@ import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
 import { Text, View } from '../components/Themed'
+import { osName } from 'react-device-detect'
 
-export default function ProfileTab(): JSX.Element {
+export default function ShipmentScreen(): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile Tab!</Text>
+      <Text style={styles.title}>Shipments Screen!</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
+      <Text>You are using {osName}.</Text>
     </View>
   )
 }

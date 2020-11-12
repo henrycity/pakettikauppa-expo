@@ -8,22 +8,17 @@ export default {
         screens: {
           Home: {
             screens: {
-              HomeTab: 'home',
+              HomeScreen: 'home',
             },
           },
           Profile: {
             screens: {
-              ProfileTab: 'profile',
+              ProfileScreen: 'profile',
             },
           },
-          TabOne: {
+          Shipments: {
             screens: {
-              TabOneScreen: 'one',
-            },
-          },
-          TabTwo: {
-            screens: {
-              TabTwoScreen: 'two',
+              ShipmentScreen: 'shipments',
             },
           },
         },
