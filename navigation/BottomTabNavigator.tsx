@@ -1,21 +1,19 @@
-import { Ionicons, Entypo } from '@expo/vector-icons'
+import { Ionicons, Entypo, Feather } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
 import HeaderLinks from '../components/HeaderLinks'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
-import TabOneScreen from '../screens/TabOneScreen'
-import TabTwoScreen from '../screens/TabTwoScreen'
-import HomeTab from '../screens/HomeTab'
-import ProfileTab from '../screens/ProfileTab'
+import HomeScreen from '../screens/HomeScreen'
+import ProfileScreen from '../screens/ProfileScreen'
+import ShipmentScreen from '../screens/ShipmentScreen'
 import { osName } from 'react-device-detect'
 import {
   BottomTabParamList,
-  HomeTabParamList,
-  ProfileTabParamList,
-  TabOneParamList,
-  TabTwoParamList,
+  HomeParamList,
+  ProfileParamList,
+  ShipmentParamList,
 } from '../types'
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
@@ -29,7 +27,7 @@ export default function BottomTabNavigator(): JSX.Element {
     >
       <BottomTab.Screen
         name="Home"
-        component={HomeTabNavigator}
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Entypo name="home" size={24} color={color} />
@@ -38,7 +36,7 @@ export default function BottomTabNavigator(): JSX.Element {
       />
       <BottomTab.Screen
         name="Profile"
-        component={ProfileTabNavigator}
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="md-person" size={24} color={color} />
@@ -46,20 +44,11 @@ export default function BottomTabNavigator(): JSX.Element {
         }}
       />
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Shipments"
+        component={ShipmentNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-code" color={color} />
+            <Feather name="package" size={24} color={color} />
           ),
         }}
       />
@@ -73,69 +62,59 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />
 }
 
-const HomeTabStack = createStackNavigator<HomeTabParamList>()
+const HomeStack = createStackNavigator<HomeParamList>()
 
-function HomeTabNavigator({ navigation }) {
+function HomeNavigator({ navigation }) {
   osName == 'Linux' || osName == 'Windows'
     ? navigation.setOptions({ tabBarVisible: false })
-    : 1
+    : navigation.setOptions({ tabBarVisible: true })
   return (
-    <HomeTabStack.Navigator>
-      <HomeTabStack.Screen
-        name="HomeTab"
-        component={HomeTab}
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
         options={{ ...headerOptions(navigation) }}
       />
-    </HomeTabStack.Navigator>
+    </HomeStack.Navigator>
   )
 }
 
-const ProfileTabStack = createStackNavigator<ProfileTabParamList>()
+const ShipmentStack = createStackNavigator<ShipmentParamList>()
 
-function ProfileTabNavigator({ navigation }) {
+function ShipmentNavigator({ navigation }) {
   osName == 'Linux' || osName == 'Windows'
-    ? navigation.setOptions({ tabBarVisible: false })
-    : 1
+    ? navigation.setOptions({ tabBarVisible: true })
+    : navigation.setOptions({ tabBarVisible: true })
   return (
-    <ProfileTabStack.Navigator>
-      <ProfileTabStack.Screen
-        name="ProfileTab"
-        component={ProfileTab}
+    <ShipmentStack.Navigator>
+      <ShipmentStack.Screen
+        name="ShipmentScreen"
+        component={ShipmentScreen}
         options={{ ...headerOptions(navigation) }}
       />
-    </ProfileTabStack.Navigator>
+    </ShipmentStack.Navigator>
+  )
+}
+
+const ProfileStack = createStackNavigator<ProfileParamList>()
+
+function ProfileNavigator({ navigation }) {
+  osName == 'Linux' || osName == 'Windows'
+    ? navigation.setOptions({ tabBarVisible: false })
+    : navigation.setOptions({ tabBarVisible: true })
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ ...headerOptions(navigation) }}
+      />
+    </ProfileStack.Navigator>
   )
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>()
-
-function TabOneNavigator({ navigation }) {
-  return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ ...headerOptions(navigation) }}
-      />
-    </TabOneStack.Navigator>
-  )
-}
-
-const TabTwoStack = createStackNavigator<TabTwoParamList>()
-
-function TabTwoNavigator({ navigation }) {
-  return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ ...headerOptions(navigation) }}
-      />
-    </TabTwoStack.Navigator>
-  )
-}
 
 function headerOptions(navigation) {
   return {

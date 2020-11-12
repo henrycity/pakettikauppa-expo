@@ -2,6 +2,7 @@ import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
 import { Text, View } from '../components/Themed'
+import { osName } from 'react-device-detect'
 
 export default function HomeTab(): JSX.Element {
   return (
@@ -12,6 +13,7 @@ export default function HomeTab(): JSX.Element {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
+      <Text>You are using {osName}.</Text>
     </View>
   )
 }
