@@ -18,6 +18,11 @@ function HeaderLink({ text, onPress }: HeaderLinkProps) {
 export default function HeaderLinks({ navigation }): JSX.Element {
   return (
     <View style={styles.container}>
+      <HeaderLink text="Home" onPress={() => navigation.navigate('Home')} />
+      <HeaderLink
+        text="Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
       <HeaderLink
         text="Tab One"
         onPress={() => navigation.navigate('TabOne')}

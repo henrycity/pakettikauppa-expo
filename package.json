@@ -28,13 +28,15 @@
     "expo-status-bar": "~1.0.2",
     "expo-web-browser": "~8.5.0",
     "react": "16.13.1",
+    "react-device-detect": "^1.14.0",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
     "react-native-web": "~0.13.12",
-    "swr": "^0.3.8"
+    "swr": "^0.3.8",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
