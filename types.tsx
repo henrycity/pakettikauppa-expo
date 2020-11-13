@@ -20,3 +20,5 @@ export type ProfileParamList = {
 export type ShipmentParamList = {
   Shipment: undefined
 }
+
+export type ScreenName = 'Home' | 'Profile' | 'Shipments'

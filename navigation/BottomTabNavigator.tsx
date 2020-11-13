@@ -6,12 +6,12 @@ import * as React from 'react'
 
 import HeaderLinks from '../components/HeaderLinks'
 import Colors from '../constants/Colors'
+import useAuthorization from '../hooks/useAuthorization'
 import useColorScheme from '../hooks/useColorScheme'
 import useDeviceType from '../hooks/useDeviceType'
 import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ShipmentScreen from '../screens/ShipmentScreen'
-
 import {
   BottomTabParamList,
   HomeParamList,
@@ -24,7 +24,8 @@ const Stack = createStackNavigator()
 
 export default function BottomTabNavigator({ navigation }): JSX.Element {
   const colorScheme = useColorScheme()
-  const [loaded, deviceType] = useDeviceType()
+  const [diviceTypeLoaded, deviceType] = useDeviceType()
+  const { authLoaded, isAuthorized } = useAuthorization()
   if (deviceType !== DeviceType.PHONE) {
     return (
       <Stack.Navigator

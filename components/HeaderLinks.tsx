@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 
+import useAuthorization from '../hooks/useAuthorization'
 import { Text } from './Themed'
 
 interface HeaderLinkProps {
@@ -17,17 +18,24 @@ function HeaderLink({ text, onPress }: HeaderLinkProps) {
 }
 
 export default function HeaderLinks({ navigation }): JSX.Element {
+  const { isAuthorized } = useAuthorization()
   return (
     <View style={styles.container}>
       <HeaderLink text="Home" onPress={() => navigation.navigate('Home')} />
-      <HeaderLink
-        text="Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
-      <HeaderLink
-        text="Shipments"
-        onPress={() => navigation.navigate('Shipments')}
-      />
+
+      {isAuthorized('Profile') ? (
+        <HeaderLink
+          text="Profile"
+          onPress={() => navigation.navigate('Profile')}
+        />
+      ) : null}
+
+      {isAuthorized('Shipments') ? (
+        <HeaderLink
+          text="Shipments"
+          onPress={() => navigation.navigate('Shipments')}
+        />
+      ) : null}
     </View>
   )
 }
