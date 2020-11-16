@@ -1,0 +1,16 @@
+import { DeviceType, getDeviceTypeAsync } from 'expo-device'
+import { useEffect, useState } from 'react'
+
+export default function useDeviceType(): [boolean, DeviceType] {
+  const [loaded, setLoaded] = useState(false)
+  const [deviceType, setDeviceType] = useState<DeviceType | null>(null)
+
+  useEffect(() => {
+    getDeviceTypeAsync().then((type) => {
+      setDeviceType(type)
+      setLoaded(true)
+    })
+  }, [])
+
+  return [loaded, deviceType]
+}
