@@ -1,0 +1,30 @@
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e .yarn -e .jest -e node_modules/
+image: node:14.15.0-alpine
+stages:
+  - test
+  - deploy
+before_script:
+  - yarn install --cache-folder .yarn --frozen-lockfile
+jest-tests:
+  stage: test
+  script:
+    - yarn jest --ci --cacheDirectory .jest
+expo-deployments:
+  stage: deploy
+  script:
+    - yarn global add expo-cli --cache-folder .yarn
+    - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+    - yarn expo publish --non-interactive
+  only:
+    - master
+netlify-deployment:
+  stage: deploy
+  script:
+    - yarn global add expo-cli --cache-folder .yarn
+    - yarn global add netlify-cli --cache-folder .yarn
+    - yarn expo build:web
+    - echo "/*    /index.html   200" > web-build/_redirects
+    - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+  only:
+    - master
