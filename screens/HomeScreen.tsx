@@ -1,19 +1,24 @@
+import { DeviceType } from 'expo-device'
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
-import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
+import useDeviceType from '../hooks/useDeviceType'
 
-export default function TabTwoScreen(): JSX.Element {
+export default function HomeScreen(): JSX.Element {
+  const [loaded, deviceType] = useDeviceType()
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={styles.title}>Home Screen!</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <EditScreenInfo path="/screens/TabTwoScreen.js" />
+      <Text>
+        You are using{' '}
+        {loaded && deviceType !== DeviceType.PHONE ? 'web' : 'mobile'}.
+      </Text>
     </View>
   )
 }
