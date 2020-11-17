@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import useSWR from 'swr'
 
 import { ScreenName } from '../types'
 
@@ -7,25 +8,27 @@ interface Permission {
 }
 
 interface AuthState {
-  authHasLoaded: boolean
   isAuthorized: (screenName: ScreenName) => boolean
+  isLoading: boolean
+  isError: any
 }
 
 export default function useAuthorization(): AuthState {
-  // TODO: Replace following useState and useEffect hooks with SWR implementation
+  const { data, error } = useSWR('/permissions')
   const [permissions, setPermissions] = useState<Permission[]>([])
-  const [isLoaded, setLoaded] = useState(false)
+
   useEffect(() => {
-    setPermissions([{ screenName: 'Profile' }, { screenName: 'Shipments' }])
-    setLoaded(true)
-  }, [])
+    if (data) setPermissions(data)
+  }, [data, error])
 
   const isAuthorized = (screenName: ScreenName) =>
-    permissions.find((permission) => permission.screenName === screenName) !=
-    null
+    permissions.find(
+      (permission: Permission) => permission.screenName === screenName
+    ) != null
 
   return {
-    authHasLoaded: isLoaded,
     isAuthorized: (screenName: ScreenName) => isAuthorized(screenName),
+    isLoading: !error && !data,
+    isError: error,
   }
 }

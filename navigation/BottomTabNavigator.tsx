@@ -2,13 +2,13 @@ import { Ionicons, Entypo, Feather } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { DeviceType } from 'expo-device'
-import * as React from 'react'
+import React, { useContext } from 'react'
 
+import { AuthorizationContext } from '../components/AuthorizationContextProvider'
+import { DeviceTypeContext } from '../components/DeviceTypeContextProvider'
 import HeaderLinks from '../components/HeaderLinks'
 import Colors from '../constants/Colors'
-import useAuthorization from '../hooks/useAuthorization'
 import useColorScheme from '../hooks/useColorScheme'
-import useDeviceType from '../hooks/useDeviceType'
 import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ShipmentScreen from '../screens/ShipmentScreen'
@@ -24,8 +24,8 @@ const Stack = createStackNavigator()
 
 export default function BottomTabNavigator({ navigation }): JSX.Element {
   const colorScheme = useColorScheme()
-  const [diviceTypeLoaded, deviceType] = useDeviceType()
-  const { authLoaded, isAuthorized } = useAuthorization()
+  const isAuthorized = useContext(AuthorizationContext)
+  const deviceType = useContext(DeviceTypeContext)
   if (deviceType !== DeviceType.PHONE) {
     return (
       <Stack.Navigator
@@ -37,16 +37,22 @@ export default function BottomTabNavigator({ navigation }): JSX.Element {
           component={HomeScreen}
           options={{ ...HeaderOptions(navigation) }}
         />
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{ ...HeaderOptions(navigation) }}
-        />
-        <Stack.Screen
-          name="Shipments"
-          component={ShipmentScreen}
-          options={{ ...HeaderOptions(navigation) }}
-        />
+
+        {isAuthorized('Profile') ? (
+          <Stack.Screen
+            name="Profile"
+            component={ProfileScreen}
+            options={{ ...HeaderOptions(navigation) }}
+          />
+        ) : null}
+
+        {isAuthorized('Shipments') ? (
+          <Stack.Screen
+            name="Shipments"
+            component={ShipmentScreen}
+            options={{ ...HeaderOptions(navigation) }}
+          />
+        ) : null}
       </Stack.Navigator>
     )
   } else {
@@ -64,24 +70,30 @@ export default function BottomTabNavigator({ navigation }): JSX.Element {
             ),
           }}
         />
-        <BottomTab.Screen
-          name="Profile"
-          component={ProfileNavigator}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Ionicons name="md-person" size={24} color={color} />
-            ),
-          }}
-        />
-        <BottomTab.Screen
-          name="Shipments"
-          component={ShipmentNavigator}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Feather name="package" size={24} color={color} />
-            ),
-          }}
-        />
+
+        {isAuthorized('Profile') ? (
+          <BottomTab.Screen
+            name="Profile"
+            component={ProfileNavigator}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="md-person" size={24} color={color} />
+              ),
+            }}
+          />
+        ) : null}
+
+        {isAuthorized('Shipments') ? (
+          <BottomTab.Screen
+            name="Shipments"
+            component={ShipmentNavigator}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Feather name="package" size={24} color={color} />
+              ),
+            }}
+          />
+        ) : null}
       </BottomTab.Navigator>
     )
   }
@@ -133,11 +145,11 @@ function ProfileNavigator({ navigation }) {
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 
 function HeaderOptions(navigation) {
-  const [loaded, deviceType] = useDeviceType()
+  const deviceType = useContext(DeviceTypeContext)
   return {
     headerTitle: 'Pakettikauppa',
     headerRight: () =>
-      deviceType != DeviceType.PHONE ? (
+      deviceType !== DeviceType.PHONE ? (
         <HeaderLinks navigation={navigation} />
       ) : null,
     headerLeft: null,

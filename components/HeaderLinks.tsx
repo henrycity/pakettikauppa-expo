@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 
-import useAuthorization from '../hooks/useAuthorization'
+import { AuthorizationContext } from './AuthorizationContextProvider'
 import { Text } from './Themed'
 
 interface HeaderLinkProps {
@@ -18,7 +18,7 @@ function HeaderLink({ text, onPress }: HeaderLinkProps) {
 }
 
 export default function HeaderLinks({ navigation }): JSX.Element {
-  const { isAuthorized } = useAuthorization()
+  const isAuthorized = useContext(AuthorizationContext)
   return (
     <View style={styles.container}>
       <HeaderLink text="Home" onPress={() => navigation.navigate('Home')} />

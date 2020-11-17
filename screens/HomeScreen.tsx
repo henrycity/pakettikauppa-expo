@@ -1,12 +1,12 @@
 import { DeviceType } from 'expo-device'
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
+import { DeviceTypeContext } from '../components/DeviceTypeContextProvider'
 import { Text, View } from '../components/Themed'
-import useDeviceType from '../hooks/useDeviceType'
 
 export default function HomeScreen(): JSX.Element {
-  const [loaded, deviceType] = useDeviceType()
+  const deviceType = useContext(DeviceTypeContext)
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home Screen!</Text>
@@ -16,8 +16,7 @@ export default function HomeScreen(): JSX.Element {
         darkColor="rgba(255,255,255,0.1)"
       />
       <Text>
-        You are using{' '}
-        {loaded && deviceType !== DeviceType.PHONE ? 'web' : 'mobile'}.
+        You are using {deviceType !== DeviceType.PHONE ? 'web' : 'mobile'}.
       </Text>
     </View>
   )
