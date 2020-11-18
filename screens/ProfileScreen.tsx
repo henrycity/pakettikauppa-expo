@@ -17,7 +17,7 @@ export default function ProfileScreen(): JSX.Element {
       />
       <Text>
         You are using{' '}
-        {loaded && deviceType !== DeviceType.PHONE ? 'web' : 'mobile'}.
+        {loaded && deviceType === DeviceType.PHONE ? 'mobile' : 'web'}.
       </Text>
     </View>
   )
