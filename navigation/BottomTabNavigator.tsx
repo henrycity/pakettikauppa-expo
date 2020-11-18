@@ -28,15 +28,10 @@ const Drawer = createDrawerNavigator()
 export default function BottomTabNavigator({ navigation }): JSX.Element {
   const colorScheme = useColorScheme()
   const [loaded, deviceType] = useDeviceType()
-  let headerData = loaded ? { ...headerOptions(navigation) } : null
   if (deviceType !== DeviceType.PHONE) {
     return (
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen
-          name="Home"
-          component={HomeNavigator}
-          options={headerData}
-        />
+        <Drawer.Screen name="Home" component={HomeNavigator} />
         <Drawer.Screen name="Profile" component={ProfileNavigator} />
         <Drawer.Screen name="Shipments" component={ShipmentNavigator} />
       </Drawer.Navigator>
@@ -92,23 +87,24 @@ function TabNavigator({ navigation }) {
 const HomeStack = createStackNavigator<HomeParamList>()
 
 function HomeNavigator({ navigation }) {
+  const [loaded, deviceType] = useDeviceType()
+
+  // Don't touch! Makes headerlinks not flash on mobile :)
+  let headerData = loaded
+    ? deviceType !== DeviceType.PHONE
+      ? {
+          ...headerOptions(navigation),
+          headerRight: () => <HeaderLinks navigation={navigation} />,
+        }
+      : { ...headerOptions(navigation) }
+    : { ...headerOptions(navigation) }
+
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="HomeScreen"
+        name="Home"
         component={HomeScreen}
-        options={{
-          title: 'Pakettikauppa',
-          ...headerOptions(navigation),
-          headerLeft: () => (
-            <Feather.Button
-              name="menu"
-              color="black"
-              backgroundColor="white"
-              onPress={() => navigation.openDrawer()}
-            ></Feather.Button>
-          ),
-        }}
+        options={headerData}
       />
     </HomeStack.Navigator>
   )
@@ -117,23 +113,24 @@ function HomeNavigator({ navigation }) {
 const ShipmentStack = createStackNavigator<ShipmentParamList>()
 
 function ShipmentNavigator({ navigation }) {
+  const [loaded, deviceType] = useDeviceType()
+
+  // Don't touch! Makes headerlinks not flash on mobile :)
+  let headerData = loaded
+    ? deviceType !== DeviceType.PHONE
+      ? {
+          ...headerOptions(navigation),
+          headerRight: () => <HeaderLinks navigation={navigation} />,
+        }
+      : { ...headerOptions(navigation) }
+    : { ...headerOptions(navigation) }
+
   return (
     <ShipmentStack.Navigator>
       <ShipmentStack.Screen
-        name="ShipmentScreen"
+        name="Shipments"
         component={ShipmentScreen}
-        options={{
-          title: 'Pakettikauppa',
-          ...headerOptions(navigation),
-          headerLeft: () => (
-            <Feather.Button
-              name="menu"
-              color="black"
-              backgroundColor="white"
-              onPress={() => navigation.openDrawer()}
-            ></Feather.Button>
-          ),
-        }}
+        options={headerData}
       />
     </ShipmentStack.Navigator>
   )
@@ -142,23 +139,24 @@ function ShipmentNavigator({ navigation }) {
 const ProfileStack = createStackNavigator<ProfileParamList>()
 
 function ProfileNavigator({ navigation }) {
+  const [loaded, deviceType] = useDeviceType()
+
+  // Don't touch! Makes headerlinks not flash on mobile :)
+  let headerData = loaded
+    ? deviceType !== DeviceType.PHONE
+      ? {
+          ...headerOptions(navigation),
+          headerRight: () => <HeaderLinks navigation={navigation} />,
+        }
+      : { ...headerOptions(navigation) }
+    : { ...headerOptions(navigation) }
+
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
-        name="ProfileScreen"
+        name="Profile"
         component={ProfileScreen}
-        options={{
-          title: 'Pakettikauppa',
-          ...headerOptions(navigation),
-          headerLeft: () => (
-            <Feather.Button
-              name="menu"
-              color="black"
-              backgroundColor="white"
-              onPress={() => navigation.openDrawer()}
-            ></Feather.Button>
-          ),
-        }}
+        options={headerData}
       />
     </ProfileStack.Navigator>
   )
@@ -170,6 +168,13 @@ function ProfileNavigator({ navigation }) {
 function headerOptions(navigation) {
   return {
     headerTitle: 'Pakettikauppa',
-    headerRight: () => <HeaderLinks navigation={navigation} />,
+    headerLeft: () => (
+      <Feather.Button
+        name="menu"
+        color="black"
+        backgroundColor="white"
+        onPress={() => navigation.openDrawer()}
+      />
+    ),
   }
 }
