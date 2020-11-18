@@ -1,6 +1,8 @@
 import { Ionicons, Entypo, Feather } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
+import { createDrawerNavigator, DrawerActions } from '@react-navigation/drawer'
+import { Button } from 'react-native'
 import { DeviceType } from 'expo-device'
 import * as React from 'react'
 
@@ -21,69 +23,70 @@ import {
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 const Stack = createStackNavigator()
+const Drawer = createDrawerNavigator()
 
 export default function BottomTabNavigator({ navigation }): JSX.Element {
   const colorScheme = useColorScheme()
   const [loaded, deviceType] = useDeviceType()
+  let headerData = loaded ? { ...headerOptions(navigation) } : null
   if (deviceType !== DeviceType.PHONE) {
     return (
-      <Stack.Navigator
-        initialRouteName="Home"
-        navigationOptions={{ headerLeft: null }}
-      >
-        <Stack.Screen
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen
           name="Home"
-          component={HomeScreen}
-          options={{ ...HeaderOptions(navigation) }}
+          component={HomeNavigator}
+          options={headerData}
         />
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{ ...HeaderOptions(navigation) }}
-        />
-        <Stack.Screen
-          name="Shipments"
-          component={ShipmentScreen}
-          options={{ ...HeaderOptions(navigation) }}
-        />
-      </Stack.Navigator>
+        <Drawer.Screen name="Profile" component={ProfileNavigator} />
+        <Drawer.Screen name="Shipments" component={ShipmentNavigator} />
+      </Drawer.Navigator>
     )
   } else {
     return (
-      <BottomTab.Navigator
-        initialRouteName="Home"
-        tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
-      >
-        <BottomTab.Screen
-          name="Home"
-          component={HomeNavigator}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Entypo name="home" size={24} color={color} />
-            ),
-          }}
-        />
-        <BottomTab.Screen
-          name="Profile"
-          component={ProfileNavigator}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Ionicons name="md-person" size={24} color={color} />
-            ),
-          }}
-        />
-        <BottomTab.Screen
-          name="Shipments"
-          component={ShipmentNavigator}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Feather name="package" size={24} color={color} />
-            ),
-          }}
-        />
-      </BottomTab.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={TabNavigator} />
+        <Drawer.Screen name="Settings" component={ProfileNavigator} />
+      </Drawer.Navigator>
     )
   }
+}
+
+function TabNavigator({ navigation }) {
+  const colorScheme = useColorScheme()
+  return (
+    <BottomTab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+    >
+      <BottomTab.Screen
+        name="Home"
+        component={HomeNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Entypo name="home" size={24} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={ProfileNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="md-person" size={24} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Shipments"
+        component={ShipmentNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Feather name="package" size={24} color={color} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
+  )
 }
 
 const HomeStack = createStackNavigator<HomeParamList>()
@@ -94,7 +97,18 @@ function HomeNavigator({ navigation }) {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ ...HeaderOptions(navigation) }}
+        options={{
+          title: 'Pakettikauppa',
+          ...headerOptions(navigation),
+          headerLeft: () => (
+            <Feather.Button
+              name="menu"
+              color="black"
+              backgroundColor="white"
+              onPress={() => navigation.openDrawer()}
+            ></Feather.Button>
+          ),
+        }}
       />
     </HomeStack.Navigator>
   )
@@ -108,7 +122,18 @@ function ShipmentNavigator({ navigation }) {
       <ShipmentStack.Screen
         name="ShipmentScreen"
         component={ShipmentScreen}
-        options={{ ...HeaderOptions(navigation) }}
+        options={{
+          title: 'Pakettikauppa',
+          ...headerOptions(navigation),
+          headerLeft: () => (
+            <Feather.Button
+              name="menu"
+              color="black"
+              backgroundColor="white"
+              onPress={() => navigation.openDrawer()}
+            ></Feather.Button>
+          ),
+        }}
       />
     </ShipmentStack.Navigator>
   )
@@ -122,7 +147,18 @@ function ProfileNavigator({ navigation }) {
       <ProfileStack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{ ...HeaderOptions(navigation) }}
+        options={{
+          title: 'Pakettikauppa',
+          ...headerOptions(navigation),
+          headerLeft: () => (
+            <Feather.Button
+              name="menu"
+              color="black"
+              backgroundColor="white"
+              onPress={() => navigation.openDrawer()}
+            ></Feather.Button>
+          ),
+        }}
       />
     </ProfileStack.Navigator>
   )
@@ -131,14 +167,9 @@ function ProfileNavigator({ navigation }) {
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 
-function HeaderOptions(navigation) {
-  const [loaded, deviceType] = useDeviceType()
+function headerOptions(navigation) {
   return {
     headerTitle: 'Pakettikauppa',
-    headerRight: () =>
-      deviceType != DeviceType.PHONE ? (
-        <HeaderLinks navigation={navigation} />
-      ) : null,
-    headerLeft: null,
+    headerRight: () => <HeaderLinks navigation={navigation} />,
   }
 }
