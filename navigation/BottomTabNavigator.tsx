@@ -4,12 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator, DrawerActions } from '@react-navigation/drawer'
 import { Button } from 'react-native'
 import { DeviceType } from 'expo-device'
-import * as React from 'react'
+import React, { useContext } from 'react'
 
+import { DeviceTypeContext } from '../components/DeviceTypeContextProvider'
 import HeaderLinks from '../components/HeaderLinks'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
-import useDeviceType from '../hooks/useDeviceType'
 import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ShipmentScreen from '../screens/ShipmentScreen'
@@ -27,7 +27,7 @@ const Drawer = createDrawerNavigator()
 
 export default function BottomTabNavigator({ navigation }): JSX.Element {
   const colorScheme = useColorScheme()
-  const [loaded, deviceType] = useDeviceType()
+  const deviceType = useContext(DeviceTypeContext)
   if (deviceType !== DeviceType.PHONE) {
     return (
       <Drawer.Navigator initialRouteName="Home">
@@ -87,24 +87,14 @@ function TabNavigator({ navigation }) {
 const HomeStack = createStackNavigator<HomeParamList>()
 
 function HomeNavigator({ navigation }) {
-  const [loaded, deviceType] = useDeviceType()
-
-  // Don't touch! Makes headerlinks not flash on mobile :)
-  let headerData = loaded
-    ? deviceType !== DeviceType.PHONE
-      ? {
-          ...headerOptions(navigation),
-          headerRight: () => <HeaderLinks navigation={navigation} />,
-        }
-      : { ...headerOptions(navigation) }
-    : { ...headerOptions(navigation) }
+  const deviceType = useContext(DeviceTypeContext)
 
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Home"
         component={HomeScreen}
-        options={headerData}
+        options={{ ...headerOptions(navigation, deviceType) }}
       />
     </HomeStack.Navigator>
   )
@@ -113,24 +103,14 @@ function HomeNavigator({ navigation }) {
 const ShipmentStack = createStackNavigator<ShipmentParamList>()
 
 function ShipmentNavigator({ navigation }) {
-  const [loaded, deviceType] = useDeviceType()
-
-  // Don't touch! Makes headerlinks not flash on mobile :)
-  let headerData = loaded
-    ? deviceType !== DeviceType.PHONE
-      ? {
-          ...headerOptions(navigation),
-          headerRight: () => <HeaderLinks navigation={navigation} />,
-        }
-      : { ...headerOptions(navigation) }
-    : { ...headerOptions(navigation) }
+  const deviceType = useContext(DeviceTypeContext)
 
   return (
     <ShipmentStack.Navigator>
       <ShipmentStack.Screen
         name="Shipments"
         component={ShipmentScreen}
-        options={headerData}
+        options={{ ...headerOptions(navigation, deviceType) }}
       />
     </ShipmentStack.Navigator>
   )
@@ -139,33 +119,20 @@ function ShipmentNavigator({ navigation }) {
 const ProfileStack = createStackNavigator<ProfileParamList>()
 
 function ProfileNavigator({ navigation }) {
-  const [loaded, deviceType] = useDeviceType()
-
-  // Don't touch! Makes headerlinks not flash on mobile :)
-  let headerData = loaded
-    ? deviceType !== DeviceType.PHONE
-      ? {
-          ...headerOptions(navigation),
-          headerRight: () => <HeaderLinks navigation={navigation} />,
-        }
-      : { ...headerOptions(navigation) }
-    : { ...headerOptions(navigation) }
+  const deviceType = useContext(DeviceTypeContext)
 
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
         name="Profile"
         component={ProfileScreen}
-        options={headerData}
+        options={{ ...headerOptions(navigation, deviceType) }}
       />
     </ProfileStack.Navigator>
   )
 }
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-
-function headerOptions(navigation) {
+function headerOptions(navigation: any, deviceType: DeviceType) {
   return {
     headerTitle: 'Pakettikauppa',
     headerLeft: () => (
@@ -176,5 +143,9 @@ function headerOptions(navigation) {
         onPress={() => navigation.openDrawer()}
       />
     ),
+    headerRight: () =>
+      deviceType !== DeviceType.PHONE ? (
+        <HeaderLinks navigation={navigation} />
+      ) : null,
   }
 }
