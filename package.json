@@ -8,7 +8,8 @@
     "eject": "expo eject",
     "test": "jest --watchAll",
     "format": "yarn prettier --write .",
-    "lint": "yarn eslint ."
+    "lint": "yarn eslint . --fix",
+    "type-check": "tsc --noEmit"
   },
   "jest": {
     "preset": "jest-expo"
@@ -53,14 +54,13 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "jest"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "prettier --write",
-      "yarn run lint",
+      "yarn lint",
       "jest --bail --findRelatedTests"
     ]
   }
