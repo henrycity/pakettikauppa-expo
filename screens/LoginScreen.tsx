@@ -1,13 +1,24 @@
+import {
+  StackActions,
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import { ResponseType } from 'expo-auth-session'
 import * as Google from 'expo-auth-session/providers/google'
 import { DeviceType } from 'expo-device'
+import * as SecureStore from 'expo-secure-store'
 import * as WebBrowser from 'expo-web-browser'
 import firebase from 'firebase'
 import * as React from 'react'
 import { StyleSheet, Button } from 'react-native'
+import { State } from 'react-native-gesture-handler'
 
 import { Text, View } from '../components/Themed'
 import useDeviceType from '../hooks/useDeviceType'
+import Navigation from '../navigation'
+import HomeScreen from './HomeScreen'
 
 //Initialize Firebase
 if (!firebase.apps.length) {
@@ -26,16 +37,25 @@ if (!firebase.apps.length) {
 WebBrowser.maybeCompleteAuthSession()
 
 export default function LoginScreen(): JSX.Element {
+  const [loaded, deviceType] = useDeviceType()
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId:
       '516972920334-28iectrmi5aksd36clssbfirlu2hmtp8.apps.googleusercontent.com',
   })
-
   React.useEffect(() => {
     if (response?.type === 'success') {
       const { id_token } = response.params
-      //     const credential = firebase.auth.GoogleAuthProvider.credential(id_token)
-      //     firebase.auth().signInWithCredential(credential)
+      const credential = firebase.auth.GoogleAuthProvider.credential(id_token)
+      firebase.auth().signInWithCredential(credential)
+      if (deviceType !== DeviceType.PHONE) {
+        // empty
+      } else {
+        try {
+          SecureStore.setItemAsync('token', id_token)
+        } catch (e) {
+          // console.log(e)
+        }
+      }
     }
   }, [response])
 
