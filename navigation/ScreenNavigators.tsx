@@ -12,9 +12,16 @@ import { useDrawerType } from '../hooks/useDrawer'
 import ProfileScreen from '../screens/ProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import ShipmentScreen from '../screens/ShipmentScreen'
-import { HomeParamList, ProfileParamList, ShipmentParamList } from '../types'
+import {
+  ProfileParamList,
+  ShipmentParamList,
+  SettingsParamList,
+  ProfileNavigatorProps,
+  ShipmentNavigatorProps,
+  SettingsNavigatorProps,
+} from '../types'
 
-const SettingsStack = createStackNavigator<HomeParamList>()
+const SettingsStack = createStackNavigator<SettingsParamList>()
 
 export default {
   Profile: ProfileNavigator,
@@ -22,10 +29,9 @@ export default {
   Settings: SettingsNavigator,
 }
 
-
 const ProfileStack = createStackNavigator<ProfileParamList>()
 
-function ProfileNavigator({ navigation }) {
+function ProfileNavigator({ navigation }: ProfileNavigatorProps): JSX.Element {
   const deviceType = useContext(DeviceTypeContext)
 
   const { setActiveScreen } = useContext(ActiveScreenContext)
@@ -52,7 +58,9 @@ function ProfileNavigator({ navigation }) {
 
 const ShipmentStack = createStackNavigator<ShipmentParamList>()
 
-function ShipmentNavigator({ navigation }) {
+function ShipmentNavigator({
+  navigation,
+}: ShipmentNavigatorProps): JSX.Element {
   const deviceType = useContext(DeviceTypeContext)
 
   const { setActiveScreen } = useContext(ActiveScreenContext)
@@ -77,7 +85,9 @@ function ShipmentNavigator({ navigation }) {
   )
 }
 
-function SettingsNavigator({ navigation }) {
+function SettingsNavigator({
+  navigation,
+}: SettingsNavigatorProps): JSX.Element {
   const deviceType = useContext(DeviceTypeContext)
 
   const { setActiveScreen } = useContext(ActiveScreenContext)
@@ -102,10 +112,10 @@ function SettingsNavigator({ navigation }) {
   )
 }
 
-function MenuButton({ navigation }) {
+function MenuButton({ navigation }: { navigation: any }) {
   const colorScheme = useColorScheme()
   const drawerType = useDrawerType()
-  return drawerType != 'permanent' ? (
+  return drawerType !== 'permanent' ? (
     <Feather.Button
       name="menu"
       color={Colors[colorScheme].tint}

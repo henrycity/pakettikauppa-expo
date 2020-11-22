@@ -20,7 +20,7 @@ export function useDrawerType(): DrawerType {
     desktopDrawerSHouldBePermanent() ? 'permanent' : 'front'
 
   const initType =
-    deviceType == DeviceType.DESKTOP ? initTypeDesktop() : 'front'
+    deviceType === DeviceType.DESKTOP ? initTypeDesktop() : 'front'
 
   const [type, setType] = useState<DrawerType>(initType)
 
@@ -30,7 +30,7 @@ export function useDrawerType(): DrawerType {
   }
 
   useEffect(() => {
-    if (deviceType == DeviceType.DESKTOP) {
+    if (deviceType === DeviceType.DESKTOP) {
       window.addEventListener('resize', eventListener)
       return () => window.removeEventListener('resize', eventListener)
     }

@@ -8,7 +8,13 @@ import { ActiveScreenContext } from './ActiveScreenContextProvider'
 import { TabBar, TabBarItem } from './TabBar'
 import { View } from './Themed'
 
-export default function BottomTabLayout({ children }) {
+interface BottomTabLayoutProps {
+  children: JSX.Element | JSX.Element[]
+}
+
+export default function BottomTabLayout({
+  children,
+}: BottomTabLayoutProps): JSX.Element {
   const navigation = useNavigation()
 
   const { activeScreen, setActiveScreen } = useContext(ActiveScreenContext)

@@ -1,14 +1,14 @@
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import React from 'react'
-import { StyleSheet } from 'react-native'
 
 import DrawerMenu from '../components/DrawerMenu'
 import { useDrawerType } from '../hooks/useDrawer'
+import { DrawerParamList } from '../types'
 import Navigators from './ScreenNavigators'
 
-const Drawer = createDrawerNavigator()
+const Drawer = createDrawerNavigator<DrawerParamList>()
 
-export default function DrawerNavigator() {
+export default function DrawerNavigator(): JSX.Element {
   const drawerType = useDrawerType()
   return (
     <Drawer.Navigator
@@ -23,11 +23,3 @@ export default function DrawerNavigator() {
     </Drawer.Navigator>
   )
 }
-
-const styles = StyleSheet.create({
-  separator: {
-    marginVertical: 10,
-    height: 1,
-    width: '80%',
-  },
-})
