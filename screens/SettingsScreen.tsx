@@ -6,12 +6,12 @@ import BottomTabLayout from '../components/BottomTabLayout'
 import { Text, View } from '../components/Themed'
 import useDeviceType from '../hooks/useDeviceType'
 
-export default function ProfileScreen(): JSX.Element {
+export default function SettingsSCreen(): JSX.Element {
   const [loaded, deviceType] = useDeviceType()
   return (
     <BottomTabLayout>
       <View style={styles.container}>
-        <Text style={styles.title}>Profile Screen!</Text>
+        <Text style={styles.title}>Settings Screen!</Text>
         <View
           style={styles.separator}
           lightColor="#eee"

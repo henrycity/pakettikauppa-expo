@@ -6,11 +6,6 @@ export default {
     screens: {
       Root: {
         screens: {
-          Home: {
-            screens: {
-              HomeScreen: 'home',
-            },
-          },
           Profile: {
             screens: {
               ProfileScreen: 'profile',
@@ -19,6 +14,11 @@ export default {
           Shipments: {
             screens: {
               ShipmentScreen: 'shipments',
+            },
+          },
+          Settings: {
+            screens: {
+              SettingsScreen: 'settings',
             },
           },
         },
