@@ -4,16 +4,17 @@ import {
   DarkTheme,
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { DeviceType } from 'expo-device'
+import * as SecureStore from 'expo-secure-store'
 import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
+
 import useDeviceType from '../hooks/useDeviceType'
+import LoginScreen from '../screens/LoginScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import { RootStackParamList } from '../types'
 import BottomTabNavigator from './BottomTabNavigator'
 import LinkingConfiguration from './LinkingConfiguration'
-import LoginScreen from '../screens/LoginScreen'
-import * as SecureStore from 'expo-secure-store'
-import { DeviceType } from 'expo-device'
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
