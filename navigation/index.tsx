@@ -23,16 +23,18 @@ export default function Navigation({
   colorScheme: ColorSchemeName
 }): JSX.Element {
   const [loaded, deviceType] = useDeviceType()
-  const [IDtoken, setToken] = React.useState<Promise<string | null>>(null)
+  const [token, setToken] = React.useState<string | null>(null)
   if (deviceType === DeviceType.PHONE) {
-    setToken(SecureStore.getItemAsync('token'))
+    SecureStore.getItemAsync('token').then((token) => setToken(token))
+  } else {
+    // start web login from here
   }
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
-      {IDtoken === null ? (
+      {token === null ? (
         <>
           <Login />
         </>

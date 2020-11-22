@@ -48,7 +48,7 @@ export default function LoginScreen(): JSX.Element {
       const credential = firebase.auth.GoogleAuthProvider.credential(id_token)
       firebase.auth().signInWithCredential(credential)
       if (deviceType !== DeviceType.PHONE) {
-        // empty
+        // empty, for web authentication
       } else {
         try {
           SecureStore.setItemAsync('token', id_token)
