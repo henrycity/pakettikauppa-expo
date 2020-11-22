@@ -6,16 +6,26 @@ import { StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
+import {
+  ShipmentDrawerNavigatorProps,
+  SettingsDrawerNavigatorProps,
+  ProfileDrawerNavigatorProps,
+} from '../types'
 import { ActiveScreenContext } from './ActiveScreenContextProvider'
 import { DeviceTypeContext } from './DeviceTypeContextProvider'
 import { View } from './Themed'
 
-const DrawerMenu = (props) => {
-  const { navigation } = props
+const DrawerMenu = (props: any): JSX.Element => {
+  const {
+    navigation,
+  }:
+    | ProfileDrawerNavigatorProps
+    | ShipmentDrawerNavigatorProps
+    | SettingsDrawerNavigatorProps = props
   const deviceType = useContext(DeviceTypeContext)
   const { activeScreen, setActiveScreen } = useContext(ActiveScreenContext)
   const colorScheme = useColorScheme()
-  const backgroundColor = Colors[colorScheme].drawerBackground
+  const backgroundColor = Colors[colorScheme].background
   const containerStyle = {
     flex: 1,
     alignItems: 'center' as const,
