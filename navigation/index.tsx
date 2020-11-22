@@ -4,22 +4,12 @@ import {
   DarkTheme,
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { createDrawerNavigator } from '@react-navigation/drawer'
 import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
 
-import Text from '..components/Themed'
-
-import { DeviceType } from 'expo-device'
-import useDeviceType from '../hooks/useDeviceType'
-import useCachedResources from './hooks/useCachedResources'
-
 import NotFoundScreen from '../screens/NotFoundScreen'
-import HomeScreen from '../screens/HomeScreen'
-import ProfileScreen from '../screens/ProfileScreen'
-import ShipmentScreen from '../screens/ShipmentScreen'
 import { RootStackParamList } from '../types'
-import BottomTabNavigator from './BottomTabNavigator'
+import DrawerNavigator from './DrawerNavigator'
 import LinkingConfiguration from './LinkingConfiguration'
 
 // If you are not familiar with React Navigation, we recommend going through the
@@ -46,7 +36,8 @@ const Stack = createStackNavigator<RootStackParamList>()
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="Root" component={DrawerNavigator} />
+      <Stack.Screen name="NotFound" component={NotFoundScreen} />
     </Stack.Navigator>
   )
 }
