@@ -16,11 +16,12 @@ export function useDrawerType(): DrawerType {
   const desktopDrawerSHouldBePermanent = () =>
     screen.width > 650 && window.innerWidth > Breakpoint.large * screen.width
 
-  const initTypeDesktop = desktopDrawerSHouldBePermanent()
-    ? 'permanent'
-    : 'front'
+  const initTypeDesktop = () =>
+    desktopDrawerSHouldBePermanent() ? 'permanent' : 'front'
 
-  const initType = deviceType == DeviceType.DESKTOP ? initTypeDesktop : 'front'
+  const initType =
+    deviceType == DeviceType.DESKTOP ? initTypeDesktop() : 'front'
+
   const [type, setType] = useState<DrawerType>(initType)
 
   const eventListener = () => {
