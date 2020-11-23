@@ -4,10 +4,10 @@ import { StyleSheet } from 'react-native'
 
 import BottomTabLayout from '../components/BottomTabLayout'
 import { Text, View } from '../components/Themed'
-import useDeviceType from '../hooks/useDeviceType'
+import { _useDeviceType } from '../hooks/useDeviceType'
 
 export default function ShipmentScreen(): JSX.Element {
-  const [loaded, deviceType] = useDeviceType()
+  const [loaded, deviceType] = _useDeviceType()
   return (
     <BottomTabLayout>
       <View style={styles.container}>

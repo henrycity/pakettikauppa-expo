@@ -3,10 +3,10 @@ import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
 import { Text, View } from '../components/Themed'
-import useDeviceType from '../hooks/useDeviceType'
+import { _useDeviceType } from '../hooks/useDeviceType'
 
 export default function HomeScreen(): JSX.Element {
-  const [loaded, deviceType] = useDeviceType()
+  const [loaded, deviceType] = _useDeviceType()
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home Screen!</Text>
