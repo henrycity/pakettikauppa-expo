@@ -22,6 +22,7 @@ const DrawerMenu = (props: any): JSX.Element => {
     | ProfileDrawerNavigatorProps
     | ShipmentDrawerNavigatorProps
     | SettingsDrawerNavigatorProps = props
+
   const deviceType = useContext(DeviceTypeContext)
   const { activeScreen, setActiveScreen } = useContext(ActiveScreenContext)
   const colorScheme = useColorScheme()

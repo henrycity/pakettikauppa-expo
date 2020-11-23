@@ -1,7 +1,7 @@
 import { DeviceType } from 'expo-device'
 import React, { createContext } from 'react'
 
-import useDeviceType from '../hooks/useDeviceType'
+import { _useDeviceType } from '../hooks/useDeviceType'
 
 export const DeviceTypeContext = createContext<DeviceType | null>(null)
 
@@ -11,8 +11,8 @@ interface Props {
 
 export default function DeviceTypeContextProvider({
   children,
-}: Props): JSX.Element {
-  const [loaded, deviceType] = useDeviceType()
+}: Props): JSX.Element | null {
+  const [loaded, deviceType] = _useDeviceType()
   return loaded ? (
     <DeviceTypeContext.Provider value={deviceType}>
       {children}

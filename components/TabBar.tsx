@@ -41,7 +41,13 @@ export function TabBarItem({
 
   return (
     <TouchableOpacity style={{ height: 40 }} onPress={onPress}>
-      <Text style={textStyle}>{text}</Text>
+      <Text
+        accessible
+        accessibilityLabel={`Tab bar link to ${text}`}
+        style={textStyle}
+      >
+        {text}
+      </Text>
     </TouchableOpacity>
   )
 }

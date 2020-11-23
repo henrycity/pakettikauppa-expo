@@ -27,7 +27,7 @@ export default function BottomTabLayout({
       {deviceType === DeviceType.PHONE || deviceType === DeviceType.TABLET ? (
         <TabBar>
           <TabBarItem
-            text="profile"
+            text="Profile"
             active={activeScreen === 'profile'}
             onPress={() => {
               setActiveScreen('profile')
@@ -35,7 +35,7 @@ export default function BottomTabLayout({
             }}
           />
           <TabBarItem
-            text="shipments"
+            text="Shipments"
             active={activeScreen === 'shipments'}
             onPress={() => {
               setActiveScreen('shipments')
