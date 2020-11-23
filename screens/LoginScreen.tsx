@@ -12,7 +12,7 @@ import * as SecureStore from 'expo-secure-store'
 import * as WebBrowser from 'expo-web-browser'
 import firebase from 'firebase'
 import * as React from 'react'
-import { StyleSheet, Button } from 'react-native'
+import { StyleSheet, Button, Platform } from 'react-native'
 import { State } from 'react-native-gesture-handler'
 
 import { Text, View } from '../components/Themed'
@@ -45,9 +45,23 @@ export default function LoginScreen(): JSX.Element {
   React.useEffect(() => {
     if (response?.type === 'success') {
       const { id_token } = response.params
-      const credential = firebase.auth.GoogleAuthProvider.credential(id_token)
-      firebase.auth().signInWithCredential(credential)
-      if (deviceType !== DeviceType.PHONE) {
+      //  const credential = firebase.auth.GoogleAuthProvider.credential(id_token)
+     // firebase.auth().signInWithCredential(credential)
+      if (Platform.OS === 'web') {
+        fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ idToken: id_token }),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log('Success:', result)
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          })
         // empty, for web authentication
       } else {
         try {
