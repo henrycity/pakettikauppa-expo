@@ -6,13 +6,13 @@ import { StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
+import useDeviceType from '../hooks/useDeviceType'
 import {
   ShipmentDrawerNavigatorProps,
   SettingsDrawerNavigatorProps,
   ProfileDrawerNavigatorProps,
 } from '../types'
 import { ActiveScreenContext } from './ActiveScreenContextProvider'
-import { DeviceTypeContext } from './DeviceTypeContextProvider'
 import { View } from './Themed'
 
 const DrawerMenu = (props: any): JSX.Element => {
@@ -23,7 +23,8 @@ const DrawerMenu = (props: any): JSX.Element => {
     | ShipmentDrawerNavigatorProps
     | SettingsDrawerNavigatorProps = props
 
-  const deviceType = useContext(DeviceTypeContext)
+  const { isDesktop } = useDeviceType()
+
   const { activeScreen, setActiveScreen } = useContext(ActiveScreenContext)
   const colorScheme = useColorScheme()
   const backgroundColor = Colors[colorScheme].background
@@ -36,7 +37,7 @@ const DrawerMenu = (props: any): JSX.Element => {
 
   return (
     <DrawerContentScrollView {...props}>
-      {deviceType === DeviceType.DESKTOP ? (
+      {isDesktop ? (
         <DrawerItem
           label="Profile"
           focused={activeScreen === 'profile'}
@@ -50,7 +51,7 @@ const DrawerMenu = (props: any): JSX.Element => {
         />
       ) : null}
 
-      {deviceType === DeviceType.DESKTOP ? (
+      {isDesktop ? (
         <DrawerItem
           label="Shipments"
           focused={activeScreen === 'shipments'}
@@ -64,7 +65,7 @@ const DrawerMenu = (props: any): JSX.Element => {
         />
       ) : null}
 
-      {deviceType === DeviceType.DESKTOP ? (
+      {isDesktop ? (
         <View style={containerStyle}>
           <View
             style={styles.separator}

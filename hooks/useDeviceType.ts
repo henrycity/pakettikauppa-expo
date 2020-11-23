@@ -1,8 +1,25 @@
 import { DeviceType, getDeviceTypeAsync } from 'expo-device'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
-export default function useDeviceType() {
-  undefined
+import { DeviceTypeContext } from '../components/DeviceTypeContextProvider'
+
+export interface useDeviceReturnType {
+  isDesktop: boolean
+  isMobile: boolean
+}
+
+export default function useDeviceType(): useDeviceReturnType {
+  const deviceType = useContext(DeviceTypeContext)
+
+  const isDesktop =
+    deviceType === DeviceType.DESKTOP || deviceType === DeviceType.TV
+
+  const isMobile =
+    deviceType === DeviceType.PHONE ||
+    deviceType === DeviceType.TABLET ||
+    deviceType === DeviceType.UNKNOWN
+
+  return { isDesktop, isMobile }
 }
 
 export function _useDeviceType(): [boolean, DeviceType | null] {
