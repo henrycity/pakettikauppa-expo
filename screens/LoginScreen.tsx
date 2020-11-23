@@ -53,7 +53,7 @@ export default function LoginScreen(): JSX.Element {
         try {
           SecureStore.setItemAsync('token', id_token)
         } catch (e) {
-          // console.log(e)
+          throw new Error('Oops! There was an error.')
         }
       }
     }
@@ -71,7 +71,7 @@ export default function LoginScreen(): JSX.Element {
       <Button
         disabled={!request}
         title="Login"
-        onPress={() => {
+        onPress={async () => {
           promptAsync()
         }}
       />

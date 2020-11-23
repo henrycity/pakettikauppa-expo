@@ -4,16 +4,17 @@ import {
   DarkTheme,
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { DeviceType } from 'expo-device'
+import * as SecureStore from 'expo-secure-store'
 import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
+
 import useDeviceType from '../hooks/useDeviceType'
+import LoginScreen from '../screens/LoginScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import { RootStackParamList } from '../types'
 import BottomTabNavigator from './BottomTabNavigator'
 import LinkingConfiguration from './LinkingConfiguration'
-import LoginScreen from '../screens/LoginScreen'
-import * as SecureStore from 'expo-secure-store'
-import { DeviceType } from 'expo-device'
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -24,23 +25,30 @@ export default function Navigation({
 }): JSX.Element {
   const [loaded, deviceType] = useDeviceType()
   const [token, setToken] = React.useState<string | null>(null)
-  if (deviceType === DeviceType.PHONE) {
-    SecureStore.getItemAsync('token').then((token) => setToken(token))
-  } else {
-    // start web login from here
+  const [isSignedIn, setSignIn] = React.useState<boolean>(false)
+  async function getToken() {
+    try {
+      await SecureStore.getItemAsync('token').then((token) => {
+        setToken(token)
+        setSignIn(true)
+      })
+    } catch (e) {
+      throw new Error('Oops! There was an error.')
+    }
   }
+  React.useEffect(() => {
+    if (deviceType === DeviceType.PHONE) {
+      getToken()
+    } else {
+      // start web login from here
+    }
+  }, [])
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
-      {token === null ? (
-        <>
-          <Login />
-        </>
-      ) : (
-        <RootNavigator />
-      )}
+      {token !== null ? <RootNavigator /> : <Login />}
     </NavigationContainer>
   )
 }
@@ -65,7 +73,7 @@ function RootNavigator() {
 function Login() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Root" component={LoginScreen} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
