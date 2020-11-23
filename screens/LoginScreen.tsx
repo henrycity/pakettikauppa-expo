@@ -49,6 +49,7 @@ export default function LoginScreen(): JSX.Element {
      // firebase.auth().signInWithCredential(credential)
       if (Platform.OS === 'web') {
         fetch('http://localhost:3000/login', {
+          credentials: 'include',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
