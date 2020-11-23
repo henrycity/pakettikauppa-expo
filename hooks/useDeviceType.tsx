@@ -6,10 +6,14 @@ export default function useDeviceType(): [boolean, DeviceType | null] {
   const [deviceType, setDeviceType] = useState<DeviceType | null>(null)
 
   useEffect(() => {
-    getDeviceTypeAsync().then((type) => {
-      setDeviceType(type)
-      setLoaded(true)
-    })
+    try {
+      getDeviceTypeAsync().then((type) => {
+        setDeviceType(type)
+        setLoaded(true)
+      })
+    } catch (error) {
+      console.log('error', error)
+    }
   }, [])
 
   return [loaded, deviceType]

@@ -131,14 +131,11 @@ function ProfileNavigator({ navigation }) {
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 
+// TODO: Fix this
 function HeaderOptions(navigation) {
-  const [loaded, deviceType] = useDeviceType()
+  // const [loaded, deviceType] = useDeviceType()
   return {
     headerTitle: 'Pakettikauppa',
-    headerRight: () =>
-      deviceType != DeviceType.PHONE ? (
-        <HeaderLinks navigation={navigation} />
-      ) : null,
     headerLeft: null,
   }
 }

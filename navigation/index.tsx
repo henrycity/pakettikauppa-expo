@@ -26,29 +26,31 @@ export default function Navigation({
   const [loaded, deviceType] = useDeviceType()
   const [token, setToken] = React.useState<string | null>(null)
   const [isSignedIn, setSignIn] = React.useState<boolean>(false)
-  async function getToken() {
-    try {
-      await SecureStore.getItemAsync('token').then((token) => {
-        setToken(token)
-        setSignIn(true)
-      })
-    } catch (e) {
-      throw new Error('Oops! There was an error.')
-    }
-  }
+
   React.useEffect(() => {
-    if (deviceType === DeviceType.PHONE) {
-      getToken()
-    } else {
-      // start web login from here
+    const getToken = async () => {
+      if (deviceType === DeviceType.PHONE) {
+        try {
+          SecureStore.getItemAsync('token').then((token) => {
+            setToken(token)
+            setSignIn(true)
+          })
+        } catch (e) {
+          throw new Error('Oops! There was an error.')
+        }
+      } else {
+        // start web login from here
+      }
     }
-  }, [])
+
+    getToken()
+  }, [deviceType])
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
-      {token !== null ? <RootNavigator /> : <Login />}
+      {token ? <RootNavigator /> : <Login />}
     </NavigationContainer>
   )
 }
