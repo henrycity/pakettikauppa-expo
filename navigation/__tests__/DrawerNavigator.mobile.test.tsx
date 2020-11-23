@@ -4,15 +4,15 @@ import React from 'react'
 
 import DeviceTypeContextProvider from '../../components/DeviceTypeContextProvider'
 import DrawerNavigator from '../DrawerNavigator'
-import { findDrawerLink } from './webTests'
+import { findDrawerLink } from './DrawerNavigator.desktop.test'
 
-describe('Testing app navigation', () => {
+describe('Testing mobile navigation', () => {
   afterEach(cleanup)
 
   const component = <TestApp />
 
   it('should navigate to shipments', async () => {
-    process.env.TEST_ENV = 'app'
+    process.env.TEST_ENV = 'mobile'
     const { findByA11yLabel, getByText } = render(component)
 
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
@@ -24,7 +24,7 @@ describe('Testing app navigation', () => {
   })
 
   it('should navigate to settings', async () => {
-    process.env.TEST_ENV = 'app'
+    process.env.TEST_ENV = 'mobile'
 
     const { getAllByA11yRole, getByText } = render(component)
     const drawerLinks = getAllByA11yRole('button')

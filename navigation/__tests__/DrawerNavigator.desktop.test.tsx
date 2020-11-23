@@ -12,13 +12,13 @@ import React from 'react'
 import DeviceTypeContextProvider from '../../components/DeviceTypeContextProvider'
 import DrawerNavigator from '../DrawerNavigator'
 
-describe('Testing app navigation', () => {
+describe('Testing desktop navigation', () => {
   afterEach(cleanup)
 
   const component = <TestApp />
 
   it('should navigate to shipments', async () => {
-    process.env.TEST_ENV = 'web'
+    process.env.TEST_ENV = 'desktop'
     const { getAllByA11yRole, getByText } = render(component)
     const drawerLinks = getAllByA11yRole('button')
 
@@ -31,14 +31,14 @@ describe('Testing app navigation', () => {
   })
 
   it('should navigate to settings', async () => {
-    process.env.TEST_ENV = 'web'
+    process.env.TEST_ENV = 'desktop'
     const { getAllByA11yRole, getByText } = render(component)
     const drawerLinks = getAllByA11yRole('button')
 
     const settingsLink = await findDrawerLink(drawerLinks, 'Settings')
 
     fireEvent(settingsLink, 'press')
-    const settingsText = await getByText('Settings Screen!')
+    const settingsText = getByText('Settings Screen!')
 
     expect(settingsText).toBeTruthy()
   })

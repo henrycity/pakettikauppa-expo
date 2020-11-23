@@ -1,9 +1,38 @@
-import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import React, { useContext } from 'react'
 import { TouchableOpacity } from 'react-native'
 
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
+import { ActiveScreenContext } from './ActiveScreenContextProvider'
 import { View, Text } from './Themed'
+
+export default function BottomTabBar() {
+  const navigation = useNavigation()
+
+  const { activeScreen, setActiveScreen } = useContext(ActiveScreenContext)
+
+  return (
+    <TabBar>
+      <TabBarItem
+        text="Profile"
+        active={activeScreen === 'profile'}
+        onPress={() => {
+          setActiveScreen('profile')
+          navigation.navigate('Profile')
+        }}
+      />
+      <TabBarItem
+        text="Shipments"
+        active={activeScreen === 'shipments'}
+        onPress={() => {
+          setActiveScreen('shipments')
+          navigation.navigate('Shipments')
+        }}
+      />
+    </TabBar>
+  )
+}
 
 interface TabBarProps {
   children: JSX.Element | JSX.Element[]
@@ -36,7 +65,7 @@ export function TabBarItem({
   const colorScheme = useColorScheme()
 
   const textStyle = {
-    color: active ? 'blue' : Colors[colorScheme].tabIconDefault,
+    color: active ? '#3b79ff' : Colors[colorScheme].tabIconDefault,
   }
 
   return (

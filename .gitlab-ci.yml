@@ -15,8 +15,7 @@ lint:
 jest-tests:
   stage: test
   script:
-    - TEST_DEVICE_TYPE=1 jest yarn jest --ci --cacheDirectory .jest
-    - TEST_DEVICE_TYPE=3 jest yarn jest --ci --cacheDirectory .jest
+    - yarn jest --ci --cacheDirectory .jest
 expo-deployments:
   stage: deploy
   script:
