@@ -10,6 +10,7 @@ import {
 import React from 'react'
 
 import DeviceTypeContextProvider from '../../components/DeviceTypeContextProvider'
+import ScreenNames from '../../constants/ScreenNames'
 import DrawerNavigator from '../DrawerNavigator'
 
 describe('Testing desktop navigation', () => {
@@ -17,25 +18,28 @@ describe('Testing desktop navigation', () => {
 
   const component = <TestApp />
 
-  it('should navigate to shipments', async () => {
+  it('should navigate to shipments from the drawer', async () => {
     process.env.TEST_ENV = 'desktop'
     const { getAllByA11yRole, getByText } = render(component)
     const drawerLinks = getAllByA11yRole('button')
 
-    const shipmentsLink = await findDrawerLink(drawerLinks, 'Shipments')
+    const shipmentsLink = await findDrawerLink(
+      drawerLinks,
+      ScreenNames.Shipments
+    )
 
     fireEvent(shipmentsLink, 'press')
-    const shipmentsText = await getByText('Shipments Screen!')
+    const shipmentsText = getByText('Shipments Screen!')
 
     expect(shipmentsText).toBeTruthy()
   })
 
-  it('should navigate to settings', async () => {
+  it('should navigate to settings from the drawer', async () => {
     process.env.TEST_ENV = 'desktop'
     const { getAllByA11yRole, getByText } = render(component)
     const drawerLinks = getAllByA11yRole('button')
 
-    const settingsLink = await findDrawerLink(drawerLinks, 'Settings')
+    const settingsLink = await findDrawerLink(drawerLinks, ScreenNames.Settings)
 
     fireEvent(settingsLink, 'press')
     const settingsText = getByText('Settings Screen!')

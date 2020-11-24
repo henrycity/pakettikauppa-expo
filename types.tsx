@@ -2,6 +2,8 @@ import { DrawerNavigationProp } from '@react-navigation/drawer'
 import { CompositeNavigationProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+import ScreenNames from './constants/ScreenNames'
+
 export type RootStackParamList = {
   Root: undefined
   NotFound: undefined
@@ -70,3 +72,5 @@ export type SettingsScreenNavigationProp = CompositeNavigationProp<
 export type SettingsNavigatorProps = {
   navigation: SettingsNavigatorProps
 }
+
+export type ScreenName = keyof typeof ScreenNames

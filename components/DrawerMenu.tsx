@@ -4,6 +4,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
+import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
 import useDeviceType from '../hooks/useDeviceType'
@@ -11,6 +12,7 @@ import {
   ShipmentDrawerNavigatorProps,
   SettingsDrawerNavigatorProps,
   ProfileDrawerNavigatorProps,
+  ScreenName,
 } from '../types'
 import { View } from './Themed'
 
@@ -34,7 +36,7 @@ const DrawerMenu = (props: any): JSX.Element => {
     backgroundColor,
   }
 
-  const handleLinkPress = (screenName: 'Profile' | 'Shipments') => {
+  const handleLinkPress = (screenName: ScreenName) => {
     setActiveScreen(screenName)
     navigation.navigate(screenName)
   }
@@ -43,18 +45,18 @@ const DrawerMenu = (props: any): JSX.Element => {
     <DrawerContentScrollView {...props}>
       {isDesktop ? (
         <DrawerItem
-          label="Profile"
-          focused={activeScreen === 'Profile'}
-          onPress={() => handleLinkPress('Profile')}
+          label={ScreenNames.Profile}
+          focused={activeScreen === ScreenNames.Profile}
+          onPress={() => handleLinkPress(ScreenNames.Profile)}
           icon={({ color }) => <Feather name="user" size={24} color={color} />}
         />
       ) : null}
 
       {isDesktop ? (
         <DrawerItem
-          label="Shipments"
-          focused={activeScreen === 'Shipments'}
-          onPress={() => handleLinkPress('Shipments')}
+          label={ScreenNames.Shipments}
+          focused={activeScreen === ScreenNames.Shipments}
+          onPress={() => handleLinkPress(ScreenNames.Shipments)}
           icon={({ color }) => (
             <Feather name="package" size={24} color={color} />
           )}
@@ -72,9 +74,9 @@ const DrawerMenu = (props: any): JSX.Element => {
       ) : null}
 
       <DrawerItem
-        label="Settings"
-        focused={activeScreen === 'Settings'}
-        onPress={() => handleLinkPress('Settings')}
+        label={ScreenNames.Settings}
+        focused={activeScreen === ScreenNames.Settings}
+        onPress={() => handleLinkPress(ScreenNames.Settings)}
         icon={({ color }) => (
           <Feather name="settings" size={24} color={color} />
         )}

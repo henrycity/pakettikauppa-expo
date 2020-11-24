@@ -1,20 +1,20 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
+import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
-import { View, Text } from './Themed'
+import { ScreenName } from '../types'
+import { View, Text, useThemeColor } from './Themed'
 
 export default function BottomTabBar(): JSX.Element {
   const navigation = useNavigation()
 
   const { activeScreen, setActiveScreen } = useActiveScreen()
 
-  const handleLinkPress = (
-    screenName: 'Profile' | 'Shipments' | 'Settings'
-  ) => {
+  const handleLinkPress = (screenName: ScreenName) => {
     setActiveScreen(screenName)
     navigation.navigate(screenName)
   }
@@ -22,14 +22,17 @@ export default function BottomTabBar(): JSX.Element {
   return (
     <TabBar>
       <TabBarItem
-        text="Profile"
-        active={activeScreen === 'profile'}
-        onPress={() => handleLinkPress('Profile')}
+        text={ScreenNames.Profile}
+        active={activeScreen === ScreenNames.Profile}
+        onPress={() => handleLinkPress(ScreenNames.Profile)}
       />
       <TabBarItem
-        text="Shipments"
-        active={activeScreen === 'shipments'}
-        onPress={() => handleLinkPress('Shipments')}
+        text={ScreenNames.Shipments}
+        active={activeScreen === ScreenNames.Shipments}
+        onPress={() => {
+          setActiveScreen(ScreenNames.Shipments)
+          navigation.navigate(ScreenNames.Shipments)
+        }}
       />
     </TabBar>
   )
@@ -40,16 +43,9 @@ interface TabBarProps {
 }
 
 export function TabBar({ children }: TabBarProps): JSX.Element {
-  const colorScheme = useColorScheme()
-  const barStyle = {
-    flex: 1,
-    flexDirection: 'row' as const,
-    alignContent: 'stretch' as const,
-    justifyContent: 'space-evenly' as const,
-    backgroundColor: Colors[colorScheme].background,
-    maxHeight: 50,
-  }
-  return <View style={barStyle}>{children}</View>
+  const backgroundColor = useThemeColor({}, 'background')
+
+  return <View style={[styles.tabBar, { backgroundColor }]}>{children}</View>
 }
 
 interface TabBarItemProps {
@@ -66,7 +62,9 @@ export function TabBarItem({
   const colorScheme = useColorScheme()
 
   const textStyle = {
-    color: active ? '#3b79ff' : Colors[colorScheme].tabIconDefault,
+    color: active
+      ? Colors[colorScheme].tabIconSelected
+      : Colors[colorScheme].tabIconDefault,
   }
 
   return (
@@ -74,10 +72,21 @@ export function TabBarItem({
       <Text
         accessible
         accessibilityLabel={`Tab bar link to ${text}`}
-        style={textStyle}
+        style={[styles.itemContainer, textStyle]}
       >
         {text}
       </Text>
     </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    flex: 1,
+    flexDirection: 'row' as const,
+    alignContent: 'stretch' as const,
+    justifyContent: 'space-evenly' as const,
+    maxHeight: 50,
+  },
+  itemContainer: {},
+})

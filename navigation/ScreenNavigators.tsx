@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 
 import MenuButton from '../components/MenuButton'
+import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
@@ -31,7 +32,7 @@ function ProfileNavigator({ navigation }: ProfileNavigatorProps): JSX.Element {
 
   useFocusEffect(
     useCallback(() => {
-      setActiveScreen('profile')
+      setActiveScreen(ScreenNames.Profile)
     }, [])
   )
 
@@ -58,7 +59,7 @@ function ShipmentNavigator({
 
   useFocusEffect(
     useCallback(() => {
-      setActiveScreen('shipments')
+      setActiveScreen(ScreenNames.Shipments)
     }, [])
   )
 
@@ -83,7 +84,7 @@ function SettingsNavigator({
 
   useFocusEffect(
     useCallback(() => {
-      setActiveScreen('settings')
+      setActiveScreen(ScreenNames.Settings)
     }, [])
   )
 
@@ -103,7 +104,6 @@ function SettingsNavigator({
 
 function headerOptions(navigation: any) {
   return {
-    headerTitle: 'Pakettikauppa',
     headerLeft: () => <MenuButton navigation={navigation} />,
   }
 }

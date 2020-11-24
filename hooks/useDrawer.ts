@@ -13,11 +13,11 @@ enum Breakpoint {
 export function useDrawerType(): DrawerType {
   const deviceType = useContext(DeviceTypeContext)
 
-  const desktopDrawerSHouldBePermanent = () =>
+  const desktopDrawerShouldBePermanent = () =>
     screen.width > 650 && window.innerWidth > Breakpoint.large * screen.width
 
   const initTypeDesktop = () =>
-    desktopDrawerSHouldBePermanent() ? 'permanent' : 'front'
+    desktopDrawerShouldBePermanent() ? 'permanent' : 'front'
 
   const initType =
     deviceType === DeviceType.DESKTOP ? initTypeDesktop() : 'front'
@@ -25,7 +25,7 @@ export function useDrawerType(): DrawerType {
   const [type, setType] = useState<DrawerType>(initType)
 
   const eventListener = () => {
-    if (desktopDrawerSHouldBePermanent()) setType('permanent')
+    if (desktopDrawerShouldBePermanent()) setType('permanent')
     else setType('front')
   }
 
