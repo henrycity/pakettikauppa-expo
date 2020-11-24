@@ -1,7 +1,7 @@
 import { DeviceType } from 'expo-device'
 import { useState, useEffect, useContext } from 'react'
 
-import { DeviceTypeContext } from '../components/DeviceTypeContextProvider'
+import DeviceTypeContext from '../components/DeviceTypeContext'
 
 type DrawerType = 'front' | 'permanent' | 'back' | 'slide' | undefined
 
