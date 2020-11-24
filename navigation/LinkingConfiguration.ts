@@ -13,7 +13,7 @@ export default {
           },
           Shipments: {
             screens: {
-              ShipmentScreen: 'shipments',
+              ShipmentsScreen: 'shipments',
             },
           },
           Settings: {

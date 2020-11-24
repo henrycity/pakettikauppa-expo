@@ -52,7 +52,7 @@ export async function findDrawerLink(
   linkList: GetAllReturn,
   linkName: string
 ): Promise<GetReturn> {
-  const linkPromises = linkList.map((link: any) => {
+  const linkPromises = linkList.map((link: GetReturn) => {
     // queryAllByText returns all matching nodes with or []
     return within(link).queryAllByText(linkName)
   })

@@ -7,17 +7,12 @@ import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
-import ShipmentScreen from '../screens/ShipmentScreen'
+import ShipmentsScreen from '../screens/ShipmentsScreen'
 import {
   ProfileParamList,
-  ShipmentParamList,
+  ShipmentsParamList,
   SettingsParamList,
-  ProfileNavigatorProps,
-  ShipmentNavigatorProps,
-  SettingsNavigatorProps,
 } from '../types'
-
-const SettingsStack = createStackNavigator<SettingsParamList>()
 
 export default {
   Profile: ProfileNavigator,
@@ -25,9 +20,13 @@ export default {
   Settings: SettingsNavigator,
 }
 
+const headerOptions = {
+  headerLeft: () => <MenuButton />,
+}
+
 const ProfileStack = createStackNavigator<ProfileParamList>()
 
-function ProfileNavigator({ navigation }: ProfileNavigatorProps): JSX.Element {
+function ProfileNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
@@ -42,7 +41,7 @@ function ProfileNavigator({ navigation }: ProfileNavigatorProps): JSX.Element {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          ...headerOptions(navigation),
+          ...headerOptions,
           headerTitle: 'Profile',
         }}
       />
@@ -50,11 +49,9 @@ function ProfileNavigator({ navigation }: ProfileNavigatorProps): JSX.Element {
   )
 }
 
-const ShipmentStack = createStackNavigator<ShipmentParamList>()
+const ShipmentStack = createStackNavigator<ShipmentsParamList>()
 
-function ShipmentNavigator({
-  navigation,
-}: ShipmentNavigatorProps): JSX.Element {
+function ShipmentNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
@@ -66,10 +63,10 @@ function ShipmentNavigator({
   return (
     <ShipmentStack.Navigator>
       <ShipmentStack.Screen
-        name="ShipmentScreen"
-        component={ShipmentScreen}
+        name="ShipmentsScreen"
+        component={ShipmentsScreen}
         options={{
-          ...headerOptions(navigation),
+          ...headerOptions,
           headerTitle: 'Shipments',
         }}
       />
@@ -77,9 +74,9 @@ function ShipmentNavigator({
   )
 }
 
-function SettingsNavigator({
-  navigation,
-}: SettingsNavigatorProps): JSX.Element {
+const SettingsStack = createStackNavigator<SettingsParamList>()
+
+function SettingsNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
@@ -94,16 +91,10 @@ function SettingsNavigator({
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
-          ...headerOptions(navigation),
+          ...headerOptions,
           headerTitle: 'Settings',
         }}
       />
     </SettingsStack.Navigator>
   )
-}
-
-function headerOptions(navigation: any) {
-  return {
-    headerLeft: () => <MenuButton navigation={navigation} />,
-  }
 }

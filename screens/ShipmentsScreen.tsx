@@ -5,7 +5,7 @@ import BottomTabLayout from '../components/BottomTabLayout'
 import { Text, View } from '../components/Themed'
 import useDeviceType from '../hooks/useDeviceType'
 
-export default function ShipmentScreen(): JSX.Element {
+export default function ShipmentsScreen(): JSX.Element {
   const { isMobile } = useDeviceType()
 
   return (

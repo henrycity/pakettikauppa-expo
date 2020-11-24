@@ -8,21 +8,11 @@ import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
 import useDeviceType from '../hooks/useDeviceType'
-import {
-  ShipmentDrawerNavigatorProps,
-  SettingsDrawerNavigatorProps,
-  ProfileDrawerNavigatorProps,
-  ScreenName,
-} from '../types'
+import { ScreenName, DrawerMenuProps } from '../types'
 import { View } from './Themed'
 
-const DrawerMenu = (props: any): JSX.Element => {
-  const {
-    navigation,
-  }:
-    | ProfileDrawerNavigatorProps
-    | ShipmentDrawerNavigatorProps
-    | SettingsDrawerNavigatorProps = props
+const DrawerMenu = (props: DrawerMenuProps): JSX.Element => {
+  const { navigation } = props
 
   const { isDesktop } = useDeviceType()
 
