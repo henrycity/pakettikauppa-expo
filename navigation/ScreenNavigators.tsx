@@ -1,12 +1,10 @@
 import { Feather } from '@expo/vector-icons'
 import { useFocusEffect } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { DeviceType } from 'expo-device'
-import React, { useContext, useCallback } from 'react'
+import React, { useCallback } from 'react'
 
-import { ActiveScreenContext } from '../components/ActiveScreenContextProvider'
-import { DeviceTypeContext } from '../components/DeviceTypeContextProvider'
 import Colors from '../constants/Colors'
+import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
 import { useDrawerType } from '../hooks/useDrawer'
 import ProfileScreen from '../screens/ProfileScreen'
@@ -32,9 +30,7 @@ export default {
 const ProfileStack = createStackNavigator<ProfileParamList>()
 
 function ProfileNavigator({ navigation }: ProfileNavigatorProps): JSX.Element {
-  const deviceType = useContext(DeviceTypeContext)
-
-  const { setActiveScreen } = useContext(ActiveScreenContext)
+  const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
     useCallback(() => {
@@ -48,7 +44,7 @@ function ProfileNavigator({ navigation }: ProfileNavigatorProps): JSX.Element {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          ...headerOptions(navigation, deviceType),
+          ...headerOptions(navigation),
           headerTitle: 'Profile',
         }}
       />
@@ -61,9 +57,7 @@ const ShipmentStack = createStackNavigator<ShipmentParamList>()
 function ShipmentNavigator({
   navigation,
 }: ShipmentNavigatorProps): JSX.Element {
-  const deviceType = useContext(DeviceTypeContext)
-
-  const { setActiveScreen } = useContext(ActiveScreenContext)
+  const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
     useCallback(() => {
@@ -77,7 +71,7 @@ function ShipmentNavigator({
         name="ShipmentScreen"
         component={ShipmentScreen}
         options={{
-          ...headerOptions(navigation, deviceType),
+          ...headerOptions(navigation),
           headerTitle: 'Shipments',
         }}
       />
@@ -88,9 +82,7 @@ function ShipmentNavigator({
 function SettingsNavigator({
   navigation,
 }: SettingsNavigatorProps): JSX.Element {
-  const deviceType = useContext(DeviceTypeContext)
-
-  const { setActiveScreen } = useContext(ActiveScreenContext)
+  const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
     useCallback(() => {
@@ -104,7 +96,7 @@ function SettingsNavigator({
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
-          ...headerOptions(navigation, deviceType),
+          ...headerOptions(navigation),
           headerTitle: 'Settings',
         }}
       />
@@ -119,14 +111,16 @@ function MenuButton({ navigation }: { navigation: any }) {
     <Feather.Button
       name="menu"
       color={Colors[colorScheme].tint}
-      backgroundColor={Colors[colorScheme].background}
-      style={{ paddingLeft: 20 }}
+      style={{
+        paddingLeft: 20,
+        backgroundColor: Colors[colorScheme].background,
+      }}
       onPress={() => navigation.openDrawer()}
     />
   ) : null
 }
 
-function headerOptions(navigation: any, _deviceType: DeviceType | null) {
+function headerOptions(navigation: any) {
   return {
     headerTitle: 'Pakettikauppa',
     headerLeft: () => <MenuButton navigation={navigation} />,

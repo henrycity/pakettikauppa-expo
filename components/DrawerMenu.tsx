@@ -1,10 +1,10 @@
 import { Ionicons, Feather } from '@expo/vector-icons'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
-import { DeviceType } from 'expo-device'
-import React, { useContext } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
+import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
 import useDeviceType from '../hooks/useDeviceType'
 import {
@@ -12,7 +12,6 @@ import {
   SettingsDrawerNavigatorProps,
   ProfileDrawerNavigatorProps,
 } from '../types'
-import { ActiveScreenContext } from './ActiveScreenContextProvider'
 import { View } from './Themed'
 
 const DrawerMenu = (props: any): JSX.Element => {
@@ -25,7 +24,7 @@ const DrawerMenu = (props: any): JSX.Element => {
 
   const { isDesktop } = useDeviceType()
 
-  const { activeScreen, setActiveScreen } = useContext(ActiveScreenContext)
+  const { activeScreen, setActiveScreen } = useActiveScreen()
   const colorScheme = useColorScheme()
   const backgroundColor = Colors[colorScheme].background
   const containerStyle = {
