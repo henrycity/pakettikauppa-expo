@@ -8,6 +8,7 @@ import { DeviceType } from 'expo-device'
 import * as SecureStore from 'expo-secure-store'
 import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
+import useSWR from 'swr'
 
 import useDeviceType from '../hooks/useDeviceType'
 import LoginScreen from '../screens/LoginScreen'
@@ -29,6 +30,8 @@ export default function Navigation({
     SecureStore.getItemAsync('token').then((token) => setToken(token))
   } else {
     // start web login from here
+    // const fetcher = url => fetch(url).then(res => res.json());
+    // const {data, error} = useSWR(’/user’, fetcher) 
   }
   return (
     <NavigationContainer
