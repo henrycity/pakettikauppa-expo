@@ -1,8 +1,11 @@
+import Constants from 'expo-constants'
 import * as SecureStore from 'expo-secure-store'
 import React, { useState, useEffect } from 'react'
 import { SWRConfig } from 'swr'
 
-const serverUrl = 'http://192.168.100.11:3000'
+import options from './options'
+
+const serverUrl = Constants.manifest.extra.server
 
 const nativeFetcherOptions = (token: string | null) => {
   if (token)
@@ -18,7 +21,7 @@ const nativeFetcherOptions = (token: string | null) => {
     }
 }
 
-function getNativeFetcher(token: string | null) {
+function getNativeFetcher(token: string | null): Promise<any> {
   return (url: string) =>
     fetch(serverUrl + url, nativeFetcherOptions(token)).then((res) =>
       res.json()
@@ -44,6 +47,7 @@ export default function ConfigSWRNative({
     <SWRConfig
       value={{
         fetcher: getNativeFetcher(token),
+        ...options,
       }}
     >
       {children}

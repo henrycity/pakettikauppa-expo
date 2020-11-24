@@ -2,8 +2,10 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-import { ActiveScreenContextProvider } from './hooks/useActiveScreen'
 import ConfigSWR from './components/ConfigSWR'
+import { DeviceTypeContextProvider } from './components/DeviceTypeContext'
+import { ActiveScreenContextProvider } from './hooks/useActiveScreen'
+import { AccessProvider } from './hooks/useAuthorization'
 import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'
 import { DeviceTypeContextProvider } from './hooks/useDeviceType'
@@ -20,10 +22,12 @@ export default function App(): null | JSX.Element {
       <SafeAreaProvider>
         <ConfigSWR>
           <DeviceTypeContextProvider>
-            <ActiveScreenContextProvider>
-              <Navigation colorScheme={colorScheme} />
-              <StatusBar />
-            </ActiveScreenContextProvider>
+            <AccessProvider>
+              <ActiveScreenContextProvider>
+                <Navigation colorScheme={colorScheme} />
+                <StatusBar />
+              </ActiveScreenContextProvider>
+            </AccessProvider>
           </DeviceTypeContextProvider>
         </ConfigSWR>
       </SafeAreaProvider>

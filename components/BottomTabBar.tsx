@@ -3,8 +3,9 @@ import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
-import ScreenNames from '../constants/ScreenNames'
+import Screens from '../constants/Screens'
 import useActiveScreen from '../hooks/useActiveScreen'
+import useAuthorization from '../hooks/useAuthorization'
 import useColorScheme from '../hooks/useColorScheme'
 import { ScreenName } from '../types'
 import { View, Text, useThemeColor } from './Themed'
@@ -14,6 +15,8 @@ export default function BottomTabBar(): JSX.Element {
 
   const { activeScreen, setActiveScreen } = useActiveScreen()
 
+  const isAuthorized = useAuthorization()
+
   const handleLinkPress = (screenName: ScreenName) => {
     setActiveScreen(screenName)
     navigation.navigate(screenName)
@@ -22,18 +25,20 @@ export default function BottomTabBar(): JSX.Element {
   return (
     <TabBar>
       <TabBarItem
-        text={ScreenNames.Profile}
-        active={activeScreen === ScreenNames.Profile}
-        onPress={() => handleLinkPress(ScreenNames.Profile)}
+        text={Screens.Profile}
+        active={activeScreen === Screens.Profile}
+        onPress={() => handleLinkPress(Screens.Profile)}
       />
-      <TabBarItem
-        text={ScreenNames.Shipments}
-        active={activeScreen === ScreenNames.Shipments}
-        onPress={() => {
-          setActiveScreen(ScreenNames.Shipments)
-          navigation.navigate(ScreenNames.Shipments)
-        }}
-      />
+
+      <>
+        {isAuthorized(Screens.Shipments) && (
+          <TabBarItem
+            text={Screens.Shipments}
+            active={activeScreen === Screens.Shipments}
+            onPress={() => handleLinkPress(Screens.Shipments)}
+          />
+        )}
+      </>
     </TabBar>
   )
 }
