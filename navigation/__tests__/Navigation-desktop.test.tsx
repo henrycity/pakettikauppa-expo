@@ -9,7 +9,7 @@ import {
 } from '@testing-library/react-native'
 import React from 'react'
 
-import DeviceTypeContextProvider from '../../components/DeviceTypeContextProvider'
+import { DeviceTypeContextProvider } from '../../components/DeviceTypeContext'
 import ScreenNames from '../../constants/ScreenNames'
 import DrawerNavigator from '../DrawerNavigator'
 

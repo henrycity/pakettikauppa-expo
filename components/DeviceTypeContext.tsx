@@ -3,17 +3,20 @@ import React, { createContext } from 'react'
 
 import { _useDeviceType } from '../hooks/useDeviceType'
 
-export const DeviceTypeContext = createContext<DeviceType | null>(null)
+const DeviceTypeContext = createContext<DeviceType | null>(null)
+
+export default DeviceTypeContext
 
 interface Props {
   children: JSX.Element | JSX.Element[]
 }
 
-export default function DeviceTypeContextProvider({
+export function DeviceTypeContextProvider({
   children,
 }: Props): JSX.Element | null {
-  const [loaded, deviceType] = _useDeviceType()
-  return loaded ? (
+  const deviceType = _useDeviceType()
+
+  return deviceType ? (
     <DeviceTypeContext.Provider value={deviceType}>
       {children}
     </DeviceTypeContext.Provider>

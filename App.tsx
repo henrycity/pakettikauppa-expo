@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-import DeviceTypeContextProvider from './components/DeviceTypeContextProvider'
+import { DeviceTypeContextProvider } from './components/DeviceTypeContext'
 import { ActiveScreenContextProvider } from './hooks/useActiveScreen'
 import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'

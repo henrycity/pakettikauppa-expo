@@ -10,7 +10,7 @@ export default function useDeviceType(): useDeviceReturnType {
   else return { isDesktop: true, isMobile: false }
 }
 
-export function _useDeviceType(): [boolean, DeviceType | null] {
+export function _useDeviceType(): DeviceType | null {
   let deviceType: DeviceType
   switch (process.env.TEST_ENV) {
     case 'mobile':
@@ -24,5 +24,5 @@ export function _useDeviceType(): [boolean, DeviceType | null] {
       break
   }
 
-  return [true, deviceType]
+  return deviceType
 }
