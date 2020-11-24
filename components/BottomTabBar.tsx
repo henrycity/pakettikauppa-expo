@@ -1,16 +1,16 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useContext } from 'react'
+import React from 'react'
 import { TouchableOpacity } from 'react-native'
 
 import Colors from '../constants/Colors'
+import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
-import { ActiveScreenContext } from './ActiveScreenContextProvider'
 import { View, Text } from './Themed'
 
-export default function BottomTabBar() {
+export default function BottomTabBar(): JSX.Element {
   const navigation = useNavigation()
 
-  const { activeScreen, setActiveScreen } = useContext(ActiveScreenContext)
+  const { activeScreen, setActiveScreen } = useActiveScreen()
 
   return (
     <TabBar>
