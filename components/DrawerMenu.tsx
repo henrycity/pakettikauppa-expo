@@ -34,16 +34,18 @@ const DrawerMenu = (props: any): JSX.Element => {
     backgroundColor,
   }
 
+  const handleLinkPress = (screenName: 'Profile' | 'Shipments') => {
+    setActiveScreen(screenName)
+    navigation.navigate(screenName)
+  }
+
   return (
     <DrawerContentScrollView {...props}>
       {isDesktop ? (
         <DrawerItem
           label="Profile"
-          focused={activeScreen === 'profile'}
-          onPress={() => {
-            setActiveScreen('profile')
-            navigation.navigate('Profile')
-          }}
+          focused={activeScreen === 'Profile'}
+          onPress={() => handleLinkPress('Profile')}
           icon={({ color }) => <Feather name="user" size={24} color={color} />}
         />
       ) : null}
@@ -51,11 +53,8 @@ const DrawerMenu = (props: any): JSX.Element => {
       {isDesktop ? (
         <DrawerItem
           label="Shipments"
-          focused={activeScreen === 'shipments'}
-          onPress={() => {
-            setActiveScreen('shipments')
-            navigation.navigate('Shipments')
-          }}
+          focused={activeScreen === 'Shipments'}
+          onPress={() => handleLinkPress('Shipments')}
           icon={({ color }) => (
             <Feather name="package" size={24} color={color} />
           )}
@@ -74,11 +73,8 @@ const DrawerMenu = (props: any): JSX.Element => {
 
       <DrawerItem
         label="Settings"
-        focused={activeScreen === 'settings'}
-        onPress={() => {
-          setActiveScreen('settings')
-          navigation.navigate('Settings')
-        }}
+        focused={activeScreen === 'Settings'}
+        onPress={() => handleLinkPress('Settings')}
         icon={({ color }) => (
           <Feather name="settings" size={24} color={color} />
         )}

@@ -12,23 +12,24 @@ export default function BottomTabBar(): JSX.Element {
 
   const { activeScreen, setActiveScreen } = useActiveScreen()
 
+  const handleLinkPress = (
+    screenName: 'Profile' | 'Shipments' | 'Settings'
+  ) => {
+    setActiveScreen(screenName)
+    navigation.navigate(screenName)
+  }
+
   return (
     <TabBar>
       <TabBarItem
         text="Profile"
         active={activeScreen === 'profile'}
-        onPress={() => {
-          setActiveScreen('profile')
-          navigation.navigate('Profile')
-        }}
+        onPress={() => handleLinkPress('Profile')}
       />
       <TabBarItem
         text="Shipments"
         active={activeScreen === 'shipments'}
-        onPress={() => {
-          setActiveScreen('shipments')
-          navigation.navigate('Shipments')
-        }}
+        onPress={() => handleLinkPress('Shipments')}
       />
     </TabBar>
   )
