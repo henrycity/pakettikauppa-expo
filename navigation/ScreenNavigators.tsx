@@ -1,12 +1,9 @@
-import { Feather } from '@expo/vector-icons'
 import { useFocusEffect } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 
-import Colors from '../constants/Colors'
+import MenuButton from '../components/MenuButton'
 import useActiveScreen from '../hooks/useActiveScreen'
-import useColorScheme from '../hooks/useColorScheme'
-import { useDrawerType } from '../hooks/useDrawer'
 import ProfileScreen from '../screens/ProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import ShipmentScreen from '../screens/ShipmentScreen'
@@ -102,22 +99,6 @@ function SettingsNavigator({
       />
     </SettingsStack.Navigator>
   )
-}
-
-function MenuButton({ navigation }: { navigation: any }) {
-  const colorScheme = useColorScheme()
-  const drawerType = useDrawerType()
-  return drawerType !== 'permanent' ? (
-    <Feather.Button
-      name="menu"
-      color={Colors[colorScheme].tint}
-      style={{
-        paddingLeft: 20,
-        backgroundColor: Colors[colorScheme].background,
-      }}
-      onPress={() => navigation.openDrawer()}
-    />
-  ) : null
 }
 
 function headerOptions(navigation: any) {

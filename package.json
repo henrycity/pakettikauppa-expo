@@ -7,8 +7,6 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "yarn jest --watchAll",
-    "test-native": "TEST_DEVICE_TYPE=native jest",
-    "test-web": "TEST_DEVICE_TYPE=web jest",
     "format": "yarn prettier --write .",
     "lint": "yarn eslint . --fix",
     "type-check": "tsc --noEmit"

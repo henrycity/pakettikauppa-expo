@@ -1,13 +1,13 @@
-import { DeviceType } from 'expo-device'
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
 import BottomTabLayout from '../components/BottomTabLayout'
 import { Text, View } from '../components/Themed'
-import { _useDeviceType } from '../hooks/useDeviceType'
+import useDeviceType from '../hooks/useDeviceType'
 
 export default function ProfileScreen(): JSX.Element {
-  const [loaded, deviceType] = _useDeviceType()
+  const { isMobile } = useDeviceType()
+
   return (
     <BottomTabLayout>
       <View style={styles.container}>
@@ -17,10 +17,7 @@ export default function ProfileScreen(): JSX.Element {
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        <Text>
-          You are using{' '}
-          {loaded && deviceType === DeviceType.PHONE ? 'mobile' : 'web'}.
-        </Text>
+        <Text>You are using {isMobile ? 'mobile' : 'desktop'}.</Text>
       </View>
     </BottomTabLayout>
   )

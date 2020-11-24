@@ -1,4 +1,4 @@
-import { Ionicons, Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import React from 'react'
 import { StyleSheet } from 'react-native'
@@ -44,9 +44,7 @@ const DrawerMenu = (props: any): JSX.Element => {
             setActiveScreen('profile')
             navigation.navigate('Profile')
           }}
-          icon={({ color }) => (
-            <Ionicons name="md-person" size={24} color={color} />
-          )}
+          icon={({ color }) => <Feather name="user" size={24} color={color} />}
         />
       ) : null}
 
