@@ -1,30 +1,25 @@
 import { Feather } from '@expo/vector-icons'
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
+import {
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerContentComponentProps,
+} from '@react-navigation/drawer'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-import Colors from '../constants/Colors'
 import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
-import useColorScheme from '../hooks/useColorScheme'
 import useDeviceType from '../hooks/useDeviceType'
-import { ScreenName, DrawerMenuProps } from '../types'
-import { View } from './Themed'
+import { ScreenName } from '../types'
+import { View, useThemedColors } from './Themed'
 
-const DrawerMenu = (props: DrawerMenuProps): JSX.Element => {
+const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
   const { navigation } = props
 
   const { isDesktop } = useDeviceType()
-
   const { activeScreen, setActiveScreen } = useActiveScreen()
-  const colorScheme = useColorScheme()
-  const backgroundColor = Colors[colorScheme].background
-  const containerStyle = {
-    flex: 1,
-    alignItems: 'center' as const,
-    justifyContent: 'center' as const,
-    backgroundColor,
-  }
+
+  const themed = useThemedColors()
 
   const handleLinkPress = (screenName: ScreenName) => {
     setActiveScreen(screenName)
@@ -54,11 +49,13 @@ const DrawerMenu = (props: DrawerMenuProps): JSX.Element => {
       ) : null}
 
       {isDesktop ? (
-        <View style={containerStyle}>
+        <View
+          style={[styles.container, { backgroundColor: themed.background }]}
+        >
           <View
             style={styles.separator}
-            lightColor={Colors[colorScheme].tabIconDefault}
-            darkColor={Colors[colorScheme].tabIconDefault}
+            lightColor={themed.tabIconDefault}
+            darkColor={themed.tabIconDefault}
           />
         </View>
       ) : null}
@@ -80,6 +77,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     height: 1,
     width: '80%',
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
 

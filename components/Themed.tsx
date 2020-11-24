@@ -18,6 +18,11 @@ export function useThemeColor(
   }
 }
 
+export function useThemedColors() {
+  const theme = useColorScheme()
+  return Colors[theme]
+}
+
 type ThemeProps = {
   lightColor?: string
   darkColor?: string
