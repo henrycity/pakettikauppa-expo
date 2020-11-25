@@ -1,17 +1,74 @@
+import {
+  DrawerNavigationProp,
+  DrawerScreenProps,
+} from '@react-navigation/drawer'
+import { StackNavigationProp } from '@react-navigation/stack'
+
+import ScreenNames from './constants/ScreenNames'
+
 export type RootStackParamList = {
   Root: undefined
   NotFound: undefined
 }
 
-export type BottomTabParamList = {
-  TabOne: undefined
-  TabTwo: undefined
+export type DrawerParamList = {
+  Profile: undefined
+  Shipments: undefined
+  Settings: undefined
 }
 
-export type TabOneParamList = {
-  TabOneScreen: undefined
+export type DrawerMenuProps = DrawerScreenProps<DrawerParamList>
+
+export type DrawerMenuNavigationProp = DrawerNavigationProp<DrawerParamList>
+
+export type ScreenParamList = {
+  ProfileScreen: undefined
+  ShipmentsScreen: undefined
+  SettingsScreen: undefined
 }
 
-export type TabTwoParamList = {
-  TabTwoScreen: undefined
+export type ProfileParamList = {
+  ProfileScreen: undefined
 }
+export type ProfileNavigationProp = StackNavigationProp<
+  ProfileParamList,
+  'ProfileScreen'
+>
+export type ProfileNavigatorProps = {
+  navigation: ProfileNavigationProp
+}
+
+export type ShipmentsParamList = {
+  ShipmentsScreen: undefined
+}
+export type ShipmentsNavigationProp = StackNavigationProp<
+  ShipmentsParamList,
+  'ShipmentsScreen'
+>
+export type ShipmentsNavigatorProps = {
+  navigation: ShipmentsNavigationProp
+}
+
+export type SettingsParamList = {
+  SettingsScreen: undefined
+}
+
+export type SettingsNavigationProp = StackNavigationProp<
+  SettingsParamList,
+  'SettingsScreen'
+>
+
+export type SettingsNavigatorProps = {
+  navigation: SettingsNavigationProp
+}
+
+export type ScreenStackNavigationProp =
+  | ProfileNavigationProp
+  | ShipmentsNavigationProp
+  | SettingsNavigationProp
+
+export type ScreenStackNavigatorProps = {
+  navigation: ScreenStackNavigationProp
+}
+
+export type ScreenName = keyof typeof ScreenNames
