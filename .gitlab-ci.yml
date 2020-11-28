@@ -1,21 +1,33 @@
 variables:
   GIT_CLEAN_FLAGS: -ffdx -e .yarn -e .jest -e node_modules/
+
 image: node:14.15.0-alpine
+
 stages:
   - lint
   - test
   - deploy
+
 before_script:
   - yarn install --cache-folder .yarn --frozen-lockfile
+
 lint:
   stage: lint
+  needs: []
   script:
     - yarn lint
     - yarn type-check
+
 jest-tests:
   stage: test
+  needs: []
   script:
-    - yarn jest --ci --cacheDirectory .jest
+    - yarn jest --coverage --ci --cacheDirectory .jest
+  artifacts:
+    reports:
+      cobertura: coverage/cobertura-coverage.xml
+
+
 expo-deployments:
   stage: deploy
   script:
@@ -24,6 +36,7 @@ expo-deployments:
     - yarn expo publish --non-interactive
   only:
     - master
+
 netlify-deployment:
   stage: deploy
   script:

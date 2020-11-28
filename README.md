@@ -1,5 +1,7 @@
 # Pakettikauppa Expo
 
+![Coverage](https://gitlab.pakettikauppa.fi/aalto/pakettikauppa-expo/badges/master/coverage.svg?style=flat-square)
+
 ## Latest deployed versions
 Mobile
 - [Expo CDN](https://expo.io/@pakettikauppa/projects/pakettikauppa-expo)
