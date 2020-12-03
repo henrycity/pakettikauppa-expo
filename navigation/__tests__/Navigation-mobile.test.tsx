@@ -2,7 +2,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { render, fireEvent, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
-import { DeviceTypeContextProvider } from '../../components/DeviceTypeContext'
 import ScreenNames from '../../constants/ScreenNames'
 import DrawerNavigator from '../DrawerNavigator'
 import { findDrawerLink } from './Navigation-desktop.test'
@@ -42,10 +41,8 @@ describe('Testing mobile navigation', () => {
 
 function TestApp() {
   return (
-    <DeviceTypeContextProvider>
-      <NavigationContainer>
-        <DrawerNavigator />
-      </NavigationContainer>
-    </DeviceTypeContextProvider>
+    <NavigationContainer>
+      <DrawerNavigator />
+    </NavigationContainer>
   )
 }

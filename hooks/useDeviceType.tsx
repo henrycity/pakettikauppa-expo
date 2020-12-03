@@ -1,7 +1,5 @@
 import { DeviceType, getDeviceTypeAsync } from 'expo-device'
-import { useEffect, useState, useContext } from 'react'
-
-import DeviceTypeContext from '../components/DeviceTypeContext'
+import React, { useEffect, useState, useContext, createContext } from 'react'
 
 export interface useDeviceReturnType {
   isDesktop: boolean
@@ -17,8 +15,25 @@ export default function useDeviceType(): useDeviceReturnType {
   return { isDesktop, isMobile }
 }
 
-// Used by DeviceTypeContextProvider.tsx
-export function _useDeviceType(): DeviceType | null {
+const DeviceTypeContext = createContext<DeviceType | null>(null)
+
+interface Props {
+  children: JSX.Element | JSX.Element[]
+}
+
+export function DeviceTypeContextProvider({
+  children,
+}: Props): JSX.Element | null {
+  const deviceType = useGetDeviceType()
+
+  return deviceType ? (
+    <DeviceTypeContext.Provider value={deviceType}>
+      {children}
+    </DeviceTypeContext.Provider>
+  ) : null
+}
+
+function useGetDeviceType(): DeviceType | null {
   const [deviceType, setDeviceType] = useState<DeviceType | null>(null)
 
   useEffect(() => {

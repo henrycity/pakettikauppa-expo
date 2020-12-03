@@ -9,7 +9,6 @@ import {
 } from '@testing-library/react-native'
 import React from 'react'
 
-import { DeviceTypeContextProvider } from '../../components/DeviceTypeContext'
 import ScreenNames from '../../constants/ScreenNames'
 import DrawerNavigator from '../DrawerNavigator'
 
@@ -69,10 +68,8 @@ export async function findDrawerLink(
 
 function TestApp() {
   return (
-    <DeviceTypeContextProvider>
-      <NavigationContainer>
-        <DrawerNavigator />
-      </NavigationContainer>
-    </DeviceTypeContextProvider>
+    <NavigationContainer>
+      <DrawerNavigator />
+    </NavigationContainer>
   )
 }

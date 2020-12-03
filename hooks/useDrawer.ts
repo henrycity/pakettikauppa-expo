@@ -1,7 +1,6 @@
-import { DeviceType } from 'expo-device'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 
-import DeviceTypeContext from '../components/DeviceTypeContext'
+import useDeviceType from './useDeviceType'
 
 type DrawerType = 'front' | 'permanent' | 'back' | 'slide' | undefined
 
@@ -11,7 +10,7 @@ enum Breakpoint {
 }
 
 export function useDrawerType(): DrawerType {
-  const deviceType = useContext(DeviceTypeContext)
+  const { isDesktop } = useDeviceType()
 
   const desktopDrawerShouldBePermanent = () =>
     screen.width > 650 && window.innerWidth > Breakpoint.large * screen.width
@@ -19,8 +18,7 @@ export function useDrawerType(): DrawerType {
   const initTypeDesktop = () =>
     desktopDrawerShouldBePermanent() ? 'permanent' : 'front'
 
-  const initType =
-    deviceType === DeviceType.DESKTOP ? initTypeDesktop() : 'front'
+  const initType = isDesktop ? initTypeDesktop() : 'front'
 
   const [type, setType] = useState<DrawerType>(initType)
 
@@ -30,7 +28,7 @@ export function useDrawerType(): DrawerType {
   }
 
   useEffect(() => {
-    if (deviceType === DeviceType.DESKTOP) {
+    if (isDesktop) {
       window.addEventListener('resize', eventListener)
       return () => window.removeEventListener('resize', eventListener)
     }

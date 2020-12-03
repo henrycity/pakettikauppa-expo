@@ -27,7 +27,6 @@ jest-tests:
     reports:
       cobertura: coverage/cobertura-coverage.xml
 
-
 expo-deployments:
   stage: deploy
   script:
