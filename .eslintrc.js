@@ -5,6 +5,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
     'universe/native',
     'universe/web',
     'universe/shared/typescript-analysis',
