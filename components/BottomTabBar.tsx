@@ -1,20 +1,23 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
-import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
 import { ScreenName } from '../types'
 import { View, Text, useThemeColor } from './Themed'
+import Screens from '../constants/Screens'
 
 export default function BottomTabBar(): JSX.Element {
   const navigation = useNavigation()
 
   const { activeScreen, setActiveScreen } = useActiveScreen()
 
-  const handleLinkPress = (screenName: ScreenName) => {
+  const { t } = useTranslation()
+
+  const pressTabBarLink = (screenName: ScreenName) => {
     setActiveScreen(screenName)
     navigation.navigate(screenName)
   }
@@ -22,14 +25,14 @@ export default function BottomTabBar(): JSX.Element {
   return (
     <TabBar>
       <TabBarItem
-        text={ScreenNames.Profile}
-        active={activeScreen === ScreenNames.Profile}
-        onPress={() => handleLinkPress(ScreenNames.Profile)}
+        text={t('profile')}
+        active={activeScreen === Screens.Profile}
+        onPress={() => pressTabBarLink(Screens.Profile)}
       />
       <TabBarItem
-        text={ScreenNames.Shipments}
-        active={activeScreen === ScreenNames.Shipments}
-        onPress={() => handleLinkPress(ScreenNames.Shipments)}
+        text={t('shipments')}
+        active={activeScreen === Screens.Shipments}
+        onPress={() => pressTabBarLink(Screens.Shipments)}
       />
     </TabBar>
   )

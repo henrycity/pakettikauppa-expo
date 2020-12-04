@@ -4,7 +4,7 @@ import {
 } from '@react-navigation/drawer'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import ScreenNames from './constants/ScreenNames'
+import Screens from './constants/Screens'
 
 export type RootStackParamList = {
   Root: undefined
@@ -71,4 +71,4 @@ export type ScreenStackNavigatorProps = {
   navigation: ScreenStackNavigationProp
 }
 
-export type ScreenName = keyof typeof ScreenNames
+export type ScreenName = keyof typeof Screens
