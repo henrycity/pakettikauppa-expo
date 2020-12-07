@@ -8,6 +8,7 @@ import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
 
 import NotFoundScreen from '../screens/NotFoundScreen'
+import LoginScreen from '../screens/LoginScreen'
 import { RootStackParamList } from '../types'
 import DrawerNavigator from './DrawerNavigator'
 import LinkingConfiguration from './LinkingConfiguration'
@@ -36,6 +37,7 @@ const Stack = createStackNavigator<RootStackParamList>()
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Root" component={DrawerNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} />
     </Stack.Navigator>
