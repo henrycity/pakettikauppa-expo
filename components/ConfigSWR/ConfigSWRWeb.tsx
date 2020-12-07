@@ -20,7 +20,7 @@ export default function ConfigSWRWeb({
     <SWRConfig
       value={{
         fetcher: webFetcher,
-        ...options
+        ...options,
       }}
     >
       {children}

@@ -45,7 +45,7 @@ export default function ConfigSWRNative({
     <SWRConfig
       value={{
         fetcher: getNativeFetcher(token),
-        ...options
+        ...options,
       }}
     >
       {children}
