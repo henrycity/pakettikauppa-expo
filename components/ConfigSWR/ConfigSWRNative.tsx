@@ -21,7 +21,7 @@ const nativeFetcherOptions = (token: string | null) => {
     }
 }
 
-function getNativeFetcher(token: string | null): Promise<any> {
+function getNativeFetcher(token: string | null): (url: string) => Promise<any> {
   return (url: string) =>
     fetch(serverUrl + url, nativeFetcherOptions(token)).then((res) =>
       res.json()

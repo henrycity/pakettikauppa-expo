@@ -11,14 +11,24 @@ export default {
               ProfileScreen: 'profile',
             },
           },
-          Shipments: {
+          Reports: {
             screens: {
-              ShipmentsScreen: 'shipments',
+              ReportsScreen: 'reports',
             },
           },
           Settings: {
             screens: {
               SettingsScreen: 'settings',
+            },
+          },
+          Shipments: {
+            screens: {
+              ShipmentsScreen: 'shipments',
+            },
+          },
+          Statistics: {
+            screens: {
+              StatisticsScreen: 'statistics',
             },
           },
         },

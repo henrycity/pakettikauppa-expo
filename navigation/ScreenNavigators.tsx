@@ -6,18 +6,24 @@ import MenuButton from '../components/MenuButton'
 import Screens from '../constants/Screens'
 import useActiveScreen from '../hooks/useActiveScreen'
 import ProfileScreen from '../screens/ProfileScreen'
+import ReportsScreen from '../screens/ReportsScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import ShipmentsScreen from '../screens/ShipmentsScreen'
+import StatisticsScreen from '../screens/StatisticsScreen'
 import {
   ProfileParamList,
   ShipmentsParamList,
   SettingsParamList,
+  StatisticsParamList,
+  ReportsParamList,
 } from '../types'
 
 export default {
   Profile: ProfileNavigator,
-  Shipments: ShipmentNavigator,
+  Reports: ReportsNavigator,
   Settings: SettingsNavigator,
+  Shipments: ShipmentNavigator,
+  Statistics: StatisticsNavigator,
 }
 
 const headerOptions = {
@@ -49,28 +55,28 @@ function ProfileNavigator(): JSX.Element {
   )
 }
 
-const ShipmentStack = createStackNavigator<ShipmentsParamList>()
+const ReportsStack = createStackNavigator<ReportsParamList>()
 
-function ShipmentNavigator(): JSX.Element {
+function ReportsNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
     useCallback(() => {
-      setActiveScreen(Screens.Shipments)
+      setActiveScreen(Screens.Reports)
     }, [])
   )
 
   return (
-    <ShipmentStack.Navigator>
-      <ShipmentStack.Screen
-        name="ShipmentsScreen"
-        component={ShipmentsScreen}
+    <ReportsStack.Navigator>
+      <ReportsStack.Screen
+        name="ReportsScreen"
+        component={ReportsScreen}
         options={{
           ...headerOptions,
-          headerTitle: 'Shipments',
+          headerTitle: 'Reports',
         }}
       />
-    </ShipmentStack.Navigator>
+    </ReportsStack.Navigator>
   )
 }
 
@@ -96,5 +102,55 @@ function SettingsNavigator(): JSX.Element {
         }}
       />
     </SettingsStack.Navigator>
+  )
+}
+
+const ShipmentStack = createStackNavigator<ShipmentsParamList>()
+
+function ShipmentNavigator(): JSX.Element {
+  const { setActiveScreen } = useActiveScreen()
+
+  useFocusEffect(
+    useCallback(() => {
+      setActiveScreen(Screens.Shipments)
+    }, [])
+  )
+
+  return (
+    <ShipmentStack.Navigator>
+      <ShipmentStack.Screen
+        name="ShipmentsScreen"
+        component={ShipmentsScreen}
+        options={{
+          ...headerOptions,
+          headerTitle: 'Shipments',
+        }}
+      />
+    </ShipmentStack.Navigator>
+  )
+}
+
+const StatisticsStack = createStackNavigator<StatisticsParamList>()
+
+function StatisticsNavigator(): JSX.Element {
+  const { setActiveScreen } = useActiveScreen()
+
+  useFocusEffect(
+    useCallback(() => {
+      setActiveScreen(Screens.Statistics)
+    }, [])
+  )
+
+  return (
+    <StatisticsStack.Navigator>
+      <StatisticsStack.Screen
+        name="StatisticsScreen"
+        component={StatisticsScreen}
+        options={{
+          ...headerOptions,
+          headerTitle: 'Statistics',
+        }}
+      />
+    </StatisticsStack.Navigator>
   )
 }

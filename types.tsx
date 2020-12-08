@@ -13,9 +13,10 @@ export type RootStackParamList = {
 
 export type DrawerParamList = {
   Profile: undefined
-  Shipments: undefined
+  Reports: undefined
   Settings: undefined
-  unauthorized: undefined
+  Shipments: undefined
+  Statistics: undefined
 }
 
 export type DrawerMenuProps = DrawerScreenProps<DrawerParamList>
@@ -24,8 +25,10 @@ export type DrawerMenuNavigationProp = DrawerNavigationProp<DrawerParamList>
 
 export type ScreenParamList = {
   ProfileScreen: undefined
-  ShipmentsScreen: undefined
+  ReportsScreen: undefined
   SettingsScreen: undefined
+  ShipmentsScreen: undefined
+  StatisticsScreen: undefined
 }
 
 export type ProfileParamList = {
@@ -39,15 +42,15 @@ export type ProfileNavigatorProps = {
   navigation: ProfileNavigationProp
 }
 
-export type ShipmentsParamList = {
-  ShipmentsScreen: undefined
+export type ReportsParamList = {
+  ReportsScreen: undefined
 }
-export type ShipmentsNavigationProp = StackNavigationProp<
-  ShipmentsParamList,
-  'ShipmentsScreen'
+export type ReportsNavigationProp = StackNavigationProp<
+  ReportsParamList,
+  'ReportsScreen'
 >
-export type ShipmentsNavigatorProps = {
-  navigation: ShipmentsNavigationProp
+export type ReportsNavigatorProps = {
+  navigation: ReportsNavigationProp
 }
 
 export type SettingsParamList = {
@@ -63,13 +66,26 @@ export type SettingsNavigatorProps = {
   navigation: SettingsNavigationProp
 }
 
-export type ScreenStackNavigationProp =
-  | ProfileNavigationProp
-  | ShipmentsNavigationProp
-  | SettingsNavigationProp
+export type ShipmentsParamList = {
+  ShipmentsScreen: undefined
+}
+export type ShipmentsNavigationProp = StackNavigationProp<
+  ShipmentsParamList,
+  'ShipmentsScreen'
+>
+export type ShipmentsNavigatorProps = {
+  navigation: ShipmentsNavigationProp
+}
 
-export type ScreenStackNavigatorProps = {
-  navigation: ScreenStackNavigationProp
+export type StatisticsParamList = {
+  StatisticsScreen: undefined
+}
+export type StatisticsNavigationProp = StackNavigationProp<
+  StatisticsParamList,
+  'StatisticsScreen'
+>
+export type StatisticsNavigatorProps = {
+  navigation: ShipmentsNavigationProp
 }
 
 export type ScreenName = keyof typeof Screens

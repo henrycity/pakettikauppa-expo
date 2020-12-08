@@ -61,6 +61,28 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
         </View>
       ) : null}
 
+      {isAuthorized(Screens.Reports) ? (
+        <DrawerItem
+          label={Screens.Reports}
+          focused={activeScreen === Screens.Reports}
+          onPress={() => handleLinkPress(Screens.Reports)}
+          icon={({ color }) => (
+            <Feather name="layers" size={24} color={color} />
+          )}
+        />
+      ) : null}
+
+      {isAuthorized(Screens.Statistics) ? (
+        <DrawerItem
+          label={Screens.Statistics}
+          focused={activeScreen === Screens.Statistics}
+          onPress={() => handleLinkPress(Screens.Statistics)}
+          icon={({ color }) => (
+            <Feather name="activity" size={24} color={color} />
+          )}
+        />
+      ) : null}
+
       {isAuthorized(Screens.Settings) ? (
         <DrawerItem
           label={Screens.Settings}

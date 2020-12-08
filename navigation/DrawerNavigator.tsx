@@ -24,12 +24,20 @@ export default function DrawerNavigator(): JSX.Element {
     >
       <Drawer.Screen name="Profile" component={Navigators.Profile} />
 
-      {isAuthorized(Screens.Shipments) ? (
-        <Drawer.Screen name="Shipments" component={Navigators.Shipments} />
+      {isAuthorized(Screens.Reports) ? (
+        <Drawer.Screen name="Reports" component={Navigators.Reports} />
       ) : null}
 
       {isAuthorized(Screens.Settings) ? (
         <Drawer.Screen name="Settings" component={Navigators.Settings} />
+      ) : null}
+
+      {isAuthorized(Screens.Shipments) ? (
+        <Drawer.Screen name="Shipments" component={Navigators.Shipments} />
+      ) : null}
+
+      {isAuthorized(Screens.Statistics) ? (
+        <Drawer.Screen name="Statistics" component={Navigators.Statistics} />
       ) : null}
     </Drawer.Navigator>
   )
