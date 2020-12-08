@@ -12,6 +12,8 @@ import React from 'react'
 import Screens from '../../constants/Screens'
 import DrawerNavigator from '../DrawerNavigator'
 
+jest.mock('../../hooks/useAuthorization')
+
 describe('Testing desktop navigation', () => {
   afterEach(cleanup)
 

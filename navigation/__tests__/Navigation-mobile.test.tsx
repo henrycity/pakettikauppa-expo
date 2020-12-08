@@ -6,6 +6,8 @@ import Screens from '../../constants/Screens'
 import DrawerNavigator from '../DrawerNavigator'
 import { findDrawerLink } from './Navigation-desktop.test'
 
+jest.mock('../../hooks/useAuthorization')
+
 describe('Testing mobile navigation', () => {
   afterEach(cleanup)
 
