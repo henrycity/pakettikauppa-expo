@@ -2,9 +2,10 @@ import * as Google from 'expo-auth-session/providers/google'
 import * as SecureStore from 'expo-secure-store'
 import * as WebBrowser from 'expo-web-browser'
 import firebase from 'firebase'
+import { secretmanager } from 'googleapis/build/src/apis/secretmanager'
 import * as React from 'react'
-import { StyleSheet, Button, Platform } from 'react-native'
 import { useEffect } from 'react'
+import { StyleSheet, Button, Platform } from 'react-native'
 import { mutate } from 'swr'
 
 //Initialize Firebase
@@ -37,7 +38,9 @@ export default function useLogin() {
         // We need to tell swr to revalidate the user / login status after saving then token
         //.then(() => mutate('/user'))
       } else {
-        handleIOSAndroidToken(id_token)
+        handleIOSAndroidToken(id_token).then(() => {
+          mutate('/user')
+        })
         // We need to tell swr to revalidate the user / login status after saving then token
         //.then(() => mutate('/user'))
       }
@@ -51,6 +54,10 @@ function handleWebToken(idToken: string) {
   // fetch request to /login etc
 }
 
-function handleIOSAndroidToken(idToken: string) {
-  // Save to secure store
+function handleIOSAndroidToken(idToken: string): Promise<void> {
+  try {
+    return SecureStore.setItemAsync('token', idToken)
+  } catch (e) {
+    throw new Error(e)
+  }
 }

@@ -1,9 +1,10 @@
 import * as SecureStore from 'expo-secure-store'
 import React, { useState, useEffect } from 'react'
 import { SWRConfig } from 'swr'
+
 import options from './options'
 
-const serverUrl = 'http://192.168.100.11:3000'
+const serverUrl = 'http://100.64.2.107:3000/'
 
 const nativeFetcherOptions = (token: string | null) => {
   if (token)

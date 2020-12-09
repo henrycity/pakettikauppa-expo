@@ -1,12 +1,10 @@
 import * as Google from 'expo-auth-session/providers/google'
 import * as SecureStore from 'expo-secure-store'
 import * as WebBrowser from 'expo-web-browser'
-import firebase from 'firebase'
 import * as React from 'react'
 import { StyleSheet, Button, Platform } from 'react-native'
 
 import { Text, View } from '../components/Themed'
-import useDeviceType from '../hooks/useDeviceType'
 import useLogin from '../hooks/useLogin'
 
 WebBrowser.maybeCompleteAuthSession()

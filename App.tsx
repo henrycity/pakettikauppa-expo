@@ -6,6 +6,7 @@ import { ActiveScreenContextProvider } from './hooks/useActiveScreen'
 import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'
 import { DeviceTypeContextProvider } from './hooks/useDeviceType'
+import { AuthenticationProvider } from './hooks/useUser'
 import Navigation from './navigation'
 
 export default function App(): null | JSX.Element {
@@ -19,8 +20,10 @@ export default function App(): null | JSX.Element {
       <SafeAreaProvider>
         <DeviceTypeContextProvider>
           <ActiveScreenContextProvider>
-            <Navigation colorScheme={colorScheme} />
-            <StatusBar />
+            <AuthenticationProvider>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar />
+            </AuthenticationProvider>
           </ActiveScreenContextProvider>
         </DeviceTypeContextProvider>
       </SafeAreaProvider>
