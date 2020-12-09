@@ -4,7 +4,7 @@ import { SWRConfig } from 'swr'
 
 import options from './options'
 
-const serverUrl = 'http://100.64.2.107:3000'
+const serverUrl = 'http://192.168.1.7:3000'
 
 const nativeFetcherOptions = (token: string | null) => {
   // console.log('token', token)
@@ -22,11 +22,11 @@ const nativeFetcherOptions = (token: string | null) => {
   }
 }
 
-function getNativeFetcher(token: string | null) {
-  return (url: string) =>
-    fetch(serverUrl + url, nativeFetcherOptions(token)).then((res) =>
-      res.json()
-    )
+const nativeFetcher = async (url: string) => {
+  const token = await SecureStore.getItemAsync('token')
+  return fetch(serverUrl + url, nativeFetcherOptions(token)).then((res) =>
+    res.json()
+  )
 }
 
 export default function ConfigSWRNative({
@@ -34,24 +34,14 @@ export default function ConfigSWRNative({
 }: {
   children: JSX.Element | JSX.Element[]
 }) {
-  const [token, setToken] = useState<string | null>(null)
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    SecureStore.getItemAsync('token').then((token) => {
-      setToken(token)
-      setLoaded(true)
-    })
-  }, [])
-
-  return loaded ? (
+  return (
     <SWRConfig
       value={{
-        fetcher: getNativeFetcher(token),
+        fetcher: nativeFetcher,
         ...options,
       }}
     >
       {children}
     </SWRConfig>
-  ) : null
+  )
 }
