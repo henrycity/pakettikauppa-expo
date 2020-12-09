@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import { StyleSheet, Button, Platform } from 'react-native'
 import { mutate } from 'swr'
 
+import ConfigSWRWeb from '../components/ConfigSWR/ConfigSWRWeb'
+
 //Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -50,8 +52,16 @@ export default function useLogin() {
   return { login: promptAsync, disabled: !request }
 }
 
-function handleWebToken(idToken: string) {
+function handleWebToken(idToken: string): Promise<object> {
   // fetch request to /login etc
+  return fetch('http://localhost:3000/login', {
+    credentials: 'include',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ idToken }),
+  }).then((response) => response.json())
 }
 
 function handleIOSAndroidToken(idToken: string): Promise<void> {
