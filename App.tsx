@@ -3,7 +3,6 @@ import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import ConfigSWR from './components/ConfigSWR'
-import { DeviceTypeContextProvider } from './components/DeviceTypeContext'
 import { ActiveScreenContextProvider } from './hooks/useActiveScreen'
 import { AccessProvider } from './hooks/useAuthorization'
 import useCachedResources from './hooks/useCachedResources'
