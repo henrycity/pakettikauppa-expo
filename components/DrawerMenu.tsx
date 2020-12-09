@@ -8,12 +8,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
 
+import Screens from '../constants/Screens'
 import useActiveScreen from '../hooks/useActiveScreen'
 import useDeviceType from '../hooks/useDeviceType'
 import { ScreenName } from '../types'
 import LanguagePicker from './LanguagePicker'
 import { View, useThemedColors } from './Themed'
-import Screens from '../constants/Screens'
 
 const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
   const { navigation } = props

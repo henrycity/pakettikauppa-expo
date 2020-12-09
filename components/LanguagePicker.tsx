@@ -1,13 +1,11 @@
+import { MaterialIcons } from '@expo/vector-icons'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
-import { MaterialIcons } from '@expo/vector-icons'
 
-import { languages } from '../localization'
-import { useSelectedLanguage } from '../localization'
-import { View } from 'react-native'
+import { languages, useSelectedLanguage } from '../localization'
 import { useThemedColors } from './Themed'
 
 interface LanguagePickerProps {
@@ -20,10 +18,15 @@ export default ({ navigation }: LanguagePickerProps) => {
   const themed = useThemedColors()
 
   return (
-    <View style={[styles.container, {backgroundColor: themed.background}]}>
-      <MaterialIcons name="language" size={26} color="blue" style={styles.icon} />
+    <View style={[styles.container, { backgroundColor: themed.background }]}>
+      <MaterialIcons
+        name="language"
+        size={26}
+        color="blue"
+        style={styles.icon}
+      />
       <View style={styles.languagePicker}>
-        {selectedLanguage ?
+        {selectedLanguage ? (
           <RNPickerSelect
             value={selectedLanguage}
             placeholder={{}}
@@ -37,17 +40,19 @@ export default ({ navigation }: LanguagePickerProps) => {
               inputWeb: {
                 ...webStyle,
                 backgroundColor: themed.background,
-                color: themed.text
-              }, inputIOS: {
+                color: themed.text,
+              },
+              inputIOS: {
                 backgroundColor: themed.background,
-                color: themed.text
-              }, inputAndroid: {
+                color: themed.text,
+              },
+              inputAndroid: {
                 backgroundColor: themed.background,
                 color: themed.text,
               },
             }}
           />
-          : null}
+        ) : null}
       </View>
     </View>
   )
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     padding: 7,
-  }
+  },
 })
 
 const webStyle = {

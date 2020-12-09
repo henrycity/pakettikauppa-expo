@@ -20,3 +20,5 @@ jest.mock('../hooks/useDeviceType')
 jest.mock('../hooks/useDrawer')
 
 jest.mock('../localization/useSelectedLanguage')
+
+jest.mock('../localization/index.tsx')

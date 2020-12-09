@@ -3,7 +3,10 @@ import * as Font from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import * as React from 'react'
 
-import { initializeLocalization, setLanguageChangedEventListener } from '../localization'
+import {
+  initializeLocalization,
+  setLanguageChangedEventListener,
+} from '../localization'
 
 export default function useCachedResources(): boolean {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false)

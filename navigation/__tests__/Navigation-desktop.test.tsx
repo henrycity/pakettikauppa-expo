@@ -10,9 +10,14 @@ import {
 import React from 'react'
 
 import Screens from '../../constants/Screens'
+import { initializeLocalization } from '../../localization'
 import DrawerNavigator from '../DrawerNavigator'
 
 describe('Testing desktop navigation', () => {
+  beforeAll(() => {
+    initializeLocalization()
+  })
+
   afterEach(cleanup)
 
   const component = <TestApp />
@@ -22,10 +27,7 @@ describe('Testing desktop navigation', () => {
     const { getAllByA11yRole, getByText } = render(component)
     const drawerLinks = getAllByA11yRole('button')
 
-    const shipmentsLink = await findDrawerLink(
-      drawerLinks,
-      Screens.Shipments
-    )
+    const shipmentsLink = await findDrawerLink(drawerLinks, Screens.Shipments)
 
     fireEvent(shipmentsLink, 'press')
     const shipmentsText = getByText('Shipments Screen!')

@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
+import Screens from '../constants/Screens'
 import useActiveScreen from '../hooks/useActiveScreen'
 import useColorScheme from '../hooks/useColorScheme'
 import { ScreenName } from '../types'
 import { View, Text, useThemeColor } from './Themed'
-import Screens from '../constants/Screens'
 
 export default function BottomTabBar(): JSX.Element {
   const navigation = useNavigation()

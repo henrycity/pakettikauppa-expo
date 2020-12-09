@@ -1,5 +1,5 @@
 // the translations
-// (tip move them in a JSON file and import them)
+// (tip move them in a JSON file and import them (which should make the app load faster when there are lots of resources))
 const resources = {
   en: {
     translation: {

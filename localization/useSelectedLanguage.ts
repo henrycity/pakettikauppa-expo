@@ -1,6 +1,7 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import * as Localization from "expo-localization"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Localization from 'expo-localization'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
+
 import { languages } from './resources'
 
 type useSelectedLanguageReturnType = [string, Dispatch<SetStateAction<string>>]
@@ -8,8 +9,7 @@ type useSelectedLanguageReturnType = [string, Dispatch<SetStateAction<string>>]
 export default function useSelectedLanguage(): useSelectedLanguageReturnType {
   const [selected, setSelected] = useState('')
   useEffect(() => {
-    getSelectedLanguage()
-      .then(lng => setSelected(lng))
+    getSelectedLanguage().then((lng) => setSelected(lng))
   }, [])
 
   return [selected, setSelected]
@@ -19,10 +19,8 @@ async function getSelectedLanguage() {
   let selected = await getStoredLanguage()
   if (!selected) {
     const locale = Localization.locale
-    if (languages.includes(locale))
-      selected = locale
-    else
-      selected = 'en'
+    if (languages.includes(locale)) selected = locale
+    else selected = 'en'
   }
   return selected
 }
