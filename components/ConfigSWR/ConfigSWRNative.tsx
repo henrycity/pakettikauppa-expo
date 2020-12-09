@@ -4,20 +4,22 @@ import { SWRConfig } from 'swr'
 
 import options from './options'
 
-const serverUrl = 'http://100.64.2.107:3000/'
+const serverUrl = 'http://100.64.2.107:3000'
 
 const nativeFetcherOptions = (token: string | null) => {
-  if (token)
+  // console.log('token', token)
+  if (token) {
     return {
       credentials: 'include' as const,
       headers: {
         Authorization: 'Bearer ' + token,
       },
     }
-  else
+  } else {
     return {
       credentials: 'include' as const,
     }
+  }
 }
 
 function getNativeFetcher(token: string | null) {
@@ -36,7 +38,7 @@ export default function ConfigSWRNative({
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    SecureStore.getItemAsync('idToken').then((token) => {
+    SecureStore.getItemAsync('token').then((token) => {
       setToken(token)
       setLoaded(true)
     })

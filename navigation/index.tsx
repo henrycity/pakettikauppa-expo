@@ -36,9 +36,10 @@ export default function Navigation({
 const Stack = createStackNavigator<RootStackParamList>()
 
 function RootNavigator() {
+  const { isLoggedIn } = useUser()
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {useUser().isLoggedIn ? (
+      {isLoggedIn ? (
         <Stack.Screen name="Root" component={DrawerNavigator} />
       ) : (
         <>
