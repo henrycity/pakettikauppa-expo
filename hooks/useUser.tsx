@@ -1,3 +1,4 @@
+import { isLoaded } from 'expo-font'
 import * as React from 'react'
 import useSWR from 'swr'
 
@@ -13,11 +14,9 @@ const AuthenticationContext = React.createContext({
 // Wrap <Navigation /> to <AuthProvider> in App.tsx
 export function AuthenticationProvider({ children }) {
   const { data, error } = useSWR('/user')
-  //console.log('data', data)
-  //console.log('error', error)
-  //  const isLoading = !error && !data
+  const isLoading = !error && !data
   const isLoggedIn = data && error?.status !== 401
-  return (
+  return isLoading ? null : (
     <AuthenticationContext.Provider value={{ user: data, isLoggedIn }}>
       {children}
     </AuthenticationContext.Provider>

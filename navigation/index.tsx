@@ -37,16 +37,20 @@ const Stack = createStackNavigator<RootStackParamList>()
 
 function RootNavigator() {
   const { isLoggedIn } = useUser()
+  // console.log('isLoggedIn', isLoggedIn)
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isLoggedIn ? (
-        <Stack.Screen name="Root" component={DrawerNavigator} />
+        <>
+          <Stack.Screen name="Root" component={DrawerNavigator} />
+          <Stack.Screen name="NotFound" component={NotFoundScreen} />
+        </>
       ) : (
         <>
           <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="NotFound" component={NotFoundScreen} />
         </>
       )}
-      <Stack.Screen name="NotFound" component={NotFoundScreen} />
     </Stack.Navigator>
   )
 }
