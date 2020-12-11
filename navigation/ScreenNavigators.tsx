@@ -16,15 +16,39 @@ import {
   SettingsParamList,
   StatisticsParamList,
   ReportsParamList,
+  ScreenName,
 } from '../types'
 
-export default {
-  Profile: ProfileNavigator,
-  Reports: ReportsNavigator,
-  Settings: SettingsNavigator,
-  Shipments: ShipmentNavigator,
-  Statistics: StatisticsNavigator,
+interface ScreenNavigator {
+  navigator: () => JSX.Element
+  name: ScreenName
 }
+
+export const ScreenNavigators: ScreenNavigator[] = [
+  {
+    navigator: ProfileNavigator,
+    name: Screens.Profile,
+  },
+]
+
+export const RestrictedScreenNavigators: ScreenNavigator[] = [
+  {
+    navigator: ReportsNavigator,
+    name: Screens.Reports,
+  },
+  {
+    navigator: SettingsNavigator,
+    name: Screens.Settings,
+  },
+  {
+    navigator: ShipmentNavigator,
+    name: Screens.Shipments,
+  },
+  {
+    navigator: StatisticsNavigator,
+    name: Screens.Statistics,
+  },
+]
 
 const headerOptions = {
   headerLeft: () => <MenuButton />,

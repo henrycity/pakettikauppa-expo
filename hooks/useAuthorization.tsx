@@ -3,16 +3,20 @@ import useSWR from 'swr'
 
 import { ScreenName } from '../types'
 
-type PermissionChecker = (screenName: ScreenName) => boolean
+type PermissionChecker = (screenName: ScreenName) => boolean | undefined
+
+type SWRUserData = Permission[] | undefined
+
+type SWRError = Error | undefined
 
 interface Permission {
   screen: ScreenName
 }
 
 interface AuthState {
-  isAuthorized: (screenName: ScreenName) => boolean
+  isAuthorized: PermissionChecker
   isLoading: boolean
-  isError: any
+  error: SWRError
 }
 
 interface AccessProviderProps {
@@ -30,29 +34,31 @@ interface AccessProviderProps {
  * )
  * ```
  */
-export default function useAuthorization(): (
-  screenName: ScreenName
-) => boolean {
+export default function useAuthorization(): PermissionChecker {
   return useContext(AccessContext)
 }
+
+const AccessContext = createContext<PermissionChecker>(
+  (_screenName: ScreenName) => false
+)
 
 /**
  * Provider for [[`useAuthorization`]]
  */
-export function AccessProvider({ children }: AccessProviderProps) {
-  const { isAuthorized, isLoading, isError } = _useAuthorization()
+export function AccessProvider({
+  children,
+}: AccessProviderProps): JSX.Element | null {
+  const { isAuthorized, isLoading } = _useAuthorization()
 
-  if (!isLoading) {
-    return (
-      <AccessContext.Provider value={isAuthorized}>
-        {children}
-      </AccessContext.Provider>
-    )
-  } else return null
+  return isLoading ? null : (
+    <AccessContext.Provider value={isAuthorized}>
+      {children}
+    </AccessContext.Provider>
+  )
 }
 
 function _useAuthorization(): AuthState {
-  const { data, error } = useSWR('/permissions')
+  const { data, error } = useSWR<SWRUserData, SWRError>('/permissions')
 
   const isAuthorized = (screenName: ScreenName) =>
     data?.some((permission: Permission) => permission.screen === screenName)
@@ -60,10 +66,6 @@ function _useAuthorization(): AuthState {
   return {
     isAuthorized: (screenName: ScreenName) => isAuthorized(screenName),
     isLoading: !error && !data,
-    isError: error,
+    error,
   }
 }
-
-const AccessContext = createContext<PermissionChecker>(
-  (_screenName: ScreenName) => false
-)

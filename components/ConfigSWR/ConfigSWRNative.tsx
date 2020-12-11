@@ -1,31 +1,17 @@
 import Constants from 'expo-constants'
-import * as SecureStore from 'expo-secure-store'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { SWRConfig } from 'swr'
 
 import options from './options'
 
 const serverUrl = Constants.manifest.extra.server
 
-const nativeFetcherOptions = (token: string | null) => {
-  if (token)
-    return {
-      credentials: 'include' as const,
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    }
-  else
-    return {
-      credentials: 'include' as const,
-    }
+const nativeFetcherOptions = {
+  credentials: 'include' as const,
 }
 
-function getNativeFetcher(token: string | null): (url: string) => Promise<any> {
-  return (url: string) =>
-    fetch(serverUrl + url, nativeFetcherOptions(token)).then((res) =>
-      res.json()
-    )
+async function nativeFetcher(url: string): Promise<any> {
+  return fetch(serverUrl + url, nativeFetcherOptions).then((res) => res.json())
 }
 
 export default function ConfigSWRNative({
@@ -33,24 +19,14 @@ export default function ConfigSWRNative({
 }: {
   children: JSX.Element | JSX.Element[]
 }) {
-  const [token, setToken] = useState<string | null>(null)
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    SecureStore.getItemAsync('idToken').then((token) => {
-      setToken(token)
-      setLoaded(true)
-    })
-  }, [])
-
-  return loaded ? (
+  return (
     <SWRConfig
       value={{
-        fetcher: getNativeFetcher(token),
+        fetcher: nativeFetcher,
         ...options,
       }}
     >
       {children}
     </SWRConfig>
-  ) : null
+  )
 }

@@ -1,3 +1,1 @@
-export default {
-  revalidateOnFocus: true,
-}
+export default {}

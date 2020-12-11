@@ -1,11 +1,10 @@
-import Constants from 'expo-constants'
+import { Constants } from 'expo-constants'
 import React from 'react'
 import { SWRConfig } from 'swr'
 
 import options from './options'
 
-//const serverUrl = Constants.manifest.extra.server
-const serverUrl = 'http://localhost:3000'
+const serverUrl = Constants.manifest.extra.server
 
 const webFetcherOptions = {
   credentials: 'include' as const,

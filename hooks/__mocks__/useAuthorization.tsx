@@ -5,4 +5,7 @@ import { ScreenName } from '../../types'
  *
  * `jest.mock('hooks/useAuthorization')` could be added to jest/setup.js if we wanted to use it in every test.
  */
-export default () => (_screenName: ScreenName) => true
+export default (): useAuthorizationReturnType => (_screenName: ScreenName) =>
+  true
+
+type useAuthorizationReturnType = (_screenName: ScreenName) => boolean
