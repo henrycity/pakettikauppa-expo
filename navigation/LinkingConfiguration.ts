@@ -23,7 +23,7 @@ export default {
           },
         },
       },
-      Login: 'login',
+      Login: '*',
       NotFound: '*',
     },
   },

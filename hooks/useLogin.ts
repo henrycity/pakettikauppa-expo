@@ -57,7 +57,7 @@ function handleWebToken(idToken: string): Promise<object> {
   }).then((response) => response.json())
 }
 
-function handleIOSAndroidToken(idToken: string): Promise<void> {
+export function handleIOSAndroidToken(idToken: string): Promise<void> {
   try {
     return AsyncStorage.setItem('token', idToken)
   } catch (e) {
