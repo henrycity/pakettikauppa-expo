@@ -1,21 +1,19 @@
 import { render, cleanup, waitFor } from '@testing-library/react-native'
 import React from 'react'
-import { debug, exp } from 'react-native-reanimated'
 
 import Navigation from '../../navigation/index'
-// import LoginScreen from '../../screens/LoginScreen'
 import useUser from '../useUser'
 
 jest.mock('../useUser', () => {
   return () => ({ user: 'aa', isLoggedIn: true })
 })
+jest.mock('../useLogin')
 
 describe('Testing mobile authorization when isLoggedIn === true', () => {
   afterEach(cleanup)
 
   const comp = <Test />
 
-  jest.mock('../useLogin')
   it('Profile page should open when isLoggedIn is true', async () => {
     process.env.TEST_ENV = 'mobile'
     const { isLoggedIn } = useUser()

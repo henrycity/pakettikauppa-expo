@@ -8,9 +8,7 @@ export function handleIOSAndroidToken(idToken: string): Promise<void> {
 
 export default function useLogin() {
   return {
-    login: () => {
-      return undefined
-    },
+    login: jest.fn,
     disabled: false,
   }
 }

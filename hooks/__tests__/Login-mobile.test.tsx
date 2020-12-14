@@ -7,13 +7,12 @@ import useUser from '../useUser'
 jest.mock('../useUser', () => {
   return () => ({ user: 'aa', isLoggedIn: false })
 })
-
+jest.mock('../useLogin')
 describe('Testing mobile authorization', () => {
   afterEach(cleanup)
 
   const comp = <Test />
 
-  jest.mock('../useLogin')
   it('login page should open when isLoggedIn is false', async () => {
     process.env.TEST_ENV = 'mobile'
     const { getByText } = render(comp)

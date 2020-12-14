@@ -45,6 +45,7 @@ exports[`LoginScreen renders correctly 1`] = `
     }
   />
   <View
+    accessibilityLabel="Login button"
     accessibilityRole="button"
     accessibilityState={Object {}}
     accessible={true}

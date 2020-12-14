@@ -24,6 +24,7 @@ export default function LoginScreen(): JSX.Element {
 
       <Button
         disabled={disabled}
+        accessibilityLabel="Login button"
         title="Login"
         onPress={() => {
           login()

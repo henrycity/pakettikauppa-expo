@@ -48,6 +48,7 @@
     "expo-web-browser": "~8.5.0",
     "firebase": "7.9.0",
     "googleapis": "^66.0.0",
+    "jest-enzyme": "^7.1.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
