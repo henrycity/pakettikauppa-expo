@@ -5,6 +5,7 @@ export default function RegistrationModal() {
   const [isVisible, setIsVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [vat_id, setVat_id] = useState('')
+  const [error, setError] = useState('')
 
   const postAsync = async () => {
     const response = await fetch('https://pk-aalto.setamies.com/register', {
@@ -23,6 +24,8 @@ export default function RegistrationModal() {
       setIsVisible(false)
       setVat_id('')
       setEmail('')
+    } else {
+      setError(response.status)
     }
   }
 
@@ -33,6 +36,12 @@ export default function RegistrationModal() {
         <View style={styles.container}>
           <Text style={styles.title}>Please enter your details: </Text>
           <View style={{ height: 10 }} />
+
+          <View>
+            {error !== '' ? (
+              <Text style={styles.error}> Error code: {error} </Text>
+            ) : null}
+          </View>
 
           <Text> Email: </Text>
           <TextInput
@@ -79,5 +88,8 @@ const styles = StyleSheet.create({
   input: {
     borderBottomWidth: 1.0,
     width: 200,
+  },
+  error: {
+    color: 'red',
   },
 })
