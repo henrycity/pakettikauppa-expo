@@ -1,9 +1,10 @@
 import * as Google from 'expo-auth-session/providers/google'
 import * as SecureStore from 'expo-secure-store'
 import * as WebBrowser from 'expo-web-browser'
-import * as React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Button, Platform } from 'react-native'
 
+import RegistrationModal from '../components/RegistrationModal'
 import { Text, View } from '../components/Themed'
 import useLogin from '../hooks/useLogin'
 
@@ -28,6 +29,10 @@ export default function LoginScreen(): JSX.Element {
           login()
         }}
       />
+
+      <View style={{ height: 10 }} />
+
+      <RegistrationModal />
     </View>
   )
 }
