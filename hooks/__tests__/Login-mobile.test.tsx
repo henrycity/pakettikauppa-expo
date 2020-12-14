@@ -1,49 +1,48 @@
 // Work in progress
 
 import { render, fireEvent, cleanup } from '@testing-library/react-native'
-import { app } from 'firebase'
 import React from 'react'
-import { AsyncStorage, StyleSheet, Button, Platform } from 'react-native'
-import { mutate } from 'swr'
+import { debug } from 'react-native-reanimated'
 
-import App from '../../App'
-import ConfigSWRNative from '../../components/ConfigSWR/ConfigSWRNative'
-import { DeviceTypeContextProvider } from '../../components/DeviceTypeContext'
-import RootNavigator from '../../navigation/index'
-import useColorScheme from '../useColorScheme'
-import { handleIOSAndroidToken } from '../useLogin'
-import useUser, { AuthenticationProvider } from '../useUser'
+import Navigation from '../../navigation/index'
+
+// import Navigation from '../../navigation/index'
+// import RootNavigator from '../../navigation/index'
+import LoginScreen from '../../screens/LoginScreen'
+import useUser from '../useUser'
 
 describe('Testing mobile authorization', () => {
   afterEach(cleanup)
 
   const comp = <Test />
 
-  /**it('login status should be true when token is set', async () => {
-        process.env.TEST_ENV = 'mobile'
-        render(comp)
-        handleIOSAndroidToken('tokeni').then(() => mutate('/user'))
-        const { isLoggedIn } = useUser()
+  jest.mock('../useUser')
+  jest.mock('../useLogin')
 
-        expect(isLoggedIn).toEqual(true)
-      })*/
-
-  it('asyncstorage should work', async () => {
+  it('login page should open when isLoggedIn is false', async () => {
     process.env.TEST_ENV = 'mobile'
-    handleIOSAndroidToken('tokeni').then(() => {
-      const testedToken = AsyncStorage.getItem('token')
-      expect(testedToken).toEqual('tokeni')
-    })
+    const { getByText, debug } = render(comp)
+    const { isLoggedIn } = useUser()
+    // console.log(isLoggedIn)
+    expect(isLoggedIn).toEqual(false)
+    // const loginText = await getByText('Login or register with a Google account')
+    // console.log(loginText)
+    // expect(loginText).toBeTruthy()
   })
+
+  /**it('login page should come when isLoggedIn is false', async () => {
+    process.env.TEST_ENV = 'mobile'
+    const { getByText } = render(comp)
+    const { isLoggedIn } = useUser()
+    expect(isLoggedIn).toEqual(true)
+    const loginText = await getByText('Profile Screen!')
+    console.log(loginText)
+    expect(loginText).toBeTruthy()
+  })*/
 })
 
 function Test() {
-  const colorScheme = useColorScheme()
-  return (
-    <ConfigSWRNative>
-      <AuthenticationProvider>
-        <RootNavigator colorScheme={colorScheme} />
-      </AuthenticationProvider>
-    </ConfigSWRNative>
-  )
+  return <Navigation colorScheme="light" />
 }
+
+// yarn test hooks/__tests__/Login-mobile.test.tsx

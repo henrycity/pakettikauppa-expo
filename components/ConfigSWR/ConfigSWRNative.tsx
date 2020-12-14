@@ -4,7 +4,7 @@ import { SWRConfig } from 'swr'
 
 import options from './options'
 
-const serverUrl = 'http://192.168.1.7:3000'
+const serverUrl = 'http://100.64.2.107:3000'
 
 const nativeFetcherOptions = (token: string | null) => {
   if (token) {

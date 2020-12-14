@@ -1,8 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Google from 'expo-auth-session/providers/google'
 import * as WebBrowser from 'expo-web-browser'
 import firebase from 'firebase'
 import { useEffect } from 'react'
-import { AsyncStorage, StyleSheet, Button, Platform } from 'react-native'
+import { StyleSheet, Button, Platform } from 'react-native'
 import { mutate } from 'swr'
 
 //Initialize Firebase
