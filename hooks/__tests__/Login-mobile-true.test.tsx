@@ -10,7 +10,7 @@ jest.mock('../useUser', () => {
   return () => ({ user: 'aa', isLoggedIn: true })
 })
 
-describe('Testing mobile authorization', () => {
+describe('Testing mobile authorization when isLoggedIn === true', () => {
   afterEach(cleanup)
 
   const comp = <Test />

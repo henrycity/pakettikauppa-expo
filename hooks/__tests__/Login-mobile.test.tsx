@@ -1,9 +1,7 @@
 import { render, cleanup, waitFor } from '@testing-library/react-native'
 import React from 'react'
-import { debug, exp } from 'react-native-reanimated'
 
 import Navigation from '../../navigation/index'
-// import LoginScreen from '../../screens/LoginScreen'
 import useUser from '../useUser'
 
 jest.mock('../useUser', () => {
