@@ -3,7 +3,7 @@ import * as Google from 'expo-auth-session/providers/google'
 import * as WebBrowser from 'expo-web-browser'
 import firebase from 'firebase'
 import { useEffect } from 'react'
-import { StyleSheet, Button, Platform } from 'react-native'
+import { Platform } from 'react-native'
 import { mutate } from 'swr'
 
 //Initialize Firebase
@@ -20,7 +20,7 @@ if (!firebase.apps.length) {
   })
 }
 
-export default function useLogin() {
+export default function useLogin(): object {
   WebBrowser.maybeCompleteAuthSession()
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
@@ -32,7 +32,7 @@ export default function useLogin() {
     if (response?.type === 'success') {
       const { id_token } = response.params
       if (Platform.OS === 'web') {
-        handleWebToken(id_token)
+        handleWebToken(id_token).then(() => mutate('/user'))
         // We need to tell swr to revalidate the user / login status after saving then token
         //.then(() => mutate('/user'))
       } else {
