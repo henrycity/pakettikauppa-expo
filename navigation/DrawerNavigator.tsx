@@ -25,16 +25,22 @@ export default function DrawerNavigator(): JSX.Element {
       drawerStyle={styles.drawer}
     >
       {ScreenNavigators.map((screen) => (
-        <Drawer.Screen name={screen.name} component={screen.navigator} />
+        <Drawer.Screen
+          key={screen.name}
+          name={screen.name}
+          component={screen.navigator}
+        />
       ))}
 
-      {RestrictedScreenNavigators.map((screen) => (
-        <>
-          {isAuthorized(screen.name) && (
-            <Drawer.Screen name={screen.name} component={screen.navigator} />
-          )}
-        </>
-      ))}
+      {RestrictedScreenNavigators.map((screen) =>
+        isAuthorized(screen.name) ? (
+          <Drawer.Screen
+            key={screen.name}
+            name={screen.name}
+            component={screen.navigator}
+          />
+        ) : null
+      )}
     </Drawer.Navigator>
   )
 }
