@@ -1,8 +1,6 @@
-import * as Google from 'expo-auth-session/providers/google'
-import * as SecureStore from 'expo-secure-store'
 import * as WebBrowser from 'expo-web-browser'
-import React, { useState } from 'react'
-import { StyleSheet, Button, Platform } from 'react-native'
+import React from 'react'
+import { StyleSheet, Button } from 'react-native'
 
 import RegistrationModal from '../components/RegistrationModal'
 import { Text, View } from '../components/Themed'

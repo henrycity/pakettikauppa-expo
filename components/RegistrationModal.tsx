@@ -1,29 +1,18 @@
 import React, { useState } from 'react'
 import { Modal, Text, View, Button, StyleSheet, TextInput } from 'react-native'
 
+import PostRegistration from './PostRegistration'
+
 export default function RegistrationModal() {
   const [isVisible, setIsVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [vat_id, setVat_id] = useState('')
   const [error, setError] = useState('')
 
-  const postAsync = async () => {
-    const response = await fetch('https://pk-aalto.setamies.com/register', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        vat_id,
-      }),
-    })
-
+  const handlePress = async () => {
+    const response = await PostRegistration(email, vat_id)
     if (response.status === 200) {
       setIsVisible(false)
-      setVat_id('')
-      setEmail('')
     } else {
       setError(response.status)
     }
@@ -64,7 +53,7 @@ export default function RegistrationModal() {
 
           <View style={{ height: 10 }} />
 
-          <Button onPress={() => postAsync()} title="Submit" />
+          <Button onPress={() => handlePress()} title="Submit" />
 
           <View style={{ height: 10 }} />
 
