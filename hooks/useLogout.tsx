@@ -1,4 +1,5 @@
-import { AsyncStorage, Platform } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Platform } from 'react-native'
 import { mutate } from 'swr'
 
 export default function useLogout(): Function {
