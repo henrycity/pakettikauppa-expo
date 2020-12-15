@@ -52,7 +52,7 @@ export default function useLogin(): object {
 
 function handleWebToken(idToken: string): Promise<object> {
   // fetch request to /login etc
-  return fetch(`${server}/login`, {
+  return fetch(`${serverURL}/login`, {
     credentials: 'include',
     method: 'POST',
     headers: {
