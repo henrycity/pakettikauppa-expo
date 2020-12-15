@@ -6,6 +6,10 @@ import { useEffect } from 'react'
 import { Platform } from 'react-native'
 import { mutate } from 'swr'
 
+import server from '../constants/config'
+
+const serverURL = server()
+
 //Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -48,7 +52,7 @@ export default function useLogin(): object {
 
 function handleWebToken(idToken: string): Promise<object> {
   // fetch request to /login etc
-  return fetch('http://localhost:3000/login', {
+  return fetch(`${server}/login`, {
     credentials: 'include',
     method: 'POST',
     headers: {

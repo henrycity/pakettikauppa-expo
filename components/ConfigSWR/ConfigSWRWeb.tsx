@@ -1,9 +1,10 @@
 import React from 'react'
 import { SWRConfig } from 'swr'
 
+import server from '../../constants/config'
 import options from './options'
 
-const serverUrl = 'http://localhost:3000'
+const serverUrl = server()
 
 const webFetcherOptions = {
   credentials: 'include' as const,

@@ -2,6 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Platform } from 'react-native'
 import { mutate } from 'swr'
 
+import server from '../constants/config'
+
+const serverURL = server()
+
 export default function useLogout(): Function {
   function logout() {
     if (Platform.OS === 'web') {
@@ -14,7 +18,7 @@ export default function useLogout(): Function {
 }
 
 function handleWebLogout() {
-  return fetch('http://localhost:3000/logout', {
+  return fetch(`${serverURL}/logout`, {
     credentials: 'include',
     method: 'POST',
   }).then((response) => response.json())

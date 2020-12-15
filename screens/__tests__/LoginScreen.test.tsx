@@ -1,15 +1,8 @@
-import {
-  render,
-  cleanup,
-  waitFor,
-  fireEvent,
-} from '@testing-library/react-native'
+import { render, fireEvent } from '@testing-library/react-native'
 import React from 'react'
-import ReactTestUtils from 'react-dom/test-utils'
-import Button from 'react-native'
 import renderer from 'react-test-renderer'
 
-// import useLogin from '../../hooks/useLogin'
+import useLogin from '../../hooks/useLogin'
 import LoginScreen from '../LoginScreen'
 
 it('LoginScreen renders correctly', () => {
@@ -17,16 +10,18 @@ it('LoginScreen renders correctly', () => {
 
   expect(tree).toMatchSnapshot()
 })
-
+const mocklogin = { login: jest.fn(), disabled: false }
 jest.mock('../../hooks/useLogin', () => {
-  return () => ({ login: jest.fn(), disabled: false })
+  return () => mocklogin
 })
-/** 
+
 it('LoginScreen button should ...', async () => {
   const { login, disabled } = useLogin()
-  const { findByRole, findByA11yLabel } = render(<LoginScreen />)
+  expect(disabled).toBe(false)
+  const { findByA11yLabel } = render(<LoginScreen />)
   const button = await findByA11yLabel('Login button')
   fireEvent.press(button)
   expect(login.mock.calls.length).toBe(1)
 })
-*/
+
+// yarn test -- screens/__tests__/LoginScreen.test.tsx

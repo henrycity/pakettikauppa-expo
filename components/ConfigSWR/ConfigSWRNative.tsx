@@ -2,9 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
 import { SWRConfig } from 'swr'
 
+import server from '../../constants/config'
 import options from './options'
 
-const serverUrl = 'http://100.64.2.107:3000'
+const serverUrl = server()
 
 const nativeFetcherOptions = (token: string | null) => {
   if (token) {
