@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { AsyncStorage } from 'react-native'
 import { SWRConfig } from 'swr'
 
@@ -23,16 +23,28 @@ const nativeFetcherOptions = (token: string | null) => {
 
 const nativeFetcher = async (url: string) => {
   const token = await AsyncStorage.getItem('token')
-  return fetch(serverUrl + url, nativeFetcherOptions(token)).then((res) =>
-    res.json()
-  )
+  const res = await fetch(serverUrl + url, nativeFetcherOptions(token))
+  if (!res.ok) {
+    const error = new Error(
+      'An error occurred while fetching the data'
+    ) as Error & { info: object | string; status: number }
+    const body = await res.text()
+    try {
+      error.info = JSON.parse(body)
+    } catch (e) {
+      error.info = body
+    }
+    error.status = res.status
+    throw error
+  }
+  return res.json()
 }
 
 export default function ConfigSWRNative({
   children,
 }: {
   children: JSX.Element | JSX.Element[]
-}) {
+}): JSX.Element {
   return (
     <SWRConfig
       value={{
