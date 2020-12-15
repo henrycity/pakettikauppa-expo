@@ -13,26 +13,15 @@ const AuthenticationContext = React.createContext<{
   isLoggedIn: false,
 })
 
-const authFetcher = (
-  url: string
-): Promise<object & { ok: boolean; user: object }> =>
-  // TODO: change the hardcoded path here and elsewhere
-  fetch('http://localhost:3000' + url, { credentials: 'include' }).then(
-    (res) => {
-      return { ok: res.ok, user: res.json() }
-    }
-  )
-
 // Wrap <Navigation /> to <AuthProvider> in App.tsx
 export function AuthenticationProvider({
   children,
 }: React.PropsWithChildren<object>): JSX.Element | null {
-  const { data, error } = useSWR('/user', authFetcher)
+  const { data, error } = useSWR('/user')
   const isLoading = !error && !data
-  const isLoggedIn = data ? data.ok : false
-  const user = data ? data.user : null
-  return isLoading && !user ? null : (
-    <AuthenticationContext.Provider value={{ user, isLoggedIn }}>
+  const isLoggedIn = data && error?.status !== 401 && error?.status !== 403
+  return isLoading ? null : (
+    <AuthenticationContext.Provider value={{ user: data, isLoggedIn }}>
       {children}
     </AuthenticationContext.Provider>
   )
