@@ -21,11 +21,14 @@ export default function RegistrationModal() {
   return (
     <>
       <Button onPress={() => setIsVisible(true)} title="Register" />
-      <Modal onRequestClose={() => setIsVisible(false)} visible={isVisible}>
+      <Modal
+        onRequestClose={() => setIsVisible(false)}
+        visible={isVisible}
+        testID="modelTest"
+      >
         <View style={styles.container}>
           <Text style={styles.title}>Please enter your details: </Text>
           <View style={{ height: 10 }} />
-
           <View>
             {error !== '' ? (
               <Text style={styles.error}> Error code: {error} </Text>
