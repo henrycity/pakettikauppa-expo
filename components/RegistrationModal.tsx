@@ -8,7 +8,7 @@ export default function RegistrationModal(): JSX.Element {
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [vat_id, setVat_id] = useState('')
-  const [error, setError] = useState(0)
+  const [error, setError] = useState<number | null>(null)
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
 
   const handlePress = async () => {
@@ -16,7 +16,7 @@ export default function RegistrationModal(): JSX.Element {
     if (response.status === 200) {
       setModalIsVisible(false)
       setDisplaySuccessMessage(true)
-      setError(0)
+      setError(null)
     } else {
       setError(response.status)
     }
@@ -43,7 +43,7 @@ export default function RegistrationModal(): JSX.Element {
           <Text style={styles.title}>Please enter your details: </Text>
           <View style={styles.gap} />
           <View>
-            {error !== 0 ? (
+            {error ? (
               <Text style={styles.error}> Error code: {error} </Text>
             ) : null}
           </View>
