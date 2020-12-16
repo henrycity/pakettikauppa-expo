@@ -14,7 +14,7 @@ describe('Testing registration modal', () => {
     const button = getByText('Register')
     fireEvent.press(button)
 
-    const modal = getByTestId('modelTest')
+    const modal = getByTestId('modalTest')
     expect(modal.props.visible).toBe(true)
   })
 
@@ -27,7 +27,7 @@ describe('Testing registration modal', () => {
     const submit = getByText('Submit')
     fireEvent.press(submit)
 
-    const modal = getByTestId('modelTest')
+    const modal = getByTestId('modalTest')
     expect(modal.props.visible).toBe(true)
   })
 
@@ -40,7 +40,7 @@ describe('Testing registration modal', () => {
     const close = getByText('Close')
     fireEvent.press(close)
 
-    const modal = getByTestId('modelTest')
+    const modal = getByTestId('modalTest')
     expect(modal.props.visible).toBe(false)
   })
 })

@@ -1,4 +1,4 @@
-export default async function PostRegistration(
+export default async function postRegistration(
   email: string,
   vat_id: string
 ): Promise<Response> {

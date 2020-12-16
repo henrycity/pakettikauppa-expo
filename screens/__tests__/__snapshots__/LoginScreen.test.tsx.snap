@@ -151,7 +151,7 @@ exports[`LoginScreen renders correctly 1`] = `
   <Modal
     hardwareAccelerated={false}
     onRequestClose={[Function]}
-    testID="modelTest"
+    testID="modalTest"
     visible={false}
   >
     <View

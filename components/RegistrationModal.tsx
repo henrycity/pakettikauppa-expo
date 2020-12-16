@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Modal, Text, View, Button, StyleSheet, TextInput } from 'react-native'
 
-import PostRegistration from './PostRegistration'
+import postRegistration from './utils/postRegistration'
 
 export default function RegistrationModal(): JSX.Element {
   const [modalIsVisible, setModalIsVisible] = useState(false)
@@ -11,7 +11,7 @@ export default function RegistrationModal(): JSX.Element {
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
 
   const handlePress = async () => {
-    const response = await PostRegistration(email, vat_id)
+    const response = await postRegistration(email, vat_id)
     if (response.status === 200) {
       setModalIsVisible(false)
       setDisplaySuccessMessage(true)
@@ -35,7 +35,7 @@ export default function RegistrationModal(): JSX.Element {
       <Modal
         onRequestClose={() => setModalIsVisible(false)}
         visible={modalIsVisible}
-        testID="modelTest"
+        testID="modalTest"
       >
         <View style={styles.container}>
           <Text style={styles.title}>Please enter your details: </Text>
