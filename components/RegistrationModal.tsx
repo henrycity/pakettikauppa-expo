@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Modal, Text, View, Button, StyleSheet, TextInput } from 'react-native'
+import { Modal, Button, StyleSheet, TextInput } from 'react-native'
 
+import { Text, View } from './Themed'
 import postRegistration from './utils/postRegistration'
 
 export default function RegistrationModal(): JSX.Element {
@@ -15,6 +16,7 @@ export default function RegistrationModal(): JSX.Element {
     if (response.status === 200) {
       setModalIsVisible(false)
       setDisplaySuccessMessage(true)
+      setError(0)
     } else {
       setError(response.status)
     }
