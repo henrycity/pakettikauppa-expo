@@ -10,8 +10,8 @@ stages:
 
 before_script:
   - yarn install --cache-folder .yarn --frozen-lockfile
-  - ECHO EXPO_FIREBASE_CLIENT_ID=$EXPO_FIREBASE_CLIENT_ID > .env
-  - ECHO EXPO_SERVER=$EXPO_SERVER >> .env
+  - echo EXPO_FIREBASE_CLIENT_ID=$EXPO_FIREBASE_CLIENT_ID > .env
+  - echo EXPO_SERVER=$EXPO_SERVER >> .env
 
 lint:
   stage: lint
