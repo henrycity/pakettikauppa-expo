@@ -18,7 +18,7 @@ export function useThemeColor(
   }
 }
 
-export function useThemedColors() {
+export function useThemedColors(): typeof Colors.light & typeof Colors.dark {
   const theme = useColorScheme()
   return Colors[theme]
 }

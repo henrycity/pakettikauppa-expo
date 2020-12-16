@@ -8,7 +8,7 @@ interface Props {
   children: JSX.Element | JSX.Element[]
 }
 
-export default function ({ children }: Props) {
+export default function ({ children }: Props): JSX.Element {
   const isWeb = Platform.OS === 'web'
   return isWeb ? (
     <ConfigSWRWeb>{children}</ConfigSWRWeb>

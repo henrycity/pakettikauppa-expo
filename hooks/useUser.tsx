@@ -1,5 +1,6 @@
 import * as React from 'react'
 import useSWR from 'swr'
+
 import Loading from '../components/Loading'
 
 export default function useUser(): object {
@@ -21,11 +22,11 @@ export function AuthenticationProvider({
   const { data, error } = useSWR('/user')
   const isLoading = !error && !data
   const isLoggedIn = data && error?.status !== 401 && error?.status !== 403
-  return isLoading ?  (
-    <Loading/>
-    ) : (
-        <AuthenticationContext.Provider value={{ user: data, isLoggedIn }}>
-          {children}
-        </AuthenticationContext.Provider>
-      )
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <AuthenticationContext.Provider value={{ user: data, isLoggedIn }}>
+      {children}
+    </AuthenticationContext.Provider>
+  )
 }
