@@ -9,6 +9,7 @@ import ScreenNames from './constants/ScreenNames'
 export type RootStackParamList = {
   Root: undefined
   NotFound: undefined
+  Login: undefined
 }
 
 export type DrawerParamList = {
