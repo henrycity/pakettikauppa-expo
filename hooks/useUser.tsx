@@ -18,7 +18,7 @@ const AuthenticationContext = React.createContext<{
 // Wrap <Navigation /> to <AuthProvider> in App.tsx
 export function AuthenticationProvider({
   children,
-}: React.PropsWithChildren<object>): JSX.Element | (() => JSX.Element) {
+}: React.PropsWithChildren<object>): JSX.Element {
   const { data, error } = useSWR('/user')
   const isLoading = !error && !data
   const isLoggedIn = data && error?.status !== 401 && error?.status !== 403
