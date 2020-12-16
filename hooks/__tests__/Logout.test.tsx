@@ -11,16 +11,22 @@ import Navigation from '../../navigation/index'
 import useLogout from '../useLogout'
 import useUser from '../useUser'
 
+const mockedUseLogout = useLogout as jest.Mock
+const mockedUseUser = useUser as jest.Mock
+
 const mockLogout = jest.fn()
 jest.mock('../useUser', () => jest.fn())
 jest.mock('../useLogout', () => jest.fn())
-useLogout.mockImplementation(() => () => mockLogout)
+mockedUseLogout.mockImplementation(() => () => mockLogout)
 
 describe('Log out button', () => {
   afterEach(cleanup)
 
   it('should not be visible when not logged in', async () => {
-    useUser.mockImplementation(() => ({ user: 'test', isLoggedIn: false }))
+    mockedUseUser.mockImplementation(() => ({
+      user: 'test',
+      isLoggedIn: false,
+    }))
     const { queryByText } = render(<Navigation colorScheme="light" />)
     const { isLoggedIn } = useUser()
     expect(isLoggedIn).toEqual(false)
@@ -30,7 +36,7 @@ describe('Log out button', () => {
   })
 
   it('should be visible when logged in', async () => {
-    useUser.mockImplementation(() => ({ user: 'test', isLoggedIn: true }))
+    mockedUseUser.mockImplementation(() => ({ user: 'test', isLoggedIn: true }))
     const { getByText } = render(<Navigation colorScheme="light" />)
     const { isLoggedIn } = useUser()
     expect(isLoggedIn).toEqual(true)
@@ -40,7 +46,7 @@ describe('Log out button', () => {
   })
 
   it('should call logout when pressed', async () => {
-    useUser.mockImplementation(() => ({ user: 'test', isLoggedIn: true }))
+    mockedUseUser.mockImplementation(() => ({ user: 'test', isLoggedIn: true }))
     const { getByText } = render(<Navigation colorScheme="light" />)
     const { isLoggedIn } = useUser()
     expect(isLoggedIn).toEqual(true)
