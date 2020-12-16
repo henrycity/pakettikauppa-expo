@@ -7,13 +7,11 @@ exports[`renders correctly 1`] = `
       Object {
         "backgroundColor": "#fff",
       },
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-      ],
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
     ]
   }
 >

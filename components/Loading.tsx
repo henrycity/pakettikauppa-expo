@@ -5,7 +5,7 @@ import { View } from './Themed'
 
 export default function Loading(): JSX.Element {
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <ActivityIndicator />
     </View>
   )
