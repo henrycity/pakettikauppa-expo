@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { AuthRequestPromptOptions, AuthSessionResult } from 'expo-auth-session'
 import * as Google from 'expo-auth-session/providers/google'
 import { useEffect } from 'react'
 import { Platform } from 'react-native'
@@ -8,7 +9,12 @@ import server from '../constants/config'
 
 const serverURL = server()
 
-export default function useLogin(): object {
+export default function useLogin(): {
+  login: (
+    options?: AuthRequestPromptOptions | undefined
+  ) => Promise<AuthSessionResult>
+  disabled: boolean
+} {
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: process.env.EXPO_FIREBASE_CLIENT_ID,
   })
