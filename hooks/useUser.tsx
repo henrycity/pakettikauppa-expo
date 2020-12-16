@@ -3,7 +3,10 @@ import useSWR from 'swr'
 
 import Loading from '../components/Loading'
 
-export default function useUser(): object {
+export default function useUser(): {
+  user: object | null
+  isLoggedIn: boolean
+} {
   return React.useContext(AuthenticationContext)
 }
 
