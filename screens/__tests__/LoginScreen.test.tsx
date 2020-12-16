@@ -21,7 +21,7 @@ it('LoginScreen button should ...', async () => {
   const { findByA11yLabel } = render(<LoginScreen />)
   const button = await findByA11yLabel('Login button')
   fireEvent.press(button)
-  expect(login.mock.calls.length).toBe(1)
+  expect(login).toHaveBeenCalled()
 })
 
 // yarn test -- screens/__tests__/LoginScreen.test.tsx
