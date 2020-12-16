@@ -3,16 +3,16 @@ import { Modal, Text, View, Button, StyleSheet, TextInput } from 'react-native'
 
 import PostRegistration from './PostRegistration'
 
-export default function RegistrationModal() {
-  const [isVisible, setIsVisible] = useState(false)
+export default function RegistrationModal(): JSX.Element {
+  const [modalIsVisible, setModalIsVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [vat_id, setVat_id] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState(0)
 
   const handlePress = async () => {
     const response = await PostRegistration(email, vat_id)
     if (response.status === 200) {
-      setIsVisible(false)
+      setModalIsVisible(false)
     } else {
       setError(response.status)
     }
@@ -20,17 +20,17 @@ export default function RegistrationModal() {
 
   return (
     <>
-      <Button onPress={() => setIsVisible(true)} title="Register" />
+      <Button onPress={() => setModalIsVisible(true)} title="Register" />
       <Modal
-        onRequestClose={() => setIsVisible(false)}
-        visible={isVisible}
+        onRequestClose={() => setModalIsVisible(false)}
+        visible={modalIsVisible}
         testID="modelTest"
       >
         <View style={styles.container}>
           <Text style={styles.title}>Please enter your details: </Text>
-          <View style={{ height: 10 }} />
+          <View style={styles.gap} />
           <View>
-            {error !== '' ? (
+            {error !== 0 ? (
               <Text style={styles.error}> Error code: {error} </Text>
             ) : null}
           </View>
@@ -43,24 +43,24 @@ export default function RegistrationModal() {
             onChangeText={(email) => setEmail(email)}
             defaultValue={email}
           />
-          <View style={{ height: 10 }} />
+          <View style={styles.gap} />
 
-          <Text> VAT: </Text>
+          <Text> VAT ID: </Text>
           <TextInput
             style={styles.input}
-            placeholder="VAT"
+            placeholder="VAT ID"
             autoCapitalize="none"
             onChangeText={(vat_id) => setVat_id(vat_id)}
             defaultValue={vat_id}
           />
 
-          <View style={{ height: 10 }} />
+          <View style={styles.gap} />
 
           <Button onPress={() => handlePress()} title="Submit" />
 
-          <View style={{ height: 10 }} />
+          <View style={styles.gap} />
 
-          <Button onPress={() => setIsVisible(false)} title="Go back" />
+          <Button onPress={() => setModalIsVisible(false)} title="Close" />
         </View>
       </Modal>
     </>
@@ -83,5 +83,8 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
+  },
+  gap: {
+    height: 10,
   },
 })

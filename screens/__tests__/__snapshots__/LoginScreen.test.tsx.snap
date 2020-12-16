@@ -199,14 +199,14 @@ exports[`LoginScreen renders correctly 1`] = `
         }
       />
       <Text>
-         VAT: 
+         VAT ID: 
       </Text>
       <TextInput
         allowFontScaling={true}
         autoCapitalize="none"
         defaultValue=""
         onChangeText={[Function]}
-        placeholder="VAT"
+        placeholder="VAT ID"
         rejectResponderTermination={true}
         style={
           Object {
@@ -308,7 +308,7 @@ exports[`LoginScreen renders correctly 1`] = `
               ]
             }
           >
-            Go back
+            Close
           </Text>
         </View>
       </View>

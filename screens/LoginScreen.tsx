@@ -29,7 +29,7 @@ export default function LoginScreen(): JSX.Element {
         }}
       />
 
-      <View style={{ height: 10 }} />
+      <View style={styles.gap} />
 
       <RegistrationModal />
     </View>
@@ -50,5 +50,8 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  gap: {
+    height: 10,
   },
 })

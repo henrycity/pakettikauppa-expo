@@ -1,4 +1,7 @@
-export default async function PostRegistration(email: string, vat_id: string) {
+export default async function PostRegistration(
+  email: string,
+  vat_id: string
+): Promise<Response> {
   return fetch('https://pk-aalto.setamies.com/register', {
     method: 'POST',
     headers: {

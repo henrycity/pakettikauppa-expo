@@ -1,11 +1,4 @@
-import {
-  render,
-  fireEvent,
-  within,
-  cleanup,
-  GetAllReturn,
-  GetReturn,
-} from '@testing-library/react-native'
+import { render, fireEvent, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
 import LoginScreen from '../../screens/LoginScreen'
@@ -38,14 +31,14 @@ describe('Testing registration modal', () => {
     expect(modal.props.visible).toBe(true)
   })
 
-  it('Should close modal when pressing back button', async () => {
+  it('Should close modal when pressing close button', async () => {
     const { getByText, getByTestId } = render(component)
 
     const button = getByText('Register')
     fireEvent.press(button)
 
-    const back = getByText('Go back')
-    fireEvent.press(back)
+    const close = getByText('Close')
+    fireEvent.press(close)
 
     const modal = getByTestId('modelTest')
     expect(modal.props.visible).toBe(false)
