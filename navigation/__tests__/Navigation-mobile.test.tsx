@@ -13,12 +13,12 @@ describe('Testing mobile navigation', () => {
 
   it('should navigate to shipments from the tab bar', async () => {
     process.env.TEST_ENV = 'mobile'
-    const { findByA11yLabel, getByText } = render(component)
+    const { findByA11yLabel, findByText } = render(component)
 
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
 
-    const shipmentsText = getByText('Shipments Screen!')
+    const shipmentsText = await findByText('Shipments Screen!')
 
     expect(shipmentsText).toBeTruthy()
   })
@@ -26,16 +26,15 @@ describe('Testing mobile navigation', () => {
   it('should navigate to settings from the drawer', async () => {
     process.env.TEST_ENV = 'mobile'
 
-    const { getAllByA11yRole, getByText } = render(component)
-    const drawerLinks = getAllByA11yRole('button')
+    const { findAllByA11yRole, findByText } = render(component)
+    const drawerLinks = await findAllByA11yRole('button')
 
     const settingsLink = await findDrawerLink(drawerLinks, ScreenNames.Settings)
 
     fireEvent(settingsLink, 'press')
-    const settingsText = getByText('Settings Screen!')
+    const settingsText = await findByText('Settings Screen!')
 
     expect(settingsText).toBeTruthy()
-    expect(true).toBeTruthy()
   })
 })
 

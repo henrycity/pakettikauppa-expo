@@ -6,6 +6,7 @@ import {
   cleanup,
   GetAllReturn,
   GetReturn,
+  act,
 } from '@testing-library/react-native'
 import React from 'react'
 
@@ -19,8 +20,8 @@ describe('Testing desktop navigation', () => {
 
   it('should navigate to shipments from the drawer', async () => {
     process.env.TEST_ENV = 'desktop'
-    const { getAllByA11yRole, getByText } = render(component)
-    const drawerLinks = getAllByA11yRole('button')
+    const { findAllByA11yRole, findByText } = render(component)
+    const drawerLinks = await findAllByA11yRole('button')
 
     const shipmentsLink = await findDrawerLink(
       drawerLinks,
@@ -28,20 +29,20 @@ describe('Testing desktop navigation', () => {
     )
 
     fireEvent(shipmentsLink, 'press')
-    const shipmentsText = getByText('Shipments Screen!')
+    const shipmentsText = await findByText('Shipments Screen!')
 
     expect(shipmentsText).toBeTruthy()
   })
 
   it('should navigate to settings from the drawer', async () => {
     process.env.TEST_ENV = 'desktop'
-    const { getAllByA11yRole, getByText } = render(component)
-    const drawerLinks = getAllByA11yRole('button')
+    const { findAllByA11yRole, findByText } = render(component)
+    const drawerLinks = await findAllByA11yRole('button')
 
     const settingsLink = await findDrawerLink(drawerLinks, ScreenNames.Settings)
 
-    fireEvent(settingsLink, 'press')
-    const settingsText = getByText('Settings Screen!')
+    act(() => fireEvent(settingsLink, 'press'))
+    const settingsText = await findByText('Settings Screen!')
 
     expect(settingsText).toBeTruthy()
   })
