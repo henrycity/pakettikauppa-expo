@@ -8,11 +8,13 @@ export default function RegistrationModal(): JSX.Element {
   const [email, setEmail] = useState('')
   const [vat_id, setVat_id] = useState('')
   const [error, setError] = useState(0)
+  const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
 
   const handlePress = async () => {
     const response = await PostRegistration(email, vat_id)
     if (response.status === 200) {
       setModalIsVisible(false)
+      setDisplaySuccessMessage(true)
     } else {
       setError(response.status)
     }
@@ -21,6 +23,15 @@ export default function RegistrationModal(): JSX.Element {
   return (
     <>
       <Button onPress={() => setModalIsVisible(true)} title="Register" />
+
+      <View style={styles.gap} />
+
+      <View>
+        {displaySuccessMessage ? (
+          <Text style={styles.success}>Registration successful!</Text>
+        ) : null}
+      </View>
+
       <Modal
         onRequestClose={() => setModalIsVisible(false)}
         visible={modalIsVisible}
@@ -83,6 +94,9 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
+  },
+  success: {
+    color: 'green',
   },
   gap: {
     height: 10,
