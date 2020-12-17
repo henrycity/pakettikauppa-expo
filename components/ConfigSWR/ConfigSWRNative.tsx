@@ -7,7 +7,7 @@ import options from './options'
 
 const serverUrl = server()
 
-const nativeFetcherOptions = (token: string | null) => {
+const nativeFetcherOptions = (token: string | null): RequestInit => {
   if (token) {
     return {
       credentials: 'include' as const,
