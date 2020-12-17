@@ -24,12 +24,8 @@ export default function useLogin(): {
       const { id_token } = response.params
       if (Platform.OS === 'web') {
         handleWebToken(id_token).then(() => mutate('/user'))
-        // We need to tell swr to revalidate the user / login status after saving then token
-        //.then(() => mutate('/user'))
       } else {
         handleIOSAndroidToken(id_token).then(() => mutate('/user'))
-        // We need to tell swr to revalidate the user / login status after saving then token
-        //.then(() => mutate('/user'))
       }
     }
   }, [response])
