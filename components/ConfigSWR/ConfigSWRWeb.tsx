@@ -6,7 +6,7 @@ import options from './options'
 
 const serverUrl = server()
 
-const webFetcherOptions = {
+const webFetcherOptions: RequestInit = {
   credentials: 'include' as const,
 }
 
