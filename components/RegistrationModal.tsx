@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Modal, Button, StyleSheet, TextInput } from 'react-native'
+import { Modal, Button, StyleSheet } from 'react-native'
 
-import { Text, View } from './Themed'
+import { Text, View, TextInput } from './Themed'
 import postRegistration from './utils/postRegistration'
 
 const emailIsValid = (email: string) =>
