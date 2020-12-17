@@ -72,7 +72,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
       />
 
       <DrawerItem
-        label={ScreenNames.Logout}
+        label="Log out"
         onPress={() => logout()}
         icon={({ color }) => <Feather name="log-out" size={24} color={color} />}
       />
