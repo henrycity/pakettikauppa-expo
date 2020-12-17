@@ -17,6 +17,12 @@ export default ({ navigation }: LanguagePickerProps) => {
   const [selectedLanguage, setSelectedLanguage] = useSelectedLanguage()
   const themed = useThemedColors()
 
+  const onValueChange = (value: string) => {
+    setSelectedLanguage(value)
+    i18n.changeLanguage(value)
+    navigation.closeDrawer()
+  }
+
   return (
     <View style={[styles.container, { backgroundColor: themed.background }]}>
       <MaterialIcons
@@ -30,11 +36,7 @@ export default ({ navigation }: LanguagePickerProps) => {
           <RNPickerSelect
             value={selectedLanguage}
             placeholder={{}}
-            onValueChange={(value) => {
-              setSelectedLanguage(value)
-              i18n.changeLanguage(value)
-              navigation.closeDrawer()
-            }}
+            onValueChange={onValueChange}
             items={languages.map((lang) => ({ label: lang, value: lang }))}
             style={{
               inputWeb: {
