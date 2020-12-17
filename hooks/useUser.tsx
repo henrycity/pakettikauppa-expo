@@ -2,16 +2,17 @@ import * as React from 'react'
 import useSWR from 'swr'
 
 import Loading from '../components/Loading'
+import { User } from '../types'
 
 export default function useUser(): {
-  user: object | null
+  user: User | null
   isLoggedIn: boolean
 } {
   return React.useContext(AuthenticationContext)
 }
 
 const AuthenticationContext = React.createContext<{
-  user: object | null
+  user: User | null
   isLoggedIn: boolean
 }>({
   user: null,
