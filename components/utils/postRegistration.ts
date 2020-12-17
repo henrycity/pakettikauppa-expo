@@ -1,8 +1,10 @@
+import server from '../../constants/config'
+
 export default async function postRegistration(
   email: string,
   vat_id: string
 ): Promise<Response> {
-  return fetch('https://pk-aalto.setamies.com/register', {
+  return fetch(`${server()}/register`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

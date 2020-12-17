@@ -4,6 +4,11 @@ import { Modal, Button, StyleSheet, TextInput } from 'react-native'
 import { Text, View } from './Themed'
 import postRegistration from './utils/postRegistration'
 
+const emailIsValid = (email: string) =>
+  email.includes('@') &&
+  email.includes('.') &&
+  email.indexOf('.') - email.indexOf('@') > 1
+
 export default function RegistrationModal(): JSX.Element {
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [email, setEmail] = useState('')
@@ -16,7 +21,7 @@ export default function RegistrationModal(): JSX.Element {
     const isValid = () => newErrors.length === 0
 
     if (!email) newErrors.push(new Error('Enter an email address'))
-    else if (!email.includes('@') || !email.includes('.'))
+    else if (!emailIsValid(email))
       newErrors.push(new Error('Enter a valid email address'))
 
     if (!vat_id) newErrors.push(new Error('Enter VAT ID'))
@@ -29,14 +34,19 @@ export default function RegistrationModal(): JSX.Element {
   const handlePress = async () => {
     const isValid = validateInput()
     if (isValid) {
-      const response = await postRegistration(email, vat_id)
-      if (response.status === 200) {
-        setModalIsVisible(false)
-        setDisplaySuccessMessage(true)
-        setEmail('')
-        setVat_id('')
-      } else {
-        setErrors([new Error('Unexpected server response')])
+      try {
+        const response = await postRegistration(email, vat_id)
+        if (response.status === 200) {
+          setModalIsVisible(false)
+          setDisplaySuccessMessage(true)
+          setEmail('')
+          setVat_id('')
+        } else {
+          setErrors([new Error('Unexpected server response')])
+        }
+      } catch (err) {
+        err.message = 'Server error: ' + err.message
+        setErrors([err])
       }
     }
   }
