@@ -8,34 +8,60 @@ export default function RegistrationModal(): JSX.Element {
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [vat_id, setVat_id] = useState('')
-  const [error, setError] = useState<number | null>(null)
+  const [errors, setErrors] = useState<Error[]>([])
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
 
+  const validateInput = () => {
+    const newErrors: Error[] = []
+    const isValid = () => newErrors.length === 0
+
+    if (!email) newErrors.push(new Error('Enter an email address'))
+    else if (!email.includes('@') || !email.includes('.'))
+      newErrors.push(new Error('Enter a valid email address'))
+
+    if (!vat_id) newErrors.push(new Error('Enter VAT ID'))
+
+    setErrors(newErrors)
+
+    return isValid()
+  }
+
   const handlePress = async () => {
-    const response = await postRegistration(email, vat_id)
-    if (response.status === 200) {
-      setModalIsVisible(false)
-      setDisplaySuccessMessage(true)
-      setError(null)
-    } else {
-      setError(response.status)
+    const isValid = validateInput()
+    if (isValid) {
+      const response = await postRegistration(email, vat_id)
+      if (response.status === 200) {
+        setModalIsVisible(false)
+        setDisplaySuccessMessage(true)
+        setEmail('')
+        setVat_id('')
+      } else {
+        setErrors([new Error('Unexpected server response')])
+      }
     }
   }
 
+  const onRegisterButtonPress = () => {
+    setModalIsVisible(true)
+    setDisplaySuccessMessage(false)
+  }
+
+  const onCloseButtonPress = () => setModalIsVisible(false)
+
   return (
     <>
-      <Button onPress={() => setModalIsVisible(true)} title="Register" />
+      <Button onPress={onRegisterButtonPress} title="Register" />
 
       <View style={styles.gap} />
 
       <View>
         {displaySuccessMessage ? (
-          <Text style={styles.success}>Registration successful!</Text>
+          <Text style={styles.success}>Registration submitted!</Text>
         ) : null}
       </View>
 
       <Modal
-        onRequestClose={() => setModalIsVisible(false)}
+        onRequestClose={onCloseButtonPress}
         visible={modalIsVisible}
         testID="modalTest"
       >
@@ -43,9 +69,12 @@ export default function RegistrationModal(): JSX.Element {
           <Text style={styles.title}>Please enter your details: </Text>
           <View style={styles.gap} />
           <View>
-            {error ? (
-              <Text style={styles.error}> Error code: {error} </Text>
-            ) : null}
+            {errors.length > 0 &&
+              errors.map((error) => (
+                <Text key={error.message} style={styles.error}>
+                  {error.message}
+                </Text>
+              ))}
           </View>
 
           <Text> Email: </Text>
