@@ -6,9 +6,35 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import ScreenNames from './constants/ScreenNames'
 
+// Data
+
+export type User = {
+  id: number
+  username: string
+  merchants: Merchant[]
+  roles: Role[]
+}
+
+export type Merchant = {
+  users: User[]
+  roles: Role[]
+}
+
+export type Role = {
+  roleName: string
+  permissions: Permission[]
+}
+
+export interface Permission {
+  screen: Screen
+}
+
+// React
+
 export type RootStackParamList = {
   Root: undefined
   NotFound: undefined
+  Login: undefined
 }
 
 export type DrawerParamList = {

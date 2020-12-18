@@ -10,6 +10,7 @@ import { StyleSheet } from 'react-native'
 import ScreenNames from '../constants/ScreenNames'
 import useActiveScreen from '../hooks/useActiveScreen'
 import useDeviceType from '../hooks/useDeviceType'
+import useLogout from '../hooks/useLogout'
 import { ScreenName } from '../types'
 import { View, useThemedColors } from './Themed'
 
@@ -20,6 +21,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
   const { activeScreen, setActiveScreen } = useActiveScreen()
 
   const themed = useThemedColors()
+  const logout = useLogout()
 
   const handleLinkPress = (screenName: ScreenName) => {
     setActiveScreen(screenName)
@@ -67,6 +69,12 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
         icon={({ color }) => (
           <Feather name="settings" size={24} color={color} />
         )}
+      />
+
+      <DrawerItem
+        label="Log out"
+        onPress={() => logout()}
+        icon={({ color }) => <Feather name="log-out" size={24} color={color} />}
       />
     </DrawerContentScrollView>
   )

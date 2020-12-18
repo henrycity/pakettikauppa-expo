@@ -14,6 +14,13 @@ Web ![Netlify Status](https://api.netlify.com/api/v1/badges/4ae69533-894e-4cd3-9
 
 ## Instructions
 
+### Adding environment variables
+
+```
+cp .env.example .env
+```
+Add the values to the right variables.  
+
 ### Starting the developement server
 
 ```

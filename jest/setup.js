@@ -17,3 +17,6 @@ jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 
 jest.mock('../hooks/useDeviceType')
 jest.mock('../hooks/useDrawer')
+
+jest.mock('../hooks/useUser')
+jest.mock('../hooks/useLogin')
