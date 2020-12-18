@@ -1,4 +1,5 @@
 {
+  "name": "pakettikauppa-expo",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -78,6 +79,7 @@
     "jest-expo": "~39.0.0",
     "lint-staged": "^10.5.1",
     "prettier": "^2.1.2",
+    "typedoc": "^0.19.2",
     "typescript": "~3.9.5"
   },
   "private": true,

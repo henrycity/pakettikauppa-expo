@@ -1,17 +1,17 @@
-import React from 'react'
+import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
 import BottomTabLayout from '../components/BottomTabLayout'
 import { Text, View } from '../components/Themed'
 import useDeviceType from '../hooks/useDeviceType'
 
-export default function ProfileScreen(): JSX.Element {
+export default function ShipmentsScreen(): JSX.Element {
   const { isMobile } = useDeviceType()
 
   return (
     <BottomTabLayout>
       <View style={styles.container}>
-        <Text style={styles.title}>Profile Screen!</Text>
+        <Text style={styles.title}>Statistics Screen!</Text>
         <View
           style={styles.separator}
           lightColor="#eee"

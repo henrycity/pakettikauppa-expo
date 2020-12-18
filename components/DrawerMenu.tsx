@@ -7,8 +7,9 @@ import {
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-import ScreenNames from '../constants/ScreenNames'
+import Screens from '../constants/Screens'
 import useActiveScreen from '../hooks/useActiveScreen'
+import useAuthorization from '../hooks/useAuthorization'
 import useDeviceType from '../hooks/useDeviceType'
 import useLogout from '../hooks/useLogout'
 import { ScreenName } from '../types'
@@ -19,7 +20,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
   const { isDesktop } = useDeviceType()
   const { activeScreen, setActiveScreen } = useActiveScreen()
-
+  const isAuthorized = useAuthorization()
   const themed = useThemedColors()
   const logout = useLogout()
 
@@ -32,18 +33,18 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
     <DrawerContentScrollView {...props}>
       {isDesktop ? (
         <DrawerItem
-          label={ScreenNames.Profile}
-          focused={activeScreen === ScreenNames.Profile}
-          onPress={() => handleLinkPress(ScreenNames.Profile)}
+          label={Screens.Profile}
+          focused={activeScreen === Screens.Profile}
+          onPress={() => handleLinkPress(Screens.Profile)}
           icon={({ color }) => <Feather name="user" size={24} color={color} />}
         />
       ) : null}
 
-      {isDesktop ? (
+      {isDesktop && isAuthorized(Screens.Shipments) ? (
         <DrawerItem
-          label={ScreenNames.Shipments}
-          focused={activeScreen === ScreenNames.Shipments}
-          onPress={() => handleLinkPress(ScreenNames.Shipments)}
+          label={Screens.Shipments}
+          focused={activeScreen === Screens.Shipments}
+          onPress={() => handleLinkPress(Screens.Shipments)}
           icon={({ color }) => (
             <Feather name="package" size={24} color={color} />
           )}
@@ -62,14 +63,38 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
         </View>
       ) : null}
 
-      <DrawerItem
-        label={ScreenNames.Settings}
-        focused={activeScreen === ScreenNames.Settings}
-        onPress={() => handleLinkPress(ScreenNames.Settings)}
-        icon={({ color }) => (
-          <Feather name="settings" size={24} color={color} />
-        )}
-      />
+      {isAuthorized(Screens.Reports) ? (
+        <DrawerItem
+          label={Screens.Reports}
+          focused={activeScreen === Screens.Reports}
+          onPress={() => handleLinkPress(Screens.Reports)}
+          icon={({ color }) => (
+            <Feather name="layers" size={24} color={color} />
+          )}
+        />
+      ) : null}
+
+      {isAuthorized(Screens.Statistics) ? (
+        <DrawerItem
+          label={Screens.Statistics}
+          focused={activeScreen === Screens.Statistics}
+          onPress={() => handleLinkPress(Screens.Statistics)}
+          icon={({ color }) => (
+            <Feather name="activity" size={24} color={color} />
+          )}
+        />
+      ) : null}
+
+      {isAuthorized(Screens.Settings) ? (
+        <DrawerItem
+          label={Screens.Settings}
+          focused={activeScreen === Screens.Settings}
+          onPress={() => handleLinkPress(Screens.Settings)}
+          icon={({ color }) => (
+            <Feather name="settings" size={24} color={color} />
+          )}
+        />
+      ) : null}
 
       <DrawerItem
         label="Log out"

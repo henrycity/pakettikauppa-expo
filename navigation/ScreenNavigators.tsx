@@ -3,22 +3,52 @@ import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 
 import MenuButton from '../components/MenuButton'
-import ScreenNames from '../constants/ScreenNames'
+import Screens from '../constants/Screens'
 import useActiveScreen from '../hooks/useActiveScreen'
 import ProfileScreen from '../screens/ProfileScreen'
+import ReportsScreen from '../screens/ReportsScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import ShipmentsScreen from '../screens/ShipmentsScreen'
+import StatisticsScreen from '../screens/StatisticsScreen'
 import {
   ProfileParamList,
   ShipmentsParamList,
   SettingsParamList,
+  StatisticsParamList,
+  ReportsParamList,
+  ScreenName,
 } from '../types'
 
-export default {
-  Profile: ProfileNavigator,
-  Shipments: ShipmentNavigator,
-  Settings: SettingsNavigator,
+interface ScreenNavigator {
+  navigator: () => JSX.Element
+  name: ScreenName
 }
+
+export const ScreenNavigators: ScreenNavigator[] = [
+  {
+    navigator: ProfileNavigator,
+    name: Screens.Profile,
+  },
+]
+
+export const RestrictedScreenNavigators: ScreenNavigator[] = [
+  {
+    navigator: ReportsNavigator,
+    name: Screens.Reports,
+  },
+  {
+    navigator: SettingsNavigator,
+    name: Screens.Settings,
+  },
+  {
+    navigator: ShipmentNavigator,
+    name: Screens.Shipments,
+  },
+  {
+    navigator: StatisticsNavigator,
+    name: Screens.Statistics,
+  },
+]
 
 const headerOptions = {
   headerLeft: () => <MenuButton />,
@@ -31,7 +61,7 @@ function ProfileNavigator(): JSX.Element {
 
   useFocusEffect(
     useCallback(() => {
-      setActiveScreen(ScreenNames.Profile)
+      setActiveScreen(Screens.Profile)
     }, [])
   )
 
@@ -49,6 +79,56 @@ function ProfileNavigator(): JSX.Element {
   )
 }
 
+const ReportsStack = createStackNavigator<ReportsParamList>()
+
+function ReportsNavigator(): JSX.Element {
+  const { setActiveScreen } = useActiveScreen()
+
+  useFocusEffect(
+    useCallback(() => {
+      setActiveScreen(Screens.Reports)
+    }, [])
+  )
+
+  return (
+    <ReportsStack.Navigator>
+      <ReportsStack.Screen
+        name="ReportsScreen"
+        component={ReportsScreen}
+        options={{
+          ...headerOptions,
+          headerTitle: 'Reports',
+        }}
+      />
+    </ReportsStack.Navigator>
+  )
+}
+
+const SettingsStack = createStackNavigator<SettingsParamList>()
+
+function SettingsNavigator(): JSX.Element {
+  const { setActiveScreen } = useActiveScreen()
+
+  useFocusEffect(
+    useCallback(() => {
+      setActiveScreen(Screens.Settings)
+    }, [])
+  )
+
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{
+          ...headerOptions,
+          headerTitle: 'Settings',
+        }}
+      />
+    </SettingsStack.Navigator>
+  )
+}
+
 const ShipmentStack = createStackNavigator<ShipmentsParamList>()
 
 function ShipmentNavigator(): JSX.Element {
@@ -56,7 +136,7 @@ function ShipmentNavigator(): JSX.Element {
 
   useFocusEffect(
     useCallback(() => {
-      setActiveScreen(ScreenNames.Shipments)
+      setActiveScreen(Screens.Shipments)
     }, [])
   )
 
@@ -74,27 +154,27 @@ function ShipmentNavigator(): JSX.Element {
   )
 }
 
-const SettingsStack = createStackNavigator<SettingsParamList>()
+const StatisticsStack = createStackNavigator<StatisticsParamList>()
 
-function SettingsNavigator(): JSX.Element {
+function StatisticsNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
 
   useFocusEffect(
     useCallback(() => {
-      setActiveScreen(ScreenNames.Settings)
+      setActiveScreen(Screens.Statistics)
     }, [])
   )
 
   return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen
-        name="SettingsScreen"
-        component={SettingsScreen}
+    <StatisticsStack.Navigator>
+      <StatisticsStack.Screen
+        name="StatisticsScreen"
+        component={StatisticsScreen}
         options={{
           ...headerOptions,
-          headerTitle: 'Settings',
+          headerTitle: 'Statistics',
         }}
       />
-    </SettingsStack.Navigator>
+    </StatisticsStack.Navigator>
   )
 }

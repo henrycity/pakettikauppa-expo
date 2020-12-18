@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import ConfigSWR from './components/ConfigSWR'
 import { ActiveScreenContextProvider } from './hooks/useActiveScreen'
+import { AccessProvider } from './hooks/useAuthorization'
 import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'
 import { DeviceTypeContextProvider } from './hooks/useDeviceType'
@@ -19,16 +20,18 @@ export default function App(): null | JSX.Element {
   } else {
     return (
       <SafeAreaProvider>
-        <DeviceTypeContextProvider>
-          <ActiveScreenContextProvider>
-            <ConfigSWR>
-              <AuthenticationProvider>
-                <Navigation colorScheme={colorScheme} />
-                <StatusBar />
-              </AuthenticationProvider>
-            </ConfigSWR>
-          </ActiveScreenContextProvider>
-        </DeviceTypeContextProvider>
+        <ConfigSWR>
+          <DeviceTypeContextProvider>
+            <AccessProvider>
+              <ActiveScreenContextProvider>
+                <AuthenticationProvider>
+                  <Navigation colorScheme={colorScheme} />
+                  <StatusBar />
+                </AuthenticationProvider>
+              </ActiveScreenContextProvider>
+            </AccessProvider>
+          </DeviceTypeContextProvider>
+        </ConfigSWR>
       </SafeAreaProvider>
     )
   }

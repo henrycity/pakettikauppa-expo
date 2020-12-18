@@ -10,8 +10,10 @@ import {
 } from '@testing-library/react-native'
 import React from 'react'
 
-import ScreenNames from '../../constants/ScreenNames'
+import Screens from '../../constants/Screens'
 import DrawerNavigator from '../DrawerNavigator'
+
+jest.mock('../../hooks/useAuthorization')
 
 describe('Testing desktop navigation', () => {
   afterEach(cleanup)
@@ -23,10 +25,7 @@ describe('Testing desktop navigation', () => {
     const { findAllByA11yRole, findByText } = render(component)
     const drawerLinks = await findAllByA11yRole('button')
 
-    const shipmentsLink = await findDrawerLink(
-      drawerLinks,
-      ScreenNames.Shipments
-    )
+    const shipmentsLink = await findDrawerLink(drawerLinks, Screens.Shipments)
 
     fireEvent(shipmentsLink, 'press')
     const shipmentsText = await findByText('Shipments Screen!')
@@ -39,7 +38,7 @@ describe('Testing desktop navigation', () => {
     const { findAllByA11yRole, findByText } = render(component)
     const drawerLinks = await findAllByA11yRole('button')
 
-    const settingsLink = await findDrawerLink(drawerLinks, ScreenNames.Settings)
+    const settingsLink = await findDrawerLink(drawerLinks, Screens.Settings)
 
     act(() => fireEvent(settingsLink, 'press'))
     const settingsText = await findByText('Settings Screen!')

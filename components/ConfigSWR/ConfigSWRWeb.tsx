@@ -1,3 +1,4 @@
+import Constants from 'expo-constants'
 import React from 'react'
 import { SWRConfig } from 'swr'
 
