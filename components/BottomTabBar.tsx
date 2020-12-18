@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
@@ -16,6 +17,7 @@ export default function BottomTabBar(): JSX.Element {
   const { activeScreen, setActiveScreen } = useActiveScreen()
 
   const isAuthorized = useAuthorization()
+  const { t } = useTranslation()
 
   const handleLinkPress = (screenName: ScreenName) => {
     setActiveScreen(screenName)
@@ -25,7 +27,7 @@ export default function BottomTabBar(): JSX.Element {
   return (
     <TabBar>
       <TabBarItem
-        text={Screens.Profile}
+        text={t('profile')}
         active={activeScreen === Screens.Profile}
         onPress={() => handleLinkPress(Screens.Profile)}
       />
@@ -33,7 +35,7 @@ export default function BottomTabBar(): JSX.Element {
       <>
         {isAuthorized(Screens.Shipments) && (
           <TabBarItem
-            text={Screens.Shipments}
+            text={t('shipments')}
             active={activeScreen === Screens.Shipments}
             onPress={() => handleLinkPress(Screens.Shipments)}
           />

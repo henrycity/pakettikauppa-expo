@@ -1,7 +1,12 @@
-import { Feather } from '@expo/vector-icons'
+import { Feather, MaterialIcons } from '@expo/vector-icons'
 import * as Font from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import * as React from 'react'
+
+import {
+  initializeLocalization,
+  setLanguageChangedEventListener,
+} from '../localization'
 
 export default function useCachedResources(): boolean {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false)
@@ -15,8 +20,12 @@ export default function useCachedResources(): boolean {
         // Load fonts
         await Font.loadAsync({
           ...Feather.font,
+          ...MaterialIcons.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
         })
+
+        initializeLocalization()
+        setLanguageChangedEventListener()
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e)

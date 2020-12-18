@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { render, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
+import { initializeLocalization } from '../../localization'
 import DrawerNavigator from '../../navigation/DrawerNavigator'
 import { ScreenName } from '../../types'
 
@@ -21,6 +22,10 @@ jest.mock('../../hooks/useAuthorization', () => {
 })
 
 describe('Testing desktop navigation', () => {
+  beforeAll(() => {
+    initializeLocalization()
+  })
+
   afterEach(cleanup)
 
   const component = <App />

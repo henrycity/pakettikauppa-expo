@@ -1,6 +1,7 @@
 import { render, cleanup, waitFor } from '@testing-library/react-native'
 import React from 'react'
 
+import { initializeLocalization } from '../../localization'
 import Navigation from '../../navigation/index'
 import useUser from '../useUser'
 
@@ -10,6 +11,10 @@ jest.mock('../useUser', () => {
 jest.mock('../useLogin')
 
 describe('Testing mobile authorization when isLoggedIn === true', () => {
+  beforeAll(() => {
+    initializeLocalization()
+  })
+
   afterEach(cleanup)
 
   const comp = <Test />

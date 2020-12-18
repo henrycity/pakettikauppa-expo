@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { StyleSheet, Button } from 'react-native'
 
 import RegistrationModal from '../components/RegistrationModal'
@@ -10,6 +11,7 @@ WebBrowser.maybeCompleteAuthSession()
 
 export default function LoginScreen(): JSX.Element {
   const { login, disabled } = useLogin()
+  const { t } = useTranslation()
 
   return (
     <View style={styles.container}>
@@ -23,7 +25,7 @@ export default function LoginScreen(): JSX.Element {
       <Button
         disabled={disabled}
         accessibilityLabel="Login button"
-        title="Login"
+        title={t('login')}
         onPress={() => {
           login()
         }}

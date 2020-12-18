@@ -3,12 +3,17 @@ import { render, fireEvent, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
 import Screens from '../../constants/Screens'
+import { initializeLocalization } from '../../localization'
 import DrawerNavigator from '../DrawerNavigator'
 import { findDrawerLink } from './Navigation-desktop.test'
 
 jest.mock('../../hooks/useAuthorization')
 
 describe('Testing mobile navigation', () => {
+  beforeAll(() => {
+    initializeLocalization()
+  })
+
   afterEach(cleanup)
 
   const component = <TestApp />

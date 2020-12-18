@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react-native'
 import React from 'react'
 
+import { initializeLocalization } from '../../localization'
 import Navigation from '../../navigation/index'
 import useLogout from '../useLogout'
 import useUser from '../useUser'
@@ -20,6 +21,10 @@ jest.mock('../useLogout', () => jest.fn())
 mockedUseLogout.mockImplementation(() => () => mockLogout)
 
 describe('Log out button', () => {
+  beforeAll(() => {
+    initializeLocalization()
+  })
+
   afterEach(cleanup)
 
   it('should not be visible when not logged in', async () => {

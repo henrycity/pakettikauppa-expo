@@ -5,6 +5,7 @@ import {
   DrawerContentComponentProps,
 } from '@react-navigation/drawer'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
 
 import Screens from '../constants/Screens'
@@ -13,6 +14,7 @@ import useAuthorization from '../hooks/useAuthorization'
 import useDeviceType from '../hooks/useDeviceType'
 import useLogout from '../hooks/useLogout'
 import { ScreenName } from '../types'
+import LanguagePicker from './LanguagePicker'
 import { View, useThemedColors } from './Themed'
 
 const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
@@ -29,11 +31,13 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
     navigation.navigate(screenName)
   }
 
+  const { t } = useTranslation()
+
   return (
     <DrawerContentScrollView {...props}>
       {isDesktop ? (
         <DrawerItem
-          label={Screens.Profile}
+          label={t('profile')}
           focused={activeScreen === Screens.Profile}
           onPress={() => handleLinkPress(Screens.Profile)}
           icon={({ color }) => <Feather name="user" size={24} color={color} />}
@@ -42,7 +46,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
       {isDesktop && isAuthorized(Screens.Shipments) ? (
         <DrawerItem
-          label={Screens.Shipments}
+          label={t('shipments')}
           focused={activeScreen === Screens.Shipments}
           onPress={() => handleLinkPress(Screens.Shipments)}
           icon={({ color }) => (
@@ -65,7 +69,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
       {isAuthorized(Screens.Reports) ? (
         <DrawerItem
-          label={Screens.Reports}
+          label={t('reports')}
           focused={activeScreen === Screens.Reports}
           onPress={() => handleLinkPress(Screens.Reports)}
           icon={({ color }) => (
@@ -76,7 +80,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
       {isAuthorized(Screens.Statistics) ? (
         <DrawerItem
-          label={Screens.Statistics}
+          label={t('statistics')}
           focused={activeScreen === Screens.Statistics}
           onPress={() => handleLinkPress(Screens.Statistics)}
           icon={({ color }) => (
@@ -87,7 +91,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
       {isAuthorized(Screens.Settings) ? (
         <DrawerItem
-          label={Screens.Settings}
+          label={t('settings')}
           focused={activeScreen === Screens.Settings}
           onPress={() => handleLinkPress(Screens.Settings)}
           icon={({ color }) => (
@@ -96,8 +100,10 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
         />
       ) : null}
 
+      <LanguagePicker navigation={navigation} />
+
       <DrawerItem
-        label="Log out"
+        label={t('logout')}
         onPress={() => logout()}
         icon={({ color }) => <Feather name="log-out" size={24} color={color} />}
       />

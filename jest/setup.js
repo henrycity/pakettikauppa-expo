@@ -16,7 +16,11 @@ jest.mock('react-native-reanimated', () => {
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 
 jest.mock('../hooks/useDeviceType')
+
 jest.mock('../hooks/useDrawer')
 
 jest.mock('../hooks/useUser')
 jest.mock('../hooks/useLogin')
+jest.mock('../localization/useSelectedLanguage')
+
+jest.mock('../localization/index.tsx')

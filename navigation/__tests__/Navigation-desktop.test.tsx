@@ -11,11 +11,16 @@ import {
 import React from 'react'
 
 import Screens from '../../constants/Screens'
+import { initializeLocalization } from '../../localization'
 import DrawerNavigator from '../DrawerNavigator'
 
 jest.mock('../../hooks/useAuthorization')
 
 describe('Testing desktop navigation', () => {
+  beforeAll(() => {
+    initializeLocalization()
+  })
+
   afterEach(cleanup)
 
   const component = <TestApp />

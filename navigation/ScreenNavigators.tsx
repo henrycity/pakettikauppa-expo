@@ -1,6 +1,7 @@
 import { useFocusEffect } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import MenuButton from '../components/MenuButton'
 import Screens from '../constants/Screens'
@@ -58,6 +59,7 @@ const ProfileStack = createStackNavigator<ProfileParamList>()
 
 function ProfileNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
+  const { t } = useTranslation()
 
   useFocusEffect(
     useCallback(() => {
@@ -72,7 +74,7 @@ function ProfileNavigator(): JSX.Element {
         component={ProfileScreen}
         options={{
           ...headerOptions,
-          headerTitle: 'Profile',
+          headerTitle: t('profile'),
         }}
       />
     </ProfileStack.Navigator>
@@ -83,6 +85,7 @@ const ReportsStack = createStackNavigator<ReportsParamList>()
 
 function ReportsNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
+  const { t } = useTranslation()
 
   useFocusEffect(
     useCallback(() => {
@@ -97,7 +100,7 @@ function ReportsNavigator(): JSX.Element {
         component={ReportsScreen}
         options={{
           ...headerOptions,
-          headerTitle: 'Reports',
+          headerTitle: t('reports'),
         }}
       />
     </ReportsStack.Navigator>
@@ -108,6 +111,7 @@ const SettingsStack = createStackNavigator<SettingsParamList>()
 
 function SettingsNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
+  const { t } = useTranslation()
 
   useFocusEffect(
     useCallback(() => {
@@ -122,7 +126,7 @@ function SettingsNavigator(): JSX.Element {
         component={SettingsScreen}
         options={{
           ...headerOptions,
-          headerTitle: 'Settings',
+          headerTitle: t('settings'),
         }}
       />
     </SettingsStack.Navigator>
@@ -133,6 +137,7 @@ const ShipmentStack = createStackNavigator<ShipmentsParamList>()
 
 function ShipmentNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
+  const { t } = useTranslation()
 
   useFocusEffect(
     useCallback(() => {
@@ -147,7 +152,7 @@ function ShipmentNavigator(): JSX.Element {
         component={ShipmentsScreen}
         options={{
           ...headerOptions,
-          headerTitle: 'Shipments',
+          headerTitle: t('shipments'),
         }}
       />
     </ShipmentStack.Navigator>
@@ -158,6 +163,7 @@ const StatisticsStack = createStackNavigator<StatisticsParamList>()
 
 function StatisticsNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
+  const { t } = useTranslation()
 
   useFocusEffect(
     useCallback(() => {
@@ -172,7 +178,7 @@ function StatisticsNavigator(): JSX.Element {
         component={StatisticsScreen}
         options={{
           ...headerOptions,
-          headerTitle: 'Statistics',
+          headerTitle: t('statistics'),
         }}
       />
     </StatisticsStack.Navigator>
