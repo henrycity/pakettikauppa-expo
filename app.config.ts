@@ -6,11 +6,12 @@ export default {
     slug: 'pakettikauppa-expo',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/images/icon.png',
+    icon: './src/assets/images/icon.png',
+    entryPoint: './src/App.tsx',
     scheme: 'pakettikauppa',
     userInterfaceStyle: 'automatic',
     splash: {
-      image: './assets/images/splash.png',
+      image: './src/assets/images/splash.png',
       resizeMode: 'contain',
       backgroundColor: '#ffffff',
     },
@@ -23,12 +24,12 @@ export default {
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: './assets/images/adaptive-icon.png',
+        foregroundImage: './src/assets/images/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
       },
     },
     web: {
-      favicon: './assets/images/favicon.png',
+      favicon: './src/assets/images/favicon.png',
     },
   },
 }
