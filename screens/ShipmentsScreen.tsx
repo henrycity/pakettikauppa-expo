@@ -17,7 +17,7 @@ export default function ShipmentsScreen(): JSX.Element {
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        <Text>You are using {isMobile ? 'mobile' : 'desktop'}.</Text>
+        {isMobile ? <Text> LIST HERE </Text> : <Text> TABLE HERE </Text>}
       </View>
     </BottomTabLayout>
   )
