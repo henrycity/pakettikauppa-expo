@@ -35,40 +35,41 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
   return (
     <DrawerContentScrollView {...props}>
-      {isDesktop ?
-
+      {isDesktop ? (
         <>
           <DrawerItem
             label={t('profile')}
             focused={activeScreen === ScreenNames.Profile}
             onPress={() => handleLinkPress(ScreenNames.Profile)}
-            icon={({ color }) => <Feather name="user" size={24} color={color} />}
-          />
-
-        {isAuthorized(ScreenNames.Shipments) ? (
-          <DrawerItem
-            label={t('shipments')}
-            focused={activeScreen === ScreenNames.Shipments}
-            onPress={() => handleLinkPress(ScreenNames.Shipments)}
             icon={({ color }) => (
-              <Feather name="package" size={24} color={color} />
+              <Feather name="user" size={24} color={color} />
             )}
           />
-        ) : null}
 
-        {isDesktop ? (
-          <View
-            style={[styles.container, { backgroundColor: themed.background }]}
-          >
-            <View
-              style={styles.separator}
-              lightColor={themed.tabIconDefault}
-              darkColor={themed.tabIconDefault}
+          {isAuthorized(ScreenNames.Shipments) ? (
+            <DrawerItem
+              label={t('shipments')}
+              focused={activeScreen === ScreenNames.Shipments}
+              onPress={() => handleLinkPress(ScreenNames.Shipments)}
+              icon={({ color }) => (
+                <Feather name="package" size={24} color={color} />
+              )}
             />
-          </View>
-        ) : null}
+          ) : null}
 
-      </> : null}
+          {isDesktop ? (
+            <View
+              style={[styles.container, { backgroundColor: themed.background }]}
+            >
+              <View
+                style={styles.separator}
+                lightColor={themed.tabIconDefault}
+                darkColor={themed.tabIconDefault}
+              />
+            </View>
+          ) : null}
+        </>
+      ) : null}
 
       {isAuthorized(ScreenNames.Reports) ? (
         <DrawerItem
