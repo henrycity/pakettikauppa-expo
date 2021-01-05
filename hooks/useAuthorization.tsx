@@ -1,6 +1,7 @@
 import React, { useContext, createContext } from 'react'
 import useSWR from 'swr'
 
+import Loading from '../components/Loading'
 import { ScreenName } from '../types'
 
 type PermissionChecker = (screenName: ScreenName) => boolean | undefined
@@ -50,7 +51,9 @@ export function AccessProvider({
 }: AccessProviderProps): JSX.Element | null {
   const { isAuthorized, isLoading } = _useAuthorization()
 
-  return isLoading ? null : (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <AccessContext.Provider value={isAuthorized}>
       {children}
     </AccessContext.Provider>
