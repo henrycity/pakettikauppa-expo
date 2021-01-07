@@ -5,27 +5,57 @@ image: node:14.15.0-alpine
 
 stages:
   - lint
+  - build
   - test
   - deploy
+
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  DOCKER_API_VERSION: '1.38'
 
 before_script:
   - yarn install --cache-folder .yarn --frozen-lockfile
 
-lint:
-  stage: lint
-  needs: []
-  script:
-    - yarn lint
-    - yarn type-check
+# lint:
+#   stage: lint
+#   needs: []
+#   script:
+#     - yarn lint
+#     - yarn type-check
 
-jest-tests:
-  stage: test
+# jest-tests:
+#   stage: test
+#   needs: []
+#   script:
+#     - yarn jest --coverage --ci --cacheDirectory .jest
+#   artifacts:
+#     reports:
+#       cobertura: coverage/cobertura-coverage.xml
+
+build-image:
+  stage: build
   needs: []
+  image: docker:stable
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - echo EXPO_FIREBASE_CLIENT_ID=$EXPO_FIREBASE_CLIENT_ID > .env
+    - echo EXPO_LOCAL_IP=backend:3000 >> .env
   script:
-    - yarn jest --coverage --ci --cacheDirectory .jest
-  artifacts:
-    reports:
-      cobertura: coverage/cobertura-coverage.xml
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+e2e-tests:
+  stage: test
+  needs: ["build-image"]
+  image: cypress/base:14.15.0
+  services:
+    - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:12edc58b
+      alias: backend
+    - name: $CONTAINER_TEST_IMAGE
+      alias: expo
+  before_script:
+  script:
+    - $(npm bin)/cypress run
 
 expo-deployments:
   stage: deploy
