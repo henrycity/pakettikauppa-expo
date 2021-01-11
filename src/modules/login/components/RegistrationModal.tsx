@@ -5,9 +5,7 @@ import { Text, View, TextInput } from '../../../common/Themed'
 import postRegistration from '../postRegistration'
 
 const emailIsValid = (email: string) =>
-  email.includes('@') &&
-  email.includes('.') &&
-  email.indexOf('.') - email.indexOf('@') > 1
+  email.includes('@') && email.includes('.')
 
 export default function RegistrationModal(): JSX.Element {
   const [modalIsVisible, setModalIsVisible] = useState(false)

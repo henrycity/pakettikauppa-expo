@@ -1,13 +1,14 @@
+import { EXPO_LOCAL_ADDRESS, EXPO_LOCAL_IP, EXPO_SERVER } from '@env'
 import { Platform } from 'react-native'
 
 export default function server(): string {
   if (__DEV__) {
     if (Platform.OS === 'web') {
-      return process.env.EXPO_LOCAL_ADDRESS ?? ''
+      return EXPO_LOCAL_ADDRESS
     } else {
-      return process.env.EXPO_LOCAL_IP ?? ''
+      return EXPO_LOCAL_IP
     }
   } else {
-    return process.env.EXPO_SERVER ?? ''
+    return EXPO_SERVER
   }
 }
