@@ -2,6 +2,7 @@ import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
 import BottomTabLayout from '../components/BottomTabLayout'
+import ListView from '../components/ListView'
 import { Text, View } from '../components/Themed'
 import useDeviceType from '../hooks/useDeviceType'
 
@@ -17,7 +18,11 @@ export default function ShipmentsScreen(): JSX.Element {
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        <Text>You are using {isMobile ? 'mobile' : 'desktop'}.</Text>
+        {isMobile ? (
+          <Text> LIST HERE </Text>
+        ) : (
+          <ListView/>
+        )}
       </View>
     </BottomTabLayout>
   )
