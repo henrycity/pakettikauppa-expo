@@ -8,11 +8,11 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
 
-import useAuthorization from '../../authorization/hooks/useAuthorization'
 import { useThemedColors, View } from '../../common/Themed'
 import useActiveScreen from '../../common/hooks/useActiveScreen'
 import useDeviceType from '../../common/hooks/useDeviceType'
 import useLogout from '../../modules/login/hooks/useLogout'
+import useUser from '../../modules/login/hooks/useUser'
 import { ScreenName } from '../../types'
 import ScreenNames from '../ScreenNames'
 import LanguagePicker from './LanguagePicker'
@@ -22,7 +22,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
   const { isDesktop } = useDeviceType()
   const { activeScreen, setActiveScreen } = useActiveScreen()
-  const isAuthorized = useAuthorization()
+  const { isAuthorized } = useUser()
   const themed = useThemedColors()
   const logout = useLogout()
 

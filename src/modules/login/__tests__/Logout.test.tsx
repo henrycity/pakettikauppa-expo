@@ -31,6 +31,7 @@ describe('Log out button', () => {
     mockedUseUser.mockImplementation(() => ({
       user: 'test',
       isLoggedIn: false,
+      isAuthorized: (_screenName: ScreenName) => false,
     }))
     const { queryByText } = render(<Navigation colorScheme="light" />)
     const { isLoggedIn } = useUser()
@@ -41,7 +42,11 @@ describe('Log out button', () => {
   })
 
   it('should be visible when logged in', async () => {
-    mockedUseUser.mockImplementation(() => ({ user: 'test', isLoggedIn: true }))
+    mockedUseUser.mockImplementation(() => ({
+      user: 'test',
+      isLoggedIn: true,
+      isAuthorized: (_screenName: ScreenName) => true,
+    }))
     const { getByText } = render(<Navigation colorScheme="light" />)
     const { isLoggedIn } = useUser()
     expect(isLoggedIn).toEqual(true)
@@ -51,7 +56,11 @@ describe('Log out button', () => {
   })
 
   it('should call logout when pressed', async () => {
-    mockedUseUser.mockImplementation(() => ({ user: 'test', isLoggedIn: true }))
+    mockedUseUser.mockImplementation(() => ({
+      user: 'test',
+      isLoggedIn: true,
+      isAuthorized: (_screenName: ScreenName) => true,
+    }))
     const { getByText } = render(<Navigation colorScheme="light" />)
     const { isLoggedIn } = useUser()
     expect(isLoggedIn).toEqual(true)

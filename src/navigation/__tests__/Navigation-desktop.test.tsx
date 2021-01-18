@@ -11,10 +11,17 @@ import {
 import React from 'react'
 
 import { initializeLocalization } from '../../localization'
+import { ScreenName } from '../../types'
 import ScreenNames from '../ScreenNames'
 import DrawerNavigator from '../components/DrawerNavigator'
 
-jest.mock('../../authorization/hooks/useAuthorization')
+jest.mock('../../modules/login/hooks/useUser', () => {
+  return () => ({
+    user: 'aa',
+    isLoggedIn: true,
+    isAuthorized: (_screenName: ScreenName) => true,
+  })
+})
 
 describe('Testing desktop navigation', () => {
   beforeAll(() => {

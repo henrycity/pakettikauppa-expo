@@ -6,17 +6,21 @@ import { initializeLocalization } from '../../localization'
 import DrawerNavigator from '../../navigation/components/DrawerNavigator'
 import { ScreenName } from '../../types'
 
-jest.mock('../hooks/useAuthorization', () => {
-  return () => (screenName: ScreenName) => {
-    switch (screenName) {
-      case 'Reports':
-        return true
-      case 'Shipments':
-        return false
-      case 'Statistics':
-        return true
-    }
-  }
+jest.mock('../../modules/login/hooks/useUser', () => {
+  return () => ({
+    user: 'aa',
+    isLoggedIn: true,
+    isAuthorized: (screenName: ScreenName) => {
+      switch (screenName) {
+        case 'Reports':
+          return true
+        case 'Shipments':
+          return false
+        case 'Statistics':
+          return true
+      }
+    },
+  })
 })
 
 describe('Testing desktop navigation', () => {

@@ -5,8 +5,15 @@ import { useTranslation } from 'react-i18next'
 
 import { initializeLocalization } from '..'
 import DrawerNavigator from '../../navigation/components/DrawerNavigator'
+import { ScreenName } from '../../types'
 
-jest.mock('../../authorization/hooks/useAuthorization')
+jest.mock('../../modules/login/hooks/useUser', () => {
+  return () => ({
+    user: 'aa',
+    isLoggedIn: true,
+    isAuthorized: (_screenName: ScreenName) => true,
+  })
+})
 
 describe('Test i18n language functionality', () => {
   beforeAll(() => {
