@@ -1,5 +1,5 @@
 import * as React from 'react'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 
 import Loading from '../../../common/components/Loading'
 import { User, ScreenName } from '../../../types'
@@ -34,7 +34,7 @@ export function AuthenticationProvider({
 }: React.PropsWithChildren<object>): JSX.Element {
   const { data, error } = useSWR('/user', {
     onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
-      if (error.status === 403) return
+      if (error?.status === 403) return
 
       if (retryCount >= 10) return
 
