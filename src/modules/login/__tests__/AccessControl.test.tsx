@@ -2,11 +2,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { render, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
-import { initializeLocalization } from '../../localization'
-import DrawerNavigator from '../../navigation/components/DrawerNavigator'
-import { ScreenName } from '../../types'
+import { initializeLocalization } from '../../../localization'
+import DrawerNavigator from '../../../navigation/components/DrawerNavigator'
+import { ScreenName } from '../../../types'
 
-jest.mock('../../modules/login/hooks/useUser', () => {
+jest.mock('../hooks/useUser', () => {
   return () => ({
     user: 'aa',
     isLoggedIn: true,
@@ -32,7 +32,7 @@ describe('Testing desktop navigation', () => {
 
   const component = <App />
 
-  it('should not render link to shipments but should render link to reports', async () => {
+  it('should not render link to shipments but should render link to reports', () => {
     const { queryByText } = render(component)
 
     const reportsText = queryByText('Reports')

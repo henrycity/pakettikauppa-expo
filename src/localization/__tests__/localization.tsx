@@ -23,14 +23,14 @@ describe('Test i18n language functionality', () => {
   afterEach(cleanup)
 
   it('should support Swedish', async () => {
-    const { getByText } = render(<LanguageTestComponent language="se" />)
-    const shipmentsText = getByText('Transporter')
+    const { findByText } = render(<LanguageTestComponent language="se" />)
+    const shipmentsText = await findByText('Transporter')
     expect(shipmentsText).toBeTruthy()
   })
 
   it('should support Finnish', async () => {
-    const { getByText } = render(<LanguageTestComponent language="fi" />)
-    const shipmentsText = getByText('Lähetykset')
+    const { findByText } = render(<LanguageTestComponent language="fi" />)
+    const shipmentsText = await findByText('Lähetykset')
     expect(shipmentsText).toBeTruthy()
   })
 })

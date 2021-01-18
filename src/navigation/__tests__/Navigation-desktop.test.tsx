@@ -34,7 +34,7 @@ describe('Testing desktop navigation', () => {
 
   it('should navigate to shipments from the drawer', async () => {
     process.env.TEST_ENV = 'desktop'
-    const { findAllByA11yRole, findByText } = render(component)
+    const { findAllByA11yRole, getByText } = render(component)
     const drawerLinks = await findAllByA11yRole('button')
 
     const shipmentsLink = await findDrawerLink(
@@ -43,20 +43,20 @@ describe('Testing desktop navigation', () => {
     )
 
     fireEvent(shipmentsLink, 'press')
-    const shipmentsText = await findByText('Shipments Screen!')
+    const shipmentsText = getByText('Shipments Screen!')
 
     expect(shipmentsText).toBeTruthy()
   })
 
   it('should navigate to reports from the drawer', async () => {
     process.env.TEST_ENV = 'desktop'
-    const { findAllByA11yRole, findByText } = render(component)
+    const { findAllByA11yRole, getByText } = render(component)
     const drawerLinks = await findAllByA11yRole('button')
 
     const reportsLink = await findDrawerLink(drawerLinks, ScreenNames.Reports)
 
     act(() => fireEvent(reportsLink, 'press'))
-    const reportsText = await findByText('Reports Screen!')
+    const reportsText = getByText('Reports Screen!')
 
     expect(reportsText).toBeTruthy()
   })
