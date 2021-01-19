@@ -1,8 +1,9 @@
 {
-	"baseUrl": "http://expo:19006",
+	"baseUrl": "http://localhost:19006",
 	"env": {
     "cypress-react-selector": {
       "root": "#root"
-    }
+    },
+    "BACKEND_URL": "http://localhost:3000"
   }
 }
