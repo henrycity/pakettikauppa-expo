@@ -1,24 +1,24 @@
 import * as React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Button } from 'react-native'
 
+<<<<<<< HEAD:src/modules/shipments/ShipmentsScreen.tsx
 import { View, Text } from '../../common/Themed'
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
 import useDeviceType from '../../common/hooks/useDeviceType'
+=======
+import BottomTabLayout from '../components/BottomTabLayout'
+import ShipmentsTable from '../components/ShipmentsTable'
+import { Text, View } from '../components/Themed'
+import getShipmentData from '../components/utils/getShipmentData'
+import useDeviceType from '../hooks/useDeviceType'
+>>>>>>> PA-3-A: Working, messy version of table finished.:screens/ShipmentsScreen.tsx
 
 export default function ShipmentsScreen(): JSX.Element {
   const { isMobile } = useDeviceType()
 
   return (
     <BottomTabWrapper>
-      <View style={styles.container}>
-        <Text style={styles.title}>Shipments Screen!</Text>
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
-        <Text>You are using {isMobile ? 'mobile' : 'desktop'}.</Text>
-      </View>
+      <ShipmentsTable />
     </BottomTabWrapper>
   )
 }
