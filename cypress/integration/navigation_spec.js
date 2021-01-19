@@ -1,6 +1,8 @@
 describe('Navigation', () => {
   beforeEach(() => {
-    cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, 'testToken')
+    cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, {
+      idToken: 'testToken',
+    })
     cy.visit('/')
     cy.waitForReact()
   })

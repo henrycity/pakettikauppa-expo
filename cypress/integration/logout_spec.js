@@ -1,6 +1,8 @@
 describe('Navigation drawer', () => {
   beforeEach(() => {
-    cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, 'testToken')
+    cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, {
+      idToken: 'testToken',
+    })
     cy.visit('/')
     cy.waitForReact()
   })
@@ -14,7 +16,9 @@ describe('Navigation drawer', () => {
 
 describe('Log out button', () => {
   beforeEach(() => {
-    cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, 'testToken')
+    cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, {
+      idToken: 'testToken',
+    })
     cy.visit('/')
     cy.waitForReact()
   })
