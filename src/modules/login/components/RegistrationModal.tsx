@@ -87,6 +87,7 @@ export default function RegistrationModal(): JSX.Element {
 
           <Text> Email: </Text>
           <TextInput
+            testID="Email"
             style={styles.input}
             placeholder="Email"
             autoCapitalize="none"
@@ -97,6 +98,7 @@ export default function RegistrationModal(): JSX.Element {
 
           <Text> VAT ID: </Text>
           <TextInput
+            testID="VAT"
             style={styles.input}
             placeholder="VAT ID"
             autoCapitalize="none"

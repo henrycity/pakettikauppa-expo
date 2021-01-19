@@ -9,6 +9,7 @@ import React from 'react'
 
 import { initializeLocalization } from '../../../localization'
 import Navigation from '../../../navigation'
+import { ScreenName } from '../../../types'
 import useLogout from '../hooks/useLogout'
 import useUser from '../hooks/useUser'
 
