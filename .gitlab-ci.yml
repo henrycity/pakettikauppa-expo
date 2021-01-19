@@ -49,7 +49,7 @@ e2e-tests:
   needs: ["build-image"]
   image: cypress/base:14.15.0
   services:
-    - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:12edc58b
+    - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:master
       alias: backend
     - name: $CONTAINER_TEST_IMAGE
       alias: expo
