@@ -7,4 +7,4 @@ COPY ./ ./
 RUN yarn add expo-cli
 RUN yarn install
 
-ENTRYPOINT [ "yarn", "expo", "start:web" ]
+ENTRYPOINT [ "yarn", "expo", "start:web", "--https" ]
