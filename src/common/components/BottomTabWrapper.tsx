@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ScrollView, Text } from 'react-native'
 
 import { View } from '../Themed'
 import useDeviceType from '../hooks/useDeviceType'
