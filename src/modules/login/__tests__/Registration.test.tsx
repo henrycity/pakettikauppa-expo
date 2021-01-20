@@ -1,15 +1,13 @@
-import {
-  render,
-  fireEvent,
-  cleanup,
-  waitFor,
-} from '@testing-library/react-native'
+import { render, fireEvent, cleanup } from '@testing-library/react-native'
 import React from 'react'
-import { exp } from 'react-native-reanimated'
 
+import { initializeLocalization } from '../../../localization'
 import LoginScreen from '../LoginScreen'
 
 describe('Testing registration modal', () => {
+  beforeAll(() => {
+    initializeLocalization()
+  })
   afterEach(cleanup)
 
   const component = <LoginScreen />

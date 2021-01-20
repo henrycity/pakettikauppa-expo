@@ -83,7 +83,7 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-        login
+        Login
       </Text>
     </View>
   </View>
