@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
-import { useTable } from 'react-table'
+import { useTable, Column } from 'react-table'
 
 import { Text, View } from '../../common/Themed'
 import server from '../../config'
@@ -82,7 +82,7 @@ function Table({ columns, data }) {
 export default function ShipmentsTable(): JSX.Element {
   const [shipmentData, setShipmentData] = useState<object[]>([])
 
-  const columns: { Header: string; accessor: string }[] = React.useMemo(
+  const columns: Column<Data>[] = React.useMemo(
     () => [
       {
         Header: 'ID',
