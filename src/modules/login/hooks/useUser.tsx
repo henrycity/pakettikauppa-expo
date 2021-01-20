@@ -35,10 +35,12 @@ export function AuthenticationProvider({
   const { data, error } = useSWR('/user', {
     onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
       if (error?.status === 403) return
+      if (retryCount && retryCount >= 10) return
 
-      if (retryCount >= 10) return
-
-      setTimeout(() => revalidate({ retryCount: retryCount + 1 }), 5000)
+      setTimeout(
+        () => revalidate({ retryCount: retryCount ? retryCount + 1 : 1 }),
+        5000
+      )
     },
   })
   const isLoading = !error && !data
