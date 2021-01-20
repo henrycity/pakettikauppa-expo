@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   tabBar: {
     flex: 1,
     flexDirection: 'row',
-    alignContent: 'stretch',
+    alignItems: 'stretch',
     justifyContent: 'space-evenly',
     maxHeight: 50,
   },

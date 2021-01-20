@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 
 import BottomTabLayout from '../components/BottomTabLayout'
 import ListView from '../components/ListView'
@@ -8,22 +8,10 @@ import useDeviceType from '../hooks/useDeviceType'
 
 export default function ShipmentsScreen(): JSX.Element {
   const { isMobile } = useDeviceType()
-  console.log(isMobile)
+
   return (
     <BottomTabLayout>
-      <View style={styles.container}>
-        <Text style={styles.title}>Shipments Screen!</Text>
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
-        {isMobile ? (
-          <Text> TABLE HERE </Text>
-        ) : (
-          <ListView/>
-        )}
-      </View>
+      {isMobile ? <Text> TABLE HERE </Text> : <ListView />}
     </BottomTabLayout>
   )
 }
