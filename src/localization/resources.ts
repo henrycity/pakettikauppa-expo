@@ -25,7 +25,7 @@ const resources = {
   se: {
     translation: {
       profile: 'Profil',
-      reports: 'Raporter',
+      reports: 'Rapporter',
       statistics: 'Statistik',
       shipments: 'Transporter',
       settings: 'Inställningar',
