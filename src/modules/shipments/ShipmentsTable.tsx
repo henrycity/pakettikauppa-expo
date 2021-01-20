@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { useTable } from 'react-table'
 
-import server from '../constants/config'
-import { Text, View } from './Themed'
-
-//import getShipmentData from './utils/getShipmentData'
+import { Text, View } from '../../common/Themed'
+import server from '../../config'
+//import getShipmentData from './getShipmentData'
 
 function Table({ columns, data }) {
   const {
@@ -22,6 +21,7 @@ function Table({ columns, data }) {
     },
   })
 
+  // Style has to be an object and cannot be imported through stylesheets
   return (
     <table
       {...getTableProps()}
@@ -79,19 +79,15 @@ function Table({ columns, data }) {
   )
 }
 
-/*const fetchShipmentData = async () => {
-  let res
-  const response = await fetch(`${server()}/shipments`)
-          .then(response => response.json())
-          .then(data => res = data)
-  return res
-}*/
-
 export default function ShipmentsTable(): JSX.Element {
-  const [shipmentData, setShipmentData] = useState([])
+  const [shipmentData, setShipmentData] = useState<object[]>([])
 
-  const columns = React.useMemo(
+  const columns: { Header: string; accessor: string }[] = React.useMemo(
     () => [
+      {
+        Header: 'ID',
+        accessor: 'id',
+      },
       {
         Header: 'Invoice Number',
         accessor: 'invoiceNumber',
@@ -133,10 +129,6 @@ export default function ShipmentsTable(): JSX.Element {
         accessor: 'latestEvent',
       },
       {
-        Header: 'ID',
-        accessor: 'id',
-      },
-      {
         Header: 'Created On',
         accessor: 'createdOn',
       },
@@ -146,11 +138,11 @@ export default function ShipmentsTable(): JSX.Element {
 
   useEffect(() => {
     async function fetchShipmentData() {
-      let res
-      const response = await fetch(`${server()}/shipments`)
+      let responseData: object[] = [{}]
+      await fetch(`${server()}/shipments`)
         .then((response) => response.json())
-        .then((data) => (res = data))
-      setShipmentData(res)
+        .then((data) => (responseData = data))
+      setShipmentData(responseData)
     }
     if (shipmentData.length) {
       return
@@ -159,7 +151,14 @@ export default function ShipmentsTable(): JSX.Element {
   })
 
   return !shipmentData.length ? (
-    <View />
+    <View style={styles.container}>
+      <Text style={styles.title}>Shipments Screen!</Text>
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+    </View>
   ) : (
     <Table columns={columns} data={shipmentData} />
   )
@@ -171,15 +170,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '80%',
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  head: {
-    height: 40,
-    backgroundColor: '#f1f8ff',
-  },
-  text: {
-    margin: 6,
   },
 })
