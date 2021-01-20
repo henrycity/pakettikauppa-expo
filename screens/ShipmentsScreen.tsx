@@ -8,7 +8,7 @@ import useDeviceType from '../hooks/useDeviceType'
 
 export default function ShipmentsScreen(): JSX.Element {
   const { isMobile } = useDeviceType()
-
+  console.log(isMobile)
   return (
     <BottomTabLayout>
       <View style={styles.container}>
@@ -19,7 +19,7 @@ export default function ShipmentsScreen(): JSX.Element {
           darkColor="rgba(255,255,255,0.1)"
         />
         {isMobile ? (
-          <Text> LIST HERE </Text>
+          <Text> TABLE HERE </Text>
         ) : (
           <ListView/>
         )}
