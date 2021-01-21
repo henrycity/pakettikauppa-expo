@@ -28,7 +28,7 @@ export default function ReportsNavigator(): JSX.Element {
         component={ReportsScreen}
         options={{
           ...headerOptions,
-          headerTitle: t('reports'),
+          headerTitle: t('Reports'),
         }}
       />
     </ReportsStack.Navigator>

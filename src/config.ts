@@ -1,5 +1,5 @@
 import { Platform } from 'react-native'
-
+//console.log(EXPO_LOCAL_ADDRESS)
 export default function server(): string {
   if (__DEV__) {
     if (Platform.OS === 'web') {
