@@ -1,14 +1,18 @@
-import { EXPO_LOCAL_ADDRESS, EXPO_LOCAL_IP, EXPO_SERVER } from '@env'
 import { Platform } from 'react-native'
 
 export default function server(): string {
   if (__DEV__) {
     if (Platform.OS === 'web') {
-      return EXPO_LOCAL_ADDRESS
+      return 'http://localhost:3000'
     } else {
-      return EXPO_LOCAL_IP
+      return (
+        process.env.EXPO_DEV_SERVER_MOBILE ?? 'https://pk-aalto.setamies.com'
+      )
     }
   } else {
-    return EXPO_SERVER
+    return 'https://pk-aalto.setamies.com'
   }
 }
+
+export const clientID =
+  '516972920334-28iectrmi5aksd36clssbfirlu2hmtp8.apps.googleusercontent.com'

@@ -20,7 +20,8 @@ Web ![Netlify Status](https://api.netlify.com/api/v1/badges/4ae69533-894e-4cd3-9
 cp .env.example .env
 ```
 
-Add the values to the right variables.
+Add the local IP address to the environment variable to be able to
+test using a simulator/emulator while running backend locally
 
 ### Starting the developement server
 
