@@ -19,6 +19,8 @@ export default function useCachedResources(): boolean {
           ...Feather.font,
           ...MaterialIcons.font,
           'space-mono': require('../../assets/fonts/SpaceMono-Regular.ttf'),
+          rubik: require('../../assets/fonts/Rubik-Regular.ttf'),
+          muli: require('../../assets/fonts/Muli.ttf'),
         })
 
         initializeLocalization()

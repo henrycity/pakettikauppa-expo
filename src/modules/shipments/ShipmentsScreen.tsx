@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
-import { View, Text } from '../../common/Themed'
+import { TitleText, View, Text } from '../../common/Themed'
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
 import useDeviceType from '../../common/hooks/useDeviceType'
 
@@ -11,7 +11,7 @@ export default function ShipmentsScreen(): JSX.Element {
   return (
     <BottomTabWrapper>
       <View style={styles.container}>
-        <Text style={styles.title}>Shipments Screen!</Text>
+        <TitleText>Shipments Screen!</TitleText>
         <View
           style={styles.separator}
           lightColor="#eee"

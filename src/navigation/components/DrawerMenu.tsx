@@ -32,7 +32,6 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
   }
 
   const { t } = useTranslation()
-
   return (
     <DrawerContentScrollView {...props}>
       {isDesktop ? (
@@ -41,6 +40,9 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
             label={t('profile')}
             focused={activeScreen === ScreenNames.Profile}
             onPress={() => handleLinkPress(ScreenNames.Profile)}
+            activeTintColor={themed.white}
+            activeBackgroundColor={themed.gray}
+            inactiveTintColor={themed.text}
             icon={({ color }) => (
               <Feather name="user" size={24} color={color} />
             )}
@@ -49,10 +51,13 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
           {isAuthorized(ScreenNames.Shipments) ? (
             <DrawerItem
               label={t('shipments')}
+              activeTintColor={themed.white}
+              activeBackgroundColor={themed.gray}
+              inactiveTintColor={themed.text}
               focused={activeScreen === ScreenNames.Shipments}
               onPress={() => handleLinkPress(ScreenNames.Shipments)}
               icon={({ color }) => (
-                <Feather name="package" size={24} color={color} />
+                <Feather name="truck" size={24} color={color} />
               )}
             />
           ) : null}
@@ -62,7 +67,10 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
               style={[styles.container, { backgroundColor: themed.background }]}
             >
               <View
-                style={styles.separator}
+                style={[
+                  styles.container,
+                  { backgroundColor: themed.drawerBackground },
+                ]}
                 lightColor={themed.tabIconDefault}
                 darkColor={themed.tabIconDefault}
               />
@@ -74,10 +82,13 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
       {isAuthorized(ScreenNames.Reports) ? (
         <DrawerItem
           label={t('reports')}
+          activeTintColor={themed.white}
+          activeBackgroundColor={themed.gray}
+          inactiveTintColor={themed.text}
           focused={activeScreen === ScreenNames.Reports}
           onPress={() => handleLinkPress(ScreenNames.Reports)}
           icon={({ color }) => (
-            <Feather name="layers" size={24} color={color} />
+            <Feather name="book-open" size={24} color={color} />
           )}
         />
       ) : null}
@@ -85,6 +96,9 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
       {isAuthorized(ScreenNames.Statistics) ? (
         <DrawerItem
           label={t('statistics')}
+          activeTintColor={themed.white}
+          activeBackgroundColor={themed.gray}
+          inactiveTintColor={themed.text}
           focused={activeScreen === ScreenNames.Statistics}
           onPress={() => handleLinkPress(ScreenNames.Statistics)}
           icon={({ color }) => (
@@ -97,6 +111,9 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
       <DrawerItem
         label={t('logout')}
+        activeTintColor={themed.white}
+        activeBackgroundColor={themed.gray}
+        inactiveTintColor={themed.text}
         onPress={() => logout()}
         icon={({ color }) => <Feather name="log-out" size={24} color={color} />}
       />

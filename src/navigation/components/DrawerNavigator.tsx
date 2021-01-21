@@ -48,5 +48,6 @@ export default function DrawerNavigator(): JSX.Element {
 const styles = StyleSheet.create({
   drawer: {
     width: 250,
+    backgroundColor: '#f7f1ee',
   },
 })
