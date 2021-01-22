@@ -1,11 +1,8 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import useSWR from 'swr'
 
 import { Text, View } from '../../../common/Themed'
-import Loading from '../../../common/components/Loading'
 import { cellWidths } from '../constants/tableHeaders'
-import TableComponent from './TableComponent'
 
 function Header({ fields }: any) {
   return (
@@ -35,37 +32,29 @@ function Row({ headers, shipment }: any) {
   )
 }
 
-export default function ShipmentsTable(): JSX.Element {
-  // copy Shipment interface from bacend instead of object[]
-  const { data, error } = useSWR<object[]>('/shipments')
-  const isLoading = !error && !data
+export default function TableComponent({ data }): JSX.Element {
+  const headers = Object.keys(data[0]).filter((field) => field != 'id')
 
   return (
-    <>
-      {!isLoading ? (
-        <>
-          <TableComponent data={data} />
-        </>
-      ) : (
-        <Loading />
-      )}
-    </>
+    <ScrollView stickyHeaderIndices={[0]} contentContainerStyle={styles.table}>
+      <Header fields={headers} />
+      {data.map((shipment) => (
+        <Row headers={headers} shipment={shipment} />
+      ))}
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  table: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    overflow: 'scroll',
+    margin: 30,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 10,
+    minHeight: 40,
   },
 })

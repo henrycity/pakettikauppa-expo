@@ -49,4 +49,18 @@ const tableHeaders = [
   },
 ]
 
+export const cellWidths: { [key: string]: number } = {
+  invoiceNumber: 100,
+  receiverName: 100,
+  postCode: 100,
+  postOffice: 100,
+  countryCode: 100,
+  receiverEmail: 130,
+  reference: 100,
+  price: 100,
+  status: 100,
+  latestEvent: 100,
+  createdOn: 330,
+}
+
 export default tableHeaders
