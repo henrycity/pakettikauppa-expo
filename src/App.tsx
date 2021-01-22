@@ -4,7 +4,6 @@ import React from 'react'
 import { useColorScheme } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-import { AccessProvider } from './authorization/hooks/useAuthorization'
 import ConfigSWR from './common/components/ConfigSWR'
 import { ActiveScreenContextProvider } from './common/hooks/useActiveScreen'
 import useCachedResources from './common/hooks/useCachedResources'
@@ -23,14 +22,12 @@ export default function App(): null | JSX.Element {
       <SafeAreaProvider>
         <ConfigSWR>
           <DeviceTypeContextProvider>
-            <AccessProvider>
-              <ActiveScreenContextProvider>
-                <AuthenticationProvider>
-                  <Navigation colorScheme={colorScheme} />
-                  <StatusBar />
-                </AuthenticationProvider>
-              </ActiveScreenContextProvider>
-            </AccessProvider>
+            <ActiveScreenContextProvider>
+              <AuthenticationProvider>
+                <Navigation colorScheme={colorScheme} />
+                <StatusBar />
+              </AuthenticationProvider>
+            </ActiveScreenContextProvider>
           </DeviceTypeContextProvider>
         </ConfigSWR>
       </SafeAreaProvider>

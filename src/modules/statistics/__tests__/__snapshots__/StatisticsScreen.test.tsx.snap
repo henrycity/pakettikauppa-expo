@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginScreen renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+      },
+      Object {
+        "alignItems": "stretch",
+        "flex": 1,
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#fff",
+        },
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000",
+          },
+          Object {
+            "fontSize": 20,
+            "fontWeight": "bold",
+          },
+        ]
+      }
+    >
+      Statistics Screen!
+    </Text>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#eee",
+          },
+          Object {
+            "height": 1,
+            "marginVertical": 30,
+            "width": "80%",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000",
+          },
+          undefined,
+        ]
+      }
+    >
+      You are using 
+      desktop
+      .
+    </Text>
+  </View>
+</View>
+`;

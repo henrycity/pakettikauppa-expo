@@ -2,7 +2,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-import useAuthorization from '../../authorization/hooks/useAuthorization'
+import useUser from '../../modules/login/hooks/useUser'
 import { DrawerParamList } from '../../types'
 import {
   ScreenNavigators,
@@ -15,7 +15,7 @@ const Drawer = createDrawerNavigator<DrawerParamList>()
 
 export default function DrawerNavigator(): JSX.Element {
   const drawerType = useDrawerType()
-  const isAuthorized = useAuthorization()
+  const { isAuthorized } = useUser()
 
   return (
     <Drawer.Navigator

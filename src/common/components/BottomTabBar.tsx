@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 
-import useAuthorization from '../../authorization/hooks/useAuthorization'
+import useUser from '../../modules/login/hooks/useUser'
 import ScreenNames from '../../navigation/ScreenNames'
 import { ScreenName } from '../../types'
 import Colors from '../Colors'
@@ -16,7 +16,7 @@ export default function BottomTabBar(): JSX.Element {
 
   const { activeScreen, setActiveScreen } = useActiveScreen()
 
-  const isAuthorized = useAuthorization()
+  const { isAuthorized } = useUser()
   const { t } = useTranslation()
 
   const handleLinkPress = (screenName: ScreenName) => {

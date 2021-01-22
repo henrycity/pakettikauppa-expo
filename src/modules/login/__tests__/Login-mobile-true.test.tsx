@@ -3,10 +3,15 @@ import React from 'react'
 
 import { initializeLocalization } from '../../../localization'
 import Navigation from '../../../navigation'
+import { ScreenName } from '../../../types'
 import useUser from '../hooks/useUser'
 
 jest.mock('../hooks/useUser', () => {
-  return () => ({ user: 'aa', isLoggedIn: true })
+  return () => ({
+    user: 'aa',
+    isLoggedIn: true,
+    isAuthorized: (_screenName: ScreenName) => true,
+  })
 })
 jest.mock('../hooks/useLogin')
 
