@@ -2,6 +2,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StyleSheet } from 'react-native'
 
 import MenuButton from '../components/MenuButton'
 import Screens from '../constants/Screens'
@@ -50,10 +51,6 @@ export const RestrictedScreenNavigators: ScreenNavigator[] = [
     name: Screens.Statistics,
   },
 ]
-
-const headerOptions = {
-  headerLeft: () => <MenuButton />,
-}
 
 const ProfileStack = createStackNavigator<ProfileParamList>()
 
@@ -183,4 +180,15 @@ function StatisticsNavigator(): JSX.Element {
       />
     </StatisticsStack.Navigator>
   )
+}
+
+export const navStyles = StyleSheet.create({
+  header: {
+    height: 80,
+  }
+})
+
+const headerOptions = {
+  headerLeft: () => <MenuButton />,
+  headerStyle: navStyles.header
 }

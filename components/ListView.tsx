@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
-  ActivityIndicator,
-  Text,
-  View,
   FlatList,
   StyleSheet,
 } from 'react-native'
 import useSWR from 'swr'
 
 import Loading from './Loading'
+import { Text, View } from './Themed'
 
 interface Shipment {
   id: number
@@ -79,7 +77,6 @@ function ShipmentsFooterComponent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 0,
   },
   listContentContainer: {
   },

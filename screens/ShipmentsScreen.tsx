@@ -11,7 +11,11 @@ export default function ShipmentsScreen(): JSX.Element {
 
   return (
     <BottomTabLayout>
-      {isMobile ? <Text> TABLE HERE </Text> : <ListView />}
+      {isMobile ?
+        <ListView />
+        :
+        <ListView />
+      }
     </BottomTabLayout>
   )
 }
