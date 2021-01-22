@@ -1,52 +1,67 @@
-const tableHeaders = [
-  {
-    Header: 'ID',
-    accessor: 'id',
+export const cellData: {
+  [key: string]: { flex: number; headerRows: number }
+} = {
+  invoiceNumber: {
+    flex: 1.3,
+    headerRows: 2,
   },
-  {
-    Header: 'Invoice Number',
-    accessor: 'invoiceNumber',
+  receiverName: {
+    flex: 1.6,
+    headerRows: 2,
   },
-  {
-    Header: 'Receiver Name',
-    accessor: 'receiverName',
+  postCode: {
+    flex: 1.2,
+    headerRows: 2,
   },
-  {
-    Header: 'Post Code',
-    accessor: 'postCode',
+  postOffice: {
+    flex: 1.4,
+    headerRows: 2,
   },
-  {
-    Header: 'Post Office',
-    accessor: 'postOffice',
+  countryCode: {
+    flex: 1.7,
+    headerRows: 2,
   },
-  {
-    Header: 'Country Code',
-    accessor: 'countryCode',
+  receiverEmail: {
+    flex: 2.1,
+    headerRows: 2,
   },
-  {
-    Header: 'Receiver Email',
-    accessor: 'receiverEmail',
+  reference: {
+    flex: 1.5,
+    headerRows: 1,
   },
-  {
-    Header: 'Reference',
-    accessor: 'reference',
+  price: {
+    flex: 1,
+    headerRows: 1,
   },
-  {
-    Header: 'Price',
-    accessor: 'price',
+  status: {
+    flex: 1,
+    headerRows: 1,
   },
-  {
-    Header: 'Status',
-    accessor: 'status',
+  latestEvent: {
+    flex: 1,
+    headerRows: 2,
   },
-  {
-    Header: 'Latest Event',
-    accessor: 'latestEvent',
+  createdOn: {
+    flex: 2,
+    headerRows: 2,
   },
-  {
-    Header: 'Created On',
-    accessor: 'createdOn',
+  deliveryCompany: {
+    flex: 1.7,
+    headerRows: 2,
   },
-]
+}
 
-export default tableHeaders
+export const shipmentHeaders = [
+  'createdOn',
+  'receiverName',
+  'receiverEmail',
+  'postCode',
+  'postOffice',
+  'countryCode',
+  'price',
+  'deliveryCompany',
+  'status',
+  'reference',
+  'latestEvent',
+  'invoiceNumber',
+]

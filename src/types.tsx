@@ -6,6 +6,25 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import ScreenNames from './navigation/ScreenNames'
 
+export interface Shipment {
+  // Metadata
+  id: number
+  createdOn: Date
+  // Shipping Address
+  receiverName: string
+  receiverEmail: string
+  postCode: string // This could be a number but this seems more consistent
+  postOffice: string
+  countryCode: string
+  // Other
+  price: number
+  deliveryCompany: string
+  status: string
+  reference: string
+  latestEvent: string
+  invoiceNumber: string
+}
+
 // Data
 
 export type User = {

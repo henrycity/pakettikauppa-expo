@@ -11,6 +11,20 @@ const resources = {
       logout: 'Log out',
       login: 'Login',
     },
+    shipments: {
+      createdOn: 'Created on',
+      receiverName: 'Receiver name',
+      receiverEmail: 'Receiver email',
+      postCode: 'Post code',
+      postOffice: 'Post office',
+      countryCode: 'Country code',
+      price: 'Price',
+      deliveryCompany: 'Delivery company',
+      status: 'Status',
+      reference: 'Reference',
+      latestEvent: 'Latest event',
+      invoiceNumber: 'Invoice number',
+    },
   },
   fi: {
     translation: {

@@ -1,22 +1,15 @@
 import * as React from 'react'
 
-import { View, Text } from '../../common/Themed'
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
-import useDeviceType from '../../common/hooks/useDeviceType'
 import ShipmentsTable from './components/ShipmentsTable'
+import useBreakpoint from './hooks/useBreakpoint'
 
 export default function ShipmentsScreen(): JSX.Element {
-  const { isMobile } = useDeviceType()
+  const screenIsSmallerThan = useBreakpoint(700)
 
   return (
     <BottomTabWrapper>
-      {!isMobile ? (
-        <ShipmentsTable />
-      ) : (
-        <View>
-          <Text>Shipments Screen!</Text>
-        </View>
-      )}
+      {screenIsSmallerThan ? <ShipmentsTable /> : <ShipmentsTable />}
     </BottomTabWrapper>
   )
 }
