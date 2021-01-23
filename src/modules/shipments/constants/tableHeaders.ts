@@ -1,66 +1,29 @@
-const tableHeaders = [
-  {
-    Header: 'ID',
-    accessor: 'id',
-  },
-  {
-    Header: 'Invoice Number',
-    accessor: 'invoiceNumber',
-  },
-  {
-    Header: 'Receiver Name',
-    accessor: 'receiverName',
-  },
-  {
-    Header: 'Post Code',
-    accessor: 'postCode',
-  },
-  {
-    Header: 'Post Office',
-    accessor: 'postOffice',
-  },
-  {
-    Header: 'Country Code',
-    accessor: 'countryCode',
-  },
-  {
-    Header: 'Receiver Email',
-    accessor: 'receiverEmail',
-  },
-  {
-    Header: 'Reference',
-    accessor: 'reference',
-  },
-  {
-    Header: 'Price',
-    accessor: 'price',
-  },
-  {
-    Header: 'Status',
-    accessor: 'status',
-  },
-  {
-    Header: 'Latest Event',
-    accessor: 'latestEvent',
-  },
-  {
-    Header: 'Created On',
-    accessor: 'createdOn',
-  },
-]
-
-export const cellWidths: { [key: string]: number } = {
-  invoiceNumber: 100,
-  receiverName: 100,
-  postCode: 100,
-  postOffice: 100,
-  countryCode: 100,
-  receiverEmail: 130,
-  reference: 100,
-  price: 100,
-  status: 100,
-  latestEvent: 100,
-  createdOn: 330,
+export const cellFlex: { [key: string]: number } = {
+  invoiceNumber: 0.5,
+  receiverName: 1.4,
+  postCode: 1,
+  postOffice: 1,
+  countryCode: 1,
+  receiverEmail: 2.1,
+  reference: 0.5,
+  price: 1,
+  status: 0.5,
+  latestEvent: 0.5,
+  createdOn: 3,
+  deliveryCompany: 1,
 }
 
-export default tableHeaders
+export const shipmentHeaders = [
+  'createdOn',
+  'receiverName',
+  'receiverEmail',
+  'postCode',
+  'postOffice',
+  'countryCode',
+  'price',
+  'deliveryCompany',
+  'status',
+  'reference',
+  'latestEvent',
+  'invoiceNumber',
+]
