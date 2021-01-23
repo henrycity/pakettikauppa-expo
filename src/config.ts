@@ -4,9 +4,9 @@ import { Platform } from 'react-native'
 export default function server(): string {
   if (__DEV__) {
     if (Platform.OS === 'web') {
-      return EXPO_LOCAL_ADDRESS
+      return EXPO_LOCAL_ADDRESS || 'http://localhost:3000'
     } else {
-      return EXPO_LOCAL_IP
+      return EXPO_LOCAL_IP || 'http://localhost:3000'
     }
   } else {
     return EXPO_SERVER

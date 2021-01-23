@@ -9,6 +9,7 @@ import { mutate } from 'swr'
 import server from '../../../config'
 
 const serverURL = server()
+console.log('serverURL', serverURL)
 
 export default function useLogin(): {
   login: (

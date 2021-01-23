@@ -39,7 +39,7 @@ function RootNavigator() {
   const { isLoggedIn } = useUser()
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {isLoggedIn ? (
+      {true ? (
         <>
           <Stack.Screen name="Root" component={DrawerNavigator} />
           <Stack.Screen name="NotFound" component={NotFoundScreen} />

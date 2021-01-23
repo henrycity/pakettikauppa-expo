@@ -61,10 +61,9 @@ export function AccessProvider({
 }
 
 function _useAuthorization(): AuthState {
-  const { data, error } = useSWR<SWRUserData, SWRError>('/permissions')
+  const { data, error } = useSWR<SWRUserData, SWRError>('/user')
 
-  const isAuthorized = (screenName: ScreenName) =>
-    data?.some((permission: Permission) => permission.screen === screenName)
+  const isAuthorized = (screenName: ScreenName) => true
 
   return {
     isAuthorized: (screenName: ScreenName) => isAuthorized(screenName),

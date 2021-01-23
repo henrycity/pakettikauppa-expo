@@ -11,6 +11,7 @@ import useCachedResources from './common/hooks/useCachedResources'
 import { DeviceTypeContextProvider } from './common/hooks/useDeviceType'
 import { AuthenticationProvider } from './modules/login/hooks/useUser'
 import Navigation from './navigation'
+import { DataTable } from 'react-native-paper'
 
 export default function App(): null | JSX.Element {
   const isLoadingComplete = useCachedResources()

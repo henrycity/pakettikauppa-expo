@@ -33,7 +33,7 @@ export default function DrawerNavigator(): JSX.Element {
       ))}
 
       {RestrictedScreenNavigators.map((screen) =>
-        isAuthorized(screen.name) ? (
+        true ? (
           <Drawer.Screen
             key={screen.name}
             name={screen.name}

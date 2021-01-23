@@ -10,7 +10,7 @@ export default function ShipmentsScreen(): JSX.Element {
 
   return (
     <BottomTabWrapper>
-      {!isMobile ? (
+      {true ? (
         <ShipmentsTable />
       ) : (
         <View>
