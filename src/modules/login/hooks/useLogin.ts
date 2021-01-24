@@ -15,6 +15,7 @@ export default function useLogin(): {
   ) => Promise<AuthSessionResult>
   disabled: boolean
 } {
+
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: clientID,
   })

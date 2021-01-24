@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Modal, Button, StyleSheet } from 'react-native'
+import { Modal, TouchableOpacity } from 'react-native'
 
+import Styles from '../../../common/Styles'
 import { Text, View, TextInput } from '../../../common/Themed'
 import postRegistration from '../postRegistration'
 
@@ -58,13 +59,18 @@ export default function RegistrationModal(): JSX.Element {
 
   return (
     <>
-      <Button onPress={onRegisterButtonPress} title="Register" />
+      <TouchableOpacity
+        onPress={onRegisterButtonPress}
+        style={Styles.normalButton}
+      >
+        <Text style={Styles.buttonLabel}>REGISTER</Text>
+      </TouchableOpacity>
 
-      <View style={styles.gap} />
+      <View style={Styles.gap} />
 
       <View>
         {displaySuccessMessage ? (
-          <Text style={styles.success}>Registration submitted!</Text>
+          <Text style={Styles.success}>Registration submitted!</Text>
         ) : null}
       </View>
 
@@ -73,13 +79,13 @@ export default function RegistrationModal(): JSX.Element {
         visible={modalIsVisible}
         testID="modalTest"
       >
-        <View style={styles.container}>
-          <Text style={styles.title}>Please enter your details: </Text>
-          <View style={styles.gap} />
+        <View style={Styles.container}>
+          <Text style={Styles.title}>Please enter your details: </Text>
+          <View style={Styles.gap} />
           <View>
             {errors.length > 0 &&
               errors.map((error) => (
-                <Text key={error.message} style={styles.error}>
+                <Text key={error.message} style={Styles.error}>
                   {error.message}
                 </Text>
               ))}
@@ -94,7 +100,7 @@ export default function RegistrationModal(): JSX.Element {
             onChangeText={(email) => setEmail(email)}
             defaultValue={email}
           />
-          <View style={styles.gap} />
+          <View style={Styles.gap} />
 
           <Text> VAT ID: </Text>
           <TextInput
@@ -106,40 +112,23 @@ export default function RegistrationModal(): JSX.Element {
             defaultValue={vat_id}
           />
 
-          <View style={styles.gap} />
+          <View style={Styles.gap} />
+          <TouchableOpacity
+            onPress={() => handlePress()}
+            style={Styles.normalButton}
+          >
+            <Text style={Styles.buttonLabel}>SUBMIT</Text>
+          </TouchableOpacity>
+          <View style={Styles.gap} />
 
-          <Button onPress={() => handlePress()} title="Submit" />
-
-          <View style={styles.gap} />
-
-          <Button onPress={() => setModalIsVisible(false)} title="Close" />
+          <TouchableOpacity
+            onPress={() => setModalIsVisible(false)}
+            style={Styles.normalButton}
+          >
+            <Text style={Styles.buttonLabel}>CLOSE</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  input: {
-    borderBottomWidth: 1.0,
-    width: 200,
-  },
-  error: {
-    color: 'red',
-  },
-  success: {
-    color: 'green',
-  },
-  gap: {
-    height: 10,
-  },
-})

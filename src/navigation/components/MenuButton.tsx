@@ -11,7 +11,7 @@ export default function MenuButton(): JSX.Element | null {
   const navigation = useNavigation<DrawerMenuNavigationProp>()
   const drawerType = useDrawerType()
   const backgroundColor = useThemeColor({}, 'background')
-  const iconColor = useThemeColor({}, 'tint')
+  const iconColor = useThemeColor({}, 'blue')
 
   return drawerType !== 'permanent' ? (
     <TouchableOpacity
