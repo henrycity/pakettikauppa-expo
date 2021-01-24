@@ -1,16 +1,54 @@
-export const cellFlex: { [key: string]: number } = {
-  invoiceNumber: 0.5,
-  receiverName: 1.4,
-  postCode: 1,
-  postOffice: 1,
-  countryCode: 1,
-  receiverEmail: 2.1,
-  reference: 0.5,
-  price: 1,
-  status: 0.5,
-  latestEvent: 0.5,
-  createdOn: 3,
-  deliveryCompany: 1,
+export const cellData: {
+  [key: string]: { flex: number; headerRows: number }
+} = {
+  invoiceNumber: {
+    flex: 1.3,
+    headerRows: 2,
+  },
+  receiverName: {
+    flex: 1.6,
+    headerRows: 2,
+  },
+  postCode: {
+    flex: 1.2,
+    headerRows: 2,
+  },
+  postOffice: {
+    flex: 1.4,
+    headerRows: 2,
+  },
+  countryCode: {
+    flex: 1.7,
+    headerRows: 2,
+  },
+  receiverEmail: {
+    flex: 2.1,
+    headerRows: 2,
+  },
+  reference: {
+    flex: 1.5,
+    headerRows: 1,
+  },
+  price: {
+    flex: 1,
+    headerRows: 1,
+  },
+  status: {
+    flex: 1,
+    headerRows: 1,
+  },
+  latestEvent: {
+    flex: 1,
+    headerRows: 2,
+  },
+  createdOn: {
+    flex: 2,
+    headerRows: 2,
+  },
+  deliveryCompany: {
+    flex: 1.7,
+    headerRows: 2,
+  },
 }
 
 export const shipmentHeaders = [

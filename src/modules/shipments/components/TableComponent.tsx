@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, FlatList } from 'react-native'
+import { StyleSheet, FlatList, ScrollView } from 'react-native'
 
 import { Text, View } from '../../../common/Themed'
-import { cellFlex, shipmentHeaders } from '../constants/tableHeaders'
+import { shipmentHeaders, cellData } from '../constants/tableHeaders'
 import { mutate } from 'swr'
 import { useTranslation } from 'react-i18next'
 import { Shipment } from '../../../types'
@@ -10,11 +10,13 @@ import { Shipment } from '../../../types'
 function Header({ fields }: any) {
   const { t } = useTranslation('shipments')
   return (
-    <View style={styles.header}>
+    <View style={[styles.row, styles.header]}>
       {fields.map((field: string) => (
         // Header text should be localized: t(header) (delete this comment)
-        <View key={field} style={[styles.cell, { flex: cellFlex[field] }]}>
-          <Text numberOfLines={1}>{t(field)}</Text>
+        <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
+          <Text numberOfLines={cellData[field].headerRows} style={styles.text}>
+            {t(field)}
+          </Text>
         </View>
       ))}
     </View>
@@ -27,9 +29,11 @@ function Row({ headers, shipment }: any) {
       {headers.map((field: string) => (
         <View
           key={field + shipment.id}
-          style={[styles.cell, { flex: cellFlex[field] }]}
+          style={[styles.cell, { flex: cellData[field].flex }]}
         >
-          <Text numberOfLines={1}>{shipment[field]}</Text>
+          <Text numberOfLines={1} style={styles.text}>
+            {shipment[field]}
+          </Text>
         </View>
       ))}
     </View>
@@ -49,13 +53,24 @@ export default function TableComponent({
 
   return (
     <FlatList
+      contentContainerStyle={styles.table}
       onLayout={(event) => console.log(event.nativeEvent.layout)}
       data={data}
       renderItem={({ item }) => <Row headers={headers} shipment={item} />}
       ListHeaderComponent={<Header fields={headers} />}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
+      ItemSeparatorComponent={() => (
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <View style={styles.separator} />
+        </View>
+      )}
       stickyHeaderIndices={[0]}
-      contentContainerStyle={styles.table}
       keyExtractor={(shipment) => String(shipment.id)}
       onRefresh={() => mutate('/shipments')}
       refreshing={refreshing}
@@ -66,29 +81,30 @@ export default function TableComponent({
 const styles = StyleSheet.create({
   table: {
     flex: 1,
+    marginHorizontal: 15,
   },
   row: {
+    paddingVertical: 10,
     flex: 1,
     flexDirection: 'row',
-    minHeight: 40,
   },
   header: {
-    flex: 1,
-    flexDirection: 'row',
-    minHeight: 40,
     borderBottomWidth: 2,
     borderBottomColor: 'gray',
+    paddingVertical: 15,
   },
   cell: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    paddingRight: 6,
   },
   separator: {
-    marginVertical: 8,
     height: 1,
+    width: '93%',
     backgroundColor: 'gray',
-    alignSelf: 'center',
-    width: '90%',
+  },
+  text: {
+    fontSize: 12,
   },
 })

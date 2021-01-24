@@ -8,7 +8,7 @@ export default function ShipmentsTable(): JSX.Element {
   // copy Shipment interface from bacend instead of object[]
   const { data, error, isValidating } = useSWR<object[]>('/shipments')
   const isLoading = !error && !data
-  const refreshing = data && isValidating
+  const refreshing = (data && isValidating) || false
 
   return (
     <>
