@@ -1,12 +1,12 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import useSWR from 'swr'
 
 import Loading from '../../../common/components/Loading'
 import TableComponent from './TableComponent'
+import { Shipment } from '../../../types'
 
-export default function ShipmentsTable(): JSX.Element {
-  // copy Shipment interface from bacend instead of object[]
-  const { data, error, isValidating } = useSWR<object[]>('/shipments')
+export default function TableView(): JSX.Element {
+  const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
   const isLoading = !error && !data
   const refreshing = (data && isValidating) || false
 
@@ -14,7 +14,7 @@ export default function ShipmentsTable(): JSX.Element {
     <>
       {!isLoading ? (
         <>
-          <TableComponent refreshing={refreshing} data={data} />
+          <TableComponent refreshing={refreshing} data={data ? data : []} />
         </>
       ) : (
         <Loading />

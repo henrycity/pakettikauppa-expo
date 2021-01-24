@@ -1,3 +1,5 @@
+import { Shipment } from '../../../types'
+
 export const cellData: {
   [key: string]: { flex: number; headerRows: number }
 } = {
@@ -51,7 +53,7 @@ export const cellData: {
   },
 }
 
-export const shipmentHeaders = [
+export const shipmentHeaders: (keyof Shipment)[] = [
   'createdOn',
   'receiverName',
   'receiverEmail',

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dimensions, Platform } from 'react-native'
 
 /**
@@ -6,7 +6,7 @@ import { Dimensions, Platform } from 'react-native'
  *
  * Value updates on resize (web only)
  */
-export default function useBreakpoint(breakpoint: number) {
+export default function useBreakpoint(breakpoint: number): boolean {
   const getWidth = () => Dimensions.get('window').width
   const [isSmaller, setIsSmaller] = useState(getWidth() < breakpoint)
 
