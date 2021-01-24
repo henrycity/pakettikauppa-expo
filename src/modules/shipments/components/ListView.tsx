@@ -33,7 +33,7 @@ interface ShipmentListItemProps {
 
 function ShipmentListItem({ shipment }: ShipmentListItemProps) {
   return (
-    <View style={styles.container}>
+    <View style={styles.shipmentContainer}>
       <View style={styles.itemLeft}>
         <Text style={styles.name}>{shipment.receiverName}</Text>
         <Text style={styles.other}>{shipment.status}</Text>
@@ -58,28 +58,33 @@ function ShipmentsFooterComponent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  shipmentContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 5,
+    backgroundColor: '#F7F1EF',
+    margin: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
   },
   itemLeft: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    backgroundColor: '#F7F1EF',
     alignContent: 'stretch',
+    backgroundColor: '#F7F1EF',
   },
   itemRight: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
     flexWrap: 'wrap',
-
-    justifyContent: 'space-around',
     backgroundColor: '#F7F1EF',
-    alignContent: 'stretch',
+    justifyContent: 'center',
+    alignContent: 'flex-end',
   },
   header: {
     alignSelf: 'center',

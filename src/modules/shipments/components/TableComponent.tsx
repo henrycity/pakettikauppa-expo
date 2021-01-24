@@ -78,18 +78,13 @@ export default function TableComponent({
       )}
       ListHeaderComponent={<Header fields={headers} />}
       ItemSeparatorComponent={() => (
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.separatorContainer}>
           <View style={styles.separator} />
         </View>
       )}
       stickyHeaderIndices={[0]}
+      initialNumToRender={10}
+      removeClippedSubviews={true}
       keyExtractor={(shipment) => String(shipment.id)}
       onRefresh={() => mutate('/shipments')}
       refreshing={refreshing}
@@ -100,7 +95,10 @@ export default function TableComponent({
 const styles = StyleSheet.create({
   table: {
     flex: 1,
-    marginHorizontal: 25,
+    paddingHorizontal: 25,
+    maxHeight: 900,
+    // Needed for sticky header
+    overflow: 'scroll',
   },
   row: {
     paddingVertical: 15,
@@ -122,6 +120,12 @@ const styles = StyleSheet.create({
     height: 1,
     width: '93%',
     backgroundColor: 'gray',
+  },
+  separatorContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     fontSize: 12,
