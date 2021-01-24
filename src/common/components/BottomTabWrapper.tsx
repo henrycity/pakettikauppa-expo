@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, Dimensions, Platform } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 
+import { navStyles } from '../../../navigation/ScreenNavigators'
 import { View } from '../Themed'
 import useDeviceType from '../hooks/useDeviceType'
 import BottomTabBar, { tabBarStyles } from './BottomTabBar'
-import { View } from './Themed'
-import { navStyles } from '../navigation/ScreenNavigators'
 
 interface BottomTabWrapperProps {
   children: JSX.Element | JSX.Element[]
 }
 
 /**
-  * Calculates screen height so that header and bottom tab bar will always stay visible
-  *
-  * @returns screen height. Height updates on window resize (on web)
-  */
+ * Calculates screen height so that header and bottom tab bar will always stay visible
+ *
+ * @returns screen height. Height updates on window resize (on web)
+ */
 function useScreenHeight() {
   const { isMobile } = useDeviceType()
-  const getHeight = () => Dimensions.get('window').height - StyleSheet.flatten(navStyles.header).height - (isMobile ? StyleSheet.flatten(tabBarStyles.tabBar).maxHeight : 0)
+  const getHeight = () =>
+    Dimensions.get('window').height -
+    StyleSheet.flatten(navStyles.header).height -
+    (isMobile ? StyleSheet.flatten(tabBarStyles.tabBar).maxHeight : 0)
   const initialHeight = getHeight()
   const [height, setHeight] = useState(initialHeight)
 
@@ -32,7 +34,6 @@ function useScreenHeight() {
 
       return () => window.removeEventListener('resize', onResize)
     }
-
   }, [])
 
   return height
@@ -48,7 +49,7 @@ export default function BottomTabWrapper({
   const containerHeight = useScreenHeight()
 
   return (
-    <View style={[styles.tabBarContainer, {height: containerHeight}]}>
+    <View style={[styles.tabBarContainer, { height: containerHeight }]}>
       {children}
 
       {isMobile ? <BottomTabBar /> : null}

@@ -185,10 +185,10 @@ function StatisticsNavigator(): JSX.Element {
 export const navStyles = StyleSheet.create({
   header: {
     height: 80,
-  }
+  },
 })
 
 const headerOptions = {
   headerLeft: () => <MenuButton />,
-  headerStyle: navStyles.header
+  headerStyle: navStyles.header,
 }

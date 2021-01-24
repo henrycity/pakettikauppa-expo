@@ -2,12 +2,12 @@ import React from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 import useSWR from 'swr'
 
-import { Shipments } from '../types'
-import Loading from './Loading'
-import { Text, View } from './Themed'
+import { Text, View } from '../../../common/Themed'
+import Loading from '../../../common/components/Loading'
+import { Shipment } from '../../../types'
 
 export default function ListView(): JSX.Element {
-  const { data, error } = useSWR<Shipments[]>('/shipments')
+  const { data, error } = useSWR<Shipment[]>('/shipments')
   const isLoading = !error && !data
 
   return (
@@ -28,7 +28,7 @@ export default function ListView(): JSX.Element {
 }
 
 interface ShipmentListItemProps {
-  shipment: Shipments
+  shipment: Shipment
 }
 
 function ShipmentListItem({ shipment }: ShipmentListItemProps) {

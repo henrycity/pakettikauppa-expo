@@ -2,8 +2,8 @@ import React from 'react'
 import useSWR from 'swr'
 
 import Loading from '../../../common/components/Loading'
-import TableComponent from './TableComponent'
 import { Shipment } from '../../../types'
+import TableComponent from './TableComponent'
 
 export default function TableView(): JSX.Element {
   const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
