@@ -27,6 +27,22 @@ export interface Shipment {
 
 // Data
 
+export type Shipments = {
+  id: number
+  createdOn: Date
+  receiverName: string
+  receiverEmail: string
+  postCode: string
+  postOffice: string
+  countryCode: string
+  price: number
+  status: string
+  reference: string
+  latestEvent: string
+  invoiceNumber: string
+  deliveryCompany: string
+}
+
 export type User = {
   id: number
   username: string

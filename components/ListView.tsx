@@ -1,31 +1,13 @@
 import React from 'react'
-import {
-  FlatList,
-  StyleSheet,
-} from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import useSWR from 'swr'
 
+import { Shipments } from '../types'
 import Loading from './Loading'
 import { Text, View } from './Themed'
 
-interface Shipment {
-  id: number
-  createdOn: Date
-  receiverName: string
-  receiverEmail: string
-  postCode: string
-  postOffice: string
-  countryCode: string
-  price: number
-  status: string
-  reference: string
-  latestEvent: string
-  invoiceNumber: string
-  shippingCompany: string
-}
-
 export default function ListView(): JSX.Element {
-  const { data, error } = useSWR<Shipment[]>('/shipments')
+  const { data, error } = useSWR<Shipments[]>('/shipments')
   const isLoading = !error && !data
 
   return (
@@ -36,7 +18,6 @@ export default function ListView(): JSX.Element {
         <FlatList
           data={data}
           keyExtractor={({ id }) => String(id)}
-          contentContainerStyle={styles.listContentContainer}
           ListHeaderComponent={ShipmentsHeaderComponent}
           ListFooterComponent={ShipmentsFooterComponent}
           renderItem={({ item }) => <ShipmentListItem shipment={item} />}
@@ -47,21 +28,21 @@ export default function ListView(): JSX.Element {
 }
 
 interface ShipmentListItemProps {
-  shipment: Shipment
+  shipment: Shipments
 }
 
 function ShipmentListItem({ shipment }: ShipmentListItemProps) {
   return (
-    <View style={styles.item}>
-      <Text>
-        {shipment.createdOn}
-     </Text>
-     <Text>
-       {shipment.receiverName}
-     </Text>
-     <Text>
-       {shipment.receiverEmail}
-     </Text>
+    <View style={styles.container}>
+      <View style={styles.itemLeft}>
+        <Text style={styles.name}>{shipment.receiverName}</Text>
+        <Text style={styles.other}>{shipment.status}</Text>
+        <Text style={styles.other}>{shipment.postCode}</Text>
+        <Text style={styles.other}>{shipment.deliveryCompany}</Text>
+      </View>
+      <View style={styles.itemRight}>
+        <Text style={styles.other}>{shipment.createdOn}</Text>
+      </View>
     </View>
   )
 }
@@ -77,15 +58,28 @@ function ShipmentsFooterComponent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
   },
-  listContentContainer: {
+  itemLeft: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    backgroundColor: '#F7F1EF',
+    alignContent: 'stretch',
   },
-  item: {
+  itemRight: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'stretch',
-    margin: 40,
-    justifyContent: 'space-between'
+    alignItems: 'center',
+    flexWrap: 'wrap',
+
+    justifyContent: 'space-around',
+    backgroundColor: '#F7F1EF',
+    alignContent: 'stretch',
   },
   header: {
     alignSelf: 'center',
@@ -96,5 +90,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 28,
     margin: 30,
+  },
+  name: {
+    fontFamily: 'Rubik',
+    fontWeight: 'bold',
+    fontSize: 17,
+    color: '#223285',
+  },
+  other: {
+    fontFamily: 'Rubik',
+    fontSize: 10,
+    color: '#223285',
   },
 })
