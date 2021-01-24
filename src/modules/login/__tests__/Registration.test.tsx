@@ -15,7 +15,7 @@ describe('Testing registration modal', () => {
   it('Should open modal when clicking register', async () => {
     const { getByText, getByTestId } = render(component)
 
-    const button = getByText('Register')
+    const button = getByText('REGISTER')
     fireEvent.press(button)
 
     const modal = getByTestId('modalTest')
@@ -25,10 +25,10 @@ describe('Testing registration modal', () => {
   it('Should not close when submitting without entering anything', async () => {
     const { getByText, getByTestId } = render(component)
 
-    const button = getByText('Register')
+    const button = getByText('REGISTER')
     fireEvent.press(button)
 
-    const submit = getByText('Submit')
+    const submit = getByText('SUBMIT')
     fireEvent.press(submit)
 
     const modal = getByTestId('modalTest')
@@ -38,10 +38,10 @@ describe('Testing registration modal', () => {
   it('Should close modal when pressing close button', async () => {
     const { getByText, getByTestId } = render(component)
 
-    const button = getByText('Register')
+    const button = getByText('REGISTER')
     fireEvent.press(button)
 
-    const close = getByText('Close')
+    const close = getByText('CLOSE')
     fireEvent.press(close)
 
     const modal = getByTestId('modalTest')

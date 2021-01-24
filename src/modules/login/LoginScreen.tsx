@@ -1,8 +1,9 @@
 import * as WebBrowser from 'expo-web-browser'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, Button } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 
+import Styles from '../../common/Styles'
 import { View, Text } from '../../common/Themed'
 import RegistrationModal from './components/RegistrationModal'
 import useLogin from './hooks/useLogin'
@@ -10,50 +11,26 @@ import useLogin from './hooks/useLogin'
 WebBrowser.maybeCompleteAuthSession()
 
 export default function LoginScreen(): JSX.Element {
-  const { login, disabled } = useLogin()
+  const { login } = useLogin()
   const { t } = useTranslation()
+  const clickHandler = () => {
+    login()
+  }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login or register with a Google account</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.title}>Login or register with a Google account</Text>
       <View
-        style={styles.separator}
+        style={Styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-
-      <Button
-        disabled={disabled}
-        accessibilityLabel="Login button"
-        title={t('login')}
-        onPress={() => {
-          login()
-        }}
-      />
-
-      <View style={styles.gap} />
+      <TouchableOpacity onPress={clickHandler} style={Styles.normalButton}>
+        <Text style={Styles.buttonLabel}>{t('LOGIN')}</Text>
+      </TouchableOpacity>
+      <View style={Styles.gap} />
 
       <RegistrationModal />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-  gap: {
-    height: 10,
-  },
-})

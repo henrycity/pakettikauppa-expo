@@ -13,7 +13,6 @@ export default {
     red: '#ff2e33',
     yellow: '#ffc200',
     white: '#fff',
-    tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
   },
