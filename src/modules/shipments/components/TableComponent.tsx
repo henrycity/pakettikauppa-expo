@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, FlatList, ScrollView } from 'react-native'
+import { StyleSheet, FlatList, Platform } from 'react-native'
+import { Hoverable, Pressable, } from 'react-native-web-hover'
 
-import { Text, View } from '../../../common/Themed'
+import { Text, View, useThemedColors } from '../../../common/Themed'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
 import { mutate } from 'swr'
 import { useTranslation } from 'react-i18next'
@@ -23,13 +24,15 @@ function Header({ fields }: any) {
   )
 }
 
-function Row({ headers, shipment }: any) {
+function Row({ headers, shipment, hovered }: any) {
+  const themed = useThemedColors()
+  const backgroundColor = hovered ? '#d4d4d4' : themed.background
   return (
-    <View style={styles.row}>
+    <View style={[styles.row, {backgroundColor}]}>
       {headers.map((field: string) => (
         <View
           key={field + shipment.id}
-          style={[styles.cell, { flex: cellData[field].flex }]}
+          style={[styles.cell, { flex: cellData[field].flex, backgroundColor }]}
         >
           <Text numberOfLines={1} style={styles.text}>
             {shipment[field]}
@@ -56,7 +59,15 @@ export default function TableComponent({
       contentContainerStyle={styles.table}
       onLayout={(event) => console.log(event.nativeEvent.layout)}
       data={data}
-      renderItem={({ item }) => <Row headers={headers} shipment={item} />}
+      renderItem={({ item }) => (
+        <>
+          <Hoverable>
+            {({ hovered }) => (
+              <Row headers={headers} shipment={item} hovered={hovered} />
+            )}
+          </Hoverable>
+        </>
+      )}
       ListHeaderComponent={<Header fields={headers} />}
       ItemSeparatorComponent={() => (
         <View
@@ -81,10 +92,10 @@ export default function TableComponent({
 const styles = StyleSheet.create({
   table: {
     flex: 1,
-    marginHorizontal: 15,
+    marginHorizontal: 25,
   },
   row: {
-    paddingVertical: 10,
+    paddingVertical: 15,
     flex: 1,
     flexDirection: 'row',
   },
@@ -106,5 +117,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
+    height: 16,
   },
 })
