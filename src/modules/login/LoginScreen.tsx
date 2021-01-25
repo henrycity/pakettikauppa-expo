@@ -25,7 +25,11 @@ export default function LoginScreen(): JSX.Element {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <TouchableOpacity onPress={clickHandler} style={Styles.normalButton}>
+      <TouchableOpacity
+        onPress={clickHandler}
+        style={Styles.normalButton}
+        accessibilityLabel="Login button"
+      >
         <Text style={Styles.buttonLabel}>{t('LOGIN')}</Text>
       </TouchableOpacity>
       <View style={Styles.gap} />
