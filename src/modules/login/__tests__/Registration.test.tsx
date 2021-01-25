@@ -51,7 +51,7 @@ describe('Testing registration modal', () => {
   it('Should return Enter valid Email when giving a false email', async () => {
     const { getByText, getByTestId } = render(component)
 
-    const button = getByText('Register')
+    const button = getByText('REGISTER')
     fireEvent.press(button)
 
     const email = getByTestId('Email')
@@ -59,7 +59,7 @@ describe('Testing registration modal', () => {
     fireEvent.changeText(email, 'test')
     fireEvent.changeText(vat, '123456qwerty')
 
-    const submit = getByText('Submit')
+    const submit = getByText('SUBMIT')
     fireEvent.press(submit)
 
     const modal = getByTestId('modalTest')
@@ -72,13 +72,13 @@ describe('Testing registration modal', () => {
   it('modal should be visible when VAT ID missing', async () => {
     const { getByText, getByTestId } = render(component)
 
-    const button = getByText('Register')
+    const button = getByText('REGISTER')
     fireEvent.press(button)
 
     const email = getByTestId('Email')
     fireEvent.changeText(email, 'testtest@yahoo.fi')
 
-    const submit = getByText('Submit')
+    const submit = getByText('SUBMIT')
     fireEvent.press(submit)
 
     const modal = getByTestId('modalTest')

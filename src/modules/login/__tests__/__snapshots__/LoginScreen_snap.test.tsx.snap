@@ -48,6 +48,7 @@ exports[`LoginScreen renders correctly 1`] = `
     }
   />
   <View
+    accessibilityLabel="Login button"
     accessible={true}
     focusable={true}
     onClick={[Function]}
@@ -88,22 +89,8 @@ exports[`LoginScreen renders correctly 1`] = `
         ]
       }
     >
-      <Text
-        disabled={false}
-        style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "margin": 8,
-              "textAlign": "center",
-            },
-          ]
-        }
-      >
-        Login
-      </Text>
-    </View>
+      LOGIN
+    </Text>
   </View>
   <View
     style={
@@ -219,7 +206,7 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-        Please enter your details:
+        Please enter your details: 
       </Text>
       <View
         style={
@@ -256,7 +243,7 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-         Email:
+         Email: 
       </Text>
       <TextInput
         allowFontScaling={true}
@@ -273,11 +260,7 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
-            Object {
-              "borderBottomWidth": 1,
-              "color": "#233385",
-              "width": 200,
-            },
+            undefined,
           ]
         }
         testID="Email"
@@ -308,7 +291,7 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-         VAT ID:
+         VAT ID: 
       </Text>
       <TextInput
         allowFontScaling={true}
@@ -325,11 +308,7 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
-            Object {
-              "borderBottomWidth": 1,
-              "color": "#233385",
-              "width": 200,
-            },
+            undefined,
           ]
         }
         testID="VAT"
