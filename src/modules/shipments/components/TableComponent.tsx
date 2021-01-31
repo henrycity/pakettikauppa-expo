@@ -68,13 +68,11 @@ export default function TableComponent({
       contentContainerStyle={styles.table}
       data={data}
       renderItem={({ item }) => (
-        <>
-          <Hoverable>
-            {({ hovered }) => (
-              <Row headers={headers} shipment={item} hovered={hovered} />
-            )}
-          </Hoverable>
-        </>
+        <Hoverable>
+          {({ hovered }) => (
+            <Row headers={headers} shipment={item} hovered={hovered} />
+          )}
+        </Hoverable>
       )}
       ListHeaderComponent={<Header fields={headers} />}
       ItemSeparatorComponent={() => (

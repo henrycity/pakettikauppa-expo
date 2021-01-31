@@ -35,13 +35,13 @@ function ShipmentListItem({ shipment }: ShipmentListItemProps) {
   return (
     <View style={styles.shipmentContainer}>
       <View style={styles.itemLeft}>
-        <Text style={styles.name}>{shipment.receiverName}</Text>
-        <Text style={styles.other}>{shipment.status}</Text>
-        <Text style={styles.other}>{shipment.postCode}</Text>
-        <Text style={styles.other}>{shipment.deliveryCompany}</Text>
+        <Text style={styles.recipientName}>{shipment.receiverName}</Text>
+        <Text style={styles.otherThanName}>{shipment.status}</Text>
+        <Text style={styles.otherThanName}>{shipment.postCode}</Text>
+        <Text style={styles.otherThanName}>{shipment.deliveryCompany}</Text>
       </View>
       <View style={styles.itemRight}>
-        <Text style={styles.other}>{shipment.createdOn}</Text>
+        <Text style={styles.otherThanName}>{shipment.createdOn}</Text>
       </View>
     </View>
   )
@@ -96,13 +96,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     margin: 30,
   },
-  name: {
+  recipientName: {
     fontFamily: 'Rubik',
     fontWeight: 'bold',
     fontSize: 17,
     color: '#223285',
   },
-  other: {
+  otherThanName: {
     fontFamily: 'Rubik',
     fontSize: 10,
     color: '#223285',

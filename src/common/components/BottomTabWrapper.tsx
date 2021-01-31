@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 
+import { navStyles } from '../../navigation/headerOptions'
 import { View } from '../Themed'
 import useDeviceType from '../hooks/useDeviceType'
 import BottomTabBar, { tabBarStyles } from './BottomTabBar'
-import { navStyles } from '../../navigation/headerOptions'
 
 interface BottomTabWrapperProps {
   children: JSX.Element | JSX.Element[]
