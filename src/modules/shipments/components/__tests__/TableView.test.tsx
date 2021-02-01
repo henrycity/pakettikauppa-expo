@@ -2,10 +2,8 @@ import { render, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
 import { initializeLocalization } from '../../../../localization'
-import { mockShipmentData } from '../__mocks__/mockShipmentData'
 import TableView from '../TableView'
-
-console.log(mockShipmentData)
+import { mockShipmentData } from '../__mocks__/mockShipmentData'
 
 jest.mock('swr', () => {
   return () => ({
@@ -45,10 +43,9 @@ describe('Testing table component', () => {
   })
 
   it('Table should have data', async () => {
-    const { getByTestId, getByText } = render(component)
+    const { getAllByText } = render(component)
 
-    //console.log(getByTestId('Table Component').props.data)
-    const element = getByText('FI')
+    const element = getAllByText('FI')
     expect(element).toBeTruthy()
   })
 })

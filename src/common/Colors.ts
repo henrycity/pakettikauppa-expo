@@ -5,7 +5,7 @@ export default {
   light: {
     text: '#233385',
     background: '#fff',
-    pink:'#f7f1ee',
+    pink: '#f7f1ee',
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
@@ -13,7 +13,7 @@ export default {
   dark: {
     text: '#fff',
     background: '#000',
-    pink:'#f7f1ee',
+    pink: '#f7f1ee',
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,

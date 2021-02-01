@@ -1,4 +1,4 @@
-import { Shipment } from "../../../../types";
+import { Shipment } from '../../../../types'
 
 export const mockShipmentData: Shipment[] = [
   {
@@ -18,7 +18,7 @@ export const mockShipmentData: Shipment[] = [
   },
   {
     id: 2,
-    createdOn: "",
+    createdOn: '',
     receiverName: 'Joose',
     receiverEmail: 'joose@posti.fi',
     postCode: '01530',
@@ -33,7 +33,7 @@ export const mockShipmentData: Shipment[] = [
   },
   {
     id: 3,
-    createdOn: "",
+    createdOn: '',
     receiverName: 'Testeri',
     receiverEmail: 'testeri@posti.fi',
     postCode: '02700',

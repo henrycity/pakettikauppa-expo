@@ -9,7 +9,6 @@ import TableComponent from './TableComponent'
 
 export default function TableView(): JSX.Element {
   const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
-  console.log(data)
   const isLoading = !error && !data
   const refreshing = (data && isValidating) || false
 

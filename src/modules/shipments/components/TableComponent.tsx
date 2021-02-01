@@ -75,12 +75,10 @@ export default function TableComponent({
         </Hoverable>
       )}
       ListHeaderComponent={<Header fields={headers} />}
-      ItemSeparatorComponent={() => (
-        <View style={styles.separator} />
-      )}
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
       stickyHeaderIndices={[0]}
       initialNumToRender={10}
-      removeClippedSubviews={true}
+      removeClippedSubviews
       keyExtractor={(shipment) => String(shipment.id)}
       onRefresh={() => mutate('/shipments')}
       refreshing={refreshing}
