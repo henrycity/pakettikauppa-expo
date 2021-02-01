@@ -37,7 +37,7 @@ exports[`LoginScreen renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#000",
+            "color": "#233385",
           },
           Object {
             "fontSize": 20,
@@ -66,7 +66,7 @@ exports[`LoginScreen renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#000",
+            "color": "#233385",
           },
           undefined,
         ]
