@@ -2,13 +2,7 @@ import React, { useState } from 'react'
 import { Modal, TouchableOpacity } from 'react-native'
 
 import Styles from '../../../common/Styles'
-import {
-  useThemeColor,
-  useThemedColors,
-  Text,
-  View,
-  TextInput,
-} from '../../../common/Themed'
+import { useThemedColors, Text, View, TextInput } from '../../../common/Themed'
 import postRegistration from '../postRegistration'
 
 const emailIsValid = (email: string) =>

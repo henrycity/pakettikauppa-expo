@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native'
 
-import Colors from './Colors'
-
 // Common stylesheet that can be used everywhere
 
 export default StyleSheet.create({
