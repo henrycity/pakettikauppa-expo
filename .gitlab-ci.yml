@@ -49,6 +49,7 @@ e2e-tests:
     HTTPS: "true"
     EXPO_LOCAL_ADDRESS: https://backend:3000
     EXPO_SERVER: https://backend:3000
+    EXPO_FIREBASE_CLIENT_ID: 516972920334-28iectrmi5aksd36clssbfirlu2hmtp8.apps.googleusercontent.com
     CYPRESS_BASE_URL: https://expo:19006
     CYPRESS_BACKEND_URL: https://backend:3000
   services:
