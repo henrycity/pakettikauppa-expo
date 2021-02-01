@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { StyleSheet, View } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 
+import Styles from '../../common/Styles'
 import { useThemedColors } from '../../common/Themed'
 import { useSelectedLanguage, languages } from '../../localization'
 
@@ -27,7 +28,12 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
     <View
       style={[styles.container, { backgroundColor: themed.drawerBackground }]}
     >
-      <Feather name="globe" size={24} color={themed.blue} style={styles.icon} />
+      <Feather
+        name="globe"
+        size={24}
+        color={themed.inactiveIcon}
+        style={Styles.icon}
+      />
       <View style={styles.languagePicker}>
         {selectedLanguage ? (
           <RNPickerSelect
@@ -67,9 +73,6 @@ const styles = StyleSheet.create({
   languagePicker: {
     marginLeft: 23,
     width: '30%',
-  },
-  icon: {
-    padding: 7,
   },
 })
 

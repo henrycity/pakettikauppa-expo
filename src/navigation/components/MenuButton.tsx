@@ -1,30 +1,24 @@
 import { Feather } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { ThemeProvider, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 
-import { useThemeColor } from '../../common/Themed'
+import Styles from '../../common/Styles'
+import { useThemedColors } from '../../common/Themed'
 import { DrawerMenuNavigationProp } from '../../types'
 import { useDrawerType } from '../hooks/useDrawer'
 
 export default function MenuButton(): JSX.Element | null {
   const navigation = useNavigation<DrawerMenuNavigationProp>()
   const drawerType = useDrawerType()
-  const backgroundColor = useThemeColor({}, 'background')
-  const iconColor = useThemeColor({}, 'blue')
+  const theme = useThemedColors()
 
   return drawerType !== 'permanent' ? (
     <TouchableOpacity
-      style={[styles.menuButton, { backgroundColor }]}
+      style={[Styles.menuButton, { backgroundColor: theme.background }]}
       onPress={() => navigation.openDrawer()}
     >
-      <Feather name="menu" size={24} color={iconColor} />
+      <Feather name="menu" size={30} color={theme.inactiveIcon} />
     </TouchableOpacity>
   ) : null
 }
-
-const styles = StyleSheet.create({
-  menuButton: {
-    paddingLeft: 20,
-  },
-})

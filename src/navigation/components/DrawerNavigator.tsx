@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import React from 'react'
-import { StyleSheet } from 'react-native'
 
+import { useThemeColor } from '../../common/Themed'
 import useUser from '../../modules/login/hooks/useUser'
 import { DrawerParamList } from '../../types'
 import {
@@ -17,12 +17,14 @@ export default function DrawerNavigator(): JSX.Element {
   const drawerType = useDrawerType()
   const { isAuthorized } = useUser()
 
+  const backgroundColor = useThemeColor({}, 'drawerBackground')
+
   return (
     <Drawer.Navigator
       screenOptions={{ headerShown: false }}
       drawerContent={(props) => <DrawerMenu {...props} />}
       drawerType={drawerType}
-      drawerStyle={styles.drawer}
+      drawerStyle={[{ width: 250 }, { backgroundColor }]}
     >
       {ScreenNavigators.map((screen) => (
         <Drawer.Screen
@@ -44,10 +46,3 @@ export default function DrawerNavigator(): JSX.Element {
     </Drawer.Navigator>
   )
 }
-
-const styles = StyleSheet.create({
-  drawer: {
-    width: 250,
-    backgroundColor: '#f7f1ee',
-  },
-})

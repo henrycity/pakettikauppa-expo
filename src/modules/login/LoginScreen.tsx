@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { TouchableOpacity } from 'react-native'
 
 import Styles from '../../common/Styles'
-import { View, Text } from '../../common/Themed'
+import { useThemedColors, View, Text } from '../../common/Themed'
 import RegistrationModal from './components/RegistrationModal'
 import useLogin from './hooks/useLogin'
 
@@ -17,6 +17,7 @@ export default function LoginScreen(): JSX.Element {
     login()
   }
 
+  const theme = useThemedColors()
   return (
     <View style={Styles.container}>
       <Text style={Styles.title}>Login or register with a Google account</Text>
@@ -27,10 +28,12 @@ export default function LoginScreen(): JSX.Element {
       />
       <TouchableOpacity
         onPress={clickHandler}
-        style={Styles.normalButton}
+        style={[Styles.normalButton, { backgroundColor: theme.buttonColor }]}
         accessibilityLabel="Login button"
       >
-        <Text style={Styles.buttonLabel}>{t('LOGIN')}</Text>
+        <Text style={[Styles.buttonLabel, { color: theme.buttonTextColor }]}>
+          {t('LOGIN')}
+        </Text>
       </TouchableOpacity>
       <View style={Styles.gap} />
 
