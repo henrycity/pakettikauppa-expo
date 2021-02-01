@@ -35,7 +35,7 @@ interface RowProps {
 
 function Row({ headers, shipment, hovered }: RowProps) {
   const themed = useThemedColors()
-  const backgroundColor = hovered ? '#d4d4d4' : themed.background
+  const backgroundColor = hovered ? '#d4d4d4' : themed.pink
   return (
     <View style={[styles.row, { backgroundColor }]}>
       {headers.map((field) => (
@@ -78,9 +78,7 @@ export default function TableComponent({
       )}
       ListHeaderComponent={<Header fields={headers} />}
       ItemSeparatorComponent={() => (
-        <View style={styles.separatorContainer}>
-          <View style={styles.separator} />
-        </View>
+        <View style={styles.separator} />
       )}
       stickyHeaderIndices={[0]}
       initialNumToRender={10}
@@ -88,6 +86,8 @@ export default function TableComponent({
       keyExtractor={(shipment) => String(shipment.id)}
       onRefresh={() => mutate('/shipments')}
       refreshing={refreshing}
+      ListEmptyComponent={<Text>Nothing in the list</Text>}
+      testID="Table Component"
     />
   )
 }
@@ -101,31 +101,23 @@ const styles = StyleSheet.create({
     overflow: 'scroll',
   },
   row: {
-    paddingVertical: 15,
+    paddingVertical: '0.35rem',
     flex: 1,
     flexDirection: 'row',
   },
   header: {
-    borderBottomWidth: 2,
-    borderBottomColor: 'gray',
     paddingVertical: 15,
   },
   cell: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     paddingRight: 6,
   },
   separator: {
-    height: 1,
+    height: '0.2rem',
     width: '93%',
-    backgroundColor: 'gray',
-  },
-  separatorContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'white',
   },
   text: {
     fontSize: 12,

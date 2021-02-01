@@ -54,16 +54,16 @@ export const cellData: {
 }
 
 export const shipmentHeaders: (keyof Shipment)[] = [
-  'createdOn',
+  'invoiceNumber',
   'receiverName',
-  'receiverEmail',
   'postCode',
   'postOffice',
   'countryCode',
-  'price',
-  'deliveryCompany',
-  'status',
+  'receiverEmail',
   'reference',
+  'price',
+  'status',
   'latestEvent',
-  'invoiceNumber',
+  'deliveryCompany',
+  'createdOn',
 ]
