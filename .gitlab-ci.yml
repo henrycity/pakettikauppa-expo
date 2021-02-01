@@ -50,6 +50,8 @@ e2e-tests:
   stage: test
   needs: ["build-image"]
   image: cypress/base:14.15.0
+  variables:
+    EXPO_LOCAL_IP: https://backend:3000
   services:
     - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:https
       alias: backend
