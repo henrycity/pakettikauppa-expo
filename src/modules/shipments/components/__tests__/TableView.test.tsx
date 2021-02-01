@@ -2,12 +2,12 @@ import { render, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
 import { initializeLocalization } from '../../../../localization'
-import ShipmentsScreen from '../../ShipmentsScreen'
-import mockShipmentData from '../__mocks__/mockShipmentData'
+import { mockShipmentData } from '../__mocks__/mockShipmentData'
+import TableView from '../TableView'
 
+console.log(mockShipmentData)
 
-
-jest.mock('swr/esm/use-swr', () => {
+jest.mock('swr', () => {
   return () => ({
     data: mockShipmentData,
     error: undefined,
@@ -20,7 +20,7 @@ describe('Testing table component', () => {
   })
   afterEach(cleanup)
 
-  const component = <ShipmentsScreen/>
+  const component = <TableView />
 
   it('Should display all headers', async () => {
     const { getByText } = render(component)
@@ -38,12 +38,10 @@ describe('Testing table component', () => {
     expect(getByText('Delivery company')).toBeTruthy()
     expect(getByText('Created on')).toBeTruthy()
   })
-/*
   it('Table should exist', async () => {
     const { getByTestId } = render(component)
 
     expect(getByTestId('Table Component')).toBeTruthy()
-
   })
 
   it('Table should have data', async () => {
@@ -52,7 +50,5 @@ describe('Testing table component', () => {
     //console.log(getByTestId('Table Component').props.data)
     const element = getByText('FI')
     expect(element).toBeTruthy()
-
   })
-*/
 })

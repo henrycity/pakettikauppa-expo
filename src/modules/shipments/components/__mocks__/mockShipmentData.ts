@@ -1,9 +1,9 @@
-import { Shipment } from '../../../types'
+import { Shipment } from "../../../../types";
 
 export const mockShipmentData: Shipment[] = [
   {
     id: 1,
-    createdOn: new Date(2021, 0, 4),
+    createdOn: '1/1/2021',
     receiverName: 'Henry',
     receiverEmail: 'henry@posti.fi',
     postCode: '02150',
@@ -18,7 +18,7 @@ export const mockShipmentData: Shipment[] = [
   },
   {
     id: 2,
-    createdOn: new Date(2020, 11, 25),
+    createdOn: "",
     receiverName: 'Joose',
     receiverEmail: 'joose@posti.fi',
     postCode: '01530',
@@ -33,7 +33,7 @@ export const mockShipmentData: Shipment[] = [
   },
   {
     id: 3,
-    createdOn: new Date(2020, 11, 25),
+    createdOn: "",
     receiverName: 'Testeri',
     receiverEmail: 'testeri@posti.fi',
     postCode: '02700',
