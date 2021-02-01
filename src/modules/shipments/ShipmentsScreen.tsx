@@ -3,10 +3,10 @@ import * as React from 'react'
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
 import ListView from './components/ListView'
 import TableView from './components/TableView'
-import handleResize from './hooks/handleResize'
+import useBreakpoint from './hooks/useBreakpoint'
 
 export default function ShipmentsScreen(): JSX.Element {
-  const screenIsSmallerThan = handleResize(700)
+  const screenIsSmallerThan = useBreakpoint(700)
 
   return (
     <BottomTabWrapper>

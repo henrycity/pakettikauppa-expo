@@ -7,11 +7,15 @@ exports[`LoginScreen renders correctly 1`] = `
       Object {
         "backgroundColor": "#fff",
       },
-      Object {
-        "alignItems": "stretch",
-        "flex": 1,
-        "justifyContent": "space-between",
-      },
+      Array [
+        Object {
+          "flex": 1,
+          "justifyContent": "space-between",
+        },
+        Object {
+          "height": 1254,
+        },
+      ],
     ]
   }
 >

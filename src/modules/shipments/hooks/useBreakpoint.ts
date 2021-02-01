@@ -6,19 +6,19 @@ import { Dimensions, Platform } from 'react-native'
  *
  * Value updates on resize (web only)
  */
-export default function handleResize(breakpoint: number): boolean {
+export default function useBreakpoint(breakpoint: number): boolean {
   const getWidth = () => Dimensions.get('window').width
   const [isSmaller, setIsSmaller] = useState(getWidth() < breakpoint)
 
   useEffect(() => {
     if (Platform.OS === 'web') {
-      const listener = () => {
+      const handleResize = () => {
         setIsSmaller(getWidth() < breakpoint)
       }
 
-      window.addEventListener('resize', listener)
+      window.addEventListener('resize', handleResize)
 
-      return () => window.removeEventListener('resize', listener)
+      return () => window.removeEventListener('resize', handleResize)
     }
   }, [])
 

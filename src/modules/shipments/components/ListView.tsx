@@ -36,12 +36,12 @@ function ShipmentListItem({ shipment }: ShipmentListItemProps) {
     <View style={styles.shipmentContainer}>
       <View style={styles.itemLeft}>
         <Text style={styles.recipientName}>{shipment.receiverName}</Text>
-        <Text style={styles.otherThanName}>{shipment.status}</Text>
-        <Text style={styles.otherThanName}>{shipment.postCode}</Text>
-        <Text style={styles.otherThanName}>{shipment.deliveryCompany}</Text>
+        <Text style={styles.defaultField}>{shipment.status}</Text>
+        <Text style={styles.defaultField}>{shipment.postCode}</Text>
+        <Text style={styles.defaultField}>{shipment.deliveryCompany}</Text>
       </View>
       <View style={styles.itemRight}>
-        <Text style={styles.otherThanName}>{shipment.createdOn}</Text>
+        <Text style={styles.defaultField}>{shipment.createdOn}</Text>
       </View>
     </View>
   )
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#223285',
   },
-  otherThanName: {
+  defaultField: {
     fontFamily: 'Rubik',
     fontSize: 10,
     color: '#223285',
