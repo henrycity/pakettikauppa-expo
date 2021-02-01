@@ -1,6 +1,3 @@
-variables:
-  GIT_CLEAN_FLAGS: -ffdx -e .yarn -e .jest -e node_modules/
-
 image: node:14.15.0-alpine
 
 stages:
@@ -10,6 +7,7 @@ stages:
   - deploy
 
 variables:
+  GIT_CLEAN_FLAGS: -ffdx -e .yarn -e .jest -e node_modules/
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
 
 before_script:
@@ -47,11 +45,13 @@ e2e-tests:
   image: cypress/base:14.15.0
   variables:
     HTTPS: "true"
-    EXPO_LOCAL_ADDRESS: https://backend:3000
-    EXPO_SERVER: https://backend:3000
-    EXPO_FIREBASE_CLIENT_ID: 516972920334-28iectrmi5aksd36clssbfirlu2hmtp8.apps.googleusercontent.com
-    CYPRESS_BASE_URL: https://expo:19006
-    CYPRESS_BACKEND_URL: https://backend:3000
+    FRONTEND_SERVICE_URL: https://expo:19006
+    BACKEND_SERVICE_URL: https://backend:3000
+    EXPO_FIREBASE_CLIENT_ID: $EXPO_FIREBASE_CLIENT_ID
+    EXPO_LOCAL_ADDRESS: $BACKEND_SERVICE_URL
+    EXPO_SERVER: $BACKEND_SERVICE_URL
+    CYPRESS_BASE_URL: $FRONTEND_SERVICE_URL
+    CYPRESS_BACKEND_URL: $BACKEND_SERVICE_URL
   services:
     - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:https
       alias: backend
@@ -60,7 +60,6 @@ e2e-tests:
   script:
     - $(npm bin)/cypress run
   artifacts:
-    when: always
     paths:
       - cypress/videos
       - cypress/screenshots
