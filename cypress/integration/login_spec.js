@@ -45,11 +45,11 @@ describe('The register button', () => {
   })
 })
 
-describe('Programmatic login', () => {
-  it('should set cookie', () => {
-    cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, {
-      idToken: 'testToken',
-    })
-    cy.getCookie('jwt').should('exist')
-  })
-})
+// describe('Programmatic login', () => {
+//   it('should set cookie', () => {
+//     cy.request('POST', `${Cypress.env('BACKEND_URL')}/login`, {
+//       idToken: 'testToken',
+//     })
+//     cy.getCookie('jwt').should('exist')
+//   })
+// })
