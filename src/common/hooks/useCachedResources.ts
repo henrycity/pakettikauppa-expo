@@ -18,9 +18,12 @@ export default function useCachedResources(): boolean {
         await Font.loadAsync({
           ...Feather.font,
           ...MaterialIcons.font,
-          'space-mono': require('../../assets/fonts/SpaceMono-Regular.ttf'),
-          rubik: require('../../assets/fonts/Rubik-Regular.ttf'),
-          muli: require('../../assets/fonts/Muli.ttf'),
+          Rubik: require('../../assets/fonts/Rubik-Regular.ttf'),
+          'Rubik-Bold': require('../../assets/fonts/Rubik-Bold.ttf'),
+          'Rubik-Medium': require('../../assets/fonts/Rubik-Medium.ttf'),
+          Muli: require('../../assets/fonts/Muli.ttf'),
+          'Muli-Bold': require('../../assets/fonts/Muli-Bold.ttf'),
+          'Muli-SemiBold': require('../../assets/fonts/Muli-SemiBold.ttf'),
         })
 
         initializeLocalization()

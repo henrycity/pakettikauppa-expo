@@ -9,7 +9,7 @@ const headerOptions: StackHeaderOptions = {
   headerTitleStyle: {
     fontFamily: 'Rubik',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 25,
   },
   headerStyle: {
     shadowColor: 'transparent',
