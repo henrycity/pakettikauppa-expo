@@ -6,6 +6,14 @@ import MenuButton from './components/MenuButton'
 
 const headerOptions: StackHeaderOptions = {
   headerLeft: () => <MenuButton />,
+  headerTitleStyle: {
+    fontFamily: 'Rubik',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  headerStyle: {
+    shadowColor: 'transparent',
+  },
   headerTintColor: Colors.light.text,
 }
 

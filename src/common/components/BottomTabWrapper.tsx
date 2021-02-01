@@ -12,6 +12,7 @@ interface BottomTabWrapperProps {
 /*
  * Wrapper component that attaches a bottom tab bar to a screen
  */
+
 export default function BottomTabWrapper({
   children,
 }: BottomTabWrapperProps): JSX.Element {

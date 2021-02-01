@@ -29,7 +29,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 100,
-    backgroundColor: Colors.light.red,
   },
   largeButton: {
     width: 200,
@@ -38,10 +37,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 100,
-    backgroundColor: Colors.light.red,
   },
   buttonLabel: {
-    color: Colors.light.white,
     fontSize: 14,
     fontWeight: 'bold',
     fontFamily: 'Rubik',
@@ -49,13 +46,29 @@ export default StyleSheet.create({
   input: {
     borderBottomWidth: 1.0,
     width: 200,
-    color: '#233385',
-    //placeholderTextColor: '#8cb1b7',
   },
   error: {
     color: 'red',
   },
   success: {
     color: 'green',
+  },
+  menuButton: {
+    paddingLeft: 20,
+  },
+  icon: {
+    padding: 7,
+  },
+  drawer: {
+    width: 250,
+    backgroundColor: '#f7f1ee',
+  },
+  link: {
+    marginTop: 15,
+    paddingVertical: 15,
+  },
+  linkText: {
+    fontSize: 14,
+    color: '#2e78b7',
   },
 })

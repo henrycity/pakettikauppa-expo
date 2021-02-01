@@ -6,8 +6,8 @@ import {
 } from '@react-navigation/drawer'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet } from 'react-native'
 
+import Styles from '../../common/Styles'
 import { useThemedColors, View } from '../../common/Themed'
 import useActiveScreen from '../../common/hooks/useActiveScreen'
 import useDeviceType from '../../common/hooks/useDeviceType'
@@ -40,9 +40,9 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
             label={t('profile')}
             focused={activeScreen === ScreenNames.Profile}
             onPress={() => handleLinkPress(ScreenNames.Profile)}
-            activeTintColor={themed.white}
-            activeBackgroundColor={themed.gray}
-            inactiveTintColor={themed.text}
+            activeTintColor={themed.activeIcon}
+            activeBackgroundColor={themed.activeBackground}
+            inactiveTintColor={themed.inactiveIcon}
             icon={({ color }) => (
               <Feather name="user" size={24} color={color} />
             )}
@@ -51,9 +51,9 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
           {isAuthorized(ScreenNames.Shipments) ? (
             <DrawerItem
               label={t('shipments')}
-              activeTintColor={themed.white}
-              activeBackgroundColor={themed.gray}
-              inactiveTintColor={themed.text}
+              activeTintColor={themed.activeIcon}
+              activeBackgroundColor={themed.activeBackground}
+              inactiveTintColor={themed.inactiveIcon}
               focused={activeScreen === ScreenNames.Shipments}
               onPress={() => handleLinkPress(ScreenNames.Shipments)}
               icon={({ color }) => (
@@ -64,11 +64,11 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
           {isDesktop ? (
             <View
-              style={[styles.container, { backgroundColor: themed.background }]}
+              style={[Styles.container, { backgroundColor: themed.background }]}
             >
               <View
                 style={[
-                  styles.container,
+                  Styles.container,
                   { backgroundColor: themed.drawerBackground },
                 ]}
                 lightColor={themed.tabIconDefault}
@@ -82,9 +82,9 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
       {isAuthorized(ScreenNames.Reports) ? (
         <DrawerItem
           label={t('reports')}
-          activeTintColor={themed.white}
-          activeBackgroundColor={themed.gray}
-          inactiveTintColor={themed.text}
+          activeTintColor={themed.activeIcon}
+          activeBackgroundColor={themed.activeBackground}
+          inactiveTintColor={themed.inactiveIcon}
           focused={activeScreen === ScreenNames.Reports}
           onPress={() => handleLinkPress(ScreenNames.Reports)}
           icon={({ color }) => (
@@ -96,9 +96,9 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
       {isAuthorized(ScreenNames.Statistics) ? (
         <DrawerItem
           label={t('statistics')}
-          activeTintColor={themed.white}
-          activeBackgroundColor={themed.gray}
-          inactiveTintColor={themed.text}
+          activeTintColor={themed.activeIcon}
+          activeBackgroundColor={themed.activeBackground}
+          inactiveTintColor={themed.inactiveIcon}
           focused={activeScreen === ScreenNames.Statistics}
           onPress={() => handleLinkPress(ScreenNames.Statistics)}
           icon={({ color }) => (
@@ -111,27 +111,14 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
       <DrawerItem
         label={t('logout')}
-        activeTintColor={themed.white}
-        activeBackgroundColor={themed.gray}
-        inactiveTintColor={themed.text}
+        activeTintColor={themed.activeIcon}
+        activeBackgroundColor={themed.activeBackground}
+        inactiveTintColor={themed.inactiveIcon}
         onPress={() => logout()}
         icon={({ color }) => <Feather name="log-out" size={24} color={color} />}
       />
     </DrawerContentScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  separator: {
-    marginVertical: 10,
-    height: 1,
-    width: '80%',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
 
 export default DrawerMenu

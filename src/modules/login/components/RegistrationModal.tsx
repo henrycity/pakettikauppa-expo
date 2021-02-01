@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import { Modal, TouchableOpacity } from 'react-native'
 
 import Styles from '../../../common/Styles'
-import { Text, View, TextInput } from '../../../common/Themed'
+import {
+  useThemeColor,
+  useThemedColors,
+  Text,
+  View,
+  TextInput,
+} from '../../../common/Themed'
 import postRegistration from '../postRegistration'
 
 const emailIsValid = (email: string) =>
@@ -14,6 +20,8 @@ export default function RegistrationModal(): JSX.Element {
   const [vat_id, setVat_id] = useState('')
   const [errors, setErrors] = useState<Error[]>([])
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
+
+  const themed = useThemedColors()
 
   const validateInput = () => {
     const newErrors: Error[] = []
@@ -61,9 +69,11 @@ export default function RegistrationModal(): JSX.Element {
     <>
       <TouchableOpacity
         onPress={onRegisterButtonPress}
-        style={Styles.normalButton}
+        style={[Styles.normalButton, { backgroundColor: themed.buttonColor }]}
       >
-        <Text style={Styles.buttonLabel}>REGISTER</Text>
+        <Text style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}>
+          REGISTER
+        </Text>
       </TouchableOpacity>
 
       <View style={Styles.gap} />
@@ -96,8 +106,10 @@ export default function RegistrationModal(): JSX.Element {
             testID="Email"
             placeholder="Email"
             autoCapitalize="none"
+            placeholderTextColor={themed.placeholder}
             onChangeText={(email) => setEmail(email)}
             defaultValue={email}
+            style={[Styles.input, { color: themed.inputColor }]}
           />
           <View style={Styles.gap} />
 
@@ -106,6 +118,7 @@ export default function RegistrationModal(): JSX.Element {
             testID="VAT"
             placeholder="VAT ID"
             autoCapitalize="none"
+            placeholderTextColor={themed.placeholder}
             onChangeText={(vat_id) => setVat_id(vat_id)}
             defaultValue={vat_id}
           />
@@ -113,17 +126,31 @@ export default function RegistrationModal(): JSX.Element {
           <View style={Styles.gap} />
           <TouchableOpacity
             onPress={() => handlePress()}
-            style={Styles.normalButton}
+            style={[
+              Styles.normalButton,
+              { backgroundColor: themed.buttonColor },
+            ]}
           >
-            <Text style={Styles.buttonLabel}>SUBMIT</Text>
+            <Text
+              style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
+            >
+              SUBMIT
+            </Text>
           </TouchableOpacity>
           <View style={Styles.gap} />
 
           <TouchableOpacity
             onPress={() => setModalIsVisible(false)}
-            style={Styles.normalButton}
+            style={[
+              Styles.normalButton,
+              { backgroundColor: themed.buttonColor },
+            ]}
           >
-            <Text style={Styles.buttonLabel}>CLOSE</Text>
+            <Text
+              style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
+            >
+              CLOSE
+            </Text>
           </TouchableOpacity>
         </View>
       </Modal>
