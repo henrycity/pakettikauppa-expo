@@ -36,7 +36,7 @@ export default function Navigation({
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 250, height: 50 }}
+      style={{ width: 150, height: 50 }}
       source={require('../assets/images/logo-white.png')}
     />
   )
