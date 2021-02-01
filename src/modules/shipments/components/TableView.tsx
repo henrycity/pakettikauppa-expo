@@ -1,11 +1,11 @@
 import React from 'react'
-import useSWR from 'swr'
 import { StyleSheet } from 'react-native'
+import useSWR from 'swr'
 
+import { View } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import { Shipment } from '../../../types'
 import TableComponent from './TableComponent'
-import { View } from '../../../common/Themed'
 
 export default function TableView(): JSX.Element {
   const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
@@ -16,7 +16,7 @@ export default function TableView(): JSX.Element {
     <View style={styles.container}>
       {!isLoading ? (
         <>
-          <TableComponent refreshing={refreshing} data={data ? data : []} />
+          <TableComponent refreshing={refreshing} data={data ?? []} />
         </>
       ) : (
         <Loading />
