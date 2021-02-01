@@ -59,6 +59,7 @@ e2e-tests:
   script:
     - $(npm bin)/cypress run
   artifacts:
+    when: on_failure
     paths:
       - cypress/videos
       - cypress/screenshots
