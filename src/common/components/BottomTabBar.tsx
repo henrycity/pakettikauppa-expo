@@ -52,9 +52,7 @@ interface TabBarProps {
 export function TabBar({ children }: TabBarProps): JSX.Element {
   const backgroundColor = useThemeColor({}, 'background')
 
-  return (
-    <View style={[tabBarStyles.tabBar, { backgroundColor }]}>{children}</View>
-  )
+  return <View style={[styles.tabBar, { backgroundColor }]}>{children}</View>
 }
 
 interface TabBarItemProps {
@@ -77,11 +75,11 @@ export function TabBarItem({
   }
 
   return (
-    <TouchableOpacity style={{ height: 40 }} onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Text
         accessible
         accessibilityLabel={`Tab bar link to ${text}`}
-        style={[tabBarStyles.itemContainer, textStyle]}
+        style={[styles.itemContainer, textStyle]}
       >
         {text}
       </Text>
@@ -89,13 +87,12 @@ export function TabBarItem({
   )
 }
 
-export const tabBarStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   tabBar: {
-    flex: 1,
     flexDirection: 'row',
-    alignItems: 'stretch',
     justifyContent: 'space-evenly',
-    maxHeight: 50,
+    alignItems: 'center',
+    height: 50,
   },
   itemContainer: {},
 })

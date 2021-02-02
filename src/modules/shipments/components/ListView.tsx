@@ -1,29 +1,35 @@
 import React from 'react'
-import { FlatList, StyleSheet } from 'react-native'
-import useSWR from 'swr'
+import { FlatList, StyleSheet, Platform } from 'react-native'
+import useSWR, { mutate } from 'swr'
 
 import { Text, View } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import { Shipment } from '../../../types'
 
 export default function ListView(): JSX.Element {
-  const { data, error } = useSWR<Shipment[]>('/shipments')
+  const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
   const isLoading = !error && !data
+  const refreshing = (data && isValidating) || false
 
   return (
-    <View style={styles.container}>
+    <>
       {isLoading ? (
         <Loading />
       ) : (
         <FlatList
           data={data}
+          contentContainerStyle={
+            Platform.OS == 'web' ? styles.containerWeb : styles.containerNative
+          }
           keyExtractor={({ id }) => String(id)}
           ListHeaderComponent={ShipmentsHeaderComponent}
           ListFooterComponent={ShipmentsFooterComponent}
           renderItem={({ item }) => <ShipmentListItem shipment={item} />}
+          refreshing={refreshing}
+          onRefresh={() => mutate('/shipments')}
         />
       )}
-    </View>
+    </>
   )
 }
 
@@ -56,8 +62,12 @@ function ShipmentsFooterComponent() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  containerWeb: {
+    height: 0,
+    flexGrow: 1,
+  },
+  containerNative: {
+    flexGrow: 1,
   },
   shipmentContainer: {
     flex: 1,

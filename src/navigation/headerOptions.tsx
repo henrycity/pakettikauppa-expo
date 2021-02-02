@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 
 import MenuButton from './components/MenuButton'
 
-export const navStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     height: 80,
   },
@@ -12,7 +12,7 @@ export const navStyles = StyleSheet.create({
 
 const headerOptions: StackHeaderOptions = {
   headerLeft: () => <MenuButton />,
-  headerStyle: navStyles.header,
+  headerStyle: styles.header,
 }
 
 export default headerOptions

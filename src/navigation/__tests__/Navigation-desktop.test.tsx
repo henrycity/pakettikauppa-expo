@@ -32,19 +32,6 @@ describe('Testing desktop navigation', () => {
 
   const component = <TestApp />
 
-  it('should navigate to shipments from the drawer', async () => {
-    process.env.TEST_ENV = 'desktop'
-    const { findAllByA11yRole } = render(component)
-    const drawerLinks = await findAllByA11yRole('button')
-
-    const shipmentsLink = await findDrawerLink(
-      drawerLinks,
-      ScreenNames.Shipments
-    )
-
-    fireEvent(shipmentsLink, 'press')
-  })
-
   it('should navigate to reports from the drawer', async () => {
     process.env.TEST_ENV = 'desktop'
     const { findAllByA11yRole, getByText } = render(component)

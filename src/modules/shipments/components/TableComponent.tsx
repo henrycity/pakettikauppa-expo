@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, FlatList } from 'react-native'
+import { StyleSheet, FlatList, Platform } from 'react-native'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
@@ -15,10 +15,10 @@ interface HeaderProps {
 function Header({ fields }: HeaderProps) {
   const { t } = useTranslation('shipments')
   return (
-    <View style={[styles.row, styles.header]}>
+    <View style={styles.header}>
       {fields.map((field: string) => (
         <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
-          <Text numberOfLines={cellData[field].headerRows} style={styles.text}>
+          <Text numberOfLines={t(field).split(' ').length} style={styles.text}>
             {t(field)}
           </Text>
         </View>
@@ -65,7 +65,9 @@ export default function TableComponent({
 
   return (
     <FlatList
-      contentContainerStyle={styles.table}
+      contentContainerStyle={
+        Platform.OS === 'web' ? styles.tableWeb : styles.tableNative
+      }
       data={data}
       renderItem={({ item }) => (
         <Hoverable>
@@ -75,7 +77,6 @@ export default function TableComponent({
         </Hoverable>
       )}
       ListHeaderComponent={<Header fields={headers} />}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
       stickyHeaderIndices={[0]}
       initialNumToRender={10}
       removeClippedSubviews
@@ -89,34 +90,37 @@ export default function TableComponent({
 }
 
 const styles = StyleSheet.create({
-  table: {
-    flex: 1,
+  tableWeb: {
+    height: 0,
+    flexGrow: 1,
     paddingHorizontal: 25,
-    maxHeight: 900,
-    // Needed for sticky header
     overflow: 'scroll',
   },
+  tableNative: {
+    flexGrow: 1,
+    paddingHorizontal: 25,
+  },
   row: {
-    paddingVertical: '0.35rem',
-    flex: 1,
+    paddingVertical: 6,
+    marginVertical: 2,
     flexDirection: 'row',
   },
   header: {
     paddingVertical: 15,
+    flexDirection: 'row',
   },
   cell: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingRight: 6,
   },
   separator: {
-    height: '0.2rem',
+    height: 1,
     width: '93%',
     backgroundColor: 'white',
   },
   text: {
     fontSize: 12,
-    height: 16,
+    textAlign: 'center',
   },
 })
