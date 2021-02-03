@@ -3,19 +3,25 @@ import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import Styles from '../common/Styles'
+import { useThemedColors } from '../common/Themed'
 import { RootStackParamList } from '../types'
 
 export default function NotFoundScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'NotFound'>): JSX.Element {
+  const themed = useThemedColors()
   return (
     <View style={styles.container}>
-      <Text style={Styles.title}>This screen doesn't exist.</Text>
+      <Text style={[Styles.title, { color: themed.text }]}>
+        This screen doesn't exist.
+      </Text>
       <TouchableOpacity
         onPress={() => navigation.replace('Root')}
         style={Styles.link}
       >
-        <Text style={Styles.linkText}>Go to home screen!</Text>
+        <Text style={[Styles.linkText, { color: themed.linkTextColor }]}>
+          Go to home screen!
+        </Text>
       </TouchableOpacity>
     </View>
   )
