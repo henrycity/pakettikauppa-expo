@@ -37,6 +37,9 @@ build-image:
   script:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
+  only:
+    - master
+    - merge_requests
 
 e2e-tests:
   stage: test
@@ -62,6 +65,9 @@ e2e-tests:
     paths:
       - cypress/videos
       - cypress/screenshots
+  only:
+    - master
+    - merge_requests
 
 expo-deployments:
   stage: deploy
