@@ -9,7 +9,7 @@ import { Shipment } from '../../../types'
 export default function ListView(): JSX.Element {
   const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
   const isLoading = !error && !data
-  const refreshing = (data && isValidating) || false
+  const refreshing = Boolean(data && isValidating)
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function ListView(): JSX.Element {
         <FlatList
           data={data}
           contentContainerStyle={
-            Platform.OS == 'web' ? styles.containerWeb : styles.containerNative
+            Platform.OS === 'web' ? styles.containerWeb : styles.containerNative
           }
           keyExtractor={({ id }) => String(id)}
           ListHeaderComponent={ShipmentsHeaderComponent}
