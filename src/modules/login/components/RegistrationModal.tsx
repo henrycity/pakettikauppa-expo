@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Modal, TouchableOpacity } from 'react-native'
 
 import Styles from '../../../common/Styles'
@@ -16,16 +17,17 @@ export default function RegistrationModal(): JSX.Element {
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
 
   const themed = useThemedColors()
+  const { t } = useTranslation()
 
   const validateInput = () => {
     const newErrors: Error[] = []
     const isValid = () => newErrors.length === 0
 
-    if (!email) newErrors.push(new Error('Enter an email address'))
+    if (!email) newErrors.push(new Error(t('Enter an email address')))
     else if (!emailIsValid(email))
-      newErrors.push(new Error('Enter a valid email address'))
+      newErrors.push(new Error(t('Enter a valid email address')))
 
-    if (!vat_id) newErrors.push(new Error('Enter VAT ID'))
+    if (!vat_id) newErrors.push(new Error(t('Enter VAT ID')))
 
     setErrors(newErrors)
 
@@ -43,10 +45,10 @@ export default function RegistrationModal(): JSX.Element {
           setEmail('')
           setVat_id('')
         } else {
-          setErrors([new Error('Unexpected server response')])
+          setErrors([new Error(t('Unexpected server response'))])
         }
       } catch (err) {
-        err.message = 'Server error: ' + err.message
+        err.message = t('Server error: ') + t(err.message)
         setErrors([err])
       }
     }
@@ -66,7 +68,7 @@ export default function RegistrationModal(): JSX.Element {
         style={[Styles.normalButton, { backgroundColor: themed.buttonColor }]}
       >
         <Text style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}>
-          REGISTER
+          {t('REGISTER')}
         </Text>
       </TouchableOpacity>
 
@@ -74,7 +76,7 @@ export default function RegistrationModal(): JSX.Element {
 
       <View>
         {displaySuccessMessage ? (
-          <Text style={Styles.success}>Registration submitted!</Text>
+          <Text style={Styles.success}>{t('Registration submitted!')}</Text>
         ) : null}
       </View>
 
@@ -84,7 +86,7 @@ export default function RegistrationModal(): JSX.Element {
         testID="modalTest"
       >
         <View style={Styles.container}>
-          <Text style={Styles.title}>Please enter your details: </Text>
+          <Text style={Styles.title}>{t('Please enter your details: ')}</Text>
           <View style={Styles.gap} />
           <View>
             {errors.length > 0 &&
@@ -95,10 +97,10 @@ export default function RegistrationModal(): JSX.Element {
               ))}
           </View>
 
-          <Text> Email: </Text>
+          <Text>{t('Email: ')}</Text>
           <TextInput
             testID="Email"
-            placeholder="Email"
+            placeholder={t('Email')}
             autoCapitalize="none"
             placeholderTextColor={themed.placeholder}
             onChangeText={(email) => setEmail(email)}
@@ -107,10 +109,10 @@ export default function RegistrationModal(): JSX.Element {
           />
           <View style={Styles.gap} />
 
-          <Text> VAT ID: </Text>
+          <Text>{t('VAT ID: ')}</Text>
           <TextInput
             testID="VAT"
-            placeholder="VAT ID"
+            placeholder={t('VAT ID')}
             autoCapitalize="none"
             placeholderTextColor={themed.placeholder}
             onChangeText={(vat_id) => setVat_id(vat_id)}
@@ -128,7 +130,7 @@ export default function RegistrationModal(): JSX.Element {
             <Text
               style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
             >
-              SUBMIT
+              {t('SUBMIT')}
             </Text>
           </TouchableOpacity>
           <View style={Styles.gap} />
@@ -143,7 +145,7 @@ export default function RegistrationModal(): JSX.Element {
             <Text
               style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
             >
-              CLOSE
+              {t('CLOSE')}
             </Text>
           </TouchableOpacity>
         </View>
