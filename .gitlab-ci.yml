@@ -43,11 +43,10 @@ e2e-tests:
   needs: ["build-image"]
   image: cypress/base:14.15.0
   variables:
-    HTTPS: "true"
+    HTTPS: "true" # Use HTTPS for backend
     FRONTEND_SERVICE_URL: https://expo:19006
     BACKEND_SERVICE_URL: https://backend:3000
-    EXPO_FIREBASE_CLIENT_ID: $EXPO_FIREBASE_CLIENT_ID
-    EXPO_LOCAL_ADDRESS: $BACKEND_SERVICE_URL
+    #EXPO_FIREBASE_CLIENT_ID: $EXPO_FIREBASE_CLIENT_ID # Redundant due to hardcoded value
     EXPO_SERVER: $BACKEND_SERVICE_URL
     CYPRESS_BASE_URL: $FRONTEND_SERVICE_URL
     CYPRESS_BACKEND_URL: $BACKEND_SERVICE_URL
