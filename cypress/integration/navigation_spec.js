@@ -33,10 +33,4 @@ describe('Navigation', () => {
     cy.react('DrawerItem', { props: { label: 'Statistics' } }).click()
     cy.url().should('include', '/statistics')
   })
-
-  it('should have drawer link to settings', () => {
-    // cy.react('MenuButton').click()
-    cy.react('DrawerItem', { props: { label: 'Settings' } }).click()
-    cy.url().should('include', '/settings')
-  })
 })

@@ -29,6 +29,6 @@ describe('Log out button', () => {
 
   it('should redirect to login page', () => {
     cy.react('DrawerItem', { props: { label: 'Log out' } }).click()
-    cy.url().should('include', 'Login') // TODO: Change Login to login in frontend app
+    cy.url().should('include', 'login')
   })
 })
