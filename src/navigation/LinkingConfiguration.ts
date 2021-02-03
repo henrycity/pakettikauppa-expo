@@ -19,6 +19,7 @@ export default {
           Shipments: {
             screens: {
               ShipmentsScreen: 'shipments',
+              AddShipmentsScreen: 'shipments/addShipment',
             },
           },
           Statistics: {

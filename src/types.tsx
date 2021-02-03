@@ -94,6 +94,7 @@ export type SettingsNavigatorProps = {
 
 export type ShipmentsParamList = {
   ShipmentsScreen: undefined
+  AddShipmentsScreen: undefined
 }
 export type ShipmentsNavigationProp = StackNavigationProp<
   ShipmentsParamList,
