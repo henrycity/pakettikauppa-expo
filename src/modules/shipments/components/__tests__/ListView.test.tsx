@@ -20,12 +20,6 @@ describe('Testing the list component', () => {
 
   const component = <ListView />
 
-  it('Should display the header and footer', async () => {
-    const { getByText } = render(component)
-
-    expect(getByText('Example header')).toBeTruthy()
-    expect(getByText('Example footer')).toBeTruthy()
-  })
   it('List should exist', async () => {
     const { getByTestId } = render(component)
 

@@ -55,11 +55,11 @@ function ShipmentListItem({ shipment }: ShipmentListItemProps) {
 }
 
 function ShipmentsHeaderComponent() {
-  return <Text style={styles.header}>Example header</Text>
+  return null
 }
 
 function ShipmentsFooterComponent() {
-  return <Text style={styles.header}>Example footer</Text>
+  return <View style={styles.footer} />
 }
 
 const styles = StyleSheet.create({
@@ -97,15 +97,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'flex-end',
   },
-  header: {
-    alignSelf: 'center',
-    fontSize: 28,
-    margin: 30,
-  },
   footer: {
-    alignSelf: 'center',
-    fontSize: 28,
-    margin: 30,
+    height: 60,
   },
   recipientName: {
     fontFamily: 'Rubik',
