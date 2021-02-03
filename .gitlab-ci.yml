@@ -12,21 +12,21 @@ variables:
 before_script:
   - yarn install --frozen-lockfile
 
-# lint:
-#   stage: lint
-#   needs: []
-#   script:
-#     - yarn lint
-#     - yarn type-check
+lint:
+  stage: lint
+  needs: []
+  script:
+    - yarn lint
+    - yarn type-check
 
-# jest-tests:
-#   stage: test
-#   needs: []
-#   script:
-#     - yarn jest --coverage --ci --cacheDirectory .jest
-#   artifacts:
-#     reports:
-#       cobertura: coverage/cobertura-coverage.xml
+jest-tests:
+  stage: test
+  needs: []
+  script:
+    - yarn jest --coverage --ci
+  artifacts:
+    reports:
+      cobertura: coverage/cobertura-coverage.xml
 
 build-image:
   stage: build
