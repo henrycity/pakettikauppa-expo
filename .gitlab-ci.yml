@@ -52,7 +52,7 @@ e2e-tests:
     CYPRESS_BASE_URL: $FRONTEND_SERVICE_URL
     CYPRESS_BACKEND_URL: $BACKEND_SERVICE_URL
   services:
-    - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:https
+    - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:master
       alias: backend
     - name: $CONTAINER_TEST_IMAGE
       alias: expo
