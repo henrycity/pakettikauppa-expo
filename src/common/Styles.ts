@@ -1,7 +1,15 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TextStyle } from 'react-native'
 
 // Common stylesheet that can be used everywhere
-
+export const typography = {
+  title: {
+    fontFamily: 'Rubik',
+    fontWeight: 'bold',
+  } as TextStyle,
+  body: {
+    fontFamily: 'Muli',
+  } as TextStyle,
+}
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -10,8 +18,8 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
-    fontFamily: 'Rubik',
+    fontWeight: typography.title.fontWeight,
+    fontFamily: typography.title.fontFamily,
   },
   separator: {
     marginVertical: 30,
@@ -40,7 +48,7 @@ export default StyleSheet.create({
   buttonLabel: {
     fontSize: 12,
     fontWeight: '700',
-    fontFamily: 'Rubik',
+    fontFamily: typography.title.fontFamily,
     textTransform: 'uppercase',
   },
   input: {
@@ -65,7 +73,7 @@ export default StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
-    fontFamily: 'Muli',
+    fontFamily: typography.body.fontFamily,
     fontWeight: 'bold',
   },
 })
