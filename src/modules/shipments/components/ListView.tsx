@@ -27,6 +27,7 @@ export default function ListView(): JSX.Element {
           renderItem={({ item }) => <ShipmentListItem shipment={item} />}
           refreshing={refreshing}
           onRefresh={() => mutate('/shipments')}
+          testID="List Component"
         />
       )}
     </>
