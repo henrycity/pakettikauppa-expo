@@ -29,7 +29,7 @@ describe('Testing the list component', () => {
   it('List should have data', async () => {
     const { getAllByText } = render(component)
 
-    const element = getAllByText('Posti')
+    const element = getAllByText('Posti: Noutopistepaketti')
     expect(element).toBeTruthy()
   })
 })

@@ -45,7 +45,9 @@ function ShipmentListItem({ shipment }: ShipmentListItemProps) {
         <Text style={styles.recipientName}>{shipment.receiverName}</Text>
         <Text style={styles.defaultField}>{shipment.status}</Text>
         <Text style={styles.defaultField}>{shipment.postCode}</Text>
-        <Text style={styles.defaultField}>{shipment.deliveryCompany}</Text>
+        <Text style={styles.defaultField}>
+          {shipment.deliveryCompany}: {shipment.shippingMethod}
+        </Text>
       </View>
       <View style={styles.itemRight}>
         <Text style={styles.defaultField}>{shipment.createdOn}</Text>
