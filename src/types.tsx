@@ -46,6 +46,7 @@ export interface Shipment {
   reference: string
   latestEvent: string
   invoiceNumber: string
+  shippingMethod: string
 }
 
 // React
