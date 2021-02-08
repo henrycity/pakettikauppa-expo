@@ -13,9 +13,9 @@ describe('Testing registration modal', () => {
   const component = <LoginScreen />
 
   it('Should open modal when clicking register', async () => {
-    const { getByText, getByTestId } = render(component)
+    const { getByTestId } = render(component)
 
-    const button = getByText('REGISTER')
+    const button = getByTestId('register')
     fireEvent.press(button)
 
     const modal = getByTestId('modalTest')
@@ -23,12 +23,12 @@ describe('Testing registration modal', () => {
   })
 
   it('Should not close when submitting without entering anything', async () => {
-    const { getByText, getByTestId } = render(component)
+    const { getByTestId } = render(component)
 
-    const button = getByText('REGISTER')
+    const button = getByTestId('register')
     fireEvent.press(button)
 
-    const submit = getByText('SUBMIT')
+    const submit = getByTestId('submit')
     fireEvent.press(submit)
 
     const modal = getByTestId('modalTest')
@@ -36,12 +36,12 @@ describe('Testing registration modal', () => {
   })
 
   it('Should close modal when pressing close button', async () => {
-    const { getByText, getByTestId } = render(component)
+    const { getByTestId } = render(component)
 
-    const button = getByText('REGISTER')
+    const button = getByTestId('register')
     fireEvent.press(button)
 
-    const close = getByText('CLOSE')
+    const close = getByTestId('close')
     fireEvent.press(close)
 
     const modal = getByTestId('modalTest')
@@ -51,7 +51,7 @@ describe('Testing registration modal', () => {
   it('Should return Enter valid Email when giving a false email', async () => {
     const { getByText, getByTestId } = render(component)
 
-    const button = getByText('REGISTER')
+    const button = getByTestId('register')
     fireEvent.press(button)
 
     const email = getByTestId('Email')
@@ -59,7 +59,7 @@ describe('Testing registration modal', () => {
     fireEvent.changeText(email, 'test')
     fireEvent.changeText(vat, '123456qwerty')
 
-    const submit = getByText('SUBMIT')
+    const submit = getByTestId('submit')
     fireEvent.press(submit)
 
     const modal = getByTestId('modalTest')
@@ -72,13 +72,13 @@ describe('Testing registration modal', () => {
   it('modal should be visible when VAT ID missing', async () => {
     const { getByText, getByTestId } = render(component)
 
-    const button = getByText('REGISTER')
+    const button = getByTestId('register')
     fireEvent.press(button)
 
     const email = getByTestId('Email')
     fireEvent.changeText(email, 'testtest@yahoo.fi')
 
-    const submit = getByText('SUBMIT')
+    const submit = getByTestId('submit')
     fireEvent.press(submit)
 
     const modal = getByTestId('modalTest')

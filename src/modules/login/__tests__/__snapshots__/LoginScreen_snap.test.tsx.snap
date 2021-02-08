@@ -63,7 +63,7 @@ exports[`LoginScreen renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "backgroundColor": "#ff2e33",
-        "borderRadius": 500,
+        "borderRadius": 100,
         "height": 30,
         "justifyContent": "center",
         "opacity": 1,
@@ -86,6 +86,7 @@ exports[`LoginScreen renders correctly 1`] = `
               "fontFamily": "Rubik",
               "fontSize": 12,
               "fontWeight": "700",
+              "padding": 10,
               "textTransform": "uppercase",
             },
             Object {
@@ -95,7 +96,7 @@ exports[`LoginScreen renders correctly 1`] = `
         ]
       }
     >
-      LOGIN
+      Login
     </Text>
   </View>
   <View
@@ -124,7 +125,7 @@ exports[`LoginScreen renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "backgroundColor": "#ff2e33",
-        "borderRadius": 500,
+        "borderRadius": 100,
         "height": 30,
         "justifyContent": "center",
         "opacity": 1,
@@ -132,6 +133,7 @@ exports[`LoginScreen renders correctly 1`] = `
         "width": 85,
       }
     }
+    testID="register"
   >
     <Text
       style={
@@ -147,6 +149,7 @@ exports[`LoginScreen renders correctly 1`] = `
               "fontFamily": "Rubik",
               "fontSize": 12,
               "fontWeight": "700",
+              "padding": 10,
               "textTransform": "uppercase",
             },
             Object {
@@ -156,7 +159,7 @@ exports[`LoginScreen renders correctly 1`] = `
         ]
       }
     >
-      REGISTER
+      Register
     </Text>
   </View>
   <View
@@ -218,7 +221,7 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-         
+        Please enter your details
       </Text>
       <View
         style={
@@ -255,14 +258,14 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-         
+        Email:
       </Text>
       <TextInput
         allowFontScaling={true}
         autoCapitalize="none"
         defaultValue=""
         onChangeText={[Function]}
-        placeholder="Email"
+        placeholder="Email:"
         placeholderTextColor="#8cb1b7"
         rejectResponderTermination={true}
         style={
@@ -312,14 +315,14 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-         
+        Vat ID
       </Text>
       <TextInput
         allowFontScaling={true}
         autoCapitalize="none"
         defaultValue=""
         onChangeText={[Function]}
-        placeholder="VAT ID"
+        placeholder="Vat ID"
         placeholderTextColor="#8cb1b7"
         rejectResponderTermination={true}
         style={
@@ -330,7 +333,15 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
-            undefined,
+            Array [
+              Object {
+                "borderBottomWidth": 1,
+                "width": 200,
+              },
+              Object {
+                "color": "#233385",
+              },
+            ],
           ]
         }
         testID="VAT"
@@ -362,7 +373,7 @@ exports[`LoginScreen renders correctly 1`] = `
           Object {
             "alignItems": "center",
             "backgroundColor": "#ff2e33",
-            "borderRadius": 500,
+            "borderRadius": 100,
             "height": 30,
             "justifyContent": "center",
             "opacity": 1,
@@ -370,6 +381,7 @@ exports[`LoginScreen renders correctly 1`] = `
             "width": 85,
           }
         }
+        testID="submit"
       >
         <Text
           style={
@@ -385,6 +397,7 @@ exports[`LoginScreen renders correctly 1`] = `
                   "fontFamily": "Rubik",
                   "fontSize": 12,
                   "fontWeight": "700",
+                  "padding": 10,
                   "textTransform": "uppercase",
                 },
                 Object {
@@ -394,7 +407,7 @@ exports[`LoginScreen renders correctly 1`] = `
             ]
           }
         >
-          SUBMIT
+          Submit
         </Text>
       </View>
       <View
@@ -423,7 +436,7 @@ exports[`LoginScreen renders correctly 1`] = `
           Object {
             "alignItems": "center",
             "backgroundColor": "#ff2e33",
-            "borderRadius": 500,
+            "borderRadius": 100,
             "height": 30,
             "justifyContent": "center",
             "opacity": 1,
@@ -431,6 +444,7 @@ exports[`LoginScreen renders correctly 1`] = `
             "width": 85,
           }
         }
+        testID="close"
       >
         <Text
           style={
@@ -446,6 +460,7 @@ exports[`LoginScreen renders correctly 1`] = `
                   "fontFamily": "Rubik",
                   "fontSize": 12,
                   "fontWeight": "700",
+                  "padding": 10,
                   "textTransform": "uppercase",
                 },
                 Object {
@@ -455,7 +470,7 @@ exports[`LoginScreen renders correctly 1`] = `
             ]
           }
         >
-          CLOSE
+          Close
         </Text>
       </View>
     </View>

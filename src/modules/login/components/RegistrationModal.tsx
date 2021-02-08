@@ -23,11 +23,11 @@ export default function RegistrationModal(): JSX.Element {
     const newErrors: Error[] = []
     const isValid = () => newErrors.length === 0
 
-    if (!email) newErrors.push(new Error(t('Enter an email address')))
+    if (!email) newErrors.push(new Error('Enter an email address'))
     else if (!emailIsValid(email))
-      newErrors.push(new Error(t('Enter a valid email address')))
+      newErrors.push(new Error('Enter a valid email address'))
 
-    if (!vat_id) newErrors.push(new Error(t('Enter VAT ID')))
+    if (!vat_id) newErrors.push(new Error('Enter VAT ID'))
 
     setErrors(newErrors)
 
@@ -45,10 +45,10 @@ export default function RegistrationModal(): JSX.Element {
           setEmail('')
           setVat_id('')
         } else {
-          setErrors([new Error(t('Unexpected server response'))])
+          setErrors([new Error('Unexpected server response')])
         }
       } catch (err) {
-        err.message = t('Server error: ') + t(err.message)
+        err.message = 'Server error: ' + err.message
         setErrors([err])
       }
     }
@@ -66,9 +66,10 @@ export default function RegistrationModal(): JSX.Element {
       <TouchableOpacity
         onPress={onRegisterButtonPress}
         style={[Styles.normalButton, { backgroundColor: themed.buttonColor }]}
+        testID="register"
       >
         <Text style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}>
-          {t('REGISTER')}
+          {t('register')}
         </Text>
       </TouchableOpacity>
 
@@ -76,7 +77,7 @@ export default function RegistrationModal(): JSX.Element {
 
       <View>
         {displaySuccessMessage ? (
-          <Text style={Styles.success}>{t('Registration submitted!')}</Text>
+          <Text style={Styles.success}>{t('registerSuccess')}</Text>
         ) : null}
       </View>
 
@@ -86,7 +87,7 @@ export default function RegistrationModal(): JSX.Element {
         testID="modalTest"
       >
         <View style={Styles.container}>
-          <Text style={Styles.title}>{t('Please enter your details: ')}</Text>
+          <Text style={Styles.title}>{t('registerDetails')}</Text>
           <View style={Styles.gap} />
           <View>
             {errors.length > 0 &&
@@ -97,10 +98,10 @@ export default function RegistrationModal(): JSX.Element {
               ))}
           </View>
 
-          <Text>{t('Email: ')}</Text>
+          <Text>{t('email')}</Text>
           <TextInput
             testID="Email"
-            placeholder={t('Email')}
+            placeholder={t('email')}
             autoCapitalize="none"
             placeholderTextColor={themed.placeholder}
             onChangeText={(email) => setEmail(email)}
@@ -109,14 +110,15 @@ export default function RegistrationModal(): JSX.Element {
           />
           <View style={Styles.gap} />
 
-          <Text>{t('VAT ID: ')}</Text>
+          <Text>{t('vatID')}</Text>
           <TextInput
             testID="VAT"
-            placeholder={t('VAT ID')}
+            placeholder={t('vatID')}
             autoCapitalize="none"
             placeholderTextColor={themed.placeholder}
             onChangeText={(vat_id) => setVat_id(vat_id)}
             defaultValue={vat_id}
+            style={[Styles.input, { color: themed.inputColor }]}
           />
 
           <View style={Styles.gap} />
@@ -126,11 +128,12 @@ export default function RegistrationModal(): JSX.Element {
               Styles.normalButton,
               { backgroundColor: themed.buttonColor },
             ]}
+            testID="submit"
           >
             <Text
               style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
             >
-              {t('SUBMIT')}
+              {t('submit')}
             </Text>
           </TouchableOpacity>
           <View style={Styles.gap} />
@@ -141,11 +144,12 @@ export default function RegistrationModal(): JSX.Element {
               Styles.normalButton,
               { backgroundColor: themed.buttonColor },
             ]}
+            testID="close"
           >
             <Text
               style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
             >
-              {t('CLOSE')}
+              {t('close')}
             </Text>
           </TouchableOpacity>
         </View>

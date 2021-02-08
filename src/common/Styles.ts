@@ -35,7 +35,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    borderRadius: 500,
+    borderRadius: 100,
   },
   largeButton: {
     width: 200,
@@ -50,6 +50,7 @@ export default StyleSheet.create({
     fontWeight: '700',
     fontFamily: typography.title.fontFamily,
     textTransform: 'uppercase',
+    padding: 10,
   },
   input: {
     borderBottomWidth: 1.0,

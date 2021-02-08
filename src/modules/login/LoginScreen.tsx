@@ -20,7 +20,7 @@ export default function LoginScreen(): JSX.Element {
   const theme = useThemedColors()
   return (
     <View style={Styles.container}>
-      <Text style={Styles.title}>Login or register with a Google account</Text>
+      <Text style={Styles.title}>{t('loginText')}</Text>
       <View
         style={Styles.separator}
         lightColor="#eee"
@@ -32,7 +32,7 @@ export default function LoginScreen(): JSX.Element {
         accessibilityLabel="Login button"
       >
         <Text style={[Styles.buttonLabel, { color: theme.buttonTextColor }]}>
-          {t('LOGIN')}
+          {t('login')}
         </Text>
       </TouchableOpacity>
       <View style={Styles.gap} />

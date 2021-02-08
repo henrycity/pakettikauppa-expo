@@ -1,15 +1,16 @@
-variables:
-  GIT_CLEAN_FLAGS: -ffdx -e .yarn -e .jest -e node_modules/
-
 image: node:14.15.0-alpine
 
 stages:
   - lint
+  - build
   - test
   - deploy
 
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+
 before_script:
-  - yarn install --cache-folder .yarn --frozen-lockfile
+  - yarn install --frozen-lockfile
 
 lint:
   stage: lint
@@ -22,15 +23,56 @@ jest-tests:
   stage: test
   needs: []
   script:
-    - yarn jest --coverage --ci --cacheDirectory .jest
+    - yarn jest --coverage --ci
   artifacts:
     reports:
       cobertura: coverage/cobertura-coverage.xml
 
+build-image:
+  stage: build
+  needs: []
+  image: docker:stable
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+  only:
+    - master
+    - merge_requests
+
+e2e-tests:
+  stage: test
+  needs: ["build-image"]
+  image: cypress/base:14.15.0
+  variables:
+    HTTPS: "true" # Use HTTPS for backend
+    FRONTEND_SERVICE_URL: https://expo:19006
+    BACKEND_SERVICE_URL: https://backend:3000
+    #EXPO_FIREBASE_CLIENT_ID: $EXPO_FIREBASE_CLIENT_ID # Redundant due to hardcoded value
+    EXPO_SERVER: $BACKEND_SERVICE_URL
+    CYPRESS_BASE_URL: $FRONTEND_SERVICE_URL
+    CYPRESS_BACKEND_URL: $BACKEND_SERVICE_URL
+  services:
+    - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:master
+      alias: backend
+    - name: $CONTAINER_TEST_IMAGE
+      alias: expo
+  script:
+    - $(npm bin)/cypress run
+  artifacts:
+    when: on_failure
+    paths:
+      - cypress/videos
+      - cypress/screenshots
+  only:
+    - master
+    - merge_requests
+
 expo-deployments:
   stage: deploy
   script:
-    - yarn global add expo-cli --cache-folder .yarn
+    - yarn global add expo-cli
     - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
     - yarn expo publish --non-interactive
   only:
@@ -39,8 +81,8 @@ expo-deployments:
 netlify-deployment:
   stage: deploy
   script:
-    - yarn global add expo-cli --cache-folder .yarn
-    - yarn global add netlify-cli --cache-folder .yarn
+    - yarn global add expo-cli
+    - yarn global add netlify-cli
     - yarn expo build:web
     - echo "/*    /index.html   200" > web-build/_redirects
     - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
