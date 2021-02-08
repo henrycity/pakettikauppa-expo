@@ -15,6 +15,7 @@ export const mockShipmentData: Shipment[] = [
     latestEvent: '',
     deliveryCompany: 'Posti',
     invoiceNumber: '',
+    shippingMethod: 'Noutopistepaketti',
   },
   {
     id: 2,
@@ -30,6 +31,7 @@ export const mockShipmentData: Shipment[] = [
     latestEvent: '',
     deliveryCompany: 'Posti',
     invoiceNumber: '',
+    shippingMethod: 'Noutopistepaketti',
   },
   {
     id: 3,
@@ -45,5 +47,6 @@ export const mockShipmentData: Shipment[] = [
     latestEvent: '',
     deliveryCompany: 'Posti',
     invoiceNumber: '',
+    shippingMethod: 'Noutopistepaketti',
   },
 ]
