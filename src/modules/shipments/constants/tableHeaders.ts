@@ -39,6 +39,9 @@ export const cellData: {
   deliveryCompany: {
     flex: 1.7,
   },
+  shippingMethod: {
+    flex: 1.7,
+  },
 }
 
 export const shipmentHeaders: (keyof Shipment)[] = [
@@ -54,4 +57,5 @@ export const shipmentHeaders: (keyof Shipment)[] = [
   'latestEvent',
   'deliveryCompany',
   'createdOn',
+  'shippingMethod',
 ]
