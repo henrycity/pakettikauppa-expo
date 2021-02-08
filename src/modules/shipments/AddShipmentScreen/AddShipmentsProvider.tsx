@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 
 import Styles from '../../../common/Styles'
@@ -9,8 +9,65 @@ import AddShipmentsOne from './AddShipmentsOne'
 import AddShipmentsThree from './AddShipmentsThree'
 import AddShipmentsTwo from './AddShipmentsTwo'
 
+type FormDataOne = {
+  businessID: string
+  senderName: string
+  senderAddress: string
+  senderCountry: string
+  senderPostCode: string
+  senderCity: string
+  senderPhoneNumber: string
+  senderEmail: string
+}
+
+type FormDataTwo = {
+  recieverAddress: string
+  recieverCity: string
+  recieverCountry: string
+  recieverEmail: string
+  recieverName: string
+  recieverPhoneNumber: string
+  recieverPostCode: string
+}
+
+type FormDataThree = {
+  description: string
+  invoiceNumber: string
+  reference: string
+  sendingMethod: string
+  weight: string
+}
+
 export default function AddShipmentsScreen(): JSX.Element {
   const navigation = useNavigation()
+
+  const [pageOne, setPageOne] = useState<FormDataOne>({
+    businessID: '',
+    senderAddress: '',
+    senderCity: '',
+    senderCountry: '',
+    senderEmail: '',
+    senderName: '',
+    senderPhoneNumber: '',
+    senderPostCode: '',
+  })
+  const [pageTwo, setPageTwo] = useState<FormDataTwo>({
+    recieverAddress: '',
+    recieverCity: '',
+    recieverCountry: '',
+    recieverEmail: '',
+    recieverName: '',
+    recieverPhoneNumber: '',
+    recieverPostCode: '',
+  })
+  const [pageThree, setPageThree] = useState<FormDataThree>({
+    description: '',
+    invoiceNumber: '',
+    reference: '',
+    sendingMethod: '',
+    weight: '',
+  })
+
   type Next = {
     type: 'next'
   }
@@ -48,20 +105,16 @@ export default function AddShipmentsScreen(): JSX.Element {
     }
   }
 
+  const getFinalStates = () => {
+    // call to backend here
+    /*
+    console.log(pageOne)
+    console.log(pageTwo)
+    console.log(pageThree)*/
+  }
+
   const initialCount = 0
   const [state, dispatch] = useReducer(reducer, { count: initialCount })
-
-  const NextButton = () => (
-    <TouchableOpacity
-      accessibilityLabel="next"
-      style={Styles.normalButton}
-      onPress={() => {
-        dispatch({ type: 'next' })
-      }}
-    >
-      <Text>NEXT</Text>
-    </TouchableOpacity>
-  )
 
   const PreviousButton = () => (
     <TouchableOpacity
@@ -72,19 +125,6 @@ export default function AddShipmentsScreen(): JSX.Element {
       }}
     >
       <Text>PREVIOUS</Text>
-    </TouchableOpacity>
-  )
-
-  const SubmitButton = () => (
-    <TouchableOpacity
-      accessibilityLabel="submit"
-      style={Styles.normalButton}
-      onPress={() => {
-        dispatch({ type: 'reset' })
-        navigation.navigate('ShipmentsScreen')
-      }}
-    >
-      <Text>SUBMIT</Text>
     </TouchableOpacity>
   )
 
@@ -104,15 +144,22 @@ export default function AddShipmentsScreen(): JSX.Element {
   if (state.count === 0) {
     return (
       <BottomTabWrapper>
-        <AddShipmentsOne NextButton={NextButton} BackButton={BackButton} />
+        <AddShipmentsOne
+          BackButton={BackButton}
+          dispatch={dispatch}
+          pageOne={pageOne}
+          setPageOne={setPageOne}
+        />
       </BottomTabWrapper>
     )
   } else if (state.count === 1) {
     return (
       <BottomTabWrapper>
         <AddShipmentsTwo
-          NextButton={NextButton}
           PreviousButton={PreviousButton}
+          dispatch={dispatch}
+          pageTwo={pageTwo}
+          setPageTwo={setPageTwo}
         />
       </BottomTabWrapper>
     )
@@ -120,8 +167,11 @@ export default function AddShipmentsScreen(): JSX.Element {
     return (
       <BottomTabWrapper>
         <AddShipmentsThree
-          SubmitButton={SubmitButton}
           PreviousButton={PreviousButton}
+          dispatch={dispatch}
+          pageThree={pageThree}
+          setPageThree={setPageThree}
+          getFinalStates={getFinalStates}
         />
       </BottomTabWrapper>
     )

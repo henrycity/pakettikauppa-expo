@@ -54,6 +54,7 @@
     "jest-enzyme": "^7.1.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^6.15.1",
     "react-i18next": "^11.7.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-gesture-handler": "~1.7.0",
