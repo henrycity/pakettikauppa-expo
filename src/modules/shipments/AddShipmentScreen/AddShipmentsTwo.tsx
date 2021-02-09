@@ -24,13 +24,13 @@ type Back = {
 type ActionType = Next | Previous | Reset | Back
 
 type FormData = {
-  recieverName: string
-  recieverAddress: string
-  recieverCountry: string
-  recieverPostCode: string
-  recieverCity: string
-  recieverPhoneNumber: string
-  recieverEmail: string
+  receiverName: string
+  receiverAddress: string
+  receiverCountry: string
+  receiverPostCode: string
+  receiverCity: string
+  receiverPhoneNumber: string
+  receiverEmail: string
 }
 
 interface AddShipmentsTwoProps {
@@ -69,7 +69,7 @@ export default function AddShipmentsTwo({
   return (
     <View style={styles.container}>
       <Text>New Shipment</Text>
-      <Text>Reciever info</Text>
+      <Text>receiver info</Text>
       <View style={{ flexDirection: 'row', margin: 15 }}>
         <View style={{ width: 100, height: 5, backgroundColor: 'grey' }} />
         <View style={{ width: 100, height: 5, backgroundColor: 'red' }} />
@@ -86,8 +86,8 @@ export default function AddShipmentsTwo({
             value={value}
           />
         )}
-        name="recieverName"
-        defaultValue={pageTwo.recieverName}
+        name="receiverName"
+        defaultValue={pageTwo.receiverName}
       />
 
       <Controller
@@ -101,8 +101,8 @@ export default function AddShipmentsTwo({
             value={value}
           />
         )}
-        name="recieverAddress"
-        defaultValue={pageTwo.recieverAddress}
+        name="receiverAddress"
+        defaultValue={pageTwo.receiverAddress}
       />
       <Controller
         control={control}
@@ -115,8 +115,8 @@ export default function AddShipmentsTwo({
             value={value}
           />
         )}
-        name="recieverCountry"
-        defaultValue={pageTwo.recieverCountry}
+        name="receiverCountry"
+        defaultValue={pageTwo.receiverCountry}
       />
       <Controller
         control={control}
@@ -129,8 +129,8 @@ export default function AddShipmentsTwo({
             value={value}
           />
         )}
-        name="recieverPostCode"
-        defaultValue={pageTwo.recieverPostCode}
+        name="receiverPostCode"
+        defaultValue={pageTwo.receiverPostCode}
       />
       <Controller
         control={control}
@@ -143,8 +143,8 @@ export default function AddShipmentsTwo({
             value={value}
           />
         )}
-        name="recieverCity"
-        defaultValue={pageTwo.recieverCity}
+        name="receiverCity"
+        defaultValue={pageTwo.receiverCity}
       />
       <Controller
         control={control}
@@ -157,8 +157,8 @@ export default function AddShipmentsTwo({
             value={value}
           />
         )}
-        name="recieverPhoneNumber"
-        defaultValue={pageTwo.recieverPhoneNumber}
+        name="receiverPhoneNumber"
+        defaultValue={pageTwo.receiverPhoneNumber}
       />
       <Controller
         control={control}
@@ -171,8 +171,8 @@ export default function AddShipmentsTwo({
             value={value}
           />
         )}
-        name="recieverEmail"
-        defaultValue={pageTwo.recieverEmail}
+        name="receiverEmail"
+        defaultValue={pageTwo.receiverEmail}
       />
 
       <Text style={styles.title}>SCREEN NO. 2</Text>

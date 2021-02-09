@@ -24,13 +24,13 @@ type FormDataOne = {
 }
 
 type FormDataTwo = {
-  recieverAddress: string
-  recieverCity: string
-  recieverCountry: string
-  recieverEmail: string
-  recieverName: string
-  recieverPhoneNumber: string
-  recieverPostCode: string
+  receiverAddress: string
+  receiverCity: string
+  receiverCountry: string
+  receiverEmail: string
+  receiverName: string
+  receiverPhoneNumber: string
+  receiverPostCode: string
 }
 
 type FormDataThree = {
@@ -55,13 +55,13 @@ export default function AddShipmentsScreen(): JSX.Element {
     senderPostCode: '',
   })
   const [pageTwo, setPageTwo] = useState<FormDataTwo>({
-    recieverAddress: '',
-    recieverCity: '',
-    recieverCountry: '',
-    recieverEmail: '',
-    recieverName: '',
-    recieverPhoneNumber: '',
-    recieverPostCode: '',
+    receiverAddress: '',
+    receiverCity: '',
+    receiverCountry: '',
+    receiverEmail: '',
+    receiverName: '',
+    receiverPhoneNumber: '',
+    receiverPostCode: '',
   })
   const [pageThree, setPageThree] = useState<FormDataThree>({
     description: '',
@@ -118,11 +118,11 @@ export default function AddShipmentsScreen(): JSX.Element {
     // These fields are the current minimum for the backend to accept the shipment
     // The frontend and backend currently have wildly different fields, so we should refine them
     const newShipment = {
-      receiverName: pageTwo.recieverName,
-      receiverEmail: pageTwo.recieverEmail,
-      postCode: pageTwo.recieverPostCode,
-      postOffice: pageTwo.recieverCity,
-      countryCode: pageTwo.recieverCountry,
+      receiverName: pageTwo.receiverName,
+      receiverEmail: pageTwo.receiverEmail,
+      postCode: pageTwo.receiverPostCode,
+      postOffice: pageTwo.receiverCity,
+      countryCode: pageTwo.receiverCountry,
     }
     return fetch(`${serverURL}/shipments`, {
       method: 'POST',
