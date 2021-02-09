@@ -5,9 +5,12 @@ import { TouchableOpacity } from 'react-native'
 import Styles from '../../../common/Styles'
 import { Text } from '../../../common/Themed'
 import BottomTabWrapper from '../../../common/components/BottomTabWrapper'
+import server from '../../../config'
 import AddShipmentsOne from './AddShipmentsOne'
 import AddShipmentsThree from './AddShipmentsThree'
 import AddShipmentsTwo from './AddShipmentsTwo'
+
+const serverURL = server()
 
 type FormDataOne = {
   businessID: string
@@ -90,6 +93,12 @@ export default function AddShipmentsScreen(): JSX.Element {
     count: number
   }
 
+  type ValidatorError = {
+    param: string
+    value: string
+    msg: string
+  }
+
   function reducer(state: { count: number }, action: ActionType): State {
     switch (action.type) {
       case 'next':
@@ -105,12 +114,41 @@ export default function AddShipmentsScreen(): JSX.Element {
     }
   }
 
+  const postShipment = () => {
+    // These fields are the current minimum for the backend to accept the shipment
+    // The frontend and backend currently have wildly different fields, so we should refine them
+    const newShipment = {
+      receiverName: pageTwo.recieverName,
+      receiverEmail: pageTwo.recieverEmail,
+      postCode: pageTwo.recieverPostCode,
+      postOffice: pageTwo.recieverCity,
+      countryCode: pageTwo.recieverCountry,
+    }
+    return fetch(`${serverURL}/shipments`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newShipment),
+    }).then((res) => res.json())
+  }
+
+  // Submit data
   const getFinalStates = () => {
-    // call to backend here
-    /*
-    console.log(pageOne)
-    console.log(pageTwo)
-    console.log(pageThree)*/
+    postShipment().then((data) => {
+      if (data.errors) {
+        if (__DEV__) {
+          data.errors.forEach((error: ValidatorError) =>
+            // TODO: Display errors in UI instead of just the console
+            // eslint-disable-next-line no-console
+            console.log(
+              `Error for field ${error.param}: ${error.msg} "${error.value}"`
+            )
+          )
+        }
+      }
+    })
   }
 
   const initialCount = 0
