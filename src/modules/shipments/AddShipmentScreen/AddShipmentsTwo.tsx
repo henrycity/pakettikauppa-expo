@@ -13,15 +13,15 @@ type Previous = {
   type: 'previous'
 }
 
-type Reset = {
-  type: 'reset'
+type Submit = {
+  type: 'submit'
 }
 
 type Back = {
   type: 'back'
 }
 
-type ActionType = Next | Previous | Reset | Back
+type ActionType = Next | Previous | Submit | Back
 
 type FormData = {
   receiverName: string

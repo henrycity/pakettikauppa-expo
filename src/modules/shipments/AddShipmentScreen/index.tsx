@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
 import React, { useReducer, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
@@ -5,6 +6,7 @@ import { TouchableOpacity } from 'react-native'
 import Styles from '../../../common/Styles'
 import { Text } from '../../../common/Themed'
 import BottomTabWrapper from '../../../common/components/BottomTabWrapper'
+import useDeviceType from '../../../common/hooks/useDeviceType'
 import server from '../../../config'
 import AddShipmentsOne from './AddShipmentsOne'
 import AddShipmentsThree from './AddShipmentsThree'
@@ -37,13 +39,15 @@ type FormDataThree = {
   description: string
   invoiceNumber: string
   reference: string
+  deliveryCompany: string
   sendingMethod: string
   weight: string
 }
 
 export default function AddShipmentsScreen(): JSX.Element {
   const navigation = useNavigation()
-
+  const { isMobile } = useDeviceType()
+  /*
   const [pageOne, setPageOne] = useState<FormDataOne>({
     businessID: '',
     senderAddress: '',
@@ -69,6 +73,36 @@ export default function AddShipmentsScreen(): JSX.Element {
     reference: '',
     sendingMethod: '',
     weight: '',
+    deliveryCompany: '',
+  })
+*/
+  // testing purposes
+  const [pageOne, setPageOne] = useState<FormDataOne>({
+    businessID: '123456',
+    senderAddress: 'Postintie 69',
+    senderCity: 'EspooCity',
+    senderCountry: 'Finland',
+    senderEmail: 'posti.posti@gmail.com',
+    senderName: 'MR. henry',
+    senderPhoneNumber: '1234567',
+    senderPostCode: '02700',
+  })
+  const [pageTwo, setPageTwo] = useState<FormDataTwo>({
+    receiverAddress: 'jokuTie',
+    receiverCity: 'Espoo',
+    receiverCountry: 'Finland',
+    receiverEmail: 'pyry.aaa@gmail.com',
+    receiverName: 'Postin CEO',
+    receiverPhoneNumber: '1234567',
+    receiverPostCode: '02700',
+  })
+  const [pageThree, setPageThree] = useState<FormDataThree>({
+    description: 'Pesukone',
+    invoiceNumber: 'qwe123456',
+    reference: '123456',
+    sendingMethod: 'Postin Pikapaketti',
+    weight: '1000',
+    deliveryCompany: 'Posti',
   })
 
   type Next = {
@@ -79,15 +113,15 @@ export default function AddShipmentsScreen(): JSX.Element {
     type: 'previous'
   }
 
-  type Reset = {
-    type: 'reset'
+  type Submit = {
+    type: 'submit'
   }
 
   type Back = {
     type: 'back'
   }
 
-  type ActionType = Next | Previous | Reset | Back
+  type ActionType = Next | Previous | Submit | Back
 
   interface State {
     count: number
@@ -105,7 +139,8 @@ export default function AddShipmentsScreen(): JSX.Element {
         return { count: state.count + 1 }
       case 'previous':
         return { count: state.count - 1 }
-      case 'reset':
+      case 'submit':
+        getFinalStates()
         return { count: 0 }
       case 'back':
         return { count: 0 }
@@ -114,24 +149,49 @@ export default function AddShipmentsScreen(): JSX.Element {
     }
   }
 
-  const postShipment = () => {
-    // These fields are the current minimum for the backend to accept the shipment
-    // The frontend and backend currently have wildly different fields, so we should refine them
+  const postShipment = async () => {
     const newShipment = {
+      businessID: pageOne.businessID,
+      senderName: pageOne.senderName,
+      senderAddress: pageOne.senderAddress,
+      senderCountry: pageOne.senderCountry,
+      senderPostCode: pageOne.senderPostCode,
+      senderCity: pageOne.senderCity,
+      senderPhoneNumber: pageOne.senderPhoneNumber,
+      senderEmail: pageOne.senderEmail,
       receiverName: pageTwo.receiverName,
       receiverEmail: pageTwo.receiverEmail,
-      postCode: pageTwo.receiverPostCode,
-      postOffice: pageTwo.receiverCity,
-      countryCode: pageTwo.receiverCountry,
+      recieverPostCode: pageTwo.receiverPostCode,
+      recieverCity: pageTwo.receiverCity,
+      recieverCountry: pageTwo.receiverCountry,
+      description: pageThree.description,
+      invoiceNumber: pageThree.invoiceNumber,
+      reference: pageThree.reference,
+      deliveryCompany: pageThree.deliveryCompany,
+      sendingMethod: pageThree.sendingMethod,
+      weight: pageThree.weight,
     }
-    return fetch(`${serverURL}/shipments`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newShipment),
-    }).then((res) => res.json())
+    if (isMobile) {
+      const token = await AsyncStorage.getItem('token')
+      return fetch(`${serverURL}/shipments`, {
+        method: 'POST',
+        credentials: 'include' as const,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify(newShipment),
+      }).then((res) => res.json())
+    } else {
+      return fetch(`${serverURL}/shipments`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newShipment),
+      }).then((res) => res.json())
+    }
   }
 
   // Submit data
@@ -209,7 +269,6 @@ export default function AddShipmentsScreen(): JSX.Element {
           dispatch={dispatch}
           pageThree={pageThree}
           setPageThree={setPageThree}
-          getFinalStates={getFinalStates}
         />
       </BottomTabWrapper>
     )

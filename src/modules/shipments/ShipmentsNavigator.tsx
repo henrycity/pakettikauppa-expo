@@ -7,7 +7,7 @@ import useActiveScreen from '../../common/hooks/useActiveScreen'
 import ScreenNames from '../../navigation/ScreenNames'
 import headerOptions from '../../navigation/headerOptions'
 import { ShipmentsParamList } from '../../types'
-import AddShipmentsProvider from './AddShipmentScreen/AddShipmentsProvider'
+import AddShipmentsProvider from './AddShipmentScreen'
 import ShipmentsScreen from './ShipmentsScreen'
 
 const ShipmentStack = createStackNavigator<ShipmentsParamList>()

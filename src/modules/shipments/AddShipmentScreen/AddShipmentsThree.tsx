@@ -14,15 +14,15 @@ type Previous = {
   type: 'previous'
 }
 
-type Reset = {
-  type: 'reset'
+type Submit = {
+  type: 'submit'
 }
 
 type Back = {
   type: 'back'
 }
 
-type ActionType = Next | Previous | Reset | Back
+type ActionType = Next | Previous | Submit | Back
 
 type FormData = {
   sendingMethod: string
@@ -30,6 +30,7 @@ type FormData = {
   reference: string
   description: string
   invoiceNumber: string
+  deliveryCompany: string
 }
 
 interface AddShipmentsThreeProps {
@@ -37,7 +38,6 @@ interface AddShipmentsThreeProps {
   dispatch: (value: ActionType) => void
   pageThree: FormData
   setPageThree: React.Dispatch<React.SetStateAction<FormData>>
-  getFinalStates: () => void
 }
 
 export default function AddShipmentsThree({
@@ -45,7 +45,6 @@ export default function AddShipmentsThree({
   dispatch,
   pageThree,
   setPageThree,
-  getFinalStates,
 }: AddShipmentsThreeProps): JSX.Element {
   const navigation = useNavigation()
   const { control, getValues } = useForm<FormData>()
@@ -56,7 +55,7 @@ export default function AddShipmentsThree({
       style={Styles.normalButton}
       onPress={() => {
         onSubmit()
-        dispatch({ type: 'reset' })
+        dispatch({ type: 'submit' })
         navigation.navigate('ShipmentsScreen')
       }}
     >
@@ -67,7 +66,6 @@ export default function AddShipmentsThree({
   const onSubmit = () => {
     const finalValues = getValues()
     setPageThree(finalValues)
-    getFinalStates()
   }
 
   return (
@@ -79,6 +77,20 @@ export default function AddShipmentsThree({
         <View style={{ width: 100, height: 5, backgroundColor: 'grey' }} />
         <View style={{ width: 100, height: 5, backgroundColor: 'red' }} />
       </View>
+      <Controller
+        control={control}
+        render={({ onChange, onBlur, value }) => (
+          <TextInput
+            placeholder="Delivery Company"
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={(value) => onChange(value)}
+            value={value}
+          />
+        )}
+        name="deliveryCompany"
+        defaultValue={pageThree.deliveryCompany}
+      />
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (

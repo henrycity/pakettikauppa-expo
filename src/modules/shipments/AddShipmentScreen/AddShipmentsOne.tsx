@@ -4,6 +4,7 @@ import { StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 
 import Styles from '../../../common/Styles'
 import { View, Text } from '../../../common/Themed'
+import InputField from '../components/InputField'
 
 type Next = {
   type: 'next'
@@ -13,15 +14,15 @@ type Previous = {
   type: 'previous'
 }
 
-type Reset = {
-  type: 'reset'
+type Submit = {
+  type: 'submit'
 }
 
 type Back = {
   type: 'back'
 }
 
-type ActionType = Next | Previous | Reset | Back
+type ActionType = Next | Previous | Submit | Back
 
 type FormData = {
   businessID: string
@@ -66,7 +67,6 @@ export default function AddShipmentsOne({
     const finalValues = getValues()
     setPageOne(finalValues)
   }
-
   return (
     <View style={styles.container}>
       <Text>New Shipment</Text>
@@ -226,3 +226,13 @@ const styles = StyleSheet.create({
     margin: 15,
   },
 })
+
+/*
+      
+      
+      <InputField
+        control={controlOne}
+        placeHolder="Business ID"
+        name="BusinessID"
+        defaultValue={pageOne.businessID}
+      />*/
