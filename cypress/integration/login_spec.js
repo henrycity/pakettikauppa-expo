@@ -5,11 +5,16 @@ describe('The login page', () => {
   })
 
   it('should have a login button', () => {
-    cy.react('Button', { props: { title: 'Login' } })
+    cy.react('TouchableOpacity', {
+      props: { accessibilityLabel: 'Login button' },
+    }).should('have.length', '1')
   })
 
   it('should have a register button', () => {
-    cy.react('Button', { props: { title: 'Register' } })
+    cy.react('TouchableOpacity', { props: { testID: 'register' } }).should(
+      'have.length',
+      '1'
+    )
   })
 })
 
@@ -38,9 +43,15 @@ describe('The register button', () => {
   })
 
   it('should open registration modal', () => {
-    cy.react('Button', { props: { title: 'Register' } }).click()
-    cy.react('Button', { props: { title: 'Submit' } })
-    cy.react('Button', { props: { title: 'Close' } })
+    cy.react('TouchableOpacity', { props: { testID: 'register' } }).click()
+    cy.react('TouchableOpacity', { props: { testID: 'submit' } }).should(
+      'have.length',
+      1
+    )
+    cy.react('TouchableOpacity', { props: { testID: 'close' } }).should(
+      'have.length',
+      1
+    )
   })
 })
 
