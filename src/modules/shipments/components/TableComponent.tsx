@@ -18,7 +18,10 @@ function Header({ fields }: HeaderProps) {
     <View style={styles.header}>
       {fields.map((field: string) => (
         <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
-          <Text numberOfLines={t(field).split(' ').length} style={styles.text}>
+          <Text
+            numberOfLines={t(field).split(' ').length}
+            style={styles.headerText}
+          >
             {t(field)}
           </Text>
         </View>
@@ -35,7 +38,7 @@ interface RowProps {
 
 function Row({ headers, shipment, hovered }: RowProps) {
   const themed = useThemedColors()
-  const backgroundColor = hovered ? '#d4d4d4' : themed.pink
+  const backgroundColor = hovered ? '#d4d4d4' : themed.drawerBackground
   return (
     <View style={[styles.row, { backgroundColor }]}>
       {headers.map((field) => (
@@ -114,13 +117,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingRight: 6,
   },
-  separator: {
-    height: 1,
-    width: '93%',
-    backgroundColor: 'white',
-  },
   text: {
-    fontSize: 12,
+    fontFamily: 'Muli',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  headerText: {
+    fontFamily: 'Muli-SemiBold',
+    fontSize: 14,
     textAlign: 'center',
   },
 })

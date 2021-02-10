@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList, StyleSheet, Platform } from 'react-native'
 import useSWR, { mutate } from 'swr'
 
-import { Text, View } from '../../../common/Themed'
+import { Text, View, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import { Shipment } from '../../../types'
 
@@ -39,9 +39,12 @@ interface ShipmentListItemProps {
 }
 
 function ShipmentListItem({ shipment }: ShipmentListItemProps) {
+  const themed = useThemedColors()
+  const backgroundColor = themed.drawerBackground
+
   return (
-    <View style={styles.shipmentContainer}>
-      <View style={styles.itemLeft}>
+    <View style={[styles.shipmentContainer, { backgroundColor }]}>
+      <View style={[styles.itemLeft, { backgroundColor }]}>
         <Text style={styles.recipientName}>{shipment.receiverName}</Text>
         <Text style={styles.defaultField}>{shipment.status}</Text>
         <Text style={styles.defaultField}>{shipment.postCode}</Text>
@@ -49,7 +52,7 @@ function ShipmentListItem({ shipment }: ShipmentListItemProps) {
           {shipment.deliveryCompany}: {shipment.shippingMethod}
         </Text>
       </View>
-      <View style={styles.itemRight}>
+      <View style={[styles.itemRight, { backgroundColor }]}>
         <Text style={styles.defaultField}>{shipment.createdOn}</Text>
       </View>
     </View>
@@ -76,10 +79,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#F7F1EF',
-    margin: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
+    margin: 2,
+    paddingHorizontal: 30,
+    paddingVertical: 2,
   },
   itemLeft: {
     flex: 1,
@@ -88,14 +90,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     alignContent: 'stretch',
-    backgroundColor: '#F7F1EF',
   },
   itemRight: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-end',
     flexWrap: 'wrap',
-    backgroundColor: '#F7F1EF',
     justifyContent: 'center',
     alignContent: 'flex-end',
   },
@@ -103,14 +103,11 @@ const styles = StyleSheet.create({
     height: 60,
   },
   recipientName: {
-    fontFamily: 'Rubik',
-    fontWeight: 'bold',
+    fontFamily: 'Rubik-Bold',
     fontSize: 17,
-    color: '#223285',
   },
   defaultField: {
-    fontFamily: 'Rubik',
+    fontFamily: 'Muli',
     fontSize: 10,
-    color: '#223285',
   },
 })

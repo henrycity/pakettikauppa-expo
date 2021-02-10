@@ -1,18 +1,20 @@
 import { StackHeaderOptions } from '@react-navigation/stack/lib/typescript/src/types'
 import React from 'react'
-import { StyleSheet } from 'react-native'
 
+import Colors from '../common/Colors'
 import MenuButton from './components/MenuButton'
-
-const styles = StyleSheet.create({
-  header: {
-    height: 80,
-  },
-})
 
 const headerOptions: StackHeaderOptions = {
   headerLeft: () => <MenuButton />,
-  headerStyle: styles.header,
+  headerTitleStyle: {
+    fontFamily: 'Rubik',
+    fontWeight: 'bold',
+    fontSize: 25,
+  },
+  headerStyle: {
+    shadowColor: 'transparent',
+  },
+  headerTintColor: Colors.light.text,
 }
 
 export default headerOptions

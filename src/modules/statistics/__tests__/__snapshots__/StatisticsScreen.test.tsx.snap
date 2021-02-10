@@ -35,9 +35,11 @@ exports[`LoginScreen renders correctly 1`] = `
             "color": "#233385",
           },
           Object {
+            "fontFamily": "Rubik",
             "fontSize": 20,
             "fontWeight": "bold",
           },
+          undefined,
         ]
       }
     >
@@ -62,6 +64,9 @@ exports[`LoginScreen renders correctly 1`] = `
         Array [
           Object {
             "color": "#233385",
+          },
+          Object {
+            "fontFamily": "Muli",
           },
           undefined,
         ]

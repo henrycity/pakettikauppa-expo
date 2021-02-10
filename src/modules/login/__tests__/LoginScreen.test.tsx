@@ -25,5 +25,3 @@ describe('loginscreen', () => {
     expect(login).toHaveBeenCalled()
   })
 })
-
-// yarn test -- screens/__tests__/LoginScreen.test.tsx

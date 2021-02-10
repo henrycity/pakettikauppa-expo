@@ -1,10 +1,11 @@
-import { MaterialIcons } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, View } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 
+import Styles from '../../common/Styles'
 import { useThemedColors } from '../../common/Themed'
 import { useSelectedLanguage, languages } from '../../localization'
 
@@ -24,12 +25,14 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: themed.background }]}>
-      <MaterialIcons
-        name="language"
-        size={26}
-        color="blue"
-        style={styles.icon}
+    <View
+      style={[styles.container, { backgroundColor: themed.drawerBackground }]}
+    >
+      <Feather
+        name="globe"
+        size={24}
+        color={themed.inactiveIcon}
+        style={Styles.icon}
       />
       <View style={styles.languagePicker}>
         {selectedLanguage ? (
@@ -41,15 +44,15 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
             style={{
               inputWeb: {
                 ...webStyle,
-                backgroundColor: themed.background,
+                backgroundColor: themed.drawerBackground,
                 color: themed.text,
               },
               inputIOS: {
-                backgroundColor: themed.background,
+                backgroundColor: themed.drawerBackground,
                 color: themed.text,
               },
               inputAndroid: {
-                backgroundColor: themed.background,
+                backgroundColor: themed.drawerBackground,
                 color: themed.text,
               },
             }}
@@ -70,9 +73,6 @@ const styles = StyleSheet.create({
   languagePicker: {
     marginLeft: 23,
     width: '30%',
-  },
-  icon: {
-    padding: 7,
   },
 })
 

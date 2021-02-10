@@ -22,6 +22,10 @@ exports[`LoginScreen renders correctly 1`] = `
           "color": "#233385",
         },
         Object {
+          "fontFamily": "Muli",
+        },
+        Object {
+          "fontFamily": "Rubik",
           "fontSize": 20,
           "fontWeight": "bold",
         },
@@ -46,8 +50,6 @@ exports[`LoginScreen renders correctly 1`] = `
   />
   <View
     accessibilityLabel="Login button"
-    accessibilityRole="button"
-    accessibilityState={Object {}}
     accessible={true}
     focusable={true}
     onClick={[Function]}
@@ -59,33 +61,43 @@ exports[`LoginScreen renders correctly 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "alignItems": "center",
+        "backgroundColor": "#ff2e33",
+        "borderRadius": 100,
+        "height": 30,
+        "justifyContent": "center",
         "opacity": 1,
+        "padding": 10,
+        "width": 85,
       }
     }
   >
-    <View
+    <Text
       style={
         Array [
-          Object {},
+          Object {
+            "color": "#233385",
+          },
+          Object {
+            "fontFamily": "Muli",
+          },
+          Array [
+            Object {
+              "fontFamily": "Rubik",
+              "fontSize": 12,
+              "fontWeight": "700",
+              "padding": 10,
+              "textTransform": "uppercase",
+            },
+            Object {
+              "color": "#fff",
+            },
+          ],
         ]
       }
     >
-      <Text
-        disabled={false}
-        style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "margin": 8,
-              "textAlign": "center",
-            },
-          ]
-        }
-      >
-        Login
-      </Text>
-    </View>
+      Login
+    </Text>
   </View>
   <View
     style={
@@ -100,8 +112,6 @@ exports[`LoginScreen renders correctly 1`] = `
     }
   />
   <View
-    accessibilityRole="button"
-    accessibilityState={Object {}}
     accessible={true}
     focusable={true}
     onClick={[Function]}
@@ -113,32 +123,44 @@ exports[`LoginScreen renders correctly 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "alignItems": "center",
+        "backgroundColor": "#ff2e33",
+        "borderRadius": 100,
+        "height": 30,
+        "justifyContent": "center",
         "opacity": 1,
+        "padding": 10,
+        "width": 85,
       }
     }
+    testID="register"
   >
-    <View
+    <Text
       style={
         Array [
-          Object {},
+          Object {
+            "color": "#233385",
+          },
+          Object {
+            "fontFamily": "Muli",
+          },
+          Array [
+            Object {
+              "fontFamily": "Rubik",
+              "fontSize": 12,
+              "fontWeight": "700",
+              "padding": 10,
+              "textTransform": "uppercase",
+            },
+            Object {
+              "color": "#fff",
+            },
+          ],
         ]
       }
     >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "margin": 8,
-              "textAlign": "center",
-            },
-          ]
-        }
-      >
-        Register
-      </Text>
-    </View>
+      Register
+    </Text>
   </View>
   <View
     style={
@@ -189,13 +211,17 @@ exports[`LoginScreen renders correctly 1`] = `
               "color": "#233385",
             },
             Object {
+              "fontFamily": "Muli",
+            },
+            Object {
+              "fontFamily": "Rubik",
               "fontSize": 20,
               "fontWeight": "bold",
             },
           ]
         }
       >
-        Please enter your details: 
+        Please enter your details
       </Text>
       <View
         style={
@@ -225,28 +251,40 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "color": "#233385",
             },
+            Object {
+              "fontFamily": "Muli",
+            },
             undefined,
           ]
         }
       >
-         Email: 
+        Email:
       </Text>
       <TextInput
         allowFontScaling={true}
         autoCapitalize="none"
         defaultValue=""
         onChangeText={[Function]}
-        placeholder="Email"
+        placeholder="Email:"
+        placeholderTextColor="#8cb1b7"
         rejectResponderTermination={true}
         style={
           Array [
             Object {
-              "color": "#233385",
+              "color": "#8cb1b7",
             },
             Object {
-              "borderBottomWidth": 1,
-              "width": 200,
+              "fontFamily": "Muli",
             },
+            Array [
+              Object {
+                "borderBottomWidth": 1,
+                "width": 200,
+              },
+              Object {
+                "color": "#233385",
+              },
+            ],
           ]
         }
         testID="Email"
@@ -270,28 +308,40 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "color": "#233385",
             },
+            Object {
+              "fontFamily": "Muli",
+            },
             undefined,
           ]
         }
       >
-         VAT ID: 
+        Vat ID
       </Text>
       <TextInput
         allowFontScaling={true}
         autoCapitalize="none"
         defaultValue=""
         onChangeText={[Function]}
-        placeholder="VAT ID"
+        placeholder="Vat ID"
+        placeholderTextColor="#8cb1b7"
         rejectResponderTermination={true}
         style={
           Array [
             Object {
-              "color": "#233385",
+              "color": "#8cb1b7",
             },
             Object {
-              "borderBottomWidth": 1,
-              "width": 200,
+              "fontFamily": "Muli",
             },
+            Array [
+              Object {
+                "borderBottomWidth": 1,
+                "width": 200,
+              },
+              Object {
+                "color": "#233385",
+              },
+            ],
           ]
         }
         testID="VAT"
@@ -310,8 +360,6 @@ exports[`LoginScreen renders correctly 1`] = `
         }
       />
       <View
-        accessibilityRole="button"
-        accessibilityState={Object {}}
         accessible={true}
         focusable={true}
         onClick={[Function]}
@@ -323,32 +371,44 @@ exports[`LoginScreen renders correctly 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
+            "alignItems": "center",
+            "backgroundColor": "#ff2e33",
+            "borderRadius": 100,
+            "height": 30,
+            "justifyContent": "center",
             "opacity": 1,
+            "padding": 10,
+            "width": 85,
           }
         }
+        testID="submit"
       >
-        <View
+        <Text
           style={
             Array [
-              Object {},
+              Object {
+                "color": "#233385",
+              },
+              Object {
+                "fontFamily": "Muli",
+              },
+              Array [
+                Object {
+                  "fontFamily": "Rubik",
+                  "fontSize": 12,
+                  "fontWeight": "700",
+                  "padding": 10,
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "#fff",
+                },
+              ],
             ]
           }
         >
-          <Text
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "margin": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Submit
-          </Text>
-        </View>
+          Submit
+        </Text>
       </View>
       <View
         style={
@@ -363,8 +423,6 @@ exports[`LoginScreen renders correctly 1`] = `
         }
       />
       <View
-        accessibilityRole="button"
-        accessibilityState={Object {}}
         accessible={true}
         focusable={true}
         onClick={[Function]}
@@ -376,32 +434,44 @@ exports[`LoginScreen renders correctly 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
+            "alignItems": "center",
+            "backgroundColor": "#ff2e33",
+            "borderRadius": 100,
+            "height": 30,
+            "justifyContent": "center",
             "opacity": 1,
+            "padding": 10,
+            "width": 85,
           }
         }
+        testID="close"
       >
-        <View
+        <Text
           style={
             Array [
-              Object {},
+              Object {
+                "color": "#233385",
+              },
+              Object {
+                "fontFamily": "Muli",
+              },
+              Array [
+                Object {
+                  "fontFamily": "Rubik",
+                  "fontSize": 12,
+                  "fontWeight": "700",
+                  "padding": 10,
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "#fff",
+                },
+              ],
             ]
           }
         >
-          <Text
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "margin": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Close
-          </Text>
-        </View>
+          Close
+        </Text>
       </View>
     </View>
   </Modal>

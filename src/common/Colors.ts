@@ -1,11 +1,21 @@
-const tintColorLight = '#2f95dc'
+const tintColorLight = '#233385'
 const tintColorDark = '#fff'
 
 export default {
   light: {
     text: '#233385',
     background: '#fff',
-    pink: '#f7f1ee',
+    drawerBackground: '#f7f1ee',
+    headerBackground: '#233385',
+    placeholder: '#8cb1b7',
+    inputColor: '#233385',
+    inactiveIcon: '#233385',
+    activeIcon: '#fff',
+    activeBackground: '#8cb1b7',
+    linkTextColor: '#ff2e33',
+    buttonColor: '#ff2e33',
+    buttonTextColor: '#fff',
+    yellow: '#ffc200',
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
@@ -13,7 +23,17 @@ export default {
   dark: {
     text: '#fff',
     background: '#000',
-    pink: '#f7f1ee',
+    headerBackground: '#233385',
+    drawerBackground: '#f7f1ee',
+    inputColor: '#233385',
+    inactiveIcon: '#233385',
+    activeIcon: '#fff',
+    activeBackground: '#8cb1b7',
+    yellow: '#ffc200',
+    linkTextColor: '#ff2e33',
+    buttonColor: '#ff2e33',
+    buttonTextColor: '#fff',
+    placeholder: '#8cb1b7',
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
