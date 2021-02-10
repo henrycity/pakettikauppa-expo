@@ -19,6 +19,9 @@ export default {
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
+    bottomIcon: '#233385',
+    bottomTabBackground: '#233385',
+    bottomBorderColor: '#233385',
   },
   dark: {
     text: '#fff',
@@ -37,5 +40,8 @@ export default {
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
+    bottomIcon: '#233385',
+    bottomTabBackground: '#233385',
+    bottomBorderColor: '#233385',
   },
 }

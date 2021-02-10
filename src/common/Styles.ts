@@ -3,11 +3,22 @@ import { StyleSheet, TextStyle } from 'react-native'
 // Common stylesheet that can be used everywhere
 export const typography = {
   title: {
-    fontFamily: 'Rubik',
-    fontWeight: 'bold',
+    fontFamily: 'Rubik-Bold',
   } as TextStyle,
   body: {
     fontFamily: 'Muli',
+  } as TextStyle,
+  bottomTabLabel: {
+    fontFamily: 'Rubik',
+  } as TextStyle,
+  drawerLabel: {
+    fontFamily: 'Rubik-Medium',
+  } as TextStyle,
+  subtitle: {
+    fontFamily: 'Muli-SemiBold',
+  } as TextStyle,
+  link: {
+    fontFamily: 'Muli-Bold',
   } as TextStyle,
 }
 export default StyleSheet.create({
@@ -18,7 +29,6 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: typography.title.fontWeight,
     fontFamily: typography.title.fontFamily,
   },
   separator: {
@@ -46,8 +56,7 @@ export default StyleSheet.create({
     borderRadius: 500,
   },
   buttonLabel: {
-    fontSize: 12,
-    fontWeight: '700',
+    fontSize: 14,
     fontFamily: typography.title.fontFamily,
     textTransform: 'uppercase',
     padding: 10,
@@ -74,7 +83,15 @@ export default StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
-    fontFamily: typography.body.fontFamily,
-    fontWeight: 'bold',
+    fontFamily: typography.link.fontFamily,
+  },
+  bottomTabLabel: {
+    fontFamily: typography.bottomTabLabel.fontFamily,
+    textTransform: 'lowercase',
+    fontSize: 13,
+  },
+  drawerLabel: {
+    fontFamily: typography.drawerLabel.fontFamily,
+    fontSize: 18,
   },
 })
