@@ -25,9 +25,8 @@ exports[`LoginScreen renders correctly 1`] = `
           "fontFamily": "Muli",
         },
         Object {
-          "fontFamily": "Rubik",
+          "fontFamily": "Rubik-Bold",
           "fontSize": 20,
-          "fontWeight": "bold",
         },
       ]
     }
@@ -83,9 +82,8 @@ exports[`LoginScreen renders correctly 1`] = `
           },
           Array [
             Object {
-              "fontFamily": "Rubik",
-              "fontSize": 12,
-              "fontWeight": "700",
+              "fontFamily": "Rubik-Bold",
+              "fontSize": 14,
               "padding": 10,
               "textTransform": "uppercase",
             },
@@ -146,9 +144,8 @@ exports[`LoginScreen renders correctly 1`] = `
           },
           Array [
             Object {
-              "fontFamily": "Rubik",
-              "fontSize": 12,
-              "fontWeight": "700",
+              "fontFamily": "Rubik-Bold",
+              "fontSize": 14,
               "padding": 10,
               "textTransform": "uppercase",
             },
@@ -214,9 +211,8 @@ exports[`LoginScreen renders correctly 1`] = `
               "fontFamily": "Muli",
             },
             Object {
-              "fontFamily": "Rubik",
+              "fontFamily": "Rubik-Bold",
               "fontSize": 20,
-              "fontWeight": "bold",
             },
           ]
         }
@@ -394,9 +390,8 @@ exports[`LoginScreen renders correctly 1`] = `
               },
               Array [
                 Object {
-                  "fontFamily": "Rubik",
-                  "fontSize": 12,
-                  "fontWeight": "700",
+                  "fontFamily": "Rubik-Bold",
+                  "fontSize": 14,
                   "padding": 10,
                   "textTransform": "uppercase",
                 },
@@ -457,9 +452,8 @@ exports[`LoginScreen renders correctly 1`] = `
               },
               Array [
                 Object {
-                  "fontFamily": "Rubik",
-                  "fontSize": 12,
-                  "fontWeight": "700",
+                  "fontFamily": "Rubik-Bold",
+                  "fontSize": 14,
                   "padding": 10,
                   "textTransform": "uppercase",
                 },
