@@ -1,9 +1,8 @@
 import { Feather } from '@expo/vector-icons'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, View } from 'react-native'
-import RNPickerSelect from 'react-native-picker-select'
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 
 import Styles from '../../common/Styles'
 import { useThemedColors } from '../../common/Themed'
@@ -17,6 +16,8 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
   const { i18n } = useTranslation()
   const [selectedLanguage, setSelectedLanguage] = useSelectedLanguage()
   const themed = useThemedColors()
+
+  const [visible, setVisible] = useState(false)
 
   const onValueChange = (value: string) => {
     setSelectedLanguage(value)
@@ -36,27 +37,20 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
       />
       <View style={styles.languagePicker}>
         {selectedLanguage ? (
-          <RNPickerSelect
-            value={selectedLanguage}
-            placeholder={{}}
-            onValueChange={onValueChange}
-            items={languages.map((lang) => ({ label: lang, value: lang }))}
-            style={{
-              inputWeb: {
-                ...webStyle,
-                backgroundColor: themed.drawerBackground,
-                color: themed.text,
-              },
-              inputIOS: {
-                backgroundColor: themed.drawerBackground,
-                color: themed.text,
-              },
-              inputAndroid: {
-                backgroundColor: themed.drawerBackground,
-                color: themed.text,
-              },
-            }}
-          />
+          <>
+            <TouchableOpacity onPress={() => setVisible(!visible)}>
+              <Text>Language</Text>
+            </TouchableOpacity>
+            {visible && (
+              <View>
+                {languages.map((lang) => (
+                  <TouchableOpacity onPress={() => onValueChange(lang)}>
+                    <Text>{lang}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+          </>
         ) : null}
       </View>
     </View>
@@ -75,9 +69,5 @@ const styles = StyleSheet.create({
     width: '30%',
   },
 })
-
-const webStyle = {
-  height: '20px',
-}
 
 export default LanguagePicker
