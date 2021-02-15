@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { Modal, Button, StyleSheet } from 'react-native'
+import { useTranslation } from 'react-i18next'
+import { Modal, TouchableOpacity } from 'react-native'
 
-import { Text, View, TextInput } from '../../../common/Themed'
+import Styles from '../../../common/Styles'
+import { useThemedColors, Text, View, TextInput } from '../../../common/Themed'
 import postRegistration from '../postRegistration'
 
 const emailIsValid = (email: string) =>
@@ -13,6 +15,9 @@ export default function RegistrationModal(): JSX.Element {
   const [vat_id, setVat_id] = useState('')
   const [errors, setErrors] = useState<Error[]>([])
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
+
+  const themed = useThemedColors()
+  const { t } = useTranslation()
 
   const validateInput = () => {
     const newErrors: Error[] = []
@@ -58,13 +63,21 @@ export default function RegistrationModal(): JSX.Element {
 
   return (
     <>
-      <Button onPress={onRegisterButtonPress} title="Register" />
+      <TouchableOpacity
+        onPress={onRegisterButtonPress}
+        style={[Styles.normalButton, { backgroundColor: themed.buttonColor }]}
+        testID="register"
+      >
+        <Text style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}>
+          {t('register')}
+        </Text>
+      </TouchableOpacity>
 
-      <View style={styles.gap} />
+      <View style={Styles.gap} />
 
       <View>
         {displaySuccessMessage ? (
-          <Text style={styles.success}>Registration submitted!</Text>
+          <Text style={Styles.success}>{t('registerSuccess')}</Text>
         ) : null}
       </View>
 
@@ -73,73 +86,74 @@ export default function RegistrationModal(): JSX.Element {
         visible={modalIsVisible}
         testID="modalTest"
       >
-        <View style={styles.container}>
-          <Text style={styles.title}>Please enter your details: </Text>
-          <View style={styles.gap} />
+        <View style={Styles.container}>
+          <Text style={Styles.title}>{t('registerDetails')}</Text>
+          <View style={Styles.gap} />
           <View>
             {errors.length > 0 &&
               errors.map((error) => (
-                <Text key={error.message} style={styles.error}>
+                <Text key={error.message} style={Styles.error}>
                   {error.message}
                 </Text>
               ))}
           </View>
 
-          <Text> Email: </Text>
+          <Text>{t('email')}</Text>
           <TextInput
             testID="Email"
-            style={styles.input}
-            placeholder="Email"
+            placeholder={t('email')}
             autoCapitalize="none"
+            placeholderTextColor={themed.placeholder}
             onChangeText={(email) => setEmail(email)}
             defaultValue={email}
+            style={[Styles.input, { color: themed.inputColor }]}
           />
-          <View style={styles.gap} />
+          <View style={Styles.gap} />
 
-          <Text> VAT ID: </Text>
+          <Text>{t('vatID')}</Text>
           <TextInput
             testID="VAT"
-            style={styles.input}
-            placeholder="VAT ID"
+            placeholder={t('vatID')}
             autoCapitalize="none"
+            placeholderTextColor={themed.placeholder}
             onChangeText={(vat_id) => setVat_id(vat_id)}
             defaultValue={vat_id}
+            style={[Styles.input, { color: themed.inputColor }]}
           />
 
-          <View style={styles.gap} />
+          <View style={Styles.gap} />
+          <TouchableOpacity
+            onPress={() => handlePress()}
+            style={[
+              Styles.normalButton,
+              { backgroundColor: themed.buttonColor },
+            ]}
+            testID="submit"
+          >
+            <Text
+              style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
+            >
+              {t('submit')}
+            </Text>
+          </TouchableOpacity>
+          <View style={Styles.gap} />
 
-          <Button onPress={() => handlePress()} title="Submit" />
-
-          <View style={styles.gap} />
-
-          <Button onPress={() => setModalIsVisible(false)} title="Close" />
+          <TouchableOpacity
+            onPress={() => setModalIsVisible(false)}
+            style={[
+              Styles.normalButton,
+              { backgroundColor: themed.buttonColor },
+            ]}
+            testID="close"
+          >
+            <Text
+              style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
+            >
+              {t('close')}
+            </Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  input: {
-    borderBottomWidth: 1.0,
-    width: 200,
-  },
-  error: {
-    color: 'red',
-  },
-  success: {
-    color: 'green',
-  },
-  gap: {
-    height: 10,
-  },
-})

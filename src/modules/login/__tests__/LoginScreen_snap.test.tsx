@@ -1,4 +1,3 @@
-import { render, fireEvent, cleanup } from '@testing-library/react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
 

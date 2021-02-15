@@ -3,9 +3,11 @@ import {
   Text as DefaultText,
   View as DefaultView,
   TextInput as DefaultTextInput,
+  StyleSheet,
 } from 'react-native'
 
 import Colors from './Colors'
+import Styles from './Styles'
 import useColorScheme from './hooks/useColorScheme'
 
 export function useThemeColor(
@@ -40,7 +42,21 @@ export function Text(props: TextProps): JSX.Element {
   const { style, lightColor, darkColor, ...otherProps } = props
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
 
-  return <DefaultText style={[{ color }, style]} {...otherProps} />
+  return (
+    <DefaultText
+      style={[{ color }, { fontFamily: 'Muli' }, style]}
+      {...otherProps}
+    />
+  )
+}
+
+export function TitleText(props: TextProps): JSX.Element {
+  const { style, lightColor, darkColor, ...otherProps } = props
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
+
+  return (
+    <DefaultText style={[style, Styles.title, { color }]} {...otherProps} />
+  )
 }
 
 export function View(props: ViewProps): JSX.Element {
@@ -55,7 +71,15 @@ export function View(props: ViewProps): JSX.Element {
 
 export function TextInput(props: TextInputProps): JSX.Element {
   const { style, lightColor, darkColor, ...otherProps } = props
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
+  const color = useThemeColor(
+    { light: Colors.light.placeholder, dark: darkColor },
+    'text'
+  )
 
-  return <DefaultTextInput style={[{ color }, style]} {...otherProps} />
+  return (
+    <DefaultTextInput
+      style={[{ color }, { fontFamily: 'Muli' }, style]}
+      {...otherProps}
+    />
+  )
 }

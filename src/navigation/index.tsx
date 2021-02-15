@@ -5,8 +5,10 @@ import {
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
-import { ColorSchemeName } from 'react-native'
+import { ColorSchemeName, Image } from 'react-native'
 
+import Colors from '../common/Colors'
+import { useThemeColor, useThemedColors } from '../common/Themed'
 import LoginScreen from '../modules/login/LoginScreen'
 import useUser from '../modules/login/hooks/useUser'
 import { RootStackParamList } from '../types'
@@ -21,32 +23,73 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName
 }): JSX.Element {
+  const themed = useThemedColors()
+
+  // Theme used by react-navigation components
+  const navigationTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: themed.background,
+    },
+  }
+
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration} theme={navigationTheme}>
       <RootNavigator />
     </NavigationContainer>
   )
 }
 
+function LogoTitle() {
+  return (
+    <Image
+      style={{ width: 150, height: 50 }}
+      source={require('../assets/images/logo-white.png')}
+    />
+  )
+}
 // A root stack navigator is often used for displaying modals on top of all other content
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>()
 
 function RootNavigator() {
   const { isLoggedIn } = useUser()
+  const backgroundColor = useThemeColor(
+    {
+      light: Colors.light.headerBackground,
+      dark: Colors.dark.headerBackground,
+    },
+    'headerBackground'
+  )
+  const options = {
+    headerTitle: () => <LogoTitle />,
+    headerStyle: {
+      backgroundColor,
+    },
+  }
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: true }}>
       {isLoggedIn ? (
         <>
-          <Stack.Screen name="Root" component={DrawerNavigator} />
-          <Stack.Screen name="NotFound" component={NotFoundScreen} />
+          <Stack.Screen
+            name="Root"
+            component={DrawerNavigator}
+            options={options}
+          />
+          <Stack.Screen
+            name="NotFound"
+            component={NotFoundScreen}
+            options={options}
+          />
         </>
       ) : (
         <>
-          <Stack.Screen name="login" component={LoginScreen} />
+          <Stack.Screen
+            name="login"
+            component={LoginScreen}
+            options={options}
+          />
         </>
       )}
     </Stack.Navigator>

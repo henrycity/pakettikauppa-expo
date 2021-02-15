@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
 
-import { Text, View } from '../../common/Themed'
+import Styles from '../../common/Styles'
+import { TitleText, Text, View } from '../../common/Themed'
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
 import useDeviceType from '../../common/hooks/useDeviceType'
 
@@ -10,10 +10,10 @@ export default function ProfileScreen(): JSX.Element {
 
   return (
     <BottomTabWrapper>
-      <View style={styles.container}>
-        <Text style={styles.title}>Profile Screen!</Text>
+      <View style={Styles.container}>
+        <TitleText>Profile Screen!</TitleText>
         <View
-          style={styles.separator}
+          style={Styles.separator}
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
@@ -22,20 +22,3 @@ export default function ProfileScreen(): JSX.Element {
     </BottomTabWrapper>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-})

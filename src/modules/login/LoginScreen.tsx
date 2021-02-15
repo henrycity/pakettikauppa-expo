@@ -1,59 +1,47 @@
 import * as WebBrowser from 'expo-web-browser'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, Button } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 
-import { View, Text } from '../../common/Themed'
+import Styles from '../../common/Styles'
+import { useThemedColors, View, Text } from '../../common/Themed'
 import RegistrationModal from './components/RegistrationModal'
 import useLogin from './hooks/useLogin'
 
 WebBrowser.maybeCompleteAuthSession()
 
 export default function LoginScreen(): JSX.Element {
-  const { login, disabled } = useLogin()
+  const { login } = useLogin()
   const { t } = useTranslation()
+  const clickHandler = () => {
+    login()
+  }
 
+  const theme = useThemedColors()
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login or register with a Google account</Text>
+    <View style={Styles.container}>
+      <Text style={[Styles.title, { textAlign: 'center' }]}>
+        {t('loginText')}
+      </Text>
       <View
-        style={styles.separator}
+        style={Styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
 
-      <Button
-        disabled={disabled}
+      <TouchableOpacity
+        onPress={clickHandler}
+        style={[Styles.normalButton, { backgroundColor: theme.buttonColor }]}
         accessibilityLabel="Login button"
-        title={t('login')}
-        onPress={() => {
-          login()
-        }}
-      />
+      >
+        <Text style={[Styles.buttonLabel, { color: theme.buttonTextColor }]}>
+          {t('login')}
+        </Text>
+      </TouchableOpacity>
 
-      <View style={styles.gap} />
+      <View style={Styles.gap} />
 
       <RegistrationModal />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-  gap: {
-    height: 10,
-  },
-})

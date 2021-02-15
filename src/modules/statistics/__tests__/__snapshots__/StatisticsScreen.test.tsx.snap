@@ -32,12 +32,13 @@ exports[`LoginScreen renders correctly 1`] = `
     <Text
       style={
         Array [
+          undefined,
           Object {
-            "color": "#000",
+            "fontFamily": "Rubik-Bold",
+            "fontSize": 20,
           },
           Object {
-            "fontSize": 20,
-            "fontWeight": "bold",
+            "color": "#233385",
           },
         ]
       }
@@ -62,7 +63,10 @@ exports[`LoginScreen renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#000",
+            "color": "#233385",
+          },
+          Object {
+            "fontFamily": "Muli",
           },
           undefined,
         ]
