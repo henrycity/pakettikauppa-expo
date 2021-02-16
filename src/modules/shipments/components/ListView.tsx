@@ -1,8 +1,17 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { FlatList, StyleSheet, Platform } from 'react-native'
+import { useTranslation } from 'react-i18next'
+import {
+  FlatList,
+  StyleSheet,
+  Platform,
+  View,
+  TouchableOpacity,
+} from 'react-native'
+import { Hoverable } from 'react-native-web-hover'
 import useSWR, { mutate } from 'swr'
 
-import { Text, View, useThemedColors } from '../../../common/Themed'
+import { Text, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import { Shipment } from '../../../types'
 
@@ -24,7 +33,13 @@ export default function ListView(): JSX.Element {
           keyExtractor={({ id }) => String(id)}
           ListHeaderComponent={ShipmentsHeaderComponent}
           ListFooterComponent={ShipmentsFooterComponent}
-          renderItem={({ item }) => <ShipmentListItem shipment={item} />}
+          renderItem={({ item }) => (
+            <Hoverable>
+              {({ hovered }) => (
+                <ShipmentListItem shipment={item} hovered={hovered} />
+              )}
+            </Hoverable>
+          )}
           refreshing={refreshing}
           onRefresh={() => mutate('/shipments')}
           testID="List Component"
@@ -36,26 +51,45 @@ export default function ListView(): JSX.Element {
 
 interface ShipmentListItemProps {
   shipment: Shipment
+  hovered: boolean
 }
 
-function ShipmentListItem({ shipment }: ShipmentListItemProps) {
+function ShipmentListItem({ shipment, hovered }: ShipmentListItemProps) {
+  const navigation = useNavigation()
   const themed = useThemedColors()
-  const backgroundColor = themed.drawerBackground
+  const { i18n } = useTranslation()
+
+  const backgroundColor = hovered ? '#8cb1b7' : themed.drawerBackground
+  const color = hovered ? '#fff' : themed.text
 
   return (
-    <View style={[styles.shipmentContainer, { backgroundColor }]}>
-      <View style={[styles.itemLeft, { backgroundColor }]}>
-        <Text style={styles.recipientName}>{shipment.receiverName}</Text>
-        <Text style={styles.defaultField}>{shipment.status}</Text>
-        <Text style={styles.defaultField}>{shipment.postCode}</Text>
-        <Text style={styles.defaultField}>
+    <TouchableOpacity
+      style={[styles.shipmentContainer, { backgroundColor }]}
+      onPress={() =>
+        navigation.navigate('DetailsScreen', {
+          id: shipment.id,
+          shipment,
+        })
+      }
+    >
+      <View style={styles.itemLeft}>
+        <Text style={[styles.recipientName, { color }]}>
+          {shipment.receiverName}
+        </Text>
+        <Text style={[styles.defaultField, { color }]}>{shipment.status}</Text>
+        <Text style={[styles.defaultField, { color }]}>
+          {shipment.receiverPostCode}
+        </Text>
+        <Text style={[styles.defaultField, { color }]}>
           {shipment.deliveryCompany}: {shipment.shippingMethod}
         </Text>
       </View>
-      <View style={[styles.itemRight, { backgroundColor }]}>
-        <Text style={styles.defaultField}>{shipment.createdOn}</Text>
+      <View style={styles.itemRight}>
+        <Text style={[styles.defaultField, { color }]}>
+          {new Date(shipment.createdOn).toLocaleDateString(i18n.language)}
+        </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

@@ -1,10 +1,12 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, FlatList, Platform } from 'react-native'
+import { StyleSheet, FlatList, Platform, TouchableOpacity } from 'react-native'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
+import { useSelectedLanguage } from '../../../localization'
 import { Shipment } from '../../../types'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
 
@@ -34,24 +36,49 @@ interface RowProps {
   headers: typeof shipmentHeaders
   shipment: Shipment
   hovered: boolean
+  locale: string
 }
 
-function Row({ headers, shipment, hovered }: RowProps) {
+function Row({ headers, shipment, hovered, locale }: RowProps) {
+  const navigation = useNavigation()
   const themed = useThemedColors()
-  const backgroundColor = hovered ? '#d4d4d4' : themed.drawerBackground
+
+  const backgroundColor = hovered ? '#8cb1b7' : themed.drawerBackground
   return (
-    <View style={[styles.row, { backgroundColor }]}>
-      {headers.map((field) => (
-        <View
-          key={field + shipment.id}
-          style={[styles.cell, { flex: cellData[field].flex, backgroundColor }]}
-        >
-          <Text numberOfLines={1} style={styles.text}>
-            {shipment[field]}
-          </Text>
-        </View>
-      ))}
-    </View>
+    <TouchableOpacity
+      style={[styles.row, { backgroundColor }]}
+      onPress={() =>
+        navigation.navigate('DetailsScreen', {
+          id: shipment.id,
+          shipment,
+        })
+      }
+    >
+      {headers.map((field) => {
+        let content = ''
+        if (field === 'createdOn') {
+          content = new Date(shipment[field]).toLocaleDateString(locale)
+        } else {
+          content = shipment[field]?.toString()
+        }
+        return (
+          <View
+            key={field + shipment.id}
+            style={[
+              styles.cell,
+              { flex: cellData[field].flex, backgroundColor },
+            ]}
+          >
+            <Text
+              numberOfLines={1}
+              style={[styles.text, { color: hovered ? '#fff' : themed.text }]}
+            >
+              {content}
+            </Text>
+          </View>
+        )
+      })}
+    </TouchableOpacity>
   )
 }
 
@@ -64,6 +91,7 @@ export default function TableComponent({
   data,
   refreshing,
 }: ShipmentTableProps): JSX.Element {
+  const { i18n } = useTranslation()
   const headers = shipmentHeaders.filter((field) => field !== 'id')
 
   return (
@@ -75,13 +103,18 @@ export default function TableComponent({
       renderItem={({ item }) => (
         <Hoverable>
           {({ hovered }) => (
-            <Row headers={headers} shipment={item} hovered={hovered} />
+            <Row
+              headers={headers}
+              shipment={item}
+              hovered={hovered}
+              locale={i18n.language}
+            />
           )}
         </Hoverable>
       )}
       ListHeaderComponent={<Header fields={headers} />}
       stickyHeaderIndices={[0]}
-      initialNumToRender={10}
+      initialNumToRender={25}
       removeClippedSubviews
       keyExtractor={(shipment) => String(shipment.id)}
       onRefresh={() => mutate('/shipments')}

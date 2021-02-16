@@ -2,6 +2,7 @@ import {
   DrawerNavigationProp,
   DrawerScreenProps,
 } from '@react-navigation/drawer'
+import { RouteProp, CompositeNavigationProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import ScreenNames from './navigation/ScreenNames'
@@ -36,9 +37,9 @@ export interface Shipment {
   // Shipping Address
   receiverName: string
   receiverEmail: string
-  postCode: string // This could be a number but this seems more consistent
-  postOffice: string
-  countryCode: string
+  receiverPostCode: string // This could be a number but this seems more consistent
+  receiverCity: string
+  receiverCountry: string
   // Other
   price: number
   deliveryCompany: string
@@ -47,6 +48,39 @@ export interface Shipment {
   latestEvent: string
   invoiceNumber: string
   shippingMethod: string
+}
+
+export interface FullShipment {
+  // metadata
+  createdOn: string
+  id: number
+  // sender
+  businessID: string
+  senderName: string
+  senderAddress: string
+  senderCountry: string
+  senderPostCode: string
+  senderCity: string
+  senderPhoneNumber: string
+  senderEmail: string
+  // receiver
+  receiverAddress: string
+  receiverCity: string
+  receiverCountry: string
+  receiverEmail: string
+  receiverName: string
+  receiverPhoneNumber: string
+  receiverPostCode: string
+  //other
+  description: string
+  invoiceNumber: string
+  reference: string
+  deliveryCompany: string
+  shippingMethod: string
+  weight: string
+  latestEvent: string
+  status: string
+  price: string
 }
 
 // React
@@ -114,13 +148,30 @@ export type SettingsNavigatorProps = {
 
 export type ShipmentsParamList = {
   ShipmentsScreen: undefined
+  DetailsScreen: { id?: string | number; shipment?: Shipment }
+  AddShipmentsScreen: undefined
 }
+
 export type ShipmentsNavigationProp = StackNavigationProp<
   ShipmentsParamList,
   'ShipmentsScreen'
 >
+
+export type DetailsNavigationProp = StackNavigationProp<
+  ShipmentsParamList,
+  'DetailsScreen'
+>
+
+export type ShipmentDetailsRouteProp = RouteProp<
+  ShipmentsParamList,
+  'DetailsScreen'
+>
+
 export type ShipmentsNavigatorProps = {
-  navigation: ShipmentsNavigationProp
+  navigation: CompositeNavigationProp<
+    ShipmentsNavigationProp,
+    DetailsNavigationProp
+  >
 }
 
 export type StatisticsParamList = {

@@ -9,13 +9,13 @@ export const cellData: {
   receiverName: {
     flex: 1.6,
   },
-  postCode: {
+  receiverPostCode: {
     flex: 1.2,
   },
-  postOffice: {
+  receiverCity: {
     flex: 1.4,
   },
-  countryCode: {
+  receiverCountry: {
     flex: 1.7,
   },
   receiverEmail: {
@@ -47,9 +47,9 @@ export const cellData: {
 export const shipmentHeaders: (keyof Shipment)[] = [
   'invoiceNumber',
   'receiverName',
-  'postCode',
-  'postOffice',
-  'countryCode',
+  'receiverPostCode',
+  'receiverCity',
+  'receiverCountry',
   'receiverEmail',
   'reference',
   'price',

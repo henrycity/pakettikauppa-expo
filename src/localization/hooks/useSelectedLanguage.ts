@@ -15,7 +15,7 @@ export default function useSelectedLanguage(): useSelectedLanguageReturnType {
   return [selected, setSelected]
 }
 
-async function getSelectedLanguage() {
+export async function getSelectedLanguage() {
   let selected = await getStoredLanguage()
   if (!selected) {
     const locale = Localization.locale

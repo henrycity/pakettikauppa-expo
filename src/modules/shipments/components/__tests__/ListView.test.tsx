@@ -1,3 +1,5 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import { render, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
@@ -18,7 +20,7 @@ describe('Testing the list component', () => {
   })
   afterEach(cleanup)
 
-  const component = <ListView />
+  const component = <TestComponent />
 
   it('List should exist', async () => {
     const { getByTestId } = render(component)
@@ -33,3 +35,16 @@ describe('Testing the list component', () => {
     expect(element).toBeTruthy()
   })
 })
+
+// Create navigation because list item uses useNavigation()
+const Stack = createStackNavigator()
+
+function TestComponent() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: true }}>
+        <Stack.Screen name="Root" component={ListView} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}

@@ -3,6 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import Styles from '../../common/Styles'
+import { useThemedColors } from '../../common/Themed'
 import useActiveScreen from '../../common/hooks/useActiveScreen'
 import ScreenNames from '../../navigation/ScreenNames'
 import headerOptions from '../../navigation/headerOptions'
@@ -14,6 +16,7 @@ const ProfileStack = createStackNavigator<ProfileParamList>()
 export default function ProfileNavigator(): JSX.Element {
   const { setActiveScreen } = useActiveScreen()
   const { t } = useTranslation()
+  const themed = useThemedColors()
 
   useFocusEffect(
     useCallback(() => {
@@ -29,6 +32,11 @@ export default function ProfileNavigator(): JSX.Element {
         options={{
           ...headerOptions,
           headerTitle: t('profile'),
+          headerTitleStyle: Styles.header,
+          headerStyle: {
+            backgroundColor: themed.background,
+          },
+          headerTintColor: themed.text,
         }}
       />
     </ProfileStack.Navigator>

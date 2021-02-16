@@ -1,3 +1,5 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import { render, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
@@ -18,7 +20,7 @@ describe('Testing table component', () => {
   })
   afterEach(cleanup)
 
-  const component = <TableView />
+  const component = <TestComponent />
 
   it('Should display all headers', async () => {
     const { getByText } = render(component)
@@ -46,7 +48,20 @@ describe('Testing table component', () => {
   it('Table should have data', async () => {
     const { getAllByText } = render(component)
 
-    const element = getAllByText('FI')
+    const element = getAllByText('Finland')
     expect(element).toBeTruthy()
   })
 })
+
+// Create navigation because list item uses useNavigation()
+const Stack = createStackNavigator()
+
+function TestComponent() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: true }}>
+        <Stack.Screen name="Root" component={TableView} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}

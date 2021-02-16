@@ -2,6 +2,7 @@ import { registerRootComponent } from 'expo'
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { useColorScheme } from 'react-native'
+import { Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import ConfigSWR from './common/components/ConfigSWR'
@@ -24,8 +25,10 @@ export default function App(): null | JSX.Element {
           <DeviceTypeContextProvider>
             <ActiveScreenContextProvider>
               <AuthenticationProvider>
-                <Navigation colorScheme={colorScheme} />
-                <StatusBar />
+                <PaperProvider>
+                  <Navigation colorScheme={colorScheme} />
+                  <StatusBar />
+                </PaperProvider>
               </AuthenticationProvider>
             </ActiveScreenContextProvider>
           </DeviceTypeContextProvider>

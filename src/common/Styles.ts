@@ -3,11 +3,22 @@ import { StyleSheet, TextStyle } from 'react-native'
 // Common stylesheet that can be used everywhere
 export const typography = {
   title: {
-    fontFamily: 'Rubik',
-    fontWeight: 'bold',
+    fontFamily: 'Rubik-Bold',
   } as TextStyle,
   body: {
     fontFamily: 'Muli',
+  } as TextStyle,
+  bottomTabLabel: {
+    fontFamily: 'Rubik',
+  } as TextStyle,
+  drawerLabel: {
+    fontFamily: 'Rubik-Medium',
+  } as TextStyle,
+  subtitle: {
+    fontFamily: 'Muli-SemiBold',
+  } as TextStyle,
+  link: {
+    fontFamily: 'Muli-Bold',
   } as TextStyle,
 }
 export default StyleSheet.create({
@@ -17,9 +28,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
-    fontWeight: typography.title.fontWeight,
+    fontSize: 26,
     fontFamily: typography.title.fontFamily,
+  },
+  header: {
+    fontFamily: typography.title.fontFamily,
+    fontSize: 25,
+  },
+  body: {
+    fontFamily: typography.body.fontFamily,
   },
   separator: {
     marginVertical: 30,
@@ -30,11 +47,9 @@ export default StyleSheet.create({
     height: 10,
   },
   normalButton: {
-    width: 85,
-    height: 30,
+    minWidth: 85,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
     borderRadius: 100,
   },
   largeButton: {
@@ -46,8 +61,7 @@ export default StyleSheet.create({
     borderRadius: 500,
   },
   buttonLabel: {
-    fontSize: 12,
-    fontWeight: '700',
+    fontSize: 14,
     fontFamily: typography.title.fontFamily,
     textTransform: 'uppercase',
     padding: 10,
@@ -59,8 +73,22 @@ export default StyleSheet.create({
   error: {
     color: 'red',
   },
+  errorContainer: {
+    alignItems: 'center',
+    paddingVertical: 13,
+    margin: 12,
+    borderRadius: 7,
+    backgroundColor: '#f5aeae',
+  },
   success: {
     color: 'green',
+  },
+  successContainer: {
+    alignItems: 'center',
+    paddingVertical: 13,
+    margin: 12,
+    borderRadius: 7,
+    backgroundColor: '#aaf5c2',
   },
   menuButton: {
     paddingLeft: 20,
@@ -74,7 +102,15 @@ export default StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
-    fontFamily: typography.body.fontFamily,
-    fontWeight: 'bold',
+    fontFamily: typography.link.fontFamily,
+  },
+  bottomTabLabel: {
+    fontFamily: typography.bottomTabLabel.fontFamily,
+    textTransform: 'lowercase',
+    fontSize: 13,
+  },
+  drawerLabel: {
+    fontFamily: typography.drawerLabel.fontFamily,
+    fontSize: 18,
   },
 })

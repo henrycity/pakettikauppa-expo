@@ -31,15 +31,14 @@ exports[`LoginScreen renders correctly 1`] = `
     <Text
       style={
         Array [
+          undefined,
+          Object {
+            "fontFamily": "Rubik-Bold",
+            "fontSize": 26,
+          },
           Object {
             "color": "#233385",
           },
-          Object {
-            "fontFamily": "Rubik",
-            "fontSize": 20,
-            "fontWeight": "bold",
-          },
-          undefined,
         ]
       }
     >

@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import Colors from './Colors'
+import Styles from './Styles'
 import useColorScheme from './hooks/useColorScheme'
 
 export function useThemeColor(
@@ -53,14 +54,7 @@ export function TitleText(props: TextProps): JSX.Element {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
 
   return (
-    <DefaultText
-      style={[
-        { color },
-        { fontSize: 20, fontWeight: 'bold', fontFamily: 'Rubik' },
-        style,
-      ]}
-      {...otherProps}
-    />
+    <DefaultText style={[style, Styles.title, { color }]} {...otherProps} />
   )
 }
 
@@ -81,10 +75,5 @@ export function TextInput(props: TextInputProps): JSX.Element {
     'text'
   )
 
-  return (
-    <DefaultTextInput
-      style={[{ color }, { fontFamily: 'Muli' }, style]}
-      {...otherProps}
-    />
-  )
+  return <DefaultTextInput style={[{ color }, Styles.body]} {...otherProps} />
 }
