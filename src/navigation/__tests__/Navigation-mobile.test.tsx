@@ -4,9 +4,9 @@ import React from 'react'
 
 import { initializeLocalization } from '../../localization'
 import { ScreenName } from '../../types'
-import ScreenNames from '../ScreenNames'
+//import ScreenNames from '../ScreenNames'
 import DrawerNavigator from '../components/DrawerNavigator'
-import { findDrawerLink } from './Navigation-desktop.test'
+//import { findDrawerLink } from './Navigation-desktop.test'
 
 jest.mock('../../modules/login/hooks/useUser', () => {
   return () => ({
@@ -25,20 +25,19 @@ describe('Testing mobile navigation', () => {
 
   const component = <TestApp />
 
-  it('should navigate to shipments from the tab bar', async () => {
+  it('should navigate to reports from the tab bar', async () => {
     process.env.TEST_ENV = 'mobile'
     const { findByA11yLabel, getByText } = render(component)
 
-    const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
-    fireEvent(shipmentsLink, 'press')
+    const reportsLink = await findByA11yLabel('Tab bar link to Reports')
+    fireEvent(reportsLink, 'press')
 
-    const shipmentsText = getByText('Shipments Screen!')
+    const reportsText = getByText('Reports Screen!')
 
-    expect(shipmentsText).toBeTruthy()
+    expect(reportsText).toBeTruthy()
   })
 
-  /*
-  it('should navigate to settings from the drawer', async () => {
+  /*it('should navigate to settings from the drawer', async () => {
     process.env.TEST_ENV = 'mobile'
 
     const { findAllByA11yRole, getByText } = render(component)
@@ -50,8 +49,7 @@ describe('Testing mobile navigation', () => {
     const reportsText = getByText('Reports Screen!')
 
     expect(reportsText).toBeTruthy()
-  })
-  */
+  })*/
 })
 
 function TestApp() {

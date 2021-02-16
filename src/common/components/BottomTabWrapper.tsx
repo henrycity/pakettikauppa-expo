@@ -30,7 +30,6 @@ export default function BottomTabWrapper({
 const styles = StyleSheet.create({
   tabBarContainer: {
     flex: 1,
-    alignItems: 'stretch',
     justifyContent: 'space-between',
   },
 })

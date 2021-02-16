@@ -14,7 +14,7 @@ describe('loginscreen', () => {
   beforeAll(() => {
     initializeLocalization()
   })
-  afterAll(cleanup)
+  afterEach(cleanup)
 
   it('LoginScreen button should ...', async () => {
     const { login, disabled } = useLogin()

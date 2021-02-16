@@ -29,6 +29,26 @@ export interface Permission {
   screen: Screen
 }
 
+export interface Shipment {
+  // Metadata
+  id: number
+  createdOn: string
+  // Shipping Address
+  receiverName: string
+  receiverEmail: string
+  postCode: string // This could be a number but this seems more consistent
+  postOffice: string
+  countryCode: string
+  // Other
+  price: number
+  deliveryCompany: string
+  status: string
+  reference: string
+  latestEvent: string
+  invoiceNumber: string
+  shippingMethod: string
+}
+
 // React
 
 export type RootStackParamList = {
