@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FlatList, StyleSheet, Platform } from 'react-native'
 import useSWR, { mutate } from 'swr'
+import { Checkbox } from 'react-native-paper';
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
@@ -38,12 +39,27 @@ interface ShipmentListItemProps {
   shipment: Shipment
 }
 
+let tempSave = []
+
 function ShipmentListItem({ shipment }: ShipmentListItemProps) {
   const themed = useThemedColors()
+  const [checked, setChecked] = useState(false)
   const backgroundColor = themed.drawerBackground
 
   return (
-    <View style={[styles.shipmentContainer, { backgroundColor }]}>
+    <View style={[styles.shipmentContainer, { backgroundColor, alignItems: 'center',  }]}>
+      <Checkbox
+        status={checked ? 'checked' : 'unchecked'}
+        style={styles.checkbox}
+        onPress={() => {
+          setChecked(!checked)
+          checked 
+          ? tempSave = tempSave.filter((id) => id !== shipment.id) 
+          : tempSave.push(shipment.id);
+          console.log(tempSave)
+          }
+        }
+      />
       <View style={[styles.itemLeft, { backgroundColor }]}>
         <Text style={styles.recipientName}>{shipment.receiverName}</Text>
         <Text style={styles.defaultField}>{shipment.status}</Text>
@@ -80,11 +96,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: 2,
-    paddingHorizontal: 30,
     paddingVertical: 2,
   },
   itemLeft: {
     flex: 1,
+    paddingHorizontal: 20,
     flexDirection: 'column',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
@@ -93,6 +109,8 @@ const styles = StyleSheet.create({
   },
   itemRight: {
     flex: 1,
+    paddingHorizontal: 20,
+
     flexDirection: 'column',
     alignItems: 'flex-end',
     flexWrap: 'wrap',
@@ -110,4 +128,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Muli',
     fontSize: 10,
   },
+  checkbox: {
+    marginLeft: 20,
+    color: 'black',
+  }
 })

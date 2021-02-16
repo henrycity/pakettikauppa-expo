@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, FlatList, Platform } from 'react-native'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
+import Checkbox from 'expo-checkbox'
 import { Shipment } from '../../../types'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
 
@@ -16,6 +17,7 @@ function Header({ fields }: HeaderProps) {
   const { t } = useTranslation('shipments')
   return (
     <View style={styles.header}>
+      <Text>       </Text>
       {fields.map((field: string) => (
         <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
           <Text
@@ -36,11 +38,31 @@ interface RowProps {
   hovered: boolean
 }
 
+
+
+let tempSave = []
+
 function Row({ headers, shipment, hovered }: RowProps) {
   const themed = useThemedColors()
   const backgroundColor = hovered ? '#d4d4d4' : themed.drawerBackground
+  const [checked, setChecked] = useState(false)
   return (
     <View style={[styles.row, { backgroundColor }]}>
+      <Checkbox
+        disabled={false}
+        value={checked}
+        onChange={() => {
+          setChecked(!checked)
+          checked 
+          ? tempSave = tempSave.filter((id) => id !== shipment.id) 
+          : tempSave.push(shipment.id);
+          console.log(tempSave)
+          }
+        }
+        style={{
+          marginLeft: 12,
+        }}
+      />
       {headers.map((field) => (
         <View
           key={field + shipment.id}
