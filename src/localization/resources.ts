@@ -20,6 +20,21 @@ const resources = {
       loginText: 'Login or register with a Google account',
       language: 'Language',
     },
+    shipments: {
+      createdOn: 'Date',
+      receiverName: 'Name',
+      receiverEmail: 'E-mail',
+      postCode: 'Postcode',
+      postOffice: 'Post office',
+      countryCode: 'Country code',
+      price: 'Price',
+      deliveryCompany: 'Delivery company',
+      status: 'Status code',
+      reference: 'Reference',
+      latestEvent: 'Latest event',
+      invoiceNumber: 'Invoice number',
+      shippingMethod: 'Delivery method',
+    },
   },
   fi: {
     translation: {
@@ -44,7 +59,7 @@ const resources = {
   se: {
     translation: {
       profile: 'Profil',
-      reports: 'Raporter',
+      reports: 'Rapporter',
       statistics: 'Statistik',
       shipments: 'Transporter',
       settings: 'Inställningar',

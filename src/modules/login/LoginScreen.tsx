@@ -28,7 +28,6 @@ export default function LoginScreen(): JSX.Element {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-
       <TouchableOpacity
         onPress={clickHandler}
         style={[Styles.normalButton, { backgroundColor: theme.buttonColor }]}
@@ -38,7 +37,6 @@ export default function LoginScreen(): JSX.Element {
           {t('login')}
         </Text>
       </TouchableOpacity>
-
       <View style={Styles.gap} />
 
       <RegistrationModal />

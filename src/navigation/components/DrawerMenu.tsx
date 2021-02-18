@@ -8,7 +8,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Styles from '../../common/Styles'
-import { useThemedColors, View } from '../../common/Themed'
+import { useThemedColors } from '../../common/Themed'
 import useActiveScreen from '../../common/hooks/useActiveScreen'
 import useDeviceType from '../../common/hooks/useDeviceType'
 import useLogout from '../../modules/login/hooks/useLogout'
@@ -63,7 +63,6 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
               )}
             />
           ) : null}
-
           {isAuthorized(ScreenNames.Reports) ? (
             <DrawerItem
               label={t('reports')}
