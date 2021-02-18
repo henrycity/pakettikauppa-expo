@@ -1,5 +1,10 @@
 image: node:14.15.0-alpine
 
+.rules-default:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
 stages:
   - lint
   - build
@@ -13,6 +18,7 @@ before_script:
   - yarn install --frozen-lockfile
 
 lint:
+  extends: .rules-default
   stage: lint
   needs: []
   script:
@@ -20,6 +26,7 @@ lint:
     - yarn type-check
 
 jest-tests:
+  extends: .rules-default
   stage: test
   needs: []
   script:
@@ -37,9 +44,9 @@ build-image:
   script:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
-  only:
-    - master
-    - merge_requests
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "master"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 e2e-tests:
   stage: test
@@ -65,9 +72,9 @@ e2e-tests:
     paths:
       - cypress/videos
       - cypress/screenshots
-  only:
-    - master
-    - merge_requests
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "master"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 expo-deployments:
   stage: deploy
@@ -75,8 +82,8 @@ expo-deployments:
     - yarn global add expo-cli
     - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
     - yarn expo publish --non-interactive
-  only:
-    - master
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "master"'
 
 netlify-deployment:
   stage: deploy
@@ -86,5 +93,5 @@ netlify-deployment:
     - yarn expo build:web
     - echo "/*    /index.html   200" > web-build/_redirects
     - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
-  only:
-    - master
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "master"'
