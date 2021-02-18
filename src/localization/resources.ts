@@ -18,6 +18,7 @@ const resources = {
       close: 'Close',
       vatID: 'Vat ID',
       loginText: 'Login or register with a Google account',
+      language: 'Language',
     },
   },
   fi: {
@@ -37,6 +38,7 @@ const resources = {
       close: 'Sulje',
       vatID: 'ALV tunnus:',
       loginText: 'Kirjaudu sisään tai rekisteröidy Google-tilillä',
+      language: 'Kieli',
     },
   },
   se: {
@@ -56,6 +58,7 @@ const resources = {
       close: 'stäng',
       vatID: 'MOMS ID:',
       loginText: 'Logga in eller registrera dig med din Google-konto',
+      language: 'Språk',
     },
   },
 }

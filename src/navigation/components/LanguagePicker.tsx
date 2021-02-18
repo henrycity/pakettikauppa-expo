@@ -25,6 +25,8 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
     navigation.closeDrawer()
   }
 
+  const { t } = useTranslation()
+
   return (
     <View
       style={[styles.container, { backgroundColor: themed.drawerBackground }]}
@@ -39,7 +41,7 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
         {selectedLanguage ? (
           <>
             <TouchableOpacity onPress={() => setVisible(!visible)}>
-              <Text>Language</Text>
+              <Text>{t('language')}</Text>
             </TouchableOpacity>
             {visible && (
               <View>
