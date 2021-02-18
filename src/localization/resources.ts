@@ -103,6 +103,21 @@ const resources = {
       other: 'Muut tiedot',
       createShipment: 'Luo uusi kuljetus',
     },
+    shipments: {
+      createdOn: 'Päivämäärä',
+      receiverName: 'Nimi',
+      receiverEmail: 'Sähköposti',
+      receiverPostCode: 'Postinumero',
+      receiverCity: 'Postitoimipaikka',
+      receiverCountry: 'Maakoodi',
+      price: 'Kustannus',
+      deliveryCompany: 'Kuljetusyhtiö',
+      status: 'Tila',
+      reference: 'Viitenumero',
+      latestEvent: 'Viimeisin tapahtuma',
+      invoiceNumber: 'Laskun numero',
+      shippingMethod: 'Toimitustapa',
+    },
   },
   se: {
     translation: {

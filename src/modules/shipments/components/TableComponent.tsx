@@ -38,7 +38,9 @@ interface RowProps {
 
 function Row({ headers, shipment, hovered }: RowProps) {
   const themed = useThemedColors()
-  const backgroundColor = hovered ? '#d4d4d4' : themed.drawerBackground
+  const backgroundColor = hovered
+    ? themed.activeBackground
+    : themed.drawerBackground
   return (
     <View style={[styles.row, { backgroundColor }]}>
       {headers.map((field) => {
@@ -46,7 +48,7 @@ function Row({ headers, shipment, hovered }: RowProps) {
         if (field === 'createdOn') {
           content = new Date(shipment[field]).toLocaleDateString()
         } else {
-          content = shipment[field].toString()
+          content = shipment[field]?.toString()
         }
         return (
           <View
@@ -56,7 +58,10 @@ function Row({ headers, shipment, hovered }: RowProps) {
               { flex: cellData[field].flex, backgroundColor },
             ]}
           >
-            <Text numberOfLines={1} style={styles.text}>
+            <Text
+              numberOfLines={1}
+              style={[styles.text, { color: hovered ? '#fff' : themed.text }]}
+            >
               {content}
             </Text>
           </View>
@@ -92,7 +97,7 @@ export default function TableComponent({
       )}
       ListHeaderComponent={<Header fields={headers} />}
       stickyHeaderIndices={[0]}
-      initialNumToRender={10}
+      initialNumToRender={25}
       removeClippedSubviews
       keyExtractor={(shipment) => String(shipment.id)}
       onRefresh={() => mutate('/shipments')}

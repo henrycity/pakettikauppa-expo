@@ -1,8 +1,9 @@
 import React from 'react'
-import { FlatList, StyleSheet, Platform } from 'react-native'
+import { FlatList, StyleSheet, Platform, View } from 'react-native'
+import { Hoverable } from 'react-native-web-hover'
 import useSWR, { mutate } from 'swr'
 
-import { Text, View, useThemedColors } from '../../../common/Themed'
+import { Text, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import { Shipment } from '../../../types'
 
@@ -24,7 +25,13 @@ export default function ListView(): JSX.Element {
           keyExtractor={({ id }) => String(id)}
           ListHeaderComponent={ShipmentsHeaderComponent}
           ListFooterComponent={ShipmentsFooterComponent}
-          renderItem={({ item }) => <ShipmentListItem shipment={item} />}
+          renderItem={({ item }) => (
+            <Hoverable>
+              {({ hovered }) => (
+                <ShipmentListItem shipment={item} hovered={hovered} />
+              )}
+            </Hoverable>
+          )}
           refreshing={refreshing}
           onRefresh={() => mutate('/shipments')}
           testID="List Component"
@@ -36,24 +43,33 @@ export default function ListView(): JSX.Element {
 
 interface ShipmentListItemProps {
   shipment: Shipment
+  hovered: boolean
 }
 
-function ShipmentListItem({ shipment }: ShipmentListItemProps) {
+function ShipmentListItem({ shipment, hovered }: ShipmentListItemProps) {
   const themed = useThemedColors()
-  const backgroundColor = themed.drawerBackground
+
+  const backgroundColor = hovered
+    ? themed.activeBackground
+    : themed.drawerBackground
+  const color = hovered ? '#fff' : themed.text
 
   return (
     <View style={[styles.shipmentContainer, { backgroundColor }]}>
-      <View style={[styles.itemLeft, { backgroundColor }]}>
-        <Text style={styles.recipientName}>{shipment.receiverName}</Text>
-        <Text style={styles.defaultField}>{shipment.status}</Text>
-        <Text style={styles.defaultField}>{shipment.receiverPostCode}</Text>
-        <Text style={styles.defaultField}>
+      <View style={styles.itemLeft}>
+        <Text style={[styles.recipientName, { color }]}>
+          {shipment.receiverName}
+        </Text>
+        <Text style={[styles.defaultField, { color }]}>{shipment.status}</Text>
+        <Text style={[styles.defaultField, { color }]}>
+          {shipment.receiverPostCode}
+        </Text>
+        <Text style={[styles.defaultField, { color }]}>
           {shipment.deliveryCompany}: {shipment.shippingMethod}
         </Text>
       </View>
-      <View style={[styles.itemRight, { backgroundColor }]}>
-        <Text style={styles.defaultField}>
+      <View style={styles.itemRight}>
+        <Text style={[styles.defaultField, { color }]}>
           {new Date(shipment.createdOn).toLocaleDateString()}
         </Text>
       </View>

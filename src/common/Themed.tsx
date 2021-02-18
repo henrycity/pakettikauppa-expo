@@ -3,7 +3,6 @@ import {
   Text as DefaultText,
   View as DefaultView,
   TextInput as DefaultTextInput,
-  StyleSheet,
 } from 'react-native'
 
 import Colors from './Colors'
@@ -76,10 +75,5 @@ export function TextInput(props: TextInputProps): JSX.Element {
     'text'
   )
 
-  return (
-    <DefaultTextInput
-      style={[{ color }, { fontFamily: 'Muli' }, style]}
-      {...otherProps}
-    />
-  )
+  return <DefaultTextInput style={[{ color }, Styles.body]} {...otherProps} />
 }

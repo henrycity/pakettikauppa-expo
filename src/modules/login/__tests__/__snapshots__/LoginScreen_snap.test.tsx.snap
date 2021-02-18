@@ -27,7 +27,7 @@ exports[`LoginScreen renders correctly 1`] = `
         Array [
           Object {
             "fontFamily": "Rubik-Bold",
-            "fontSize": 20,
+            "fontSize": 26,
           },
           Object {
             "textAlign": "center",
@@ -217,7 +217,7 @@ exports[`LoginScreen renders correctly 1`] = `
             },
             Object {
               "fontFamily": "Rubik-Bold",
-              "fontSize": 20,
+              "fontSize": 26,
             },
           ]
         }
@@ -277,15 +277,6 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
-            Array [
-              Object {
-                "borderBottomWidth": 1,
-                "width": 200,
-              },
-              Object {
-                "color": "#233385",
-              },
-            ],
           ]
         }
         testID="Email"
@@ -334,15 +325,6 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
-            Array [
-              Object {
-                "borderBottomWidth": 1,
-                "width": 200,
-              },
-              Object {
-                "color": "#233385",
-              },
-            ],
           ]
         }
         testID="VAT"

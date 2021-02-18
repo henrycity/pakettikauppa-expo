@@ -28,8 +28,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 26,
     fontFamily: typography.title.fontFamily,
+  },
+  header: {
+    fontFamily: typography.title.fontFamily,
+    fontSize: 25,
+  },
+  body: {
+    fontFamily: typography.body.fontFamily,
   },
   separator: {
     marginVertical: 30,

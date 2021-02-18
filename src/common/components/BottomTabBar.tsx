@@ -112,8 +112,10 @@ export function TabBarItem({
   }
 
   const iconStyle = {
-    color: active ? themed.bottomIcon : themed.drawerBackground,
-    backgroundColor: active ? themed.drawerBackground : themed.bottomIcon,
+    color: active ? themed.bottomIcon : themed.bottomIconInactive,
+    backgroundColor: active
+      ? themed.bottomBackground
+      : themed.bottomBackgroundInactive,
   }
 
   return (
