@@ -81,7 +81,7 @@ interface TabBarProps {
 }
 
 export function TabBar({ children }: TabBarProps): JSX.Element {
-  const backgroundColor = useThemeColor({}, 'bottomTabBackground')
+  const backgroundColor = useThemeColor({}, 'bottomBackground')
 
   return <View style={[styles.tabBar, { backgroundColor }]}>{children}</View>
 }
