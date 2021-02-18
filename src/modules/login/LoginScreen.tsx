@@ -1,10 +1,10 @@
 import * as WebBrowser from 'expo-web-browser'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity } from 'react-native'
 
 import Styles from '../../common/Styles'
-import { useThemedColors, View, Text } from '../../common/Themed'
+import { View, Text } from '../../common/Themed'
+import Button from '../../common/components/Button'
 import RegistrationModal from './components/RegistrationModal'
 import useLogin from './hooks/useLogin'
 
@@ -17,7 +17,6 @@ export default function LoginScreen(): JSX.Element {
     login()
   }
 
-  const theme = useThemedColors()
   return (
     <View style={Styles.container}>
       <Text style={[Styles.title, { textAlign: 'center' }]}>
@@ -28,15 +27,13 @@ export default function LoginScreen(): JSX.Element {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <TouchableOpacity
+
+      <Button
         onPress={clickHandler}
-        style={[Styles.normalButton, { backgroundColor: theme.buttonColor }]}
+        text={t('login')}
         accessibilityLabel="Login button"
-      >
-        <Text style={[Styles.buttonLabel, { color: theme.buttonTextColor }]}>
-          {t('login')}
-        </Text>
-      </TouchableOpacity>
+      />
+
       <View style={Styles.gap} />
 
       <RegistrationModal />

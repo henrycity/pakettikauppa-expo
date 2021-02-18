@@ -21,9 +21,12 @@ export default function BottomTabBar(): JSX.Element {
   const { isAuthorized } = useUser()
   const { t } = useTranslation()
 
-  const handleLinkPress = (screenName: ScreenName) => {
+  const handleLinkPress = (
+    screenName: ScreenName,
+    navOptions?: { screen: string }
+  ) => {
     setActiveScreen(screenName)
-    navigation.navigate(screenName)
+    navigation.navigate(screenName, navOptions)
   }
 
   return (
@@ -41,7 +44,11 @@ export default function BottomTabBar(): JSX.Element {
             text={t('shipments')}
             iconName="truck"
             active={activeScreen === ScreenNames.Shipments}
-            onPress={() => handleLinkPress(ScreenNames.Shipments)}
+            onPress={() =>
+              handleLinkPress(ScreenNames.Shipments, {
+                screen: 'ShipmentsScreen',
+              })
+            }
           />
         )}
       </>

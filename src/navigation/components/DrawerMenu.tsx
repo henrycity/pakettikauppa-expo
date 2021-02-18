@@ -26,9 +26,12 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
   const themed = useThemedColors()
   const logout = useLogout()
 
-  const handleLinkPress = (screenName: ScreenName) => {
+  const handleLinkPress = (
+    screenName: ScreenName,
+    navOptions?: { screen: string }
+  ) => {
     setActiveScreen(screenName)
-    navigation.navigate(screenName)
+    navigation.navigate(screenName, navOptions)
   }
 
   const { t } = useTranslation()
@@ -57,7 +60,11 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
               activeBackgroundColor={themed.activeBackground}
               inactiveTintColor={themed.inactiveIcon}
               focused={activeScreen === ScreenNames.Shipments}
-              onPress={() => handleLinkPress(ScreenNames.Shipments)}
+              onPress={() =>
+                handleLinkPress(ScreenNames.Shipments, {
+                  screen: 'ShipmentsScreen',
+                })
+              }
               icon={({ color }) => (
                 <Feather name="truck" size={24} color={color} />
               )}

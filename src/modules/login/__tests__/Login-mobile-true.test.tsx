@@ -39,5 +39,3 @@ describe('Testing mobile authorization when isLoggedIn === true', () => {
 function Test() {
   return <Navigation colorScheme="light" />
 }
-
-// yarn test hooks/__tests__/Login-mobile-true.test.tsx

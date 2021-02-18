@@ -66,9 +66,24 @@ export default StyleSheet.create({
   error: {
     color: 'red',
   },
+  errorContainer: {
+    alignItems: 'center',
+    paddingVertical: 13,
+    margin: 12,
+    borderRadius: 7,
+    backgroundColor: '#f5aeae',
+  },
   success: {
     color: 'green',
   },
+  successContainer: {
+    alignItems: 'center',
+    paddingVertical: 13,
+    margin: 12,
+    borderRadius: 7,
+    backgroundColor: '#aaf5c2',
+  },
+
   menuButton: {
     paddingLeft: 20,
   },

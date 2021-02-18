@@ -46,7 +46,7 @@ describe('Testing table component', () => {
   it('Table should have data', async () => {
     const { getAllByText } = render(component)
 
-    const element = getAllByText('FI')
+    const element = await getAllByText('Finland')
     expect(element).toBeTruthy()
   })
 })
