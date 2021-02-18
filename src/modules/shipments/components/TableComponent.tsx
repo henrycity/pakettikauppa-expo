@@ -41,16 +41,27 @@ function Row({ headers, shipment, hovered }: RowProps) {
   const backgroundColor = hovered ? '#d4d4d4' : themed.drawerBackground
   return (
     <View style={[styles.row, { backgroundColor }]}>
-      {headers.map((field) => (
-        <View
-          key={field + shipment.id}
-          style={[styles.cell, { flex: cellData[field].flex, backgroundColor }]}
-        >
-          <Text numberOfLines={1} style={styles.text}>
-            {shipment[field]}
-          </Text>
-        </View>
-      ))}
+      {headers.map((field) => {
+        let content = ''
+        if (field === 'createdOn') {
+          content = new Date(shipment[field]).toLocaleDateString()
+        } else {
+          content = shipment[field].toString()
+        }
+        return (
+          <View
+            key={field + shipment.id}
+            style={[
+              styles.cell,
+              { flex: cellData[field].flex, backgroundColor },
+            ]}
+          >
+            <Text numberOfLines={1} style={styles.text}>
+              {content}
+            </Text>
+          </View>
+        )
+      })}
     </View>
   )
 }

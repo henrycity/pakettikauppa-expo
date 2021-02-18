@@ -53,7 +53,9 @@ function ShipmentListItem({ shipment }: ShipmentListItemProps) {
         </Text>
       </View>
       <View style={[styles.itemRight, { backgroundColor }]}>
-        <Text style={styles.defaultField}>{shipment.createdOn}</Text>
+        <Text style={styles.defaultField}>
+          {new Date(shipment.createdOn).toLocaleDateString()}
+        </Text>
       </View>
     </View>
   )
