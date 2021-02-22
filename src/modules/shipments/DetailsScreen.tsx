@@ -34,7 +34,7 @@ export default function DetailsScreen(): JSX.Element {
 
   const loading = !data && !error
 
-  error?.status === 400 && navigation.navigate('NotFound')
+  if (error?.status === 400) navigation.navigate('NotFound')
 
   return (
     <BottomTabWrapper>
