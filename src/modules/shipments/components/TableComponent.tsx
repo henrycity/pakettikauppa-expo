@@ -6,7 +6,6 @@ import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
-import { useSelectedLanguage } from '../../../localization'
 import { Shipment } from '../../../types'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
 

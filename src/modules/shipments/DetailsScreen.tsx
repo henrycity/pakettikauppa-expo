@@ -8,7 +8,6 @@ import Styles from '../../common/Styles'
 import { View, Text } from '../../common/Themed'
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
 import Loading from '../../common/components/Loading'
-import { useSelectedLanguage } from '../../localization'
 import { Shipment, ShipmentDetailsRouteProp } from '../../types'
 import useBreakpoint from './hooks/useBreakpoint'
 
