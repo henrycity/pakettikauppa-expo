@@ -9,7 +9,7 @@ import BottomTabWrapper from '../../../common/components/BottomTabWrapper'
 import useDeviceType from '../../../common/hooks/useDeviceType'
 import { ShipmentsNavigationProp } from '../../../types'
 import AddShipmentsHeader from '../components/AddShipmentsHeader'
-import { ErrorDialog, SuccessDialog } from '../components/Dialog'
+import { ErrorDialog } from '../components/Dialog'
 import PageIndicator from '../components/PageIndicator'
 import Success from '../components/Success'
 import {
