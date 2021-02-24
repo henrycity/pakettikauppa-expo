@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { FlatList, StyleSheet, Platform } from 'react-native'
+import { Checkbox } from 'react-native-paper'
 import useSWR, { mutate } from 'swr'
-import { Checkbox } from 'react-native-paper';
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
@@ -39,7 +39,8 @@ interface ShipmentListItemProps {
   shipment: Shipment
 }
 
-let tempSave = []
+// Change later, temporary for checking that checkbox works
+let tempSave: number[] = []
 
 function ShipmentListItem({ shipment }: ShipmentListItemProps) {
   const themed = useThemedColors()
@@ -47,18 +48,15 @@ function ShipmentListItem({ shipment }: ShipmentListItemProps) {
   const backgroundColor = themed.drawerBackground
 
   return (
-    <View style={[styles.shipmentContainer, { backgroundColor, alignItems: 'center',  }]}>
+    <View style={[styles.shipmentContainer, { backgroundColor }]}>
       <Checkbox
         status={checked ? 'checked' : 'unchecked'}
-        style={styles.checkbox}
         onPress={() => {
           setChecked(!checked)
-          checked 
-          ? tempSave = tempSave.filter((id) => id !== shipment.id) 
-          : tempSave.push(shipment.id);
-          console.log(tempSave)
-          }
-        }
+          checked
+            ? (tempSave = tempSave.filter((id) => id !== shipment.id))
+            : tempSave.push(shipment.id)
+        }}
       />
       <View style={[styles.itemLeft, { backgroundColor }]}>
         <Text style={styles.recipientName}>{shipment.receiverName}</Text>
@@ -95,6 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     margin: 2,
     paddingVertical: 2,
   },
@@ -128,8 +127,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Muli',
     fontSize: 10,
   },
-  checkbox: {
-    marginLeft: 20,
-    color: 'black',
-  }
 })

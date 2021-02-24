@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, FlatList, Platform } from 'react-native'
+import { Checkbox } from 'react-native-paper'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
-import Checkbox from 'expo-checkbox'
 import { Shipment } from '../../../types'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
 
@@ -17,7 +17,7 @@ function Header({ fields }: HeaderProps) {
   const { t } = useTranslation('shipments')
   return (
     <View style={styles.header}>
-      <Text>       </Text>
+      <Text> </Text>
       {fields.map((field: string) => (
         <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
           <Text
@@ -38,9 +38,8 @@ interface RowProps {
   hovered: boolean
 }
 
-
-
-let tempSave = []
+// Change later, temporary for checking that checkbox works
+let tempSave: number[] = []
 
 function Row({ headers, shipment, hovered }: RowProps) {
   const themed = useThemedColors()
@@ -49,18 +48,12 @@ function Row({ headers, shipment, hovered }: RowProps) {
   return (
     <View style={[styles.row, { backgroundColor }]}>
       <Checkbox
-        disabled={false}
-        value={checked}
-        onChange={() => {
+        status={checked ? 'checked' : 'unchecked'}
+        onPress={() => {
           setChecked(!checked)
-          checked 
-          ? tempSave = tempSave.filter((id) => id !== shipment.id) 
-          : tempSave.push(shipment.id);
-          console.log(tempSave)
-          }
-        }
-        style={{
-          marginLeft: 12,
+          checked
+            ? (tempSave = tempSave.filter((id) => id !== shipment.id))
+            : tempSave.push(shipment.id)
         }}
       />
       {headers.map((field) => (
