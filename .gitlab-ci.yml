@@ -81,7 +81,7 @@ expo-publish:
   stage: prebuild
   needs: []
   script:
-    - yarn add expo-cli
+    - yarn add expo-cli --frozen-lockfile
     - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD # These should be set in the environment as this will show the password in CI logs
     - yarn expo publish --non-interactive --release-channel "$CI_COMMIT_REF_NAME"
   rules:
@@ -91,7 +91,9 @@ expo-branch-build:
   stage: build
   needs: ["expo-publish"]
   script:
-    - yarn add turtle-cli
+    - apt-get install python3
+    - apt-get install openjdk-8-jdk
+    - yarn add turtle-cli --frozen-lockfile
     - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_COMMIT_REF_NAME"
   artifacts:
     paths:
