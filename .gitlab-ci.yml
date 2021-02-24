@@ -18,64 +18,64 @@ variables:
 before_script:
   - yarn install --frozen-lockfile
 
-lint:
-  extends: .rules-default
-  stage: lint
-  needs: []
-  script:
-    - yarn lint
-    - yarn type-check
+# lint:
+#   extends: .rules-default
+#   stage: lint
+#   needs: []
+#   script:
+#     - yarn lint
+#     - yarn type-check
 
-jest-tests:
-  extends: .rules-default
-  stage: test
-  needs: []
-  script:
-    - yarn jest --coverage --ci
-  artifacts:
-    reports:
-      cobertura: coverage/cobertura-coverage.xml
+# jest-tests:
+#   extends: .rules-default
+#   stage: test
+#   needs: []
+#   script:
+#     - yarn jest --coverage --ci
+#   artifacts:
+#     reports:
+#       cobertura: coverage/cobertura-coverage.xml
 
-build-image:
-  stage: build
-  needs: []
-  image: docker:stable
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build -t $CONTAINER_TEST_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
-  rules:
-    - if: '$CI_PIPELINE_BRANCH == "master"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+# build-image:
+#   stage: build
+#   needs: []
+#   image: docker:stable
+#   before_script:
+#     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#   script:
+#     - docker build -t $CONTAINER_TEST_IMAGE .
+#     - docker push $CONTAINER_TEST_IMAGE
+#   rules:
+#     - if: '$CI_PIPELINE_BRANCH == "master"'
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
-e2e-tests:
-  stage: test
-  needs: ["build-image"]
-  image: cypress/base:14.15.0
-  variables:
-    HTTPS: "true" # Use HTTPS for backend
-    FRONTEND_SERVICE_URL: https://expo:19006
-    BACKEND_SERVICE_URL: https://backend:3000
-    #EXPO_FIREBASE_CLIENT_ID: $EXPO_FIREBASE_CLIENT_ID # Redundant due to hardcoded value
-    EXPO_SERVER: $BACKEND_SERVICE_URL
-    CYPRESS_BASE_URL: $FRONTEND_SERVICE_URL
-    CYPRESS_BACKEND_URL: $BACKEND_SERVICE_URL
-  services:
-    - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:master
-      alias: backend
-    - name: $CONTAINER_TEST_IMAGE
-      alias: expo
-  script:
-    - $(npm bin)/cypress run
-  artifacts:
-    when: on_failure
-    paths:
-      - cypress/videos
-      - cypress/screenshots
-  rules:
-    - if: '$CI_PIPELINE_BRANCH == "master"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+# e2e-tests:
+#   stage: test
+#   needs: ["build-image"]
+#   image: cypress/base:14.15.0
+#   variables:
+#     HTTPS: "true" # Use HTTPS for backend
+#     FRONTEND_SERVICE_URL: https://expo:19006
+#     BACKEND_SERVICE_URL: https://backend:3000
+#     #EXPO_FIREBASE_CLIENT_ID: $EXPO_FIREBASE_CLIENT_ID # Redundant due to hardcoded value
+#     EXPO_SERVER: $BACKEND_SERVICE_URL
+#     CYPRESS_BASE_URL: $FRONTEND_SERVICE_URL
+#     CYPRESS_BACKEND_URL: $BACKEND_SERVICE_URL
+#   services:
+#     - name: ${CI_REGISTRY}/aalto/pakettikauppa-backend:master
+#       alias: backend
+#     - name: $CONTAINER_TEST_IMAGE
+#       alias: expo
+#   script:
+#     - $(npm bin)/cypress run
+#   artifacts:
+#     when: on_failure
+#     paths:
+#       - cypress/videos
+#       - cypress/screenshots
+#   rules:
+#     - if: '$CI_PIPELINE_BRANCH == "master"'
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 expo-publish:
   stage: prebuild
