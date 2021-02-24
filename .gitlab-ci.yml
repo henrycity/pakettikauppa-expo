@@ -76,6 +76,28 @@ e2e-tests:
     - if: '$CI_PIPELINE_BRANCH == "master"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
+expo-publish:
+  stage: build
+  needs: []
+  script:
+    - yarn add expo-cli
+    - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD # These should be set in the environment as this will show the password in CI logs
+    - yarn expo publish --non-interactive --release-channel "$CI_PIPELINE_BRANCH"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+expo-branch-build:
+  stage: build
+  needs: ["expo-publish"]
+  script:
+    - yarn add turtle-cli
+    - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_PIPELINE_BRANCH"
+  artifacts:
+    paths:
+      - build/
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
 expo-deployments:
   stage: deploy
   script:

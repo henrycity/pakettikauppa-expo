@@ -23,6 +23,7 @@ export default {
       supportsTablet: true,
     },
     android: {
+      package: 'com.pakettikauppa.expo',
       adaptiveIcon: {
         foregroundImage: './src/assets/images/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
