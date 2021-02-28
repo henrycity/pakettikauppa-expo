@@ -27,9 +27,9 @@ export default function Navigation({
 
   // Theme used by react-navigation components
   const navigationTheme = {
-    ...DefaultTheme,
+    ...(colorScheme === 'light' ? DefaultTheme : DarkTheme),
     colors: {
-      ...DefaultTheme.colors,
+      ...(colorScheme === 'light' ? DefaultTheme : DarkTheme).colors,
       background: themed.background,
     },
   }

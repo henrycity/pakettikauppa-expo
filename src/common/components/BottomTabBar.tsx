@@ -21,9 +21,12 @@ export default function BottomTabBar(): JSX.Element {
   const { isAuthorized } = useUser()
   const { t } = useTranslation()
 
-  const handleLinkPress = (screenName: ScreenName) => {
+  const handleLinkPress = (
+    screenName: ScreenName,
+    navOptions?: { screen: string }
+  ) => {
     setActiveScreen(screenName)
-    navigation.navigate(screenName)
+    navigation.navigate(screenName, navOptions)
   }
 
   return (
@@ -41,7 +44,11 @@ export default function BottomTabBar(): JSX.Element {
             text={t('shipments')}
             iconName="truck"
             active={activeScreen === ScreenNames.Shipments}
-            onPress={() => handleLinkPress(ScreenNames.Shipments)}
+            onPress={() =>
+              handleLinkPress(ScreenNames.Shipments, {
+                screen: 'ShipmentsScreen',
+              })
+            }
           />
         )}
       </>
@@ -74,7 +81,7 @@ interface TabBarProps {
 }
 
 export function TabBar({ children }: TabBarProps): JSX.Element {
-  const backgroundColor = useThemeColor({}, 'bottomTabBackground')
+  const backgroundColor = useThemeColor({}, 'bottomBackground')
 
   return <View style={[styles.tabBar, { backgroundColor }]}>{children}</View>
 }
@@ -105,8 +112,10 @@ export function TabBarItem({
   }
 
   const iconStyle = {
-    color: active ? themed.bottomIcon : themed.drawerBackground,
-    backgroundColor: active ? themed.drawerBackground : themed.bottomIcon,
+    color: active ? themed.bottomIcon : themed.bottomIconInactive,
+    backgroundColor: active
+      ? themed.bottomBackground
+      : themed.bottomBackgroundInactive,
   }
 
   return (

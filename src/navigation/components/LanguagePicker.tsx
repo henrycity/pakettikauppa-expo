@@ -67,8 +67,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   languagePicker: {
-    marginLeft: 23,
     width: '30%',
+    alignItems: 'center',
+    padding: 10,
   },
 })
 

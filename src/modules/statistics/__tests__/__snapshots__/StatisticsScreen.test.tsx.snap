@@ -34,7 +34,7 @@ exports[`LoginScreen renders correctly 1`] = `
           undefined,
           Object {
             "fontFamily": "Rubik-Bold",
-            "fontSize": 20,
+            "fontSize": 26,
           },
           Object {
             "color": "#233385",

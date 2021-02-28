@@ -27,7 +27,7 @@ exports[`LoginScreen renders correctly 1`] = `
         Array [
           Object {
             "fontFamily": "Rubik-Bold",
-            "fontSize": 20,
+            "fontSize": 26,
           },
           Object {
             "textAlign": "center",
@@ -73,6 +73,7 @@ exports[`LoginScreen renders correctly 1`] = `
         "opacity": 1,
       }
     }
+    testID="Login"
   >
     <Text
       style={
@@ -93,6 +94,7 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "color": "#fff",
             },
+            undefined,
           ],
         ]
       }
@@ -113,6 +115,7 @@ exports[`LoginScreen renders correctly 1`] = `
     }
   />
   <View
+    accessibilityLabel="Registration button"
     accessible={true}
     focusable={true}
     onClick={[Function]}
@@ -153,6 +156,7 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "color": "#fff",
             },
+            undefined,
           ],
         ]
       }
@@ -213,7 +217,7 @@ exports[`LoginScreen renders correctly 1`] = `
             },
             Object {
               "fontFamily": "Rubik-Bold",
-              "fontSize": 20,
+              "fontSize": 26,
             },
           ]
         }
@@ -273,15 +277,6 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
-            Array [
-              Object {
-                "borderBottomWidth": 1,
-                "width": 200,
-              },
-              Object {
-                "color": "#233385",
-              },
-            ],
           ]
         }
         testID="Email"
@@ -330,15 +325,6 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
-            Array [
-              Object {
-                "borderBottomWidth": 1,
-                "width": 200,
-              },
-              Object {
-                "color": "#233385",
-              },
-            ],
           ]
         }
         testID="VAT"
@@ -357,6 +343,7 @@ exports[`LoginScreen renders correctly 1`] = `
         }
       />
       <View
+        accessibilityLabel="Submit registration"
         accessible={true}
         focusable={true}
         onClick={[Function]}
@@ -397,6 +384,7 @@ exports[`LoginScreen renders correctly 1`] = `
                 Object {
                   "color": "#fff",
                 },
+                undefined,
               ],
             ]
           }
@@ -417,6 +405,7 @@ exports[`LoginScreen renders correctly 1`] = `
         }
       />
       <View
+        accessibilityLabel="Close registration modal"
         accessible={true}
         focusable={true}
         onClick={[Function]}
@@ -457,6 +446,7 @@ exports[`LoginScreen renders correctly 1`] = `
                 Object {
                   "color": "#fff",
                 },
+                undefined,
               ],
             ]
           }

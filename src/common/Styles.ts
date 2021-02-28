@@ -28,8 +28,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 26,
     fontFamily: typography.title.fontFamily,
+  },
+  header: {
+    fontFamily: typography.title.fontFamily,
+    fontSize: 25,
+  },
+  body: {
+    fontFamily: typography.body.fontFamily,
   },
   separator: {
     marginVertical: 30,
@@ -66,9 +73,24 @@ export default StyleSheet.create({
   error: {
     color: 'red',
   },
+  errorContainer: {
+    alignItems: 'center',
+    paddingVertical: 13,
+    margin: 12,
+    borderRadius: 7,
+    backgroundColor: '#f5aeae',
+  },
   success: {
     color: 'green',
   },
+  successContainer: {
+    alignItems: 'center',
+    paddingVertical: 13,
+    margin: 12,
+    borderRadius: 7,
+    backgroundColor: '#aaf5c2',
+  },
+
   menuButton: {
     paddingLeft: 20,
   },

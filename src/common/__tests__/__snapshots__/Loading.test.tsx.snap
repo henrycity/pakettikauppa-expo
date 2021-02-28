@@ -15,9 +15,6 @@ exports[`renders correctly 1`] = `
     ]
   }
 >
-  <Text>
-    Loading...
-  </Text>
   <ActivityIndicator
     animating={true}
     color="#999999"

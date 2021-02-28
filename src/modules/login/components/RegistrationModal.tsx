@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, TouchableOpacity } from 'react-native'
+import { Modal } from 'react-native'
 
 import Styles from '../../../common/Styles'
 import { useThemedColors, Text, View, TextInput } from '../../../common/Themed'
+import Button from '../../../common/components/Button'
 import postRegistration from '../postRegistration'
 
 const emailIsValid = (email: string) =>
@@ -63,15 +64,12 @@ export default function RegistrationModal(): JSX.Element {
 
   return (
     <>
-      <TouchableOpacity
+      <Button
         onPress={onRegisterButtonPress}
-        style={[Styles.normalButton, { backgroundColor: themed.buttonColor }]}
+        text={t('register')}
         testID="register"
-      >
-        <Text style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}>
-          {t('register')}
-        </Text>
-      </TouchableOpacity>
+        accessibilityLabel="Registration button"
+      />
 
       <View style={Styles.gap} />
 
@@ -122,36 +120,22 @@ export default function RegistrationModal(): JSX.Element {
           />
 
           <View style={Styles.gap} />
-          <TouchableOpacity
+
+          <Button
+            text={t('submit')}
             onPress={() => handlePress()}
-            style={[
-              Styles.normalButton,
-              { backgroundColor: themed.buttonColor },
-            ]}
             testID="submit"
-          >
-            <Text
-              style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
-            >
-              {t('submit')}
-            </Text>
-          </TouchableOpacity>
+            accessibilityLabel="Submit registration"
+          />
+
           <View style={Styles.gap} />
 
-          <TouchableOpacity
+          <Button
+            text={t('close')}
             onPress={() => setModalIsVisible(false)}
-            style={[
-              Styles.normalButton,
-              { backgroundColor: themed.buttonColor },
-            ]}
             testID="close"
-          >
-            <Text
-              style={[Styles.buttonLabel, { color: themed.buttonTextColor }]}
-            >
-              {t('close')}
-            </Text>
-          </TouchableOpacity>
+            accessibilityLabel="Close registration modal"
+          />
         </View>
       </Modal>
     </>
