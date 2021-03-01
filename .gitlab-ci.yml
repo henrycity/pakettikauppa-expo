@@ -93,7 +93,7 @@ expo-branch-build:
   image: dsokal/expo-turtle-android
   script:
     - yarn add turtle-cli --frozen-lockfile
-    - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_COMMIT_REF_NAME" --info
+    - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_COMMIT_REF_NAME" --gradle-args "--info"
   artifacts:
     paths:
       - build/
