@@ -95,8 +95,10 @@ expo-branch-build:
     - yarn add turtle-cli --frozen-lockfile
     - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_COMMIT_REF_NAME" --gradle-args "--info"
   artifacts:
+    when: always
     paths:
       - build/
+      - expo-branch-build.log
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
