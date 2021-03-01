@@ -90,9 +90,8 @@ expo-publish:
 expo-branch-build:
   stage: build
   needs: ["expo-publish"]
+  image: dsokal/expo-turtle-android
   script:
-    - apt-get install python3
-    - apt-get install openjdk-8-jdk
     - yarn add turtle-cli --frozen-lockfile
     - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_COMMIT_REF_NAME"
   artifacts:
