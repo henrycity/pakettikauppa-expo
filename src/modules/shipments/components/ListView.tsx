@@ -79,7 +79,7 @@ function ShipmentListItem({ shipment, hovered }: ShipmentListItemProps) {
 
   return (
     <View style={[styles.shipmentContainer, { backgroundColor }]}>
-      <Checkbox
+      <Checkbox.Android
         status={checked ? 'checked' : 'unchecked'}
         testID={`checkbox ${shipment.id}`}
         onPress={() => {

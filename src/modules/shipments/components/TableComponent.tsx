@@ -54,7 +54,7 @@ function Row({
     : themed.drawerBackground
   return (
     <View style={[styles.row, { backgroundColor }]}>
-      <Checkbox
+      <Checkbox.Android
         status={checked ? 'checked' : 'unchecked'}
         testID={`checkbox ${shipment.id}`}
         onPress={() => {
