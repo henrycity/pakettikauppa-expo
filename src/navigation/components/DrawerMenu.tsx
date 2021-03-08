@@ -8,7 +8,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Styles from '../../common/Styles'
-import { useThemedColors, View } from '../../common/Themed'
+import { useThemedColors } from '../../common/Themed'
 import useActiveScreen from '../../common/hooks/useActiveScreen'
 import useDeviceType from '../../common/hooks/useDeviceType'
 import useLogout from '../../modules/login/hooks/useLogout'
@@ -26,9 +26,12 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
   const themed = useThemedColors()
   const logout = useLogout()
 
-  const handleLinkPress = (screenName: ScreenName) => {
+  const handleLinkPress = (
+    screenName: ScreenName,
+    navOptions?: { screen: string }
+  ) => {
     setActiveScreen(screenName)
-    navigation.navigate(screenName)
+    navigation.navigate(screenName, navOptions)
   }
 
   const { t } = useTranslation()
@@ -38,6 +41,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
         <>
           <DrawerItem
             label={t('profile')}
+            labelStyle={Styles.drawerLabel}
             focused={activeScreen === ScreenNames.Profile}
             onPress={() => handleLinkPress(ScreenNames.Profile)}
             activeTintColor={themed.activeIcon}
@@ -51,66 +55,56 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
           {isAuthorized(ScreenNames.Shipments) ? (
             <DrawerItem
               label={t('shipments')}
+              labelStyle={Styles.drawerLabel}
               activeTintColor={themed.activeIcon}
               activeBackgroundColor={themed.activeBackground}
               inactiveTintColor={themed.inactiveIcon}
               focused={activeScreen === ScreenNames.Shipments}
-              onPress={() => handleLinkPress(ScreenNames.Shipments)}
+              onPress={() =>
+                handleLinkPress(ScreenNames.Shipments, {
+                  screen: 'ShipmentsScreen',
+                })
+              }
               icon={({ color }) => (
                 <Feather name="truck" size={24} color={color} />
               )}
             />
           ) : null}
-
-          {isDesktop ? (
-            <View
-              style={[Styles.container, { backgroundColor: themed.background }]}
-            >
-              <View
-                style={[
-                  Styles.container,
-                  { backgroundColor: themed.drawerBackground },
-                ]}
-                lightColor={themed.tabIconDefault}
-                darkColor={themed.tabIconDefault}
-              />
-            </View>
+          {isAuthorized(ScreenNames.Reports) ? (
+            <DrawerItem
+              label={t('reports')}
+              labelStyle={Styles.drawerLabel}
+              activeTintColor={themed.activeIcon}
+              activeBackgroundColor={themed.activeBackground}
+              inactiveTintColor={themed.inactiveIcon}
+              focused={activeScreen === ScreenNames.Reports}
+              onPress={() => handleLinkPress(ScreenNames.Reports)}
+              icon={({ color }) => (
+                <Feather name="book-open" size={24} color={color} />
+              )}
+            />
+          ) : null}
+          {isAuthorized(ScreenNames.Statistics) ? (
+            <DrawerItem
+              label={t('statistics')}
+              labelStyle={Styles.drawerLabel}
+              activeTintColor={themed.activeIcon}
+              activeBackgroundColor={themed.activeBackground}
+              inactiveTintColor={themed.inactiveIcon}
+              focused={activeScreen === ScreenNames.Statistics}
+              onPress={() => handleLinkPress(ScreenNames.Statistics)}
+              icon={({ color }) => (
+                <Feather name="activity" size={24} color={color} />
+              )}
+            />
           ) : null}
         </>
       ) : null}
-
-      {isAuthorized(ScreenNames.Reports) ? (
-        <DrawerItem
-          label={t('reports')}
-          activeTintColor={themed.activeIcon}
-          activeBackgroundColor={themed.activeBackground}
-          inactiveTintColor={themed.inactiveIcon}
-          focused={activeScreen === ScreenNames.Reports}
-          onPress={() => handleLinkPress(ScreenNames.Reports)}
-          icon={({ color }) => (
-            <Feather name="book-open" size={24} color={color} />
-          )}
-        />
-      ) : null}
-
-      {isAuthorized(ScreenNames.Statistics) ? (
-        <DrawerItem
-          label={t('statistics')}
-          activeTintColor={themed.activeIcon}
-          activeBackgroundColor={themed.activeBackground}
-          inactiveTintColor={themed.inactiveIcon}
-          focused={activeScreen === ScreenNames.Statistics}
-          onPress={() => handleLinkPress(ScreenNames.Statistics)}
-          icon={({ color }) => (
-            <Feather name="activity" size={24} color={color} />
-          )}
-        />
-      ) : null}
-
       <LanguagePicker navigation={navigation} />
 
       <DrawerItem
         label={t('logout')}
+        labelStyle={Styles.drawerLabel}
         activeTintColor={themed.activeIcon}
         activeBackgroundColor={themed.activeBackground}
         inactiveTintColor={themed.inactiveIcon}

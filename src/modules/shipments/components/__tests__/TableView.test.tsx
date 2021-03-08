@@ -46,7 +46,15 @@ describe('Testing table component', () => {
   it('Table should have data', async () => {
     const { getAllByText } = render(component)
 
-    const element = getAllByText('FI')
+    const element = await getAllByText('Finland')
     expect(element).toBeTruthy()
+  })
+
+  it('Tablerows should have checkboxes', async () => {
+    const { getByTestId } = render(component)
+
+    expect(getByTestId('checkbox 1')).toBeTruthy()
+    expect(getByTestId('checkbox 2')).toBeTruthy()
+    expect(getByTestId('checkbox 3')).toBeTruthy()
   })
 })

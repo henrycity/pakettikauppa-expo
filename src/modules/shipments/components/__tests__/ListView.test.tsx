@@ -32,4 +32,12 @@ describe('Testing the list component', () => {
     const element = getAllByText('Posti: Noutopistepaketti')
     expect(element).toBeTruthy()
   })
+
+  it('Tablerows should have checkboxes', async () => {
+    const { getByTestId } = render(component)
+
+    expect(getByTestId('checkbox 1')).toBeTruthy()
+    expect(getByTestId('checkbox 2')).toBeTruthy()
+    expect(getByTestId('checkbox 3')).toBeTruthy()
+  })
 })

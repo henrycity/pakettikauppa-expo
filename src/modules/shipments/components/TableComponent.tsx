@@ -17,7 +17,7 @@ function Header({ fields }: HeaderProps) {
   const { t } = useTranslation('shipments')
   return (
     <View style={styles.header}>
-      <Text> </Text>
+      <Text style={{ width: 35 }} />
       {fields.map((field: string) => (
         <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
           <Text
@@ -36,36 +36,56 @@ interface RowProps {
   headers: typeof shipmentHeaders
   shipment: Shipment
   hovered: boolean
+  addSelectedId(id: number): void
+  removeSelectedId(id: number): void
 }
 
-// Change later, temporary for checking that checkbox works
-let tempSave: number[] = []
-
-function Row({ headers, shipment, hovered }: RowProps) {
+function Row({
+  headers,
+  shipment,
+  hovered,
+  addSelectedId,
+  removeSelectedId,
+}: RowProps) {
   const themed = useThemedColors()
-  const backgroundColor = hovered ? '#d4d4d4' : themed.drawerBackground
   const [checked, setChecked] = useState(false)
+  const backgroundColor = hovered
+    ? themed.activeBackground
+    : themed.drawerBackground
   return (
     <View style={[styles.row, { backgroundColor }]}>
       <Checkbox
         status={checked ? 'checked' : 'unchecked'}
+        testID={`checkbox ${shipment.id}`}
         onPress={() => {
           setChecked(!checked)
-          checked
-            ? (tempSave = tempSave.filter((id) => id !== shipment.id))
-            : tempSave.push(shipment.id)
+          checked ? removeSelectedId(shipment.id) : addSelectedId(shipment.id)
         }}
       />
-      {headers.map((field) => (
-        <View
-          key={field + shipment.id}
-          style={[styles.cell, { flex: cellData[field].flex, backgroundColor }]}
-        >
-          <Text numberOfLines={1} style={styles.text}>
-            {shipment[field]}
-          </Text>
-        </View>
-      ))}
+      {headers.map((field) => {
+        let content = ''
+        if (field === 'createdOn') {
+          content = new Date(shipment[field]).toLocaleDateString()
+        } else {
+          content = shipment[field]?.toString()
+        }
+        return (
+          <View
+            key={field + shipment.id}
+            style={[
+              styles.cell,
+              { flex: cellData[field].flex, backgroundColor },
+            ]}
+          >
+            <Text
+              numberOfLines={1}
+              style={[styles.text, { color: hovered ? '#fff' : themed.text }]}
+            >
+              {content}
+            </Text>
+          </View>
+        )
+      })}
     </View>
   )
 }
@@ -80,30 +100,56 @@ export default function TableComponent({
   refreshing,
 }: ShipmentTableProps): JSX.Element {
   const headers = shipmentHeaders.filter((field) => field !== 'id')
+  const [selectedIds, setSelectedIds] = useState<number[]>([])
+
+  function addSelectedId(id: number) {
+    const addId = [...selectedIds, id]
+    setSelectedIds(addId)
+  }
+
+  function removeSelectedId(id: number) {
+    setSelectedIds(selectedIds.filter((shipmentId) => shipmentId !== id))
+  }
 
   return (
-    <FlatList
-      contentContainerStyle={
-        Platform.OS === 'web' ? styles.tableWeb : styles.tableNative
-      }
-      data={data}
-      renderItem={({ item }) => (
-        <Hoverable>
-          {({ hovered }) => (
-            <Row headers={headers} shipment={item} hovered={hovered} />
-          )}
-        </Hoverable>
-      )}
-      ListHeaderComponent={<Header fields={headers} />}
-      stickyHeaderIndices={[0]}
-      initialNumToRender={10}
-      removeClippedSubviews
-      keyExtractor={(shipment) => String(shipment.id)}
-      onRefresh={() => mutate('/shipments')}
-      refreshing={refreshing}
-      ListEmptyComponent={<Text>Nothing in the list</Text>}
-      testID="Table Component"
-    />
+    <>
+      <View
+        style={{
+          alignSelf: 'center',
+          justifyContent: 'space-evenly',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        }}
+      />
+      <FlatList
+        contentContainerStyle={
+          Platform.OS === 'web' ? styles.tableWeb : styles.tableNative
+        }
+        data={data}
+        renderItem={({ item }) => (
+          <Hoverable>
+            {({ hovered }) => (
+              <Row
+                headers={headers}
+                shipment={item}
+                hovered={hovered}
+                addSelectedId={addSelectedId}
+                removeSelectedId={removeSelectedId}
+              />
+            )}
+          </Hoverable>
+        )}
+        ListHeaderComponent={<Header fields={headers} />}
+        stickyHeaderIndices={[0]}
+        initialNumToRender={25}
+        removeClippedSubviews
+        keyExtractor={(shipment) => String(shipment.id)}
+        onRefresh={() => mutate('/shipments')}
+        refreshing={refreshing}
+        ListEmptyComponent={<Text>Nothing in the list</Text>}
+        testID="Table Component"
+      />
+    </>
   )
 }
 

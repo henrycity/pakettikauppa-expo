@@ -8,7 +8,7 @@ import * as React from 'react'
 import { ColorSchemeName, Image } from 'react-native'
 
 import Colors from '../common/Colors'
-import { useThemeColor } from '../common/Themed'
+import { useThemeColor, useThemedColors } from '../common/Themed'
 import LoginScreen from '../modules/login/LoginScreen'
 import useUser from '../modules/login/hooks/useUser'
 import { RootStackParamList } from '../types'
@@ -23,11 +23,19 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName
 }): JSX.Element {
+  const themed = useThemedColors()
+
+  // Theme used by react-navigation components
+  const navigationTheme = {
+    ...(colorScheme === 'light' ? DefaultTheme : DarkTheme),
+    colors: {
+      ...(colorScheme === 'light' ? DefaultTheme : DarkTheme).colors,
+      background: themed.background,
+    },
+  }
+
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration} theme={navigationTheme}>
       <RootNavigator />
     </NavigationContainer>
   )
