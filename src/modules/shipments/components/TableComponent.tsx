@@ -6,8 +6,8 @@ import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
-import { Shipment } from '../../../types'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
+import { Shipment } from '../types'
 
 interface HeaderProps {
   fields: typeof shipmentHeaders

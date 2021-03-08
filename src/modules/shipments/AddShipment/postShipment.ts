@@ -1,13 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import server from '../../../config'
-import { Shipment } from '../../../types'
-import { allShipments } from '../types'
+import { PostShipment, Shipment } from '../types'
 
 const serverURL = server()
 
 const postShipment = async (
-  newShipment: allShipments,
+  newShipment: PostShipment,
   isMobile: boolean
 ): Promise<{ success?: string; shipment?: Shipment; errors?: any }> => {
   if (isMobile) {

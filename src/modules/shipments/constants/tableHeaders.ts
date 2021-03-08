@@ -1,4 +1,4 @@
-import { Shipment } from '../../../types'
+import { Shipment } from '../types'
 
 export const cellData: {
   [key: string]: { flex: number }

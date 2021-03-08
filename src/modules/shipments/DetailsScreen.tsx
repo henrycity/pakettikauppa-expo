@@ -8,8 +8,9 @@ import Styles from '../../common/Styles'
 import { View, Text } from '../../common/Themed'
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
 import Loading from '../../common/components/Loading'
-import { Shipment, ShipmentDetailsRouteProp } from '../../types'
+import { ShipmentDetailsRouteProp } from '../../types'
 import useBreakpoint from './hooks/useBreakpoint'
+import { Shipment } from './types'
 
 export default function DetailsScreen(): JSX.Element {
   const navigation = useNavigation()

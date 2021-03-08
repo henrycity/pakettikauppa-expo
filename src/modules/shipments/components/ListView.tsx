@@ -13,7 +13,7 @@ import useSWR, { mutate } from 'swr'
 
 import { Text, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
-import { Shipment } from '../../../types'
+import { Shipment } from '../types'
 
 export default function ListView(): JSX.Element {
   const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')

@@ -16,7 +16,7 @@ import {
   FormDataOne,
   FormDataTwo,
   FormDataThree,
-  allShipments,
+  PostShipment,
   ActionType,
   State,
   ValidatorError,
@@ -68,7 +68,7 @@ export default function AddShipmentsScreen(): JSX.Element {
   const [loading, setLoading] = useState(false)
 
   const submitData = () => {
-    const newShipment: allShipments = {
+    const newShipment: PostShipment = {
       ...pageOne,
       ...pageTwo,
       ...pageThree,

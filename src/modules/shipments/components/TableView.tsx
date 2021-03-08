@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { View } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
-import { Shipment } from '../../../types'
+import { Shipment } from '../types'
 import TableComponent from './TableComponent'
 
 export default function TableView(): JSX.Element {
