@@ -2,8 +2,9 @@ image: node:14.15.0-alpine
 
 .rules-default:
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE == "push" && $CI_OPEN_MERGE_REQUESTS' # When there's an open merge request, don't run the job on pushes
+      when: never
+    - when: always  # Otherwise always run the job
 
 stages:
   - lint
@@ -78,6 +79,9 @@ e2e-tests:
 
 expo-deployments:
   stage: deploy
+  environment:
+    name: production-expo
+    url: https://expo.io/@pakettikauppa/projects/pakettikauppa-expo
   script:
     - yarn global add expo-cli
     - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
@@ -87,6 +91,9 @@ expo-deployments:
 
 netlify-deployment:
   stage: deploy
+  environment:
+    name: production-netlify
+    url: https://pakettikauppa-expo.netlify.app
   script:
     - yarn global add expo-cli
     - yarn global add netlify-cli
