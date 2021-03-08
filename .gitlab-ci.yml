@@ -46,7 +46,7 @@ build-image:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
   rules:
-    - if: '$CI_PIPELINE_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 e2e-tests:
@@ -74,7 +74,7 @@ e2e-tests:
       - cypress/videos
       - cypress/screenshots
   rules:
-    - if: '$CI_PIPELINE_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 expo-deployments:
@@ -87,7 +87,7 @@ expo-deployments:
     - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
     - yarn expo publish --non-interactive
   rules:
-    - if: '$CI_PIPELINE_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 netlify-deployment:
   stage: deploy
@@ -101,4 +101,4 @@ netlify-deployment:
     - echo "/*    /index.html   200" > web-build/_redirects
     - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
   rules:
-    - if: '$CI_PIPELINE_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
