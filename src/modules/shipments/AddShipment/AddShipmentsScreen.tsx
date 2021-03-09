@@ -7,14 +7,16 @@ import { mutate } from 'swr'
 import { View } from '../../../common/Themed'
 import BottomTabWrapper from '../../../common/components/BottomTabWrapper'
 import useDeviceType from '../../../common/hooks/useDeviceType'
+import { ShipmentsNavigationProp } from '../../../types'
 import AddShipmentsHeader from '../components/AddShipmentsHeader'
-import { ErrorDialog, SuccessDialog } from '../components/Dialog'
+import ErrorDialog from '../components/ErrorDialog'
 import PageIndicator from '../components/PageIndicator'
+import SuccessView from '../components/SuccessView'
 import {
   FormDataOne,
   FormDataTwo,
   FormDataThree,
-  allShipments,
+  PostShipment,
   ActionType,
   State,
   ValidatorError,
@@ -56,7 +58,7 @@ const pageThreeInit = {
 }
 
 export default function AddShipmentsScreen(): JSX.Element {
-  const navigation = useNavigation()
+  const navigation = useNavigation<ShipmentsNavigationProp>()
   const { isMobile } = useDeviceType()
 
   const [pageOne, setPageOne] = useState<FormDataOne>(pageOneInit)
@@ -66,7 +68,7 @@ export default function AddShipmentsScreen(): JSX.Element {
   const [loading, setLoading] = useState(false)
 
   const submitData = () => {
-    const newShipment: allShipments = {
+    const newShipment: PostShipment = {
       ...pageOne,
       ...pageTwo,
       ...pageThree,
@@ -88,9 +90,12 @@ export default function AddShipmentsScreen(): JSX.Element {
         dispatch({ type: 'back' })
         mutate('/shipments')
         setTimeout(() => {
-          navigation.navigate('ShipmentsScreen')
+          navigation.replace('DetailsScreen', {
+            id: data.shipment?.id,
+            shipment: data.shipment,
+          })
           setSuccess(false)
-        }, 2000)
+        }, 800)
       }
     })
   }
@@ -156,7 +161,7 @@ export default function AddShipmentsScreen(): JSX.Element {
   if (success) {
     return (
       <BottomTabWrapper>
-        <SuccessDialog success={success} />
+        <SuccessView />
       </BottomTabWrapper>
     )
   }

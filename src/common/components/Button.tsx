@@ -6,6 +6,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
+import { Hoverable } from 'react-native-web-hover'
 
 import Styles from '../Styles'
 import { Text, useThemedColors } from '../Themed'
@@ -26,30 +27,37 @@ const Button = ({
   accessibilityLabel,
   style,
   textStyle,
-}: ButtonProps) => {
+}: ButtonProps): JSX.Element => {
   const themed = useThemedColors()
 
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[
-        Styles.normalButton,
-        { backgroundColor: themed.buttonColor },
-        style,
-      ]}
-      testID={testID ?? text}
-      accessibilityLabel={accessibilityLabel}
-    >
-      <Text
-        style={[
-          Styles.buttonLabel,
-          { color: themed.buttonTextColor },
-          textStyle,
-        ]}
-      >
-        {text}
-      </Text>
-    </TouchableOpacity>
+    <Hoverable>
+      {({ hovered }) => (
+        <TouchableOpacity
+          onPress={onPress}
+          style={[
+            Styles.normalButton,
+            { backgroundColor: themed.buttonColor },
+            style,
+          ]}
+          testID={testID ?? text}
+          accessibilityLabel={accessibilityLabel}
+        >
+          <Text
+            style={[
+              Styles.buttonLabel,
+              {
+                color: themed.buttonTextColor,
+                textDecorationLine: hovered ? 'underline' : 'none',
+              },
+              textStyle,
+            ]}
+          >
+            {text}
+          </Text>
+        </TouchableOpacity>
+      )}
+    </Hoverable>
   )
 }
 

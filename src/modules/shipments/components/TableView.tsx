@@ -1,23 +1,20 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import useSWR from 'swr'
 
 import { View } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
-import { Shipment } from '../../../types'
+import useShipments from '../hooks/useShipments'
 import TableComponent from './TableComponent'
 
 export default function TableView(): JSX.Element {
-  const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
-  const isLoading = !error && !data
-  const refreshing = Boolean(data && isValidating)
+  const { shipments, isLoading, isRefreshing } = useShipments()
 
   return (
     <View style={styles.container}>
       {isLoading ? (
         <Loading />
       ) : (
-        <TableComponent refreshing={refreshing} data={data ?? []} />
+        <TableComponent refreshing={isRefreshing} data={shipments ?? []} />
       )}
     </View>
   )

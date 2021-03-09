@@ -62,14 +62,14 @@ const AccessoryView = ({
   placeHolder,
 }: {
   value: string
-  onChange: any
+  onChange: (text: string) => void
   placeHolder: string
 }) => (
   <View style={styles.accessoryView}>
     <TextInput
       placeholder={placeHolder}
       style={{ height: 30, textAlign: 'center' }}
-      onChangeText={(value) => onChange(value)}
+      onChangeText={onChange}
       value={value}
       returnKeyType="done"
       placeholderTextColor="grey"

@@ -1,10 +1,13 @@
-import { Shipment } from '../../../types'
+import { Shipment } from '../types'
 
 export const cellData: {
   [key: string]: { flex: number }
 } = {
   invoiceNumber: {
     flex: 1.3,
+  },
+  trackingCode: {
+    flex: 1.5,
   },
   receiverName: {
     flex: 1.6,
@@ -46,6 +49,7 @@ export const cellData: {
 
 export const shipmentHeaders: (keyof Shipment)[] = [
   'invoiceNumber',
+  'trackingCode',
   'receiverName',
   'receiverPostCode',
   'receiverCity',

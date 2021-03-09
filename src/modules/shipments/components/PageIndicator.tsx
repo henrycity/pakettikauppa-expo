@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 
 import { View, useThemedColors } from '../../../common/Themed'
 
-const PageIndicator = ({ page }: { page: number }) => {
+const PageIndicator = ({ page }: { page: number }): JSX.Element => {
   const themed = useThemedColors()
   const getColor = (pageNumber: number) =>
     pageNumber === page ? themed.buttonColor : themed.tint

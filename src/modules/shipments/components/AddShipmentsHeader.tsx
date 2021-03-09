@@ -8,7 +8,7 @@ export default function AddShipmentsHeader({
   subTitle,
 }: {
   subTitle?: string
-}) {
+}): JSX.Element {
   const { t } = useTranslation()
   return (
     <View>

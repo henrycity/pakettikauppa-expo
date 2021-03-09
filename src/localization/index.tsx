@@ -11,7 +11,7 @@ export { default as useSelectedLanguage } from './hooks/useSelectedLanguage'
 export async function initializeLocalization(): Promise<void> {
   const language = await AsyncStorage.getItem('lng')
 
-  i18n
+  await i18n
     .use(initReactI18next) // passes i18n down to react-i18next
     .init({
       resources,

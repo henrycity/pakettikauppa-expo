@@ -1,21 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { Paragraph, Dialog, Portal } from 'react-native-paper'
 
-import Styles from '../../../common/Styles'
-import { Text, View } from '../../../common/Themed'
+import { View } from '../../../common/Themed'
 import Button from '../../../common/components/Button'
-
-export const SuccessDialog = ({
-  success,
-}: {
-  success: boolean
-}): JSX.Element | null => {
-  return success ? (
-    <View style={Styles.successContainer}>
-      <Text style={Styles.success}>Shipment created successfully!</Text>
-    </View>
-  ) : null
-}
 
 interface ErrorDialogProps {
   error: string
@@ -53,3 +40,5 @@ export const ErrorDialog = ({
     </View>
   )
 }
+
+export default ErrorDialog

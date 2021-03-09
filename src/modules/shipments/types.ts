@@ -28,7 +28,7 @@ export type FormDataThree = {
   weight: string
 }
 
-export type allShipments = {
+export type PostShipment = {
   businessID: string
   senderName: string
   senderAddress: string
@@ -52,7 +52,12 @@ export type allShipments = {
   weight: string
 }
 
-export type finalShipment = {
+export interface Shipment {
+  // metadata
+  createdOn: string
+  id: number
+  trackingCode?: string
+  // sender
   businessID: string
   senderName: string
   senderAddress: string
@@ -61,6 +66,7 @@ export type finalShipment = {
   senderCity: string
   senderPhoneNumber: string
   senderEmail: string
+  // receiver
   receiverAddress: string
   receiverCity: string
   receiverCountry: string
@@ -68,6 +74,7 @@ export type finalShipment = {
   receiverName: string
   receiverPhoneNumber: string
   receiverPostCode: string
+  //other
   description: string
   invoiceNumber: string
   reference: string
@@ -76,8 +83,6 @@ export type finalShipment = {
   weight: string
   latestEvent: string
   status: string
-  createdOn: string
-  id: number
   price: string
 }
 

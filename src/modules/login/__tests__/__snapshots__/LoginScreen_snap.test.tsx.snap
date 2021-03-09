@@ -52,55 +52,58 @@ exports[`LoginScreen renders correctly 1`] = `
       ]
     }
   />
-  <View
-    accessibilityLabel="Login button"
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#ff2e33",
-        "borderRadius": 100,
-        "justifyContent": "center",
-        "minWidth": 85,
-        "opacity": 1,
-      }
-    }
-    testID="Login"
-  >
-    <Text
+  <View>
+    <View
+      accessibilityLabel="Login button"
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "color": "#233385",
-          },
-          Object {
-            "fontFamily": "Muli",
-          },
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ff2e33",
+          "borderRadius": 100,
+          "justifyContent": "center",
+          "minWidth": 85,
+          "opacity": 1,
+        }
+      }
+      testID="Login"
+    >
+      <Text
+        style={
           Array [
             Object {
-              "fontFamily": "Rubik-Bold",
-              "fontSize": 14,
-              "padding": 10,
-              "textTransform": "uppercase",
+              "color": "#233385",
             },
             Object {
-              "color": "#fff",
+              "fontFamily": "Muli",
             },
-            undefined,
-          ],
-        ]
-      }
-    >
-      Login
-    </Text>
+            Array [
+              Object {
+                "fontFamily": "Rubik-Bold",
+                "fontSize": 14,
+                "padding": 10,
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "#fff",
+                "textDecorationLine": "none",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Login
+      </Text>
+    </View>
   </View>
   <View
     style={
@@ -114,55 +117,58 @@ exports[`LoginScreen renders correctly 1`] = `
       ]
     }
   />
-  <View
-    accessibilityLabel="Registration button"
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#ff2e33",
-        "borderRadius": 100,
-        "justifyContent": "center",
-        "minWidth": 85,
-        "opacity": 1,
-      }
-    }
-    testID="register"
-  >
-    <Text
+  <View>
+    <View
+      accessibilityLabel="Registration button"
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "color": "#233385",
-          },
-          Object {
-            "fontFamily": "Muli",
-          },
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ff2e33",
+          "borderRadius": 100,
+          "justifyContent": "center",
+          "minWidth": 85,
+          "opacity": 1,
+        }
+      }
+      testID="register"
+    >
+      <Text
+        style={
           Array [
             Object {
-              "fontFamily": "Rubik-Bold",
-              "fontSize": 14,
-              "padding": 10,
-              "textTransform": "uppercase",
+              "color": "#233385",
             },
             Object {
-              "color": "#fff",
+              "fontFamily": "Muli",
             },
-            undefined,
-          ],
-        ]
-      }
-    >
-      Register
-    </Text>
+            Array [
+              Object {
+                "fontFamily": "Rubik-Bold",
+                "fontSize": 14,
+                "padding": 10,
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "#fff",
+                "textDecorationLine": "none",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Register
+      </Text>
+    </View>
   </View>
   <View
     style={
@@ -342,55 +348,58 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       />
-      <View
-        accessibilityLabel="Submit registration"
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ff2e33",
-            "borderRadius": 100,
-            "justifyContent": "center",
-            "minWidth": 85,
-            "opacity": 1,
-          }
-        }
-        testID="submit"
-      >
-        <Text
+      <View>
+        <View
+          accessibilityLabel="Submit registration"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
-                "color": "#233385",
-              },
-              Object {
-                "fontFamily": "Muli",
-              },
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ff2e33",
+              "borderRadius": 100,
+              "justifyContent": "center",
+              "minWidth": 85,
+              "opacity": 1,
+            }
+          }
+          testID="submit"
+        >
+          <Text
+            style={
               Array [
                 Object {
-                  "fontFamily": "Rubik-Bold",
-                  "fontSize": 14,
-                  "padding": 10,
-                  "textTransform": "uppercase",
+                  "color": "#233385",
                 },
                 Object {
-                  "color": "#fff",
+                  "fontFamily": "Muli",
                 },
-                undefined,
-              ],
-            ]
-          }
-        >
-          Submit
-        </Text>
+                Array [
+                  Object {
+                    "fontFamily": "Rubik-Bold",
+                    "fontSize": 14,
+                    "padding": 10,
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "color": "#fff",
+                    "textDecorationLine": "none",
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Submit
+          </Text>
+        </View>
       </View>
       <View
         style={
@@ -404,55 +413,58 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       />
-      <View
-        accessibilityLabel="Close registration modal"
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ff2e33",
-            "borderRadius": 100,
-            "justifyContent": "center",
-            "minWidth": 85,
-            "opacity": 1,
-          }
-        }
-        testID="close"
-      >
-        <Text
+      <View>
+        <View
+          accessibilityLabel="Close registration modal"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
-                "color": "#233385",
-              },
-              Object {
-                "fontFamily": "Muli",
-              },
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ff2e33",
+              "borderRadius": 100,
+              "justifyContent": "center",
+              "minWidth": 85,
+              "opacity": 1,
+            }
+          }
+          testID="close"
+        >
+          <Text
+            style={
               Array [
                 Object {
-                  "fontFamily": "Rubik-Bold",
-                  "fontSize": 14,
-                  "padding": 10,
-                  "textTransform": "uppercase",
+                  "color": "#233385",
                 },
                 Object {
-                  "color": "#fff",
+                  "fontFamily": "Muli",
                 },
-                undefined,
-              ],
-            ]
-          }
-        >
-          Close
-        </Text>
+                Array [
+                  Object {
+                    "fontFamily": "Rubik-Bold",
+                    "fontSize": 14,
+                    "padding": 10,
+                    "textTransform": "uppercase",
+                  },
+                  Object {
+                    "color": "#fff",
+                    "textDecorationLine": "none",
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Close
+          </Text>
+        </View>
       </View>
     </View>
   </Modal>

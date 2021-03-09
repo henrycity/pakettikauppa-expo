@@ -1,29 +1,33 @@
-import { render, cleanup } from '@testing-library/react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { render, cleanup, waitFor } from '@testing-library/react-native'
 import React from 'react'
 
 import { initializeLocalization } from '../../../../localization'
 import TableView from '../TableView'
 import { mockShipmentData } from '../__mocks__/mockShipmentData'
 
-jest.mock('swr', () => {
+jest.mock('../../hooks/useShipments', () => {
   return () => ({
-    data: mockShipmentData,
-    error: undefined,
+    shipments: mockShipmentData,
+    isLoading: false,
+    isRefreshing: false,
   })
 })
 
 describe('Testing table component', () => {
   beforeAll(() => {
-    initializeLocalization()
+    return initializeLocalization()
   })
+
   afterEach(cleanup)
 
-  const component = <TableView />
+  const component = <TestComponent />
 
   it('Should display all headers', async () => {
     const { getByText } = render(component)
 
-    expect(getByText('Invoice number')).toBeTruthy()
+    expect(await waitFor(() => getByText('Invoice number'))).toBeTruthy()
     expect(getByText('Name')).toBeTruthy()
     expect(getByText('Postcode')).toBeTruthy()
     expect(getByText('Post office')).toBeTruthy()
@@ -37,16 +41,30 @@ describe('Testing table component', () => {
     expect(getByText('Date')).toBeTruthy()
     expect(getByText('Delivery method')).toBeTruthy()
   })
-  it('Table should exist', async () => {
+
+  test('Table should exist', async () => {
     const { getByTestId } = render(component)
 
-    expect(getByTestId('Table Component')).toBeTruthy()
+    expect(await waitFor(() => getByTestId('Table Component'))).toBeTruthy()
   })
 
-  it('Table should have data', async () => {
+  test('Table should have data', async () => {
     const { getAllByText } = render(component)
 
-    const element = await getAllByText('Finland')
+    const element = await waitFor(() => getAllByText('Finland'))
     expect(element).toBeTruthy()
   })
 })
+
+// Create navigation because list item uses useNavigation()
+const Stack = createStackNavigator()
+
+function TestComponent() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: true }}>
+        <Stack.Screen name="Root" component={TableView} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}

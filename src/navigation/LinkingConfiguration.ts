@@ -19,6 +19,7 @@ export default {
           Shipments: {
             screens: {
               ShipmentsScreen: 'shipments',
+              DetailsScreen: 'shipment',
               AddShipmentsScreen: 'shipments/add-shipment',
             },
           },

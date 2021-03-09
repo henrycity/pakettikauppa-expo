@@ -17,7 +17,7 @@ jest.mock('../../login/hooks/useLogin')
 
 describe('Adding shipments', () => {
   beforeAll(() => {
-    initializeLocalization()
+    return initializeLocalization()
   })
 
   afterEach(cleanup)
@@ -28,40 +28,40 @@ describe('Adding shipments', () => {
     </Provider>
   )
 
-  it('AddShipment button should be found', async () => {
+  test('AddShipment button should be found', async () => {
     process.env.TEST_ENV = 'mobile'
     const { findByA11yLabel, getByTestId } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const AddShipment = getByTestId('AddShipment')
     expect(AddShipment).toBeTruthy()
   })
 
-  it('AddShipment button should redirect to AddShipmentsOne', async () => {
+  test('AddShipment button should redirect to AddShipmentsOne', async () => {
     process.env.TEST_ENV = 'mobile'
     const { findByA11yLabel, getByTestId, getAllByPlaceholderText } = render(
       comp
     )
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const AddShipment = getByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
-    const BusinessID = await getAllByPlaceholderText('Business ID')
+    const BusinessID = getAllByPlaceholderText('Business ID')
     expect(BusinessID).toBeTruthy()
   })
 
-  it('All buttons should be found on Shipments page', async () => {
+  test('All buttons should be found on Shipments page', async () => {
     process.env.TEST_ENV = 'mobile'
     const { findByA11yLabel, getByTestId } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const AddShipment = getByTestId('AddShipment')
     expect(AddShipment).toBeTruthy()
-    const pickup = await getByTestId('pickup')
+    const pickup = getByTestId('pickup')
     expect(pickup).toBeTruthy()
-    const lineHaul = await getByTestId('Line Haul')
+    const lineHaul = getByTestId('Line Haul')
     expect(lineHaul).toBeTruthy()
-    const Labels = await getByTestId('Multiple Labels')
+    const Labels = getByTestId('Multiple Labels')
     expect(Labels).toBeTruthy()
   })
 })

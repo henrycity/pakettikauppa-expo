@@ -1,12 +1,13 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, FlatList, Platform } from 'react-native'
+import { StyleSheet, FlatList, Platform, TouchableOpacity } from 'react-native'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
 import { Text, View, useThemedColors } from '../../../common/Themed'
-import { Shipment } from '../../../types'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
+import { Shipment } from '../types'
 
 interface HeaderProps {
   fields: typeof shipmentHeaders
@@ -34,21 +35,33 @@ interface RowProps {
   headers: typeof shipmentHeaders
   shipment: Shipment
   hovered: boolean
+  locale: string
 }
 
-function Row({ headers, shipment, hovered }: RowProps) {
+function Row({ headers, shipment, hovered, locale }: RowProps) {
+  const navigation = useNavigation()
   const themed = useThemedColors()
+
   const backgroundColor = hovered
     ? themed.activeBackground
     : themed.drawerBackground
+
   return (
-    <View style={[styles.row, { backgroundColor }]}>
+    <TouchableOpacity
+      style={[styles.row, { backgroundColor }]}
+      onPress={() =>
+        navigation.navigate('DetailsScreen', {
+          id: shipment.id,
+          shipment,
+        })
+      }
+    >
       {headers.map((field) => {
         let content = ''
         if (field === 'createdOn') {
-          content = new Date(shipment[field]).toLocaleDateString()
+          content = new Date(shipment[field]).toLocaleDateString(locale)
         } else {
-          content = shipment[field]?.toString()
+          content = shipment[field]?.toString() ?? ''
         }
         return (
           <View
@@ -67,7 +80,7 @@ function Row({ headers, shipment, hovered }: RowProps) {
           </View>
         )
       })}
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -80,6 +93,7 @@ export default function TableComponent({
   data,
   refreshing,
 }: ShipmentTableProps): JSX.Element {
+  const { i18n } = useTranslation()
   const headers = shipmentHeaders.filter((field) => field !== 'id')
 
   return (
@@ -91,7 +105,12 @@ export default function TableComponent({
       renderItem={({ item }) => (
         <Hoverable>
           {({ hovered }) => (
-            <Row headers={headers} shipment={item} hovered={hovered} />
+            <Row
+              headers={headers}
+              shipment={item}
+              hovered={hovered}
+              locale={i18n.language}
+            />
           )}
         </Hoverable>
       )}

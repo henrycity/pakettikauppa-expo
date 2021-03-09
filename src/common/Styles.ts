@@ -90,7 +90,6 @@ export default StyleSheet.create({
     borderRadius: 7,
     backgroundColor: '#aaf5c2',
   },
-
   menuButton: {
     paddingLeft: 20,
   },
