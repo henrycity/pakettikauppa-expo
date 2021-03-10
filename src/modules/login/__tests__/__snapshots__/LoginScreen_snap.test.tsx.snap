@@ -36,7 +36,7 @@ exports[`LoginScreen renders correctly 1`] = `
       ]
     }
   >
-    Login or register with a Google account
+    Log in or register with a Google account
   </Text>
   <View
     style={
@@ -74,7 +74,7 @@ exports[`LoginScreen renders correctly 1`] = `
           "opacity": 1,
         }
       }
-      testID="Login"
+      testID="Log in"
     >
       <Text
         style={
@@ -101,7 +101,7 @@ exports[`LoginScreen renders correctly 1`] = `
           ]
         }
       >
-        Login
+        Log in
       </Text>
     </View>
   </View>
@@ -283,6 +283,15 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
+            Array [
+              Object {
+                "borderBottomWidth": 1,
+                "width": 200,
+              },
+              Object {
+                "color": "#233385",
+              },
+            ],
           ]
         }
         testID="Email"
@@ -331,6 +340,15 @@ exports[`LoginScreen renders correctly 1`] = `
             Object {
               "fontFamily": "Muli",
             },
+            Array [
+              Object {
+                "borderBottomWidth": 1,
+                "width": 200,
+              },
+              Object {
+                "color": "#233385",
+              },
+            ],
           ]
         }
         testID="VAT"

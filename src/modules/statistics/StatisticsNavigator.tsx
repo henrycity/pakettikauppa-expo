@@ -37,6 +37,7 @@ export default function StatisticsNavigator(): JSX.Element {
             backgroundColor: themed.background,
           },
           headerTintColor: themed.text,
+          title: t('statistics'),
         }}
       />
     </StatisticsStack.Navigator>

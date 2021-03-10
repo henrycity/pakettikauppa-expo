@@ -42,6 +42,7 @@ export default function ShipmentsNavigator(): JSX.Element {
             backgroundColor: themed.background,
           },
           headerTintColor: themed.text,
+          title: t('shipments'),
         }}
       />
       <ShipmentStack.Screen
@@ -50,6 +51,7 @@ export default function ShipmentsNavigator(): JSX.Element {
         options={{
           ...headerOptions,
           headerTitle: () => <AddShipmentsHeader />,
+          title: t('createShipment'),
           headerTitleStyle: Styles.header,
           headerStyle: {
             backgroundColor: themed.background,
@@ -68,6 +70,7 @@ export default function ShipmentsNavigator(): JSX.Element {
         options={{
           ...headerOptions,
           headerTitle: t('shipmentDetails'),
+          title: t('shipmentDetails'),
           headerTitleStyle: Styles.header,
           headerStyle: {
             backgroundColor: themed.background,
