@@ -77,23 +77,23 @@ before_script:
 #     - if: '$CI_PIPELINE_BRANCH == "master"'
 #     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
-expo-publish:
-  stage: prebuild
-  needs: []
-  script:
-    - yarn add expo-cli --frozen-lockfile
-    - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD # These should be set in the environment as this will show the password in CI logs
-    - yarn expo publish --non-interactive --release-channel "$CI_COMMIT_REF_NAME"
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+# expo-publish:
+#   stage: prebuild
+#   needs: []
+#   script:
+#     - yarn add expo-cli --frozen-lockfile
+#     - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD # These should be set in the environment as this will show the password in CI logs
+#     - yarn expo publish --non-interactive --release-channel "$CI_COMMIT_REF_NAME"
+#   rules:
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 expo-branch-build:
   stage: build
-  needs: ["expo-publish"]
+  needs: [] #needs: ["expo-publish"]
   image: dsokal/expo-turtle-android
   script:
     - yarn add turtle-cli --frozen-lockfile
-    - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_COMMIT_REF_NAME" --gradle-args "--info"
+    - yarn turtle build:android -u $EXPO_USERNAME -p $EXPO_PASSWORD -d ./build --release-channel "$CI_COMMIT_REF_NAME" --gradle-args ""
   artifacts:
     when: always
     paths:
