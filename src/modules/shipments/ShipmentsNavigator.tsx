@@ -2,9 +2,10 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Text, View } from 'react-native'
 
 import Styles from '../../common/Styles'
-import { useThemedColors } from '../../common/Themed'
+import { useThemedColors, TitleText } from '../../common/Themed'
 import useActiveScreen from '../../common/hooks/useActiveScreen'
 import ScreenNames from '../../navigation/ScreenNames'
 import GoBackIcon from '../../navigation/components/GoBackIcon'
@@ -14,6 +15,7 @@ import AddShipmentsScreen from './AddShipment/AddShipmentsScreen'
 import DetailsScreen from './DetailsScreen'
 import ShipmentsScreen from './ShipmentsScreen'
 import AddShipmentsHeader from './components/AddShipmentsHeader'
+import ShipmentOptions from './components/ShipmentOptions'
 
 const ShipmentStack = createStackNavigator<ShipmentsParamList>()
 
@@ -36,7 +38,12 @@ export default function ShipmentsNavigator(): JSX.Element {
         component={ShipmentsScreen}
         options={{
           ...headerOptions,
-          headerTitle: t('shipments'),
+          headerTitle: () => (
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <TitleText>{t('shipments')}</TitleText>
+              <ShipmentOptions />
+            </View>
+          ),
           headerTitleStyle: Styles.header,
           headerStyle: {
             backgroundColor: themed.background,
