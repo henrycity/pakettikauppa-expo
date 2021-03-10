@@ -84,7 +84,6 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
               )}
             />
           ) : null}
-
           {isAuthorized(ScreenNames.Statistics) ? (
             <DrawerItem
               label={t('statistics')}
@@ -101,7 +100,6 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
           ) : null}
         </>
       ) : null}
-
       <LanguagePicker navigation={navigation} />
 
       <DrawerItem

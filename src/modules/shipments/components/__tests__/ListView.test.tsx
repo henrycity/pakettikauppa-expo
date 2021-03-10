@@ -38,6 +38,14 @@ describe('Testing the list component', () => {
     )
     expect(element).toBeTruthy()
   })
+
+  it('Tablerows should have checkboxes', () => {
+    const { getByTestId } = render(component)
+
+    expect(getByTestId('checkbox 1')).toBeTruthy()
+    expect(getByTestId('checkbox 2')).toBeTruthy()
+    expect(getByTestId('checkbox 3')).toBeTruthy()
+  })
 })
 
 // Create navigation because list item uses useNavigation()

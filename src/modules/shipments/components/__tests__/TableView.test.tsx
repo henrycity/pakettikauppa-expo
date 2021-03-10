@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { render, cleanup, waitFor } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import React from 'react'
 
 import { initializeLocalization } from '../../../../localization'
@@ -24,10 +24,10 @@ describe('Testing table component', () => {
 
   const component = <TestComponent />
 
-  it('Should display all headers', async () => {
+  it('Should display all headers', () => {
     const { getByText } = render(component)
 
-    expect(await waitFor(() => getByText('Invoice number'))).toBeTruthy()
+    expect(getByText('Invoice number')).toBeTruthy()
     expect(getByText('Name')).toBeTruthy()
     expect(getByText('Postcode')).toBeTruthy()
     expect(getByText('Post office')).toBeTruthy()
@@ -42,17 +42,25 @@ describe('Testing table component', () => {
     expect(getByText('Delivery method')).toBeTruthy()
   })
 
-  test('Table should exist', async () => {
+  test('Table should exist', () => {
     const { getByTestId } = render(component)
 
-    expect(await waitFor(() => getByTestId('Table Component'))).toBeTruthy()
+    expect(getByTestId('Table Component')).toBeTruthy()
   })
 
-  test('Table should have data', async () => {
+  test('Table should have data', () => {
     const { getAllByText } = render(component)
 
-    const element = await waitFor(() => getAllByText('Finland'))
+    const element = getAllByText('Finland')
     expect(element).toBeTruthy()
+  })
+
+  it('Tablerows should have checkboxes', () => {
+    const { getByTestId } = render(component)
+
+    expect(getByTestId('checkbox 1')).toBeTruthy()
+    expect(getByTestId('checkbox 2')).toBeTruthy()
+    expect(getByTestId('checkbox 3')).toBeTruthy()
   })
 })
 

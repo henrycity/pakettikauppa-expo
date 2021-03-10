@@ -12,7 +12,6 @@ export default function ShipmentsScreen(): JSX.Element {
   return (
     <BottomTabWrapper>
       <HeaderActionButtons />
-
       {screenIsSmallerThan700 ? <ListView /> : <TableView />}
     </BottomTabWrapper>
   )

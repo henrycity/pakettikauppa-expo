@@ -50,6 +50,13 @@ const HeaderActionButtons = (): JSX.Element => {
         style={styles.button}
         textStyle={styles.buttonText}
       />
+      <Button
+        accessibilityLabel="Delete"
+        testID="delete"
+        text={t('delete')}
+        style={styles.button}
+        textStyle={styles.buttonText}
+      />
     </View>
   )
 }

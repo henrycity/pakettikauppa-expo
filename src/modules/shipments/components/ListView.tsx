@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   FlatList,
@@ -8,6 +8,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native'
+import { Checkbox } from 'react-native-paper'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
@@ -17,7 +18,17 @@ import useShipments from '../hooks/useShipments'
 import { Shipment } from '../types'
 
 export default function ListView(): JSX.Element {
+  const [selectedIds, setSelectedIds] = useState<number[]>([])
   const { shipments, isLoading, isRefreshing } = useShipments()
+
+  function addSelectedId(id: number) {
+    const addId = [...selectedIds, id]
+    setSelectedIds(addId)
+  }
+
+  function removeSelectedId(id: number) {
+    setSelectedIds(selectedIds.filter((shipmentId) => shipmentId !== id))
+  }
 
   return (
     <>
@@ -35,7 +46,12 @@ export default function ListView(): JSX.Element {
           renderItem={({ item }) => (
             <Hoverable>
               {({ hovered }) => (
-                <ShipmentListItem shipment={item} hovered={hovered} />
+                <ShipmentListItem
+                  shipment={item}
+                  hovered={hovered}
+                  addSelectedId={addSelectedId}
+                  removeSelectedId={removeSelectedId}
+                />
               )}
             </Hoverable>
           )}
@@ -51,18 +67,29 @@ export default function ListView(): JSX.Element {
 interface ShipmentListItemProps {
   shipment: Shipment
   hovered: boolean
+  addSelectedId(id: number): void
+  removeSelectedId(id: number): void
 }
 
-function ShipmentListItem({ shipment, hovered }: ShipmentListItemProps) {
+function ShipmentListItem({
+  shipment,
+  hovered,
+  addSelectedId,
+  removeSelectedId,
+}: ShipmentListItemProps) {
   const navigation = useNavigation()
   const themed = useThemedColors()
+  const [checked, setChecked] = useState(false)
   const { i18n } = useTranslation()
-
   const backgroundColor = hovered
     ? themed.activeBackground
     : themed.drawerBackground
 
   const color = hovered ? '#fff' : themed.text
+
+  useEffect(() => {
+    checked ? addSelectedId(shipment.id) : removeSelectedId(shipment.id)
+  }, [checked])
 
   return (
     <TouchableOpacity
@@ -75,6 +102,13 @@ function ShipmentListItem({ shipment, hovered }: ShipmentListItemProps) {
       }
       testID={`item-${shipment.id}`}
     >
+      <Checkbox.Android
+        status={checked ? 'checked' : 'unchecked'}
+        testID={`checkbox ${shipment.id}`}
+        onPress={() => {
+          setChecked(!checked)
+        }}
+      />
       <View style={styles.itemLeft}>
         <Text style={[styles.recipientName, { color }]}>
           {shipment.receiverName}
@@ -116,12 +150,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     margin: 2,
-    paddingHorizontal: 30,
     paddingVertical: 2,
   },
   itemLeft: {
     flex: 1,
+    paddingHorizontal: 20,
     flexDirection: 'column',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
@@ -130,6 +165,7 @@ const styles = StyleSheet.create({
   },
   itemRight: {
     flex: 1,
+    paddingHorizontal: 20,
     flexDirection: 'column',
     alignItems: 'flex-end',
     flexWrap: 'wrap',

@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, FlatList, Platform, TouchableOpacity } from 'react-native'
+import { Checkbox } from 'react-native-paper'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
@@ -17,6 +18,7 @@ function Header({ fields }: HeaderProps) {
   const { t } = useTranslation('shipments')
   return (
     <View style={styles.header}>
+      <Text style={{ width: 35 }} />
       {fields.map((field: string) => (
         <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
           <Text
@@ -36,15 +38,28 @@ interface RowProps {
   shipment: Shipment
   hovered: boolean
   locale: string
+  addSelectedId(id: number): void
+  removeSelectedId(id: number): void
 }
 
-function Row({ headers, shipment, hovered, locale }: RowProps) {
+function Row({
+  headers,
+  shipment,
+  hovered,
+  locale,
+  addSelectedId,
+  removeSelectedId,
+}: RowProps) {
   const navigation = useNavigation()
   const themed = useThemedColors()
-
+  const [checked, setChecked] = useState(false)
   const backgroundColor = hovered
     ? themed.activeBackground
     : themed.drawerBackground
+
+  useEffect(() => {
+    checked ? addSelectedId(shipment.id) : removeSelectedId(shipment.id)
+  }, [checked])
 
   return (
     <TouchableOpacity
@@ -56,6 +71,13 @@ function Row({ headers, shipment, hovered, locale }: RowProps) {
         })
       }
     >
+      <Checkbox.Android
+        status={checked ? 'checked' : 'unchecked'}
+        testID={`checkbox ${shipment.id}`}
+        onPress={() => {
+          setChecked(!checked)
+        }}
+      />
       {headers.map((field) => {
         let content = ''
         if (field === 'createdOn') {
@@ -95,6 +117,16 @@ export default function TableComponent({
 }: ShipmentTableProps): JSX.Element {
   const { i18n } = useTranslation()
   const headers = shipmentHeaders.filter((field) => field !== 'id')
+  const [selectedIds, setSelectedIds] = useState<number[]>([])
+
+  function addSelectedId(id: number) {
+    const addId = [...selectedIds, id]
+    setSelectedIds(addId)
+  }
+
+  function removeSelectedId(id: number) {
+    setSelectedIds(selectedIds.filter((shipmentId) => shipmentId !== id))
+  }
 
   return (
     <FlatList
@@ -110,6 +142,8 @@ export default function TableComponent({
               shipment={item}
               hovered={hovered}
               locale={i18n.language}
+              addSelectedId={addSelectedId}
+              removeSelectedId={removeSelectedId}
             />
           )}
         </Hoverable>
