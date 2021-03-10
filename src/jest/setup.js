@@ -23,6 +23,5 @@ jest.mock('../common/hooks/useDeviceType')
 jest.mock('../navigation/hooks/useDrawer')
 
 jest.mock('../modules/login/hooks/useLogin')
-jest.mock('../localization/hooks/useSelectedLanguage')
 
 jest.mock('../localization/index.tsx')

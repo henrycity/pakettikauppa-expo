@@ -109,8 +109,12 @@ export default StyleSheet.create({
     textTransform: 'lowercase',
     fontSize: 13,
   },
-  drawerLabel: {
+  drawerLabelDefault: {
     fontFamily: typography.drawerLabel.fontFamily,
     fontSize: 18,
+  },
+  drawerLabelCustom: {
+    fontFamily: typography.bottomTabLabel.fontFamily,
+    fontSize: 13,
   },
 })

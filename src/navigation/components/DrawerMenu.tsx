@@ -41,7 +41,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
         <>
           <DrawerItem
             label={t('profile')}
-            labelStyle={Styles.drawerLabel}
+            labelStyle={Styles.drawerLabelDefault}
             focused={activeScreen === ScreenNames.Profile}
             onPress={() => handleLinkPress(ScreenNames.Profile)}
             activeTintColor={themed.activeIcon}
@@ -55,7 +55,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
           {isAuthorized(ScreenNames.Shipments) ? (
             <DrawerItem
               label={t('shipments')}
-              labelStyle={Styles.drawerLabel}
+              labelStyle={Styles.drawerLabelDefault}
               activeTintColor={themed.activeIcon}
               activeBackgroundColor={themed.activeBackground}
               inactiveTintColor={themed.inactiveIcon}
@@ -73,7 +73,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
           {isAuthorized(ScreenNames.Reports) ? (
             <DrawerItem
               label={t('reports')}
-              labelStyle={Styles.drawerLabel}
+              labelStyle={Styles.drawerLabelDefault}
               activeTintColor={themed.activeIcon}
               activeBackgroundColor={themed.activeBackground}
               inactiveTintColor={themed.inactiveIcon}
@@ -87,7 +87,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
           {isAuthorized(ScreenNames.Statistics) ? (
             <DrawerItem
               label={t('statistics')}
-              labelStyle={Styles.drawerLabel}
+              labelStyle={Styles.drawerLabelDefault}
               activeTintColor={themed.activeIcon}
               activeBackgroundColor={themed.activeBackground}
               inactiveTintColor={themed.inactiveIcon}
@@ -104,7 +104,7 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
 
       <DrawerItem
         label={t('logout')}
-        labelStyle={Styles.drawerLabel}
+        labelStyle={Styles.drawerLabelDefault}
         activeTintColor={themed.activeIcon}
         activeBackgroundColor={themed.activeBackground}
         inactiveTintColor={themed.inactiveIcon}

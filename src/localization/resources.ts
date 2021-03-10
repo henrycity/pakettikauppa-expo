@@ -47,6 +47,8 @@ const resources = {
       receiver: 'Receiver info',
       other: 'Other info',
       createShipment: 'Create new shipment',
+      language: 'Language',
+      selection: 'English',
       shipmentAdded: 'Shipment added!',
     },
     shipments: {
@@ -125,6 +127,8 @@ const resources = {
       receiver: 'Vastaanottajan tiedot',
       other: 'Muut tiedot',
       createShipment: 'Luo uusi kuljetus',
+      language: 'Kieli',
+      selection: 'Suomi',
     },
     shipments: {
       createdOn: 'Päivämäärä',
@@ -175,7 +179,7 @@ const resources = {
       close: 'Stäng',
       vatID: 'MOMS ID:',
       loginText: 'Logga in eller registrera dig med din Google-konto',
-
+      //TODO
       newShipment: 'Ny transport',
       pickup: 'Pickup transport',
       lineHaul: 'Skapa linjetrafiksetikett',
@@ -202,6 +206,8 @@ const resources = {
       receiver: 'Mottagare',
       other: 'Övrig information',
       createShipment: 'Skapa ny transport',
+      language: 'Språk',
+      selection: 'Svenska',
     },
     shipments: {
       createdOn: 'Datum',
@@ -223,4 +229,8 @@ const resources = {
 
 export default resources
 
-export const languages = Object.keys(resources)
+export const languages = [
+  { code: 'fi', name: 'Suomi' },
+  { code: 'en', name: 'English' },
+  { code: 'se', name: 'Svenska' },
+]

@@ -6,7 +6,6 @@ import { initReactI18next } from 'react-i18next'
 import resources from './resources'
 
 export { languages } from './resources'
-export { default as useSelectedLanguage } from './hooks/useSelectedLanguage'
 
 export async function initializeLocalization(): Promise<void> {
   const language = await AsyncStorage.getItem('lng')
