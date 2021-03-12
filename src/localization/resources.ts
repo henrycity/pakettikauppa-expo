@@ -19,7 +19,6 @@ const resources = {
       close: 'Close',
       vatID: 'Vat ID',
       loginText: 'Login or register with a Google account',
-
       newShipment: 'New shipment',
       pickup: 'Pickup orders',
       lineHaul: 'Create line haul label',
