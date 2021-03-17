@@ -2,7 +2,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 import Styles from '../../common/Styles'
 import { useThemedColors, TitleText } from '../../common/Themed'

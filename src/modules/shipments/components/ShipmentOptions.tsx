@@ -28,6 +28,7 @@ const ShipmentOptions = (): JSX.Element => {
             size={26}
             color={themed.buttonColor}
             onPress={openMenu}
+            testID="Menu"
           />
         }
       >
@@ -36,18 +37,21 @@ const ShipmentOptions = (): JSX.Element => {
             navigation.navigate('AddShipmentsScreen')
           }}
           title={t('newShipment')}
+          testID="AddShipment"
           titleStyle={[Styles.body, { color: themed.text }]}
         />
         <Menu.Item
           // eslint-disable-next-line @typescript-eslint/no-empty-function
           onPress={() => {}}
           title={t('pickup')}
+          testID="pickup"
           titleStyle={[Styles.body, { color: themed.text }]}
         />
         <Menu.Item
           // eslint-disable-next-line @typescript-eslint/no-empty-function
           onPress={() => {}}
           title={t('lineHaul')}
+          testID="lineHaul"
           titleStyle={[Styles.body, { color: themed.text }]}
         />
         <Divider />
@@ -55,6 +59,7 @@ const ShipmentOptions = (): JSX.Element => {
           // eslint-disable-next-line @typescript-eslint/no-empty-function
           onPress={() => {}}
           title={t('multipleLabels')}
+          testID="multipleLabels"
           titleStyle={[Styles.body]}
           disabled
         />
@@ -62,6 +67,7 @@ const ShipmentOptions = (): JSX.Element => {
           // eslint-disable-next-line @typescript-eslint/no-empty-function
           onPress={() => {}}
           title={t('delete')}
+          testID="delete"
           titleStyle={Styles.body}
           disabled
         />
