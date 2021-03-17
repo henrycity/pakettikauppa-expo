@@ -31,6 +31,10 @@ export default StyleSheet.create({
     fontSize: 26,
     fontFamily: typography.title.fontFamily,
   },
+  addShipmentTitle: {
+    fontSize: 17,
+    fontFamily: typography.drawerLabel.fontFamily,
+  },
   header: {
     fontFamily: typography.title.fontFamily,
     fontSize: 25,

@@ -12,7 +12,7 @@ export default function AddShipmentsHeader({
   const { t } = useTranslation()
   return (
     <View>
-      <Text style={Styles.title}>{t('createShipment')}</Text>
+      <Text style={Styles.addShipmentTitle}>{t('createShipment')}</Text>
       {subTitle && <Text>{subTitle}</Text>}
     </View>
   )
