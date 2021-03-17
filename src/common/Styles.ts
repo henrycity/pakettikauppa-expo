@@ -38,6 +38,9 @@ export default StyleSheet.create({
   body: {
     fontFamily: typography.body.fontFamily,
   },
+  addShipmentMenu: {
+    fontFamily: typography.body.fontFamily,
+  },
   separator: {
     marginVertical: 30,
     height: 1,

@@ -1,8 +1,9 @@
+import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Button, Menu, Divider } from 'react-native-paper'
+import { Menu, Divider } from 'react-native-paper'
 
 import Styles from '../../../common/Styles'
 import { useThemedColors } from '../../../common/Themed'
@@ -22,9 +23,12 @@ const ShipmentOptions = (): JSX.Element => {
         visible={visible}
         onDismiss={closeMenu}
         anchor={
-          <Button onPress={openMenu} color={themed.buttonColor}>
-            Show menu
-          </Button>
+          <Feather
+            name="more-vertical"
+            size={26}
+            color={themed.buttonColor}
+            onPress={openMenu}
+          />
         }
       >
         <Menu.Item

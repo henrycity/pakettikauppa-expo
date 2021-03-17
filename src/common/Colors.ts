@@ -24,6 +24,7 @@ export default {
     bottomBorderColor: '#233385',
     bottomBackground: '#f7f1ee',
     bottomBackgroundInactive: '#233385',
+    disabled: '#ffc200',
   },
   dark: {
     text: '#F5F7F4',
@@ -47,5 +48,6 @@ export default {
     bottomBorderColor: '#272D2E',
     bottomBackground: '#af445c',
     bottomBackgroundInactive: '#272D2E',
+    disabled: '#ffc200',
   },
 }
