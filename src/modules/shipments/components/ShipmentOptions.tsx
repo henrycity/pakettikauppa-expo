@@ -35,6 +35,7 @@ const ShipmentOptions = (): JSX.Element => {
         <Menu.Item
           onPress={() => {
             navigation.navigate('AddShipmentsScreen')
+            closeMenu()
           }}
           title={t('newShipment')}
           testID="AddShipment"
