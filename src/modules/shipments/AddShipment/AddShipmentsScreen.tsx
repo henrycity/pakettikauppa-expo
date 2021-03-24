@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ActivityIndicator } from 'react-native'
 import { mutate } from 'swr'
 
-import { View } from '../../../common/Themed'
+import { View, Text } from '../../../common/Themed'
 import BottomTabWrapper from '../../../common/components/BottomTabWrapper'
 import useDeviceType from '../../../common/hooks/useDeviceType'
 import { ShipmentsNavigationProp } from '../../../types'
@@ -176,6 +176,9 @@ export default function AddShipmentsScreen(): JSX.Element {
             setShowError={setShowError}
           />
           <PageIndicator page={state.count} />
+          <View>
+            <Text style={styles.title}>{getSubtitle(state.count)}</Text>
+          </View>
 
           {loading && (
             <View style={{ margin: 10 }}>
