@@ -3,6 +3,7 @@ import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import { Hoverable } from 'react-native-web-hover'
 
 import Styles from '../../common/Styles'
 import { useThemedColors } from '../../common/Themed'
@@ -21,6 +22,7 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
   const onValueChange = (value: string) => {
     i18n.changeLanguage(value)
     navigation.closeDrawer()
+    setVisible(false)
   }
 
   const { t } = useTranslation()
@@ -35,22 +37,45 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
         color={themed.inactiveIcon}
         style={Styles.icon}
       />
+
       <View style={styles.languagePicker}>
-        <TouchableOpacity onPress={() => setVisible(!visible)}>
-          <Text style={[Styles.drawerLabelDefault, styles.mainLabel]}>
-            {t('language')}
-          </Text>
-        </TouchableOpacity>
+        <Hoverable>
+          {({ hovered }) => (
+            <TouchableOpacity onPress={() => setVisible(!visible)}>
+              <Text
+                style={[
+                  Styles.drawerLabelDefault,
+                  styles.mainLabel,
+                  { textDecorationLine: hovered ? 'underline' : 'none' },
+                ]}
+              >
+                {t('language')}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </Hoverable>
+
         {visible && (
           <View>
             {languages.map((lang) => (
-              <View key={lang.code}>
-                <TouchableOpacity onPress={() => onValueChange(lang.code)}>
-                  <Text style={[Styles.drawerLabelCustom, styles.smallLabel]}>
-                    {lang.name}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              <Hoverable>
+                {({ hovered }) => (
+                  <TouchableOpacity
+                    key={lang.code}
+                    onPress={() => onValueChange(lang.code)}
+                  >
+                    <Text
+                      style={[
+                        Styles.drawerLabelCustom,
+                        styles.smallLabel,
+                        { textDecorationLine: hovered ? 'underline' : 'none' },
+                      ]}
+                    >
+                      {lang.name}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </Hoverable>
             ))}
           </View>
         )}

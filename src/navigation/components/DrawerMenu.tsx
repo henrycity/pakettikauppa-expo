@@ -4,8 +4,10 @@ import {
   DrawerItem,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer'
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Hoverable } from 'react-native-web-hover'
 
 import Styles from '../../common/Styles'
 import { useThemedColors } from '../../common/Themed'
@@ -21,98 +23,122 @@ const DrawerMenu = (props: DrawerContentComponentProps): JSX.Element => {
   const { navigation } = props
 
   const { isDesktop } = useDeviceType()
-  const { activeScreen, setActiveScreen } = useActiveScreen()
   const { isAuthorized } = useUser()
   const themed = useThemedColors()
   const logout = useLogout()
-
-  const handleLinkPress = (
-    screenName: ScreenName,
-    navOptions?: { screen: string }
-  ) => {
-    setActiveScreen(screenName)
-    navigation.navigate(screenName, navOptions)
-  }
-
   const { t } = useTranslation()
+
   return (
     <DrawerContentScrollView {...props}>
       {isDesktop ? (
         <>
-          <DrawerItem
-            label={t('profile')}
-            labelStyle={Styles.drawerLabelDefault}
-            focused={activeScreen === ScreenNames.Profile}
-            onPress={() => handleLinkPress(ScreenNames.Profile)}
-            activeTintColor={themed.activeIcon}
-            activeBackgroundColor={themed.activeBackground}
-            inactiveTintColor={themed.inactiveIcon}
+          <DrawerMenuItem
+            screenName={ScreenNames.Profile}
             icon={({ color }) => (
               <Feather name="user" size={24} color={color} />
             )}
+            navigation={navigation}
           />
 
           {isAuthorized(ScreenNames.Shipments) ? (
-            <DrawerItem
-              label={t('shipments')}
-              labelStyle={Styles.drawerLabelDefault}
-              activeTintColor={themed.activeIcon}
-              activeBackgroundColor={themed.activeBackground}
-              inactiveTintColor={themed.inactiveIcon}
-              focused={activeScreen === ScreenNames.Shipments}
-              onPress={() =>
-                handleLinkPress(ScreenNames.Shipments, {
-                  screen: 'ShipmentsScreen',
-                })
-              }
+            <DrawerMenuItem
+              screenName={ScreenNames.Shipments}
               icon={({ color }) => (
                 <Feather name="truck" size={24} color={color} />
               )}
+              navigation={navigation}
             />
           ) : null}
+
           {isAuthorized(ScreenNames.Reports) ? (
-            <DrawerItem
-              label={t('reports')}
-              labelStyle={Styles.drawerLabelDefault}
-              activeTintColor={themed.activeIcon}
-              activeBackgroundColor={themed.activeBackground}
-              inactiveTintColor={themed.inactiveIcon}
-              focused={activeScreen === ScreenNames.Reports}
-              onPress={() => handleLinkPress(ScreenNames.Reports)}
+            <DrawerMenuItem
+              screenName={ScreenNames.Reports}
               icon={({ color }) => (
                 <Feather name="book-open" size={24} color={color} />
               )}
+              navigation={navigation}
             />
           ) : null}
+
           {isAuthorized(ScreenNames.Statistics) ? (
-            <DrawerItem
-              label={t('statistics')}
-              labelStyle={Styles.drawerLabelDefault}
-              activeTintColor={themed.activeIcon}
-              activeBackgroundColor={themed.activeBackground}
-              inactiveTintColor={themed.inactiveIcon}
-              focused={activeScreen === ScreenNames.Statistics}
-              onPress={() => handleLinkPress(ScreenNames.Statistics)}
+            <DrawerMenuItem
+              screenName={ScreenNames.Statistics}
               icon={({ color }) => (
                 <Feather name="activity" size={24} color={color} />
               )}
+              navigation={navigation}
             />
           ) : null}
         </>
       ) : null}
+
       <LanguagePicker navigation={navigation} />
 
-      <DrawerItem
-        label={t('logout')}
-        labelStyle={Styles.drawerLabelDefault}
-        activeTintColor={themed.activeIcon}
-        activeBackgroundColor={themed.activeBackground}
-        inactiveTintColor={themed.inactiveIcon}
-        onPress={() => logout()}
-        icon={({ color }) => <Feather name="log-out" size={24} color={color} />}
-      />
+      <Hoverable>
+        {({ hovered }) => (
+          <DrawerItem
+            label={t('logout')}
+            labelStyle={[
+              Styles.drawerLabelDefault,
+              { textDecorationLine: hovered ? 'underline' : 'none' },
+            ]}
+            activeTintColor={themed.activeIcon}
+            activeBackgroundColor={themed.activeBackground}
+            inactiveTintColor={themed.inactiveIcon}
+            onPress={() => logout()}
+            icon={({ color }) => (
+              <Feather name="log-out" size={24} color={color} />
+            )}
+          />
+        )}
+      </Hoverable>
     </DrawerContentScrollView>
   )
 }
 
 export default DrawerMenu
+
+interface DrawerMenuItemProps {
+  screenName: ScreenName
+  icon?: (props: {
+    focused: boolean
+    size: number
+    color: string
+  }) => React.ReactNode
+  navigation: DrawerNavigationHelpers
+}
+
+const DrawerMenuItem = ({
+  screenName,
+  icon,
+  navigation,
+}: DrawerMenuItemProps) => {
+  const { activeScreen, setActiveScreen } = useActiveScreen()
+  const themed = useThemedColors()
+  const { t } = useTranslation()
+
+  const handleLinkPress = (screenName: ScreenName) => {
+    setActiveScreen(screenName)
+    navigation.navigate(screenName)
+  }
+
+  return (
+    <Hoverable>
+      {({ hovered }) => (
+        <DrawerItem
+          label={t(screenName.toLowerCase())}
+          labelStyle={[
+            Styles.drawerLabelDefault,
+            { textDecorationLine: hovered ? 'underline' : 'none' },
+          ]}
+          focused={activeScreen === screenName}
+          onPress={() => handleLinkPress(screenName)}
+          activeTintColor={themed.activeIcon}
+          activeBackgroundColor={themed.activeBackground}
+          inactiveTintColor={themed.inactiveIcon}
+          icon={icon}
+        />
+      )}
+    </Hoverable>
+  )
+}
