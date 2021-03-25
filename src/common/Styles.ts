@@ -111,6 +111,7 @@ export default StyleSheet.create({
     fontFamily: typography.bottomTabLabel.fontFamily,
     textTransform: 'lowercase',
     fontSize: 13,
+    paddingBottom: 15,
   },
   drawerLabel: {
     fontFamily: typography.drawerLabel.fontFamily,
