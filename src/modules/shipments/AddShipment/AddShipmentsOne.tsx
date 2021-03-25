@@ -30,29 +30,22 @@ export default function AddShipmentsOne({
     setPageOne(finalValues)
   }
 
-  React.useEffect(() => {
-    const finalValues = getValues()
-    setPageOne(finalValues)
-  }, [dispatch])
-
   return (
-    <View>
-      <PageIndicator dispatch={dispatch} page={page} />
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {FieldsOne({ pageOne }).map((field) => (
-          <InputField
-            key={field.name}
-            control={control}
-            defaultValue={field.defaultValue}
-            placeHolder={field.placeHolder}
-            name={field.name}
-          />
-        ))}
-        <View style={styles.buttons}>
-          {BackButton({ dispatch })}
-          {NextButton({ onPress, dispatch })}
-        </View>
-      </ScrollView>
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <PageIndicator dispatch={dispatch} page={page} onPress={onPress} />
+      {FieldsOne({ pageOne }).map((field) => (
+        <InputField
+          key={field.name}
+          control={control}
+          defaultValue={field.defaultValue}
+          placeHolder={field.placeHolder}
+          name={field.name}
+        />
+      ))}
+      <View style={styles.buttons}>
+        {BackButton({ dispatch })}
+        {NextButton({ onPress, dispatch })}
+      </View>
+    </ScrollView>
   )
 }

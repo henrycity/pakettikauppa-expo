@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'space-around',
     padding: 20,
-    minHeight: 600,
+    minHeight: 650,
   },
   title: {
     fontSize: 20,

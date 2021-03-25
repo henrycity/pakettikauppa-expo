@@ -31,23 +31,21 @@ export default function AddShipmentsTwo({
   }
 
   return (
-    <View>
-      <PageIndicator dispatch={dispatch} page={page} />
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {FieldsTwo({ pageTwo }).map((field) => (
-          <InputField
-            key={field.name}
-            control={control}
-            defaultValue={field.defaultValue}
-            placeHolder={field.placeHolder}
-            name={field.name}
-          />
-        ))}
-        <View style={styles.buttons}>
-          {PreviousButton({ dispatch, onPress })}
-          {NextButton({ dispatch, onPress })}
-        </View>
-      </ScrollView>
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <PageIndicator dispatch={dispatch} page={page} onPress={onPress} />
+      {FieldsTwo({ pageTwo }).map((field) => (
+        <InputField
+          key={field.name}
+          control={control}
+          defaultValue={field.defaultValue}
+          placeHolder={field.placeHolder}
+          name={field.name}
+        />
+      ))}
+      <View style={styles.buttons}>
+        {PreviousButton({ dispatch, onPress })}
+        {NextButton({ dispatch, onPress })}
+      </View>
+    </ScrollView>
   )
 }

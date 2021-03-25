@@ -31,23 +31,21 @@ export default function AddShipmentsThree({
   }
 
   return (
-    <View>
-      <PageIndicator dispatch={dispatch} page={page} />
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {FieldsThree({ pageThree }).map((field) => (
-          <InputField
-            key={field.name}
-            control={control}
-            defaultValue={field.defaultValue}
-            placeHolder={field.placeHolder}
-            name={field.name}
-          />
-        ))}
-        <View style={styles.buttons}>
-          {PreviousButton({ dispatch, onPress })}
-          {SubmitButton({ dispatch, onPress })}
-        </View>
-      </ScrollView>
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <PageIndicator dispatch={dispatch} page={page} onPress={onPress} />
+      {FieldsThree({ pageThree }).map((field) => (
+        <InputField
+          key={field.name}
+          control={control}
+          defaultValue={field.defaultValue}
+          placeHolder={field.placeHolder}
+          name={field.name}
+        />
+      ))}
+      <View style={styles.buttons}>
+        {PreviousButton({ dispatch, onPress })}
+        {SubmitButton({ dispatch, onPress })}
+      </View>
+    </ScrollView>
   )
 }

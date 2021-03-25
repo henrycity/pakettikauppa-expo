@@ -8,9 +8,11 @@ import { ActionType } from '../types'
 const PageIndicator = ({
   page,
   dispatch,
+  onPress,
 }: {
   page: number
   dispatch: (value: ActionType) => void
+  onPress: () => void
 }): JSX.Element => {
   const { t } = useTranslation()
   const themed = useThemedColors()
@@ -20,19 +22,34 @@ const PageIndicator = ({
   return (
     <View style={styles.container}>
       <View style={styles.containerColumn}>
-        <Pressable onPress={() => dispatch({ type: 'sender' })}>
+        <Pressable
+          onPress={() => {
+            onPress()
+            dispatch({ type: 'sender' })
+          }}
+        >
           <Text>{t('sender')}</Text>
           <View style={[styles.bar, { backgroundColor: getColor(0) }]} />
         </Pressable>
       </View>
       <View style={styles.containerColumn}>
-        <Pressable onPress={() => dispatch({ type: 'receiver' })}>
+        <Pressable
+          onPress={() => {
+            onPress()
+            dispatch({ type: 'receiver' })
+          }}
+        >
           <Text>{t('receiver')}</Text>
           <View style={[styles.bar, { backgroundColor: getColor(1) }]} />
         </Pressable>
       </View>
       <View style={styles.containerColumn}>
-        <Pressable onPress={() => dispatch({ type: 'other' })}>
+        <Pressable
+          onPress={() => {
+            onPress()
+            dispatch({ type: 'other' })
+          }}
+        >
           <Text>{t('other')}</Text>
           <View style={[styles.bar, { backgroundColor: getColor(2) }]} />
         </Pressable>
@@ -46,9 +63,7 @@ export default PageIndicator
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: 10,
     marginBottom: 10,
-    marginHorizontal: 15,
     justifyContent: 'space-between',
   },
   containerColumn: {
