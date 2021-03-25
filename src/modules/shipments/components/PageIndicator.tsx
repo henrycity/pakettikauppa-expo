@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexGrow: 0.3,
     flexBasis: 0,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   bar: {
     flexGrow: 0.29,
