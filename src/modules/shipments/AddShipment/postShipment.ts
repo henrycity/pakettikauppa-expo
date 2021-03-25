@@ -8,6 +8,7 @@ const serverURL = server()
 const postShipment = async (
   newShipment: PostShipment,
   isMobile: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<{ success?: string; shipment?: Shipment; errors?: any }> => {
   if (isMobile) {
     const token = await AsyncStorage.getItem('token')

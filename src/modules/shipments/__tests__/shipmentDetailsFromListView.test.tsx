@@ -31,7 +31,7 @@ jest.mock('../hooks/useShipments', () => {
 })
 
 jest.mock('../hooks/useShipmentDetails', () => {
-  return (_id: string | number | undefined, initialShipment?: any) => ({
+  return (_id: string | number | undefined, initialShipment?: unknown) => ({
     shipment: initialShipment,
     error: undefined,
     isLoading: false,

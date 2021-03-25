@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, StyleSheet, Platform } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 
 import { View, useThemedColors, Text } from '../../../common/Themed'
 import { ActionType } from '../types'
@@ -14,50 +14,71 @@ const PageIndicator = ({
   dispatch: (value: ActionType) => void
   onPress: () => void
 }): JSX.Element => {
-  const { t } = useTranslation()
   const themed = useThemedColors()
   const getColor = (pageNumber: number) =>
     pageNumber === page ? themed.buttonColor : themed.tint
 
   return (
     <View style={styles.container}>
-      <View style={styles.containerColumn}>
-        <Pressable
-          onPress={() => {
-            onPress()
-            dispatch({ type: 'sender' })
-          }}
-        >
-          <View style={styles.textWrapper}>
-            <Text style={styles.text}>{t('sender')}</Text>
-          </View>
-          <View style={[styles.bar, { backgroundColor: getColor(0) }]} />
-        </Pressable>
-      </View>
-      <View style={styles.containerColumn}>
-        <Pressable
-          onPress={() => {
-            onPress()
-            dispatch({ type: 'receiver' })
-          }}
-        >
-          <View style={styles.textWrapper}>
-            <Text style={styles.text}>{t('receiver')}</Text>
-          </View>
-          <View style={[styles.bar, { backgroundColor: getColor(1) }]} />
-        </Pressable>
-      </View>
-      <View style={styles.containerColumn}>
-        <Pressable
-          onPress={() => {
-            onPress()
-            dispatch({ type: 'other' })
-          }}
-        >
-          <Text style={styles.text}>{t('other')}</Text>
-          <View style={[styles.bar, { backgroundColor: getColor(2) }]} />
-        </Pressable>
-      </View>
+      <ContainerColumn
+        onPress={onPress}
+        dispatch={dispatch}
+        page={0}
+        type={{ type: 'sender' }}
+        getColor={getColor}
+        view="sender"
+      />
+      <ContainerColumn
+        onPress={onPress}
+        dispatch={dispatch}
+        page={1}
+        type={{ type: 'receiver' }}
+        getColor={getColor}
+        view="receiver"
+      />
+      <ContainerColumn
+        onPress={onPress}
+        dispatch={dispatch}
+        page={2}
+        type={{ type: 'other' }}
+        getColor={getColor}
+        view="other"
+      />
+    </View>
+  )
+}
+
+interface ColumnItem {
+  onPress: () => void
+  dispatch: (value: ActionType) => void
+  page: number
+  type: ActionType
+  getColor: (pageNumber: number) => string
+  view: string
+}
+
+const ContainerColumn = ({
+  page,
+  dispatch,
+  onPress,
+  type,
+  getColor,
+  view,
+}: ColumnItem) => {
+  const { t } = useTranslation()
+  return (
+    <View style={styles.containerColumn}>
+      <Pressable
+        onPress={() => {
+          onPress()
+          dispatch(type)
+        }}
+      >
+        <View style={styles.textWrapper}>
+          <Text style={styles.text}>{t(view)}</Text>
+        </View>
+        <View style={[styles.bar, { backgroundColor: getColor(page) }]} />
+      </Pressable>
     </View>
   )
 }
