@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'space-around',
     paddingHorizontal: 20,
-    minHeight: 500,
+    minHeight: 580,
     maxHeight: 600,
   },
   scrollViewTwo: {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'space-around',
     paddingHorizontal: 20,
-    minHeight: 500,
+    minHeight: 510,
     maxHeight: 530,
   },
   scrollViewThree: {
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingHorizontal: 20,
     minHeight: 450,
-    maxHeight: 470,
+    maxHeight: 460,
   },
   title: {
     paddingLeft: '0.75em',
