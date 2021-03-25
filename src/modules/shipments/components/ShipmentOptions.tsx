@@ -42,31 +42,23 @@ const ShipmentOptions = (): JSX.Element => {
           titleStyle={[Styles.body, { color: themed.text }]}
         />
         <Menu.Item
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          onPress={() => {}}
           title={t('pickup')}
           testID="pickup"
           titleStyle={[Styles.body, { color: themed.text }]}
         />
         <Menu.Item
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          onPress={() => {}}
           title={t('lineHaul')}
           testID="lineHaul"
           titleStyle={[Styles.body, { color: themed.text }]}
         />
         <Divider />
         <Menu.Item
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          onPress={() => {}}
           title={t('multipleLabels')}
           testID="multipleLabels"
           titleStyle={[Styles.body]}
           disabled
         />
         <Menu.Item
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          onPress={() => {}}
           title={t('delete')}
           testID="delete"
           titleStyle={Styles.body}
