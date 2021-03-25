@@ -1,13 +1,15 @@
-import * as React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Controller, Control } from 'react-hook-form'
 import {
   StyleSheet,
   TextInput,
   Platform,
   InputAccessoryView,
+  Animated,
+  TouchableWithoutFeedback,
 } from 'react-native'
 
-import { View, Text } from '../../../common/Themed'
+import { View } from '../../../common/Themed'
 import { FormDataOne, FormDataTwo, FormDataThree } from '../types'
 
 interface InputFieldProps {
@@ -23,34 +25,88 @@ const InputField = ({
   placeHolder,
   name,
 }: InputFieldProps): JSX.Element => {
+  const [isFocused, setIsFocused] = useState(false)
+  const [inputFieldIsEmpty, setinputFieldIsEmpty] = useState(
+    defaultValue === ''
+  )
+
+  const {
+    translateY,
+    scale,
+    animateFocus,
+    animateBlur,
+  } = usePlaceholderAnimation(inputFieldIsEmpty)
+
+  useEffect(() => {
+    if (isFocused) {
+      animateFocus()
+    } else {
+      if (inputFieldIsEmpty) {
+        animateBlur()
+      }
+      if (!inputFieldIsEmpty) {
+        animateFocus()
+      }
+    }
+  }, [isFocused, inputFieldIsEmpty])
+
+  // Since our animated placeholder is a Text component, we provide a ref
+  // to the input field to focus it when the placeholder is clicked
+  const ref = React.useRef<TextInput>() as React.RefObject<TextInput>
+
   return (
     <Controller
       control={control}
       render={({ onChange, onBlur, value }) => (
-        <>
-          <View>
-            <Text style={styles.text}>{placeHolder} </Text>
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              returnKeyType="done"
-              inputAccessoryViewID={name}
-              placeholderTextColor="grey"
-            />
-          </View>
+        <View>
+          <TouchableWithoutFeedback onPress={() => ref.current?.focus()}>
+            <Animated.Text
+              style={[
+                styles.placeholder,
+                {
+                  transform: [{ translateY }, { scale }],
+                },
+              ]}
+            >
+              {placeHolder}
+            </Animated.Text>
+          </TouchableWithoutFeedback>
+
+          <TextInput
+            ref={ref}
+            style={styles.input}
+            onBlur={() => {
+              onBlur()
+              setIsFocused(false)
+            }}
+            onFocus={() => setIsFocused(true)}
+            onChangeText={(value) => {
+              onChange(value)
+              if (value) {
+                setinputFieldIsEmpty(false)
+              } else !inputFieldIsEmpty && setinputFieldIsEmpty(true)
+            }}
+            value={value}
+            returnKeyType="done"
+            inputAccessoryViewID={name}
+            placeholderTextColor="grey"
+          />
 
           {Platform.OS === 'ios' && (
             <InputAccessoryView nativeID={name}>
               <AccessoryView
                 placeHolder={placeHolder}
                 value={value}
-                onChange={onChange}
+                onChange={(value) => {
+                  onChange(value)
+                  if (value) {
+                    setinputFieldIsEmpty(false)
+                  } else !inputFieldIsEmpty && setinputFieldIsEmpty(true)
+                }}
               />
             </InputAccessoryView>
           )}
-        </>
+        </View>
       )}
       name={name}
       defaultValue={defaultValue}
@@ -58,6 +114,11 @@ const InputField = ({
   )
 }
 
+/**
+ * Accessory view for mobile
+ *
+ * Provies a text input on top of the keyboard in case keyboard is covering the actual input field
+ */
 const AccessoryView = ({
   value,
   onChange,
@@ -94,10 +155,14 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(0,0,0)',
     borderWidth: 1,
     paddingHorizontal: 10,
-    height: 40,
-    minHeight: 40,
     padding: 10,
+    height: 50,
+    paddingLeft: 17,
     borderRadius: 20,
+    fontSize: 16,
+    paddingTop: 20,
+    color: 'black',
+    zIndex: -1,
   },
   accessoryView: {
     flex: 1,
@@ -106,9 +171,71 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: 'grey',
   },
-  text: {
-    paddingLeft: 13,
+  placeholder: {
+    alignSelf: 'flex-start',
+    paddingLeft: 20,
+    position: 'relative',
+    color: 'rgba(0,0,0,0.6)',
+    top: 33,
+    fontSize: 14,
   },
 })
 
 export default InputField
+
+/**
+ * Utility hook for animating InputField placeholder text
+ */
+function usePlaceholderAnimation(inputFieldIsEmpty: boolean) {
+  // Animation start and end values
+  const [START_Y, END_Y] = [0, -12]
+  const [START_SCALE, END_SCALE] = [1, 0.8]
+  // Controls for animating placeholder placement
+  const placeholderAnimTranslateY = useRef(
+    new Animated.Value(inputFieldIsEmpty ? START_Y : END_Y)
+  ).current
+  const placeholderAnimScale = useRef(
+    new Animated.Value(inputFieldIsEmpty ? START_SCALE : END_SCALE)
+  ).current
+
+  const DURATION = 230
+
+  const focusAnimTranslateY = Animated.timing(placeholderAnimTranslateY, {
+    toValue: END_Y,
+    duration: DURATION,
+    useNativeDriver: true,
+  })
+  const blurAnimTranslateY = Animated.timing(placeholderAnimTranslateY, {
+    toValue: START_Y,
+    duration: DURATION,
+    useNativeDriver: true,
+  })
+
+  const focusAnimScale = Animated.timing(placeholderAnimScale, {
+    toValue: END_SCALE,
+    duration: DURATION,
+    useNativeDriver: true,
+  })
+  const blurAnimScale = Animated.timing(placeholderAnimScale, {
+    toValue: START_SCALE,
+    duration: DURATION,
+    useNativeDriver: true,
+  })
+
+  const animateFocus = () => {
+    focusAnimTranslateY.start()
+    focusAnimScale.start()
+  }
+
+  const animateBlur = () => {
+    blurAnimTranslateY.start()
+    blurAnimScale.start()
+  }
+
+  return {
+    translateY: placeholderAnimTranslateY,
+    scale: placeholderAnimScale,
+    animateFocus,
+    animateBlur,
+  }
+}

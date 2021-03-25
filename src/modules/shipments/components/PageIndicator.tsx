@@ -74,7 +74,7 @@ const ContainerColumn = ({
           dispatch(type)
         }}
       >
-        <View style={styles.textWrapper}>
+        <View>
           <Text style={styles.text}>{t(view)}</Text>
         </View>
         <View style={[styles.bar, { backgroundColor: getColor(page) }]} />
@@ -101,15 +101,13 @@ const styles = StyleSheet.create({
   bar: {
     flexGrow: 0.29,
     height: 5,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.1)',
+    borderRadius: 1,
   },
   text: {
     fontSize: 10,
     fontFamily: 'Rubik-Bold',
     textAlign: 'center',
-  },
-  textWrapper: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 1,
   },
 })
