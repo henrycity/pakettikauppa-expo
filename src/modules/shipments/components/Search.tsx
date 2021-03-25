@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Feather } from '@expo/vector-icons'
+import debounce from 'lodash.debounce'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, View, TextInput } from 'react-native'
