@@ -19,7 +19,13 @@ export default function NotFoundScreen({
         onPress={() => navigation.replace('Root')}
         style={Styles.link}
       >
-        <Text style={[Styles.linkText, { color: themed.linkTextColor }]}>
+        <Text
+          style={[
+            Styles.linkText,
+            { fontSize: 14 },
+            { color: themed.linkTextColor },
+          ]}
+        >
           Go to home screen!
         </Text>
       </TouchableOpacity>

@@ -7,7 +7,7 @@ import { StyleSheet, View, TextInput } from 'react-native'
 import Styles from '../../../common/Styles'
 import { useThemedColors } from '../../../common/Themed'
 
-const UselessTextInputMultiline = ({ smallScreen, setSearch }) => {
+const SearchInput = ({ smallScreen, setSearch }) => {
   const [value, onChangeText] = React.useState('')
   const themed = useThemedColors()
   const { t } = useTranslation()
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default UselessTextInputMultiline
+export default SearchInput

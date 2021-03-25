@@ -72,7 +72,7 @@ export function TextInput(props: TextInputProps): JSX.Element {
 
   return (
     <DefaultTextInput
-      style={[{ color }, { fontFamily: 'Muli' }, style]}
+      style={[{ color }, { fontFamily: Styles.body.fontFamily }, style]}
       {...otherProps}
     />
   )

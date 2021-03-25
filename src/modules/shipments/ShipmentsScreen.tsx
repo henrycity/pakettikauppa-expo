@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import BottomTabWrapper from '../../common/components/BottomTabWrapper'
 import ListView from './components/ListView'
-import UselessTextInputMultiline from './components/Search'
+import SearchInput from './components/Search'
 import TableView from './components/TableView'
 import useBreakpoint from './hooks/useBreakpoint'
 
@@ -13,10 +13,7 @@ export default function ShipmentsScreen(): JSX.Element {
 
   return (
     <BottomTabWrapper>
-      <UselessTextInputMultiline
-        smallScreen={screenIsSmallerThan700}
-        setSearch={setSearch}
-      />
+      <SearchInput smallScreen={screenIsSmallerThan700} setSearch={setSearch} />
       {screenIsSmallerThan700 ? (
         <ListView search={search} />
       ) : (

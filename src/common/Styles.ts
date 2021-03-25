@@ -111,7 +111,6 @@ export default StyleSheet.create({
     paddingVertical: 15,
   },
   linkText: {
-    fontSize: 14,
     fontFamily: typography.link.fontFamily,
   },
   bottomTabLabel: {

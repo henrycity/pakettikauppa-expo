@@ -68,7 +68,7 @@ const ShipmentComponent = ({ shipment }: { shipment: Shipment }) => {
 
 const Field = ({ name, value }: { name: string; value?: string }) => (
   <Text style={styles.fieldText}>
-    {name}: <Text style={styles.fieldBold}>{value}</Text>
+    {name}: <Text style={[Styles.linkText, { marginLeft: 5 }]}>{value}</Text>
   </Text>
 )
 
@@ -132,10 +132,6 @@ const styles = StyleSheet.create({
   },
   fieldText: {
     fontSize: 16,
-  },
-  fieldBold: {
-    marginLeft: 5,
-    fontFamily: 'Muli-Bold',
   },
   columnsLg: {
     flex: 1,

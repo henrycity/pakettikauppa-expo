@@ -12,6 +12,7 @@ import { Checkbox } from 'react-native-paper'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
+import Styles from '../../../common/Styles'
 import { Text, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import useShipments from '../hooks/useShipments'
@@ -110,19 +111,21 @@ function ShipmentListItem({
         }}
       />
       <View style={styles.itemLeft}>
-        <Text style={[styles.recipientName, { color }]}>
+        <Text style={[Styles.subtitle, { fontSize: 17 }, { color }]}>
           {shipment.receiverName}
         </Text>
-        <Text style={[styles.defaultField, { color }]}>{shipment.status}</Text>
-        <Text style={[styles.defaultField, { color }]}>
+        <Text style={[Styles.body, { fontSize: 10 }, { color }]}>
+          {shipment.status}
+        </Text>
+        <Text style={[Styles.body, { fontSize: 10 }, { color }]}>
           {shipment.receiverPostCode}
         </Text>
-        <Text style={[styles.defaultField, { color }]}>
+        <Text style={[Styles.body, { fontSize: 10 }, { color }]}>
           {shipment.deliveryCompany}: {shipment.shippingMethod}
         </Text>
       </View>
       <View style={styles.itemRight}>
-        <Text style={[styles.defaultField, { color }]}>
+        <Text style={[Styles.body, { fontSize: 10 }, { color }]}>
           {new Date(shipment.createdOn).toLocaleDateString(i18n.language)}
         </Text>
       </View>
@@ -174,13 +177,5 @@ const styles = StyleSheet.create({
   },
   footer: {
     height: 60,
-  },
-  recipientName: {
-    fontFamily: 'Rubik-Bold',
-    fontSize: 17,
-  },
-  defaultField: {
-    fontFamily: 'Muli',
-    fontSize: 10,
   },
 })

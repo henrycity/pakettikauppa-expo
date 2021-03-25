@@ -45,7 +45,7 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
               <Text
                 style={[
                   Styles.drawerLabelDefault,
-                  styles.mainLabel,
+                  { color: themed.inactiveIcon },
                   { textDecorationLine: hovered ? 'underline' : 'none' },
                 ]}
               >
@@ -67,7 +67,7 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
                     <Text
                       style={[
                         Styles.drawerLabelCustom,
-                        styles.smallLabel,
+                        { color: themed.inactiveIcon },
                         { textDecorationLine: hovered ? 'underline' : 'none' },
                       ]}
                     >
@@ -85,11 +85,7 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
 }
 
 const styles = StyleSheet.create({
-  mainLabel: {
-    color: '#233385',
-  },
   smallLabel: {
-    color: '#233385',
     marginTop: 9,
     paddingVertical: 3,
   },
