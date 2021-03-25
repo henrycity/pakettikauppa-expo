@@ -16,9 +16,9 @@ import Styles from '../../../common/Styles'
 import { Text, useThemedColors } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import useShipments from '../hooks/useShipments'
-import { Shipment } from '../types'
+import { SearchProps, Shipment } from '../types'
 
-export default function ListView({ search }): JSX.Element {
+export default function ListView({ search }: SearchProps): JSX.Element {
   const [selectedIds, setSelectedIds] = useState<number[]>([])
   const { shipments, isLoading, isRefreshing } = useShipments(search)
 

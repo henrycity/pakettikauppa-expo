@@ -86,6 +86,15 @@ export interface Shipment {
   price: string
 }
 
+export interface SearchInputProps {
+  smallScreen: boolean
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}
+
+export interface SearchProps {
+  search: string
+}
+
 type Next = {
   type: 'next'
 }

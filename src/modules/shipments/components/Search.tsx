@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Feather } from '@expo/vector-icons'
 import debounce from 'lodash.debounce'
 import React, { useEffect } from 'react'
@@ -7,8 +6,12 @@ import { StyleSheet, View, TextInput } from 'react-native'
 
 import Styles from '../../../common/Styles'
 import { useThemedColors } from '../../../common/Themed'
+import { SearchInputProps } from '../types'
 
-const SearchInput = ({ smallScreen, setSearch }) => {
+const SearchInput = ({
+  smallScreen,
+  setSearch,
+}: SearchInputProps): JSX.Element => {
   const [value, onChangeText] = React.useState('')
   const themed = useThemedColors()
   const { t } = useTranslation()
@@ -24,10 +27,10 @@ const SearchInput = ({ smallScreen, setSearch }) => {
           Styles.input,
           { color: themed.placeholder },
           { borderColor: themed.placeholder },
-          { placeholderTextColor: themed.placeholder },
         ]}
         placeholder={t('search')}
-        onChangeText={(text) => onChangeText(text)}
+        placeholderTextColor={themed.placeholder}
+        onChangeText={debounce(onChangeText, 300, { trailing: true })}
         value={value}
       />
       <Feather

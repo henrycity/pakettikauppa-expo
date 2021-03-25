@@ -4,9 +4,10 @@ import { StyleSheet } from 'react-native'
 import { View } from '../../../common/Themed'
 import Loading from '../../../common/components/Loading'
 import useShipments from '../hooks/useShipments'
+import { SearchProps } from '../types'
 import TableComponent from './TableComponent'
 
-export default function TableView({ search }): JSX.Element {
+export default function TableView({ search }: SearchProps): JSX.Element {
   const { shipments, isLoading, isRefreshing } = useShipments(search)
 
   return (
