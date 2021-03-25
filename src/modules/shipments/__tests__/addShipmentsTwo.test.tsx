@@ -46,8 +46,6 @@ describe('Adding shipments', () => {
     expect(senderName).toBeTruthy()
     const senderAddress = await getAllByPlaceholderText('Address')
     expect(senderAddress).toBeTruthy()
-    const senderCountry = await getAllByPlaceholderText('Country')
-    expect(senderCountry).toBeTruthy()
     const senderPostCode = await getAllByPlaceholderText('Postcode')
     expect(senderPostCode).toBeTruthy()
     const senderCity = await getAllByPlaceholderText('City')

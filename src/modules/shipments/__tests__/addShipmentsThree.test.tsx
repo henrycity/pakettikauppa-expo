@@ -46,8 +46,6 @@ describe('Adding shipments', () => {
     fireEvent(nextButton2, 'press')
     const deliveryCompany = await getAllByPlaceholderText('Delivery Company')
     expect(deliveryCompany).toBeTruthy()
-    const ShippingMethod = await getAllByPlaceholderText('Shipping Method')
-    expect(ShippingMethod).toBeTruthy()
     const Weight = await getAllByPlaceholderText('Weight')
     expect(Weight).toBeTruthy()
     const Reference = await getAllByPlaceholderText('Reference')
@@ -59,12 +57,7 @@ describe('Adding shipments', () => {
   })
   it('Fields are editable', async () => {
     process.env.TEST_ENV = 'mobile'
-    const {
-      findByA11yLabel,
-      getByTestId,
-      getAllByPlaceholderText,
-      getByText,
-    } = render(comp)
+    const { findByA11yLabel, getByTestId, getByText } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
     const AddShipment = await getByTestId('AddShipment')
@@ -73,18 +66,10 @@ describe('Adding shipments', () => {
     fireEvent(nextButton, 'press')
     const nextButton2 = await getByText('Next')
     fireEvent(nextButton2, 'press')
-    const ShippingMethod = await getAllByPlaceholderText('Shipping Method')
-    fireEvent.changeText(ShippingMethod[0], 'Pikapaketti')
-    expect(ShippingMethod[0].props.value).toEqual('Pikapaketti')
   })
   it('Field values stay when coming back', async () => {
     process.env.TEST_ENV = 'mobile'
-    const {
-      findByA11yLabel,
-      getByTestId,
-      getAllByPlaceholderText,
-      getByText,
-    } = render(comp)
+    const { findByA11yLabel, getByTestId, getByText } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
     const AddShipment = await getByTestId('AddShipment')
@@ -93,15 +78,10 @@ describe('Adding shipments', () => {
     fireEvent(nextButtonOne, 'press')
     const nextButtonTwo = await getByText('Next')
     fireEvent(nextButtonTwo, 'press')
-    const ShippingMethod = await getAllByPlaceholderText('Shipping Method')
-    fireEvent.changeText(ShippingMethod[0], 'Pikapaketti')
-    expect(ShippingMethod[0].props.value).toEqual('Pikapaketti')
     const previousButton = await getByText('Previous')
     fireEvent(previousButton, 'press')
     const nextButton = await getByText('Next')
     fireEvent(nextButton, 'press')
-    const ShippingMethod2 = await getAllByPlaceholderText('Shipping Method')
-    expect(ShippingMethod2[0].props.value).toEqual('Pikapaketti')
   })
 })
 

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
+import RNPickerSelect from 'react-native-picker-select'
 import { ScrollView } from 'react-native-web-hover'
 
 import { View } from '../../../common/Themed'
@@ -29,15 +30,26 @@ export default function AddShipmentsThree({
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
-      {FieldsThree({ pageThree }).map((field) => (
-        <InputField
-          key={field.name}
-          control={control}
-          defaultValue={field.defaultValue}
-          placeHolder={field.placeHolder}
-          name={field.name}
-        />
-      ))}
+      {FieldsThree({ pageThree }).map((field) =>
+        field.fieldType === 'text' ? (
+          <InputField
+            key={field.name}
+            control={control}
+            defaultValue={field.defaultValue}
+            placeHolder={field.placeHolder}
+            name={field.name}
+          />
+        ) : (
+          <RNPickerSelect
+            onValueChange={(value) => value}
+            items={[
+              { label: 'Football', value: 'football' },
+              { label: 'Baseball', value: 'baseball' },
+              { label: 'Hockey', value: 'hockey' },
+            ]}
+          />
+        )
+      )}
       <View style={styles.buttons}>
         {PreviousButton({ dispatch, onPress })}
         {SubmitButton({ dispatch, onPress })}

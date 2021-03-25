@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { ScrollView } from 'react-native'
+import RNPickerSelect from 'react-native-picker-select'
 
 import { View } from '../../../common/Themed'
 import { PreviousButton, NextButton } from '../components/Buttons'
@@ -29,15 +30,26 @@ export default function AddShipmentsTwo({
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
-      {FieldsTwo({ pageTwo }).map((field) => (
-        <InputField
-          key={field.name}
-          control={control}
-          defaultValue={field.defaultValue}
-          placeHolder={field.placeHolder}
-          name={field.name}
-        />
-      ))}
+      {FieldsTwo({ pageTwo }).map((field) =>
+        field.fieldType === 'text' ? (
+          <InputField
+            key={field.name}
+            control={control}
+            defaultValue={field.defaultValue}
+            placeHolder={field.placeHolder}
+            name={field.name}
+          />
+        ) : (
+          <RNPickerSelect
+            onValueChange={(value) => value}
+            items={[
+              { label: 'Football', value: 'football' },
+              { label: 'Baseball', value: 'baseball' },
+              { label: 'Hockey', value: 'hockey' },
+            ]}
+          />
+        )
+      )}
       <View style={styles.buttons}>
         {PreviousButton({ dispatch, onPress })}
         {NextButton({ dispatch, onPress })}
