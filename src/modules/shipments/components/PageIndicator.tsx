@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Pressable, StyleSheet } from 'react-native'
+import { Pressable, StyleSheet, Platform } from 'react-native'
 
 import { View, useThemedColors, Text } from '../../../common/Themed'
 import { ActionType } from '../types'
@@ -28,7 +28,9 @@ const PageIndicator = ({
             dispatch({ type: 'sender' })
           }}
         >
-          <Text>{t('sender')}</Text>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>{t('sender')}</Text>
+          </View>
           <View style={[styles.bar, { backgroundColor: getColor(0) }]} />
         </Pressable>
       </View>
@@ -39,7 +41,9 @@ const PageIndicator = ({
             dispatch({ type: 'receiver' })
           }}
         >
-          <Text>{t('receiver')}</Text>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>{t('receiver')}</Text>
+          </View>
           <View style={[styles.bar, { backgroundColor: getColor(1) }]} />
         </Pressable>
       </View>
@@ -50,7 +54,7 @@ const PageIndicator = ({
             dispatch({ type: 'other' })
           }}
         >
-          <Text>{t('other')}</Text>
+          <Text style={styles.text}>{t('other')}</Text>
           <View style={[styles.bar, { backgroundColor: getColor(2) }]} />
         </Pressable>
       </View>
@@ -65,6 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
     justifyContent: 'space-between',
+    maxHeight: 20,
   },
   containerColumn: {
     flexDirection: 'column',
@@ -75,5 +80,15 @@ const styles = StyleSheet.create({
   bar: {
     flexGrow: 0.29,
     height: 5,
+  },
+  text: {
+    fontSize: 10,
+    fontFamily: 'Rubik-Bold',
+    textAlign: 'center',
+  },
+  textWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 1,
   },
 })
