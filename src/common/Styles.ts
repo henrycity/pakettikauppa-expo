@@ -31,6 +31,10 @@ export default StyleSheet.create({
     fontSize: 26,
     fontFamily: typography.title.fontFamily,
   },
+  subtitle: {
+    fontFamily: typography.subtitle.fontFamily,
+    fontSize: 14,
+  },
   addShipmentTitle: {
     fontSize: 17,
     fontFamily: typography.drawerLabel.fontFamily,
@@ -73,6 +77,8 @@ export default StyleSheet.create({
   input: {
     borderBottomWidth: 1.0,
     width: 200,
+    fontFamily: typography.body.fontFamily,
+    padding: 3,
   },
   error: {
     color: 'red',

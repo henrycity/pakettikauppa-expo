@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import queryString from 'query-string'
 import useSWR from 'swr'
 
 import { Shipment } from '../types'
 
-const useShipments = () => {
-  const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
+const useShipments = (search) => {
+  const { data, error, isValidating } = useSWR<Shipment[]>(
+    `/shipments${search && '?' + queryString.stringify({ search })}`
+  )
   const isLoading = !error && !data
   const isRefreshing = Boolean(data && isValidating)
 

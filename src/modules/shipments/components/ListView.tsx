@@ -17,9 +17,9 @@ import Loading from '../../../common/components/Loading'
 import useShipments from '../hooks/useShipments'
 import { Shipment } from '../types'
 
-export default function ListView(): JSX.Element {
+export default function ListView({ search }): JSX.Element {
   const [selectedIds, setSelectedIds] = useState<number[]>([])
-  const { shipments, isLoading, isRefreshing } = useShipments()
+  const { shipments, isLoading, isRefreshing } = useShipments(search)
 
   function addSelectedId(id: number) {
     const addId = [...selectedIds, id]

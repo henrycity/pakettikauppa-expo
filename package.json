@@ -52,6 +52,7 @@
     "googleapis": "^66.0.0",
     "i18next": "^19.8.4",
     "jest-enzyme": "^7.1.2",
+    "query-string": "^7.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.15.1",

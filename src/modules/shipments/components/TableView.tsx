@@ -6,8 +6,8 @@ import Loading from '../../../common/components/Loading'
 import useShipments from '../hooks/useShipments'
 import TableComponent from './TableComponent'
 
-export default function TableView(): JSX.Element {
-  const { shipments, isLoading, isRefreshing } = useShipments()
+export default function TableView({ search }): JSX.Element {
+  const { shipments, isLoading, isRefreshing } = useShipments(search)
 
   return (
     <View style={styles.container}>

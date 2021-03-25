@@ -104,7 +104,11 @@ export default function RegistrationModal(): JSX.Element {
             placeholderTextColor={themed.placeholder}
             onChangeText={(email) => setEmail(email)}
             defaultValue={email}
-            style={[Styles.input, { color: themed.inputColor }]}
+            style={[
+              Styles.input,
+              { color: themed.inputColor },
+              { borderColor: themed.placeholder },
+            ]}
           />
           <View style={Styles.gap} />
 
@@ -116,7 +120,11 @@ export default function RegistrationModal(): JSX.Element {
             placeholderTextColor={themed.placeholder}
             onChangeText={(vat_id) => setVat_id(vat_id)}
             defaultValue={vat_id}
-            style={[Styles.input, { color: themed.inputColor }]}
+            style={[
+              Styles.input,
+              { color: themed.inputColor },
+              { borderColor: themed.placeholder },
+            ]}
           />
 
           <View style={Styles.gap} />

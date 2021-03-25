@@ -6,10 +6,10 @@ import { Checkbox } from 'react-native-paper'
 import { Hoverable } from 'react-native-web-hover'
 import { mutate } from 'swr'
 
+import Styles from '../../../common/Styles'
 import { Text, View, useThemedColors } from '../../../common/Themed'
 import { shipmentHeaders, cellData } from '../constants/tableHeaders'
 import { Shipment } from '../types'
-
 interface HeaderProps {
   fields: typeof shipmentHeaders
 }
@@ -17,18 +17,23 @@ interface HeaderProps {
 function Header({ fields }: HeaderProps) {
   const { t } = useTranslation('shipments')
   return (
-    <View style={styles.header}>
-      <Text style={{ width: 35 }} />
-      {fields.map((field: string) => (
-        <View key={field} style={[styles.cell, { flex: cellData[field].flex }]}>
-          <Text
-            numberOfLines={t(field).split(' ').length}
-            style={styles.headerText}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={{ width: 35 }} />
+        {fields.map((field: string) => (
+          <View
+            key={field}
+            style={[styles.cell, { flex: cellData[field].flex }]}
           >
-            {t(field)}
-          </Text>
-        </View>
-      ))}
+            <Text
+              numberOfLines={t(field).split(' ').length}
+              style={[Styles.subtitle, { textAlign: 'center' }]}
+            >
+              {t(field)}
+            </Text>
+          </View>
+        ))}
+      </View>
     </View>
   )
 }
@@ -95,7 +100,14 @@ function Row({
           >
             <Text
               numberOfLines={1}
-              style={[styles.text, { color: hovered ? '#fff' : themed.text }]}
+              style={[
+                Styles.body,
+                {
+                  fontSize: 14,
+                  textAlign: 'center',
+                  color: hovered ? '#fff' : themed.text,
+                },
+              ]}
             >
               {content}
             </Text>
@@ -177,6 +189,9 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     flexDirection: 'row',
   },
+  container: {
+    flexDirection: 'column',
+  },
   header: {
     paddingVertical: 15,
     flexDirection: 'row',
@@ -185,15 +200,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingRight: 6,
-  },
-  text: {
-    fontFamily: 'Muli',
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  headerText: {
-    fontFamily: 'Muli-SemiBold',
-    fontSize: 14,
-    textAlign: 'center',
   },
 })
