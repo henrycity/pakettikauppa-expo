@@ -206,6 +206,7 @@ const resources = {
       other: 'Annan information',
       createShipment: 'Skapa leverans',
       search: 'Sök',
+      language: 'Språk',
     },
     shipments: {
       createdOn: 'Datum',

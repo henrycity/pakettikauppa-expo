@@ -2,7 +2,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 import Styles from '../../common/Styles'
 import { useThemedColors, TitleText } from '../../common/Themed'
@@ -39,7 +39,9 @@ export default function ShipmentsNavigator(): JSX.Element {
         options={{
           ...headerOptions,
           headerTitle: () => (
-            <View style={{ flex: 1, flexDirection: 'row' }}>
+            <View
+              style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+            >
               <TitleText>{t('shipments')}</TitleText>
               <ShipmentOptions />
             </View>

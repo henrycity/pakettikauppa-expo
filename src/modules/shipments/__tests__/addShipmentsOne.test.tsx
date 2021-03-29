@@ -30,12 +30,18 @@ describe('Adding shipments', () => {
 
   it('AddShipmentsOne should contain all the needed fields', async () => {
     process.env.TEST_ENV = 'mobile'
-    const { findByA11yLabel, getByTestId, getAllByPlaceholderText } = render(
-      comp
-    )
+    const {
+      findByA11yLabel,
+      getByTestId,
+      getAllByPlaceholderText,
+      findByTestId,
+    } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const ShipmentMenu = await getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const BusinessID = await getAllByPlaceholderText('Business ID')
     expect(BusinessID).toBeTruthy()
@@ -56,12 +62,18 @@ describe('Adding shipments', () => {
   })
   it('Fields are editable', async () => {
     process.env.TEST_ENV = 'mobile'
-    const { findByA11yLabel, getByTestId, getAllByPlaceholderText } = render(
-      comp
-    )
+    const {
+      findByA11yLabel,
+      getByTestId,
+      getAllByPlaceholderText,
+      findByTestId,
+    } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const ShipmentMenu = await getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const senderName = await getAllByPlaceholderText('Name')
     fireEvent.changeText(senderName[0], 'Jussi')
@@ -74,10 +86,14 @@ describe('Adding shipments', () => {
       getByTestId,
       getAllByPlaceholderText,
       getByText,
+      findByTestId,
     } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const ShipmentMenu = await getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const senderName = await getAllByPlaceholderText('Name')
     fireEvent.changeText(senderName[0], 'Jussi')

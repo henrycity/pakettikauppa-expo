@@ -46,6 +46,9 @@ export default StyleSheet.create({
   body: {
     fontFamily: typography.body.fontFamily,
   },
+  addShipmentMenu: {
+    fontFamily: typography.body.fontFamily,
+  },
   separator: {
     marginVertical: 30,
     height: 1,
@@ -117,6 +120,7 @@ export default StyleSheet.create({
     fontFamily: typography.bottomTabLabel.fontFamily,
     textTransform: 'lowercase',
     fontSize: 13,
+    paddingBottom: 15,
   },
   drawerLabelDefault: {
     fontFamily: typography.drawerLabel.fontFamily,

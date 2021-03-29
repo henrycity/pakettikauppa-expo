@@ -4,7 +4,13 @@ import useSWR from 'swr'
 
 import { Shipment } from '../types'
 
-const useShipments = (search) => {
+interface UseShipmentsReturnType {
+  shipments: Shipment[] | undefined
+  isLoading: boolean
+  isRefreshing: boolean
+}
+
+const useShipments = (search: string): UseShipmentsReturnType => {
   const { data, error, isValidating } = useSWR<Shipment[]>(
     `/shipments${search && '?' + queryString.stringify({ search })}`
   )

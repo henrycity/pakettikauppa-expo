@@ -188,6 +188,9 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     marginVertical: 2,
     flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.05)',
+    borderRadius: 2,
   },
   container: {
     flexDirection: 'column',

@@ -155,7 +155,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: 2,
-    paddingVertical: 2,
+    paddingVertical: 5,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.05)',
+    borderRadius: 2,
   },
   itemLeft: {
     flex: 1,

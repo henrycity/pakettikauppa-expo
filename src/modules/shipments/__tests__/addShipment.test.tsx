@@ -33,18 +33,27 @@ describe('Adding shipments', () => {
     const { findByA11yLabel, getByTestId, findByTestId } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = findByTestId('AddShipment')
+    const ShipmentMenu = getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     expect(AddShipment).toBeTruthy()
   })
 
   test('AddShipment button should redirect to AddShipmentsOne', async () => {
     process.env.TEST_ENV = 'mobile'
-    const { findByA11yLabel, findByTestId, getAllByPlaceholderText } = render(
-      comp
-    )
+    const {
+      findByA11yLabel,
+      getByTestId,
+      findByTestId,
+      getAllByPlaceholderText,
+    } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = findByTestId('AddShipment')
+    const ShipmentMenu = getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const BusinessID = getAllByPlaceholderText('Business ID')
     expect(BusinessID).toBeTruthy()
@@ -52,17 +61,22 @@ describe('Adding shipments', () => {
 
   test('All buttons should be found on Shipments page', async () => {
     process.env.TEST_ENV = 'mobile'
-    const { findByA11yLabel, getByTestId } = render(comp)
+    const { findByA11yLabel, getByTestId, findByTestId } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = getByTestId('AddShipment')
+    const ShipmentMenu = getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     expect(AddShipment).toBeTruthy()
     const pickup = getByTestId('pickup')
     expect(pickup).toBeTruthy()
-    const lineHaul = getByTestId('Line Haul')
+    const lineHaul = getByTestId('lineHaul')
     expect(lineHaul).toBeTruthy()
-    const Labels = getByTestId('Multiple Labels')
+    const Labels = getByTestId('multipleLabels')
     expect(Labels).toBeTruthy()
+    const Delete = getByTestId('delete')
+    expect(Delete).toBeTruthy()
   })
 })
 

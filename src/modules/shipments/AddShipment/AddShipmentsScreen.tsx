@@ -10,7 +10,6 @@ import useDeviceType from '../../../common/hooks/useDeviceType'
 import { ShipmentsNavigationProp } from '../../../types'
 import AddShipmentsHeader from '../components/AddShipmentsHeader'
 import ErrorDialog from '../components/ErrorDialog'
-import PageIndicator from '../components/PageIndicator'
 import SuccessView from '../components/SuccessView'
 import {
   FormDataOne,
@@ -87,7 +86,7 @@ export default function AddShipmentsScreen(): JSX.Element {
         setSuccess(true)
         setPageTwo(pageTwoInit)
         setPageThree(pageThreeInit)
-        dispatch({ type: 'back' })
+        dispatch({ type: 'sender' })
         mutate('/shipments')
         setTimeout(() => {
           navigation.replace('DetailsScreen', {
@@ -109,8 +108,12 @@ export default function AddShipmentsScreen(): JSX.Element {
       case 'submit':
         submitData()
         return { count: 2 }
-      case 'back':
+      case 'sender':
         return { count: 0 }
+      case 'receiver':
+        return { count: 1 }
+      case 'other':
+        return { count: 2 }
       default:
         return state
     }
@@ -175,7 +178,6 @@ export default function AddShipmentsScreen(): JSX.Element {
             showError={showError}
             setShowError={setShowError}
           />
-          <PageIndicator page={state.count} />
 
           {loading && (
             <View style={{ margin: 10 }}>
@@ -188,6 +190,7 @@ export default function AddShipmentsScreen(): JSX.Element {
               dispatch={dispatch}
               pageOne={pageOne}
               setPageOne={setPageOne}
+              page={state.count}
             />
           )}
 
@@ -196,6 +199,7 @@ export default function AddShipmentsScreen(): JSX.Element {
               dispatch={dispatch}
               pageTwo={pageTwo}
               setPageTwo={setPageTwo}
+              page={state.count}
             />
           )}
 
@@ -204,6 +208,7 @@ export default function AddShipmentsScreen(): JSX.Element {
               dispatch={dispatch}
               pageThree={pageThree}
               setPageThree={setPageThree}
+              page={state.count}
             />
           )}
         </View>
