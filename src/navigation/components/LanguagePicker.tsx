@@ -2,11 +2,11 @@ import { Feather } from '@expo/vector-icons'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Hoverable } from 'react-native-web-hover'
 
 import Styles from '../../common/Styles'
-import { useThemedColors } from '../../common/Themed'
+import { useThemedColors, Text } from '../../common/Themed'
 import { languages } from '../../localization'
 
 interface LanguagePickerProps {
@@ -45,7 +45,6 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
               <Text
                 style={[
                   Styles.drawerLabelDefault,
-                  styles.mainLabel,
                   { textDecorationLine: hovered ? 'underline' : 'none' },
                 ]}
               >
@@ -58,7 +57,7 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
         {visible && (
           <View>
             {languages.map((lang) => (
-              <Hoverable>
+              <Hoverable key={lang.code}>
                 {({ hovered }) => (
                   <TouchableOpacity
                     key={lang.code}
@@ -85,11 +84,7 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
 }
 
 const styles = StyleSheet.create({
-  mainLabel: {
-    color: '#233385',
-  },
   smallLabel: {
-    color: '#233385',
     marginTop: 9,
     paddingVertical: 3,
   },

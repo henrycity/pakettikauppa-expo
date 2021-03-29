@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native'
 import { View } from '../../../common/Themed'
 import { BackButton, NextButton } from '../components/Buttons'
 import InputField from '../components/InputField'
+import PageIndicator from '../components/PageIndicator'
 import { FormDataOne, ActionType } from '../types'
 import { styles } from './Styles'
 import { FieldsOne } from './fields'
@@ -13,12 +14,14 @@ interface AddShipmentsOneProps {
   dispatch: (value: ActionType) => void
   pageOne: FormDataOne
   setPageOne: React.Dispatch<React.SetStateAction<FormDataOne>>
+  page: number
 }
 
 export default function AddShipmentsOne({
   dispatch,
   pageOne,
   setPageOne,
+  page,
 }: AddShipmentsOneProps): JSX.Element {
   const { control, getValues } = useForm<FormDataOne>()
 
@@ -29,6 +32,7 @@ export default function AddShipmentsOne({
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
+      <PageIndicator dispatch={dispatch} page={page} onPress={onPress} />
       {FieldsOne({ pageOne }).map((field) => (
         <InputField
           key={field.name}

@@ -203,6 +203,7 @@ const resources = {
       receiver: 'Mottagarinformation',
       other: 'Annan information',
       createShipment: 'Skapa leverans',
+      language: 'Språk',
     },
     shipments: {
       createdOn: 'Datum',

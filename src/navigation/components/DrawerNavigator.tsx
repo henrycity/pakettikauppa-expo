@@ -24,7 +24,12 @@ export default function DrawerNavigator(): JSX.Element {
       screenOptions={{ headerShown: false }}
       drawerContent={(props) => <DrawerMenu {...props} />}
       drawerType={drawerType}
-      drawerStyle={[{ width: 250 }, { backgroundColor }]}
+      drawerStyle={[
+        { width: 250 },
+        {
+          backgroundColor,
+        },
+      ]}
     >
       {ScreenNavigators.map((screen) => (
         <Drawer.Screen
