@@ -13,30 +13,22 @@ export const styles = StyleSheet.create({
     flexShrink: 1,
     justifyContent: 'space-evenly',
   },
-  scrollViewOne: {
+  scrollView: {
     flex: 1,
     flexGrow: 1,
     alignItems: 'stretch',
     justifyContent: 'space-around',
     paddingHorizontal: 20,
+  },
+  senderInfoStyle: {
     minHeight: 580,
     maxHeight: 600,
   },
-  scrollViewTwo: {
-    flex: 1,
-    flexGrow: 1,
-    alignItems: 'stretch',
-    justifyContent: 'space-around',
-    paddingHorizontal: 20,
+  receiverInfoStyle: {
     minHeight: 510,
     maxHeight: 530,
   },
-  scrollViewThree: {
-    flex: 1,
-    flexGrow: 1,
-    alignItems: 'stretch',
-    justifyContent: 'space-around',
-    paddingHorizontal: 20,
+  otherInfoStyle: {
     minHeight: 450,
     maxHeight: 460,
   },

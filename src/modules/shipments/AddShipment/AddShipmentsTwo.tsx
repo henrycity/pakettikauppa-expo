@@ -28,7 +28,9 @@ export default function AddShipmentsTwo({
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewTwo}>
+    <ScrollView
+      contentContainerStyle={[styles.scrollView, styles.receiverInfoStyle]}
+    >
       {FieldsTwo({ pageTwo }).map((field) => (
         <InputField
           key={field.name}
