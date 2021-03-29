@@ -1,13 +1,13 @@
 import { Feather } from '@expo/vector-icons'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, View } from 'react-native'
-import RNPickerSelect from 'react-native-picker-select'
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import { Hoverable } from 'react-native-web-hover'
 
 import Styles from '../../common/Styles'
 import { useThemedColors } from '../../common/Themed'
-import { useSelectedLanguage, languages } from '../../localization'
+import { languages } from '../../localization'
 
 interface LanguagePickerProps {
   navigation: DrawerNavigationHelpers
@@ -15,14 +15,17 @@ interface LanguagePickerProps {
 
 const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
   const { i18n } = useTranslation()
-  const [selectedLanguage, setSelectedLanguage] = useSelectedLanguage()
   const themed = useThemedColors()
 
+  const [visible, setVisible] = useState(false)
+
   const onValueChange = (value: string) => {
-    setSelectedLanguage(value)
     i18n.changeLanguage(value)
     navigation.closeDrawer()
+    setVisible(false)
   }
+
+  const { t } = useTranslation()
 
   return (
     <View
@@ -34,50 +37,73 @@ const LanguagePicker = ({ navigation }: LanguagePickerProps): JSX.Element => {
         color={themed.inactiveIcon}
         style={Styles.icon}
       />
+
       <View style={styles.languagePicker}>
-        {selectedLanguage ? (
-          <RNPickerSelect
-            value={selectedLanguage}
-            placeholder={{}}
-            onValueChange={onValueChange}
-            items={languages.map((lang) => ({ label: lang, value: lang }))}
-            style={{
-              inputWeb: {
-                ...webStyle,
-                backgroundColor: themed.drawerBackground,
-                color: themed.text,
-              },
-              inputIOS: {
-                backgroundColor: themed.drawerBackground,
-                color: themed.text,
-              },
-              inputAndroid: {
-                backgroundColor: themed.drawerBackground,
-                color: themed.text,
-              },
-            }}
-          />
-        ) : null}
+        <Hoverable>
+          {({ hovered }) => (
+            <TouchableOpacity onPress={() => setVisible(!visible)}>
+              <Text
+                style={[
+                  Styles.drawerLabelDefault,
+                  styles.mainLabel,
+                  { textDecorationLine: hovered ? 'underline' : 'none' },
+                ]}
+              >
+                {t('language')}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </Hoverable>
+
+        {visible && (
+          <View>
+            {languages.map((lang) => (
+              <Hoverable>
+                {({ hovered }) => (
+                  <TouchableOpacity
+                    key={lang.code}
+                    onPress={() => onValueChange(lang.code)}
+                  >
+                    <Text
+                      style={[
+                        Styles.drawerLabelCustom,
+                        styles.smallLabel,
+                        { textDecorationLine: hovered ? 'underline' : 'none' },
+                      ]}
+                    >
+                      {lang.name}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </Hoverable>
+            ))}
+          </View>
+        )}
       </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  mainLabel: {
+    color: '#233385',
+  },
+  smallLabel: {
+    color: '#233385',
+    marginTop: 9,
+    paddingVertical: 3,
+  },
   container: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'stretch',
     padding: 10,
   },
   languagePicker: {
-    marginLeft: 23,
-    width: '30%',
+    alignItems: 'flex-start',
+    padding: 10,
+    paddingHorizontal: 27,
   },
 })
-
-const webStyle = {
-  height: '20px',
-}
 
 export default LanguagePicker

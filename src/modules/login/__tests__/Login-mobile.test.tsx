@@ -24,7 +24,7 @@ describe('Testing mobile authorization', () => {
     const { isLoggedIn } = useUser()
     expect(isLoggedIn).toEqual(false)
     await waitFor(() => {
-      const LoginScreen = getByText('Login or register with a Google account')
+      const LoginScreen = getByText('Log in or register with a Google account')
       expect(LoginScreen).toBeTruthy()
     })
   })
@@ -33,5 +33,3 @@ describe('Testing mobile authorization', () => {
 function Test() {
   return <Navigation colorScheme="light" />
 }
-
-// yarn test hooks/__tests__/Login-mobile.test.tsx

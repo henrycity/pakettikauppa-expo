@@ -7,7 +7,7 @@ import {
   InputAccessoryView,
 } from 'react-native'
 
-import { View } from '../../../common/Themed'
+import { View, Text } from '../../../common/Themed'
 import { FormDataOne, FormDataTwo, FormDataThree } from '../types'
 
 interface InputFieldProps {
@@ -28,16 +28,18 @@ const InputField = ({
       control={control}
       render={({ onChange, onBlur, value }) => (
         <>
-          <TextInput
-            placeholder={placeHolder}
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            returnKeyType="done"
-            inputAccessoryViewID={name}
-            placeholderTextColor="grey"
-          />
+          <View>
+            <Text style={styles.text}>{placeHolder} </Text>
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              returnKeyType="done"
+              inputAccessoryViewID={name}
+              placeholderTextColor="grey"
+            />
+          </View>
 
           {Platform.OS === 'ios' && (
             <InputAccessoryView nativeID={name}>
@@ -103,6 +105,9 @@ const styles = StyleSheet.create({
     height: 30,
     borderTopWidth: 1,
     borderColor: 'grey',
+  },
+  text: {
+    paddingLeft: 13,
   },
 })
 

@@ -41,12 +41,7 @@ export function Text(props: TextProps): JSX.Element {
   const { style, lightColor, darkColor, ...otherProps } = props
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
 
-  return (
-    <DefaultText
-      style={[{ color }, { fontFamily: 'Muli' }, style]}
-      {...otherProps}
-    />
-  )
+  return <DefaultText style={[{ color }, Styles.body, style]} {...otherProps} />
 }
 
 export function TitleText(props: TextProps): JSX.Element {
@@ -75,5 +70,10 @@ export function TextInput(props: TextInputProps): JSX.Element {
     'text'
   )
 
-  return <DefaultTextInput style={[{ color }, Styles.body]} {...otherProps} />
+  return (
+    <DefaultTextInput
+      style={[{ color }, { fontFamily: 'Muli' }, style]}
+      {...otherProps}
+    />
+  )
 }

@@ -37,7 +37,8 @@ describe('Testing mobile navigation', () => {
     expect(reportsText).toBeTruthy()
   })
 
-  /*it('should navigate to settings from the drawer', async () => {
+  /*
+  it('should navigate to settings from the drawer', async () => {
     process.env.TEST_ENV = 'mobile'
 
     const { findAllByA11yRole, getByText } = render(component)
@@ -49,7 +50,8 @@ describe('Testing mobile navigation', () => {
     const reportsText = getByText('Reports Screen!')
 
     expect(reportsText).toBeTruthy()
-  })*/
+  })
+  */
 })
 
 function TestApp() {

@@ -37,6 +37,7 @@ export default function ReportsNavigator(): JSX.Element {
             backgroundColor: themed.background,
           },
           headerTintColor: themed.text,
+          title: t('reports'),
         }}
       />
     </ReportsStack.Navigator>

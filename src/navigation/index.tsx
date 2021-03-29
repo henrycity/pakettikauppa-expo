@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import { ColorSchemeName, Image } from 'react-native'
 
 import Colors from '../common/Colors'
@@ -35,7 +36,19 @@ export default function Navigation({
   }
 
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={navigationTheme}>
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={navigationTheme}
+      documentTitle={{
+        formatter: (options, route) => {
+          let title = 'Pakettikauppa'
+          if (options?.title) title += ` | ${options.title}`
+          else if (route?.name) title += ` | ${route.name}`
+
+          return title
+        },
+      }}
+    >
       <RootNavigator />
     </NavigationContainer>
   )
@@ -55,6 +68,7 @@ const Stack = createStackNavigator<RootStackParamList>()
 
 function RootNavigator() {
   const { isLoggedIn } = useUser()
+  const { t } = useTranslation()
   const backgroundColor = useThemeColor(
     {
       light: Colors.light.headerBackground,
@@ -80,7 +94,10 @@ function RootNavigator() {
           <Stack.Screen
             name="NotFound"
             component={NotFoundScreen}
-            options={options}
+            options={{
+              ...options,
+              title: 'Not Found',
+            }}
           />
         </>
       ) : (
@@ -88,7 +105,10 @@ function RootNavigator() {
           <Stack.Screen
             name="login"
             component={LoginScreen}
-            options={options}
+            options={{
+              ...options,
+              title: t('login'),
+            }}
           />
         </>
       )}

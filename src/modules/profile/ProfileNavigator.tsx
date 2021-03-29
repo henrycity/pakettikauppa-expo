@@ -37,6 +37,7 @@ export default function ProfileNavigator(): JSX.Element {
             backgroundColor: themed.background,
           },
           headerTintColor: themed.text,
+          title: t('profile'),
         }}
       />
     </ProfileStack.Navigator>
