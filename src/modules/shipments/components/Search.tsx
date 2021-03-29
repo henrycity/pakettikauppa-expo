@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
   searchSection: {
     flex: 1,
     flexGrow: 0,
-    minHeight: 30,
+    flexShrink: 0,
+    minHeight: 35,
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 19,
@@ -51,9 +52,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   searchIcon: {
-    padding: 10,
     position: 'relative',
-    left: -40,
+    left: -30,
   },
 })
 
