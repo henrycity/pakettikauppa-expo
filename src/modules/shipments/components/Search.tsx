@@ -1,6 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import debounce from 'lodash.debounce'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, View, TextInput } from 'react-native'
 
@@ -12,13 +12,8 @@ const SearchInput = ({
   smallScreen,
   setSearch,
 }: SearchInputProps): JSX.Element => {
-  const [value, onChangeText] = React.useState('')
   const themed = useThemedColors()
   const { t } = useTranslation()
-
-  useEffect(() => {
-    setSearch(value)
-  }, [value])
 
   return (
     <View style={[styles.searchSection, { marginLeft: smallScreen ? 0 : 50 }]}>
@@ -30,8 +25,7 @@ const SearchInput = ({
         ]}
         placeholder={t('search')}
         placeholderTextColor={themed.placeholder}
-        onChangeText={debounce(onChangeText, 300, { trailing: true })}
-        value={value}
+        onChangeText={debounce(setSearch, 300, { trailing: true })}
       />
       <Feather
         name="search"

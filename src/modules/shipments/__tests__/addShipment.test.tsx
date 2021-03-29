@@ -30,21 +30,21 @@ describe('Adding shipments', () => {
 
   test('AddShipment button should be found', async () => {
     process.env.TEST_ENV = 'mobile'
-    const { findByA11yLabel, getByTestId } = render(comp)
+    const { findByA11yLabel, getByTestId, findByTestId } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = getByTestId('AddShipment')
+    const AddShipment = findByTestId('AddShipment')
     expect(AddShipment).toBeTruthy()
   })
 
   test('AddShipment button should redirect to AddShipmentsOne', async () => {
     process.env.TEST_ENV = 'mobile'
-    const { findByA11yLabel, getByTestId, getAllByPlaceholderText } = render(
+    const { findByA11yLabel, findByTestId, getAllByPlaceholderText } = render(
       comp
     )
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = getByTestId('AddShipment')
+    const AddShipment = findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const BusinessID = getAllByPlaceholderText('Business ID')
     expect(BusinessID).toBeTruthy()
