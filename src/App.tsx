@@ -2,9 +2,10 @@ import { registerRootComponent } from 'expo'
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { useColorScheme } from 'react-native'
-import { Provider as PaperProvider } from 'react-native-paper'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import { useThemedColors } from './common/Themed'
 import ConfigSWR from './common/components/ConfigSWR'
 import { ActiveScreenContextProvider } from './common/hooks/useActiveScreen'
 import useCachedResources from './common/hooks/useCachedResources'
@@ -15,6 +16,15 @@ import Navigation from './navigation'
 export default function App(): null | JSX.Element {
   const isLoadingComplete = useCachedResources()
   const colorScheme = useColorScheme()
+  const themed = useThemedColors()
+
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      text: themed.text,
+    },
+  }
 
   if (!isLoadingComplete) {
     return null
@@ -25,7 +35,7 @@ export default function App(): null | JSX.Element {
           <DeviceTypeContextProvider>
             <ActiveScreenContextProvider>
               <AuthenticationProvider>
-                <PaperProvider>
+                <PaperProvider theme={theme}>
                   <Navigation colorScheme={colorScheme} />
                   <StatusBar />
                 </PaperProvider>
