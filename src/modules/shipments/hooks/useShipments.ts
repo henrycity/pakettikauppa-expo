@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import queryString from 'query-string'
 import useSWR from 'swr'
 
