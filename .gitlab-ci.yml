@@ -4,7 +4,7 @@ image: node:14.15.0-alpine
   rules:
     - if: '$CI_COMMIT_BRANCH && $CI_PIPELINE_SOURCE == "push" && $CI_OPEN_MERGE_REQUESTS' # When there's an open merge request, don't run the job on pushes
       when: never
-    - when: always  # Otherwise always run the job
+    - when: always # Otherwise always run the job
 
 stages:
   - lint
@@ -51,10 +51,10 @@ build-image:
 
 e2e-tests:
   stage: test
-  needs: ["build-image"]
+  needs: ['build-image']
   image: cypress/base:14.15.0
   variables:
-    HTTPS: "true" # Use HTTPS for backend
+    HTTPS: 'true' # Use HTTPS for backend
     FRONTEND_SERVICE_URL: https://expo:19006
     BACKEND_SERVICE_URL: https://backend:3000
     #EXPO_FIREBASE_CLIENT_ID: $EXPO_FIREBASE_CLIENT_ID # Redundant due to hardcoded value
