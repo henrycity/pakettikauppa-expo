@@ -90,7 +90,7 @@ const Column2 = ({ shipment }: { shipment: Shipment }) => {
   return (
     <View style={styles.column}>
       <Field name={t('receiver')} value={shipment.receiverName} />
-      <Field name={t('phoneNumber')} />
+      <Field name={t('phoneNumber')} value={shipment.receiverPhoneNumber} />
       <Field name={t('email')} value={shipment.receiverEmail} />
       <Field name={t('pickupPoint')} />
       <Field name={t('additionalServices')} />
@@ -103,7 +103,7 @@ const Column3 = ({ shipment }: { shipment: Shipment }) => {
 
   return (
     <View style={styles.column}>
-      <Field name={t('estimatedPrice')} />
+      <Field name={t('estimatedPrice')} value={shipment.price} />
       <Field name={t('actualPrice')} />
       <Field name={t('measuredWeight')} value={shipment.weight} />
       <Field name={t('measuredVolume')} />

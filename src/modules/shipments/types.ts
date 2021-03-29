@@ -98,11 +98,18 @@ type Submit = {
   type: 'submit'
 }
 
-type Back = {
-  type: 'back'
+type Sender = {
+  type: 'sender'
 }
 
-export type ActionType = Next | Previous | Submit | Back
+type Receiver = {
+  type: 'receiver'
+}
+
+type Other = {
+  type: 'other'
+}
+export type ActionType = Next | Previous | Submit | Sender | Receiver | Other
 
 export interface State {
   count: number

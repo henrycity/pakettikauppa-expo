@@ -51,7 +51,7 @@ export const BackButton = ({ dispatch }: BackButtonProps): JSX.Element => {
       accessibilityLabel="back"
       style={styles.button}
       onPress={() => {
-        dispatch({ type: 'back' })
+        dispatch({ type: 'sender' })
         navigation.navigate('ShipmentsScreen')
       }}
       text={t('back')}

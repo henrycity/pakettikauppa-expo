@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native'
 import { View } from '../../../common/Themed'
 import { PreviousButton, NextButton } from '../components/Buttons'
 import InputField from '../components/InputField'
+import PageIndicator from '../components/PageIndicator'
 import { FormDataTwo, ActionType } from '../types'
 import { styles } from './Styles'
 import { FieldsTwo } from './fields'
@@ -13,12 +14,14 @@ interface AddShipmentsTwoProps {
   dispatch: (value: ActionType) => void
   pageTwo: FormDataTwo
   setPageTwo: React.Dispatch<React.SetStateAction<FormDataTwo>>
+  page: number
 }
 
 export default function AddShipmentsTwo({
   dispatch,
   pageTwo,
   setPageTwo,
+  page,
 }: AddShipmentsTwoProps): JSX.Element {
   const { control, getValues } = useForm<FormDataTwo>()
 
@@ -29,6 +32,7 @@ export default function AddShipmentsTwo({
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
+      <PageIndicator dispatch={dispatch} page={page} onPress={onPress} />
       {FieldsTwo({ pageTwo }).map((field) => (
         <InputField
           key={field.name}
