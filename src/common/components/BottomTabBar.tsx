@@ -148,11 +148,12 @@ export function TabBarItem({
 const styles = StyleSheet.create({
   tabBar: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    height: 50,
+    justifyContent: 'space-between',
+    height: 75,
   },
   item: {
     flex: 1,
     alignItems: 'center',
+    paddingTop: 3,
   },
 })

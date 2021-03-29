@@ -1,0 +1,11 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "configurations": {
+    "ios.sim": {
+      "binaryPath": "bin/Exponent.app",
+      "type": "ios.simulator",
+      "name": "iPhone 7"
+    }
+  }
+}

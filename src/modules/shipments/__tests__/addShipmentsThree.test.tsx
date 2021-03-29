@@ -35,10 +35,14 @@ describe('Adding shipments', () => {
       getByTestId,
       getAllByPlaceholderText,
       getByText,
+      findByTestId,
     } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const ShipmentMenu = await getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const nextButton = await getByText('Next')
     fireEvent(nextButton, 'press')
@@ -64,10 +68,14 @@ describe('Adding shipments', () => {
       getByTestId,
       getAllByPlaceholderText,
       getByText,
+      findByTestId,
     } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const ShipmentMenu = await getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const nextButton = await getByText('Next')
     fireEvent(nextButton, 'press')
@@ -84,10 +92,14 @@ describe('Adding shipments', () => {
       getByTestId,
       getAllByPlaceholderText,
       getByText,
+      findByTestId,
     } = render(comp)
     const shipmentsLink = await findByA11yLabel('Tab bar link to Shipments')
     fireEvent(shipmentsLink, 'press')
-    const AddShipment = await getByTestId('AddShipment')
+    const ShipmentMenu = await getByTestId('Menu')
+    expect(ShipmentMenu).toBeTruthy()
+    fireEvent(ShipmentMenu, 'press')
+    const AddShipment = await findByTestId('AddShipment')
     fireEvent(AddShipment, 'press')
     const nextButtonOne = await getByText('Next')
     fireEvent(nextButtonOne, 'press')
