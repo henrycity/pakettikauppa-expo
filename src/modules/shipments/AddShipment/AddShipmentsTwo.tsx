@@ -43,7 +43,7 @@ export default function AddShipmentsTwo({
           <RNPickerSelect
             onValueChange={(value) => value}
             items={[
-              { label: 'Football', value: 'football' },
+              { label: 'Finland', value: 'Finland' },
               { label: 'Baseball', value: 'baseball' },
               { label: 'Hockey', value: 'hockey' },
             ]}

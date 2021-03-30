@@ -27,6 +27,7 @@ import AddShipmentsTwo from './AddShipmentsTwo'
 import { styles } from './Styles'
 import postShipment from './postShipment'
 
+const countries = ['Finland', 'Sweden', 'Russia']
 const pageOneInit = {
   businessID: '',
   senderAddress: '',
