@@ -89,6 +89,7 @@ export interface Shipment {
 export interface SearchInputProps {
   smallScreen: boolean
   setSearch: React.Dispatch<React.SetStateAction<string>>
+  search?: string
 }
 
 export interface SearchProps {
@@ -121,4 +122,9 @@ export type ValidatorError = {
   param: string
   value: string
   msg: string
+}
+
+export interface ShipmentListView {
+  isRefreshing: boolean
+  shipments: Shipment[]
 }

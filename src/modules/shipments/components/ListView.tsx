@@ -14,13 +14,13 @@ import { mutate } from 'swr'
 
 import Styles from '../../../common/Styles'
 import { Text, useThemedColors } from '../../../common/Themed'
-import Loading from '../../../common/components/Loading'
-import useShipments from '../hooks/useShipments'
-import { SearchProps, Shipment } from '../types'
+import { SearchProps, Shipment, ShipmentListView } from '../types'
 
-export default function ListView({ search }: SearchProps): JSX.Element {
+export default function ListView({
+  isRefreshing,
+  shipments,
+}: ShipmentListView): JSX.Element {
   const [selectedIds, setSelectedIds] = useState<number[]>([])
-  const { shipments, isLoading, isRefreshing } = useShipments(search)
 
   function addSelectedId(id: number) {
     const addId = [...selectedIds, id]
@@ -32,36 +32,30 @@ export default function ListView({ search }: SearchProps): JSX.Element {
   }
 
   return (
-    <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <FlatList
-          data={shipments}
-          contentContainerStyle={
-            Platform.OS === 'web' ? styles.containerWeb : styles.containerNative
-          }
-          keyExtractor={({ id }) => String(id)}
-          ListHeaderComponent={ShipmentsHeaderComponent}
-          ListFooterComponent={ShipmentsFooterComponent}
-          renderItem={({ item }) => (
-            <Hoverable>
-              {({ hovered }) => (
-                <ShipmentListItem
-                  shipment={item}
-                  hovered={hovered}
-                  addSelectedId={addSelectedId}
-                  removeSelectedId={removeSelectedId}
-                />
-              )}
-            </Hoverable>
+    <FlatList
+      data={shipments}
+      contentContainerStyle={
+        Platform.OS === 'web' ? styles.containerWeb : styles.containerNative
+      }
+      keyExtractor={({ id }) => String(id)}
+      ListHeaderComponent={ShipmentsHeaderComponent}
+      ListFooterComponent={ShipmentsFooterComponent}
+      renderItem={({ item }) => (
+        <Hoverable>
+          {({ hovered }) => (
+            <ShipmentListItem
+              shipment={item}
+              hovered={hovered}
+              addSelectedId={addSelectedId}
+              removeSelectedId={removeSelectedId}
+            />
           )}
-          refreshing={isRefreshing}
-          onRefresh={() => mutate('/shipments')}
-          testID="List Component"
-        />
+        </Hoverable>
       )}
-    </>
+      refreshing={isRefreshing}
+      onRefresh={() => mutate('/shipments')}
+      testID="List Component"
+    />
   )
 }
 
