@@ -15,25 +15,12 @@ export default function ShipmentsScreen(): JSX.Element {
   const screenIsSmallerThan700 = useBreakpoint(700)
   const [search, setSearch] = useState('')
 
-  const debouncedSearch = useDebounce(search, 100)
+  const debouncedSearch = useDebounce(search, 200)
 
-  console.log('debouncedSearch', debouncedSearch)
-
-  console.log(
-    'debouncedSearch',
-    debouncedSearch
-      ? `/shipments${
-          debouncedSearch && '?' + queryString.stringify({ debouncedSearch })
-        }`
-      : null
-  )
-
-  const { data: shipments, isValidating, error } = useSWR(() =>
-    debouncedSearch
-      ? `/shipments${
-          debouncedSearch && '?' + queryString.stringify({ debouncedSearch })
-        }`
-      : null
+  const { data: shipments, isValidating, error } = useSWR(
+    `/shipments${
+      debouncedSearch && '?' + queryString.stringify({ debouncedSearch })
+    }`
   )
 
   const isLoading = !error && !shipments
