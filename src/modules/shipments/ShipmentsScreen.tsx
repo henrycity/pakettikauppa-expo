@@ -17,6 +17,17 @@ export default function ShipmentsScreen(): JSX.Element {
 
   const debouncedSearch = useDebounce(search, 100)
 
+  console.log('debouncedSearch', debouncedSearch)
+
+  console.log(
+    'debouncedSearch',
+    debouncedSearch
+      ? `/shipments${
+          debouncedSearch && '?' + queryString.stringify({ debouncedSearch })
+        }`
+      : null
+  )
+
   const { data: shipments, isValidating, error } = useSWR(() =>
     debouncedSearch
       ? `/shipments${
