@@ -13,7 +13,6 @@ export default function AddShipmentsHeader({
   return (
     <View>
       <Text style={Styles.addShipmentTitle}>{t('createShipment')}</Text>
-      {subTitle && <Text>{subTitle}</Text>}
     </View>
   )
 }

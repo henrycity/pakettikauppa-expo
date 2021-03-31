@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ActivityIndicator } from 'react-native'
 import { mutate } from 'swr'
 
-import { View } from '../../../common/Themed'
+import { View, Text } from '../../../common/Themed'
 import BottomTabWrapper from '../../../common/components/BottomTabWrapper'
 import useDeviceType from '../../../common/hooks/useDeviceType'
 import { ShipmentsNavigationProp } from '../../../types'

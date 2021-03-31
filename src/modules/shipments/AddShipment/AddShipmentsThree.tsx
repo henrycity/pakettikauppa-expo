@@ -31,8 +31,11 @@ export default function AddShipmentsThree({
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollView}>
+    <ScrollView
+      contentContainerStyle={[styles.scrollView, styles.otherInfoStyle]}
+    >
       <PageIndicator dispatch={dispatch} page={page} onPress={onPress} />
+
       {FieldsThree({ pageThree }).map((field) => (
         <InputField
           key={field.name}

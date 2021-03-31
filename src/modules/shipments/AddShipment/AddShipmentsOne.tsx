@@ -31,7 +31,9 @@ export default function AddShipmentsOne({
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollView}>
+    <ScrollView
+      contentContainerStyle={[styles.scrollView, styles.senderInfoStyle]}
+    >
       <PageIndicator dispatch={dispatch} page={page} onPress={onPress} />
       {FieldsOne({ pageOne }).map((field) => (
         <InputField

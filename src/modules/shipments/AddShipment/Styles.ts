@@ -18,10 +18,22 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'stretch',
     justifyContent: 'space-around',
-    padding: 20,
-    minHeight: 650,
+    paddingHorizontal: 20,
+  },
+  senderInfoStyle: {
+    minHeight: 580,
+    maxHeight: 600,
+  },
+  receiverInfoStyle: {
+    minHeight: 510,
+    maxHeight: 535,
+  },
+  otherInfoStyle: {
+    minHeight: 450,
+    maxHeight: 465,
   },
   title: {
+    paddingLeft: '0.75em',
     fontSize: 20,
     fontWeight: 'bold',
   },
