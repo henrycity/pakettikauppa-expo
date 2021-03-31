@@ -1,3 +1,5 @@
+import {DebouncedFunc} from 'lodash'
+
 export type FormDataOne = {
   businessID: string
   senderName: string
@@ -88,7 +90,7 @@ export interface Shipment {
 
 export interface SearchInputProps {
   smallScreen: boolean
-  setSearch: React.Dispatch<React.SetStateAction<string>>
+  onSearch: DebouncedFunc<React.Dispatch<React.SetStateAction<string>>>
 }
 
 export interface SearchProps {

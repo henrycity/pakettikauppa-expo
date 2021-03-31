@@ -1,5 +1,4 @@
 import { Feather } from '@expo/vector-icons'
-import debounce from 'lodash.debounce'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, View, TextInput } from 'react-native'
@@ -10,7 +9,7 @@ import { SearchInputProps } from '../types'
 
 const SearchInput = ({
   smallScreen,
-  setSearch,
+  onSearch,
 }: SearchInputProps): JSX.Element => {
   const themed = useThemedColors()
   const { t } = useTranslation()
@@ -25,7 +24,7 @@ const SearchInput = ({
         ]}
         placeholder={t('search')}
         placeholderTextColor={themed.placeholder}
-        onChangeText={debounce(setSearch, 300, { trailing: true })}
+        onChangeText={onSearch}
       />
       <Feather
         name="search"
