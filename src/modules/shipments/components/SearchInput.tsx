@@ -1,7 +1,8 @@
 import { Feather } from '@expo/vector-icons'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, View, TextInput } from 'react-native'
+import { useDebounce } from 'use-debounce'
 
 import Styles from '../../../common/Styles'
 import { useThemedColors } from '../../../common/Themed'
@@ -9,10 +10,19 @@ import { SearchInputProps } from '../types'
 
 const SearchInput = ({
   smallScreen,
-  onSearch,
+  setSearch,
 }: SearchInputProps): JSX.Element => {
   const themed = useThemedColors()
   const { t } = useTranslation()
+
+  const [value, setValue] = useState('')
+
+  const [debouncedValue] = useDebounce(value, 350)
+
+  // Improve performance and minimize the amount of api calls by changing the search only when deobunced value changes
+  useEffect(() => {
+    setSearch(debouncedValue)
+  }, [debouncedValue])
 
   return (
     <View style={[styles.searchSection, { marginLeft: smallScreen ? 0 : 50 }]}>
@@ -24,7 +34,8 @@ const SearchInput = ({
         ]}
         placeholder={t('search')}
         placeholderTextColor={themed.placeholder}
-        onChangeText={onSearch}
+        onChangeText={setValue}
+        value={value}
       />
       <Feather
         name="search"
@@ -49,6 +60,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 43,
     width: 600,
     marginTop: 20,
+    paddingRight: 30,
   },
   searchIcon: {
     position: 'relative',
