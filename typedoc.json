@@ -1,9 +1,8 @@
 {
+  "entryPoints": "src",
+  "exclude": "**/__*__/*",
   "externalPattern": "node_modules/**",
   "excludeExternals": "true",
-  "excludeNotExported": "true",
   "out": "docs",
-  "mode": "modules",
-  "inputFiles": ["hooks/useAuthorization.tsx"],
   "readme": "README.md"
 }
