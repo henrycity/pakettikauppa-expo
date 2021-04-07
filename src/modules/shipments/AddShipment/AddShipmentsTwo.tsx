@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import RNPickerSelect from 'react-native-picker-select'
 
 import { View } from '../../../common/Themed'
 import { PreviousButton, NextButton } from '../components/Buttons'
 import InputField from '../components/InputField'
+import SelectionPicker from '../components/SelectionPicker'
+import { countryList } from '../constants/shipmentDetails'
 import { FormDataTwo, ActionType } from '../types'
 import { styles } from './Styles'
 import { FieldsTwo } from './fields'
@@ -28,6 +30,13 @@ export default function AddShipmentsTwo({
     setPageTwo(finalValues)
   }
 
+  const { t } = useTranslation('countries')
+
+  const countries = countryList.map((c) => ({
+    label: t(c.value),
+    value: c.value,
+  }))
+
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       {FieldsTwo({ pageTwo }).map((field) =>
@@ -40,13 +49,11 @@ export default function AddShipmentsTwo({
             name={field.name}
           />
         ) : (
-          <RNPickerSelect
-            onValueChange={(value) => value}
-            items={[
-              { label: 'Finland', value: 'Finland' },
-              { label: 'Baseball', value: 'baseball' },
-              { label: 'Hockey', value: 'hockey' },
-            ]}
+          <SelectionPicker
+            defaultValue={field.defaultValue}
+            control={control}
+            name={field.name}
+            items={countries}
           />
         )
       )}

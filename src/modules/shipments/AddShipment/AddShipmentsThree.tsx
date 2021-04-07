@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
-import RNPickerSelect from 'react-native-picker-select'
+import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native-web-hover'
 
 import { View } from '../../../common/Themed'
 import { PreviousButton, SubmitButton } from '../components/Buttons'
 import InputField from '../components/InputField'
+import SelectionPicker from '../components/SelectionPicker'
+import { shippingMethodList } from '../constants/shipmentDetails'
 import { FormDataThree, ActionType } from '../types'
 import { styles } from './Styles'
 import { FieldsThree } from './fields'
@@ -28,6 +30,13 @@ export default function AddShipmentsThree({
     setPageThree(finalValues)
   }
 
+  const { t } = useTranslation('shippingMethods')
+
+  const shippingMethods = shippingMethodList.map((c) => ({
+    label: t(c.value),
+    value: c.value,
+  }))
+
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       {FieldsThree({ pageThree }).map((field) =>
@@ -40,13 +49,11 @@ export default function AddShipmentsThree({
             name={field.name}
           />
         ) : (
-          <RNPickerSelect
-            onValueChange={(value) => value}
-            items={[
-              { label: 'Football', value: 'football' },
-              { label: 'Baseball', value: 'baseball' },
-              { label: 'Hockey', value: 'hockey' },
-            ]}
+          <SelectionPicker
+            defaultValue={field.defaultValue}
+            control={control}
+            name={field.name}
+            items={shippingMethods}
           />
         )
       )}

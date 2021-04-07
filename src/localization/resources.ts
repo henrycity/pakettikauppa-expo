@@ -81,6 +81,17 @@ const resources = {
       createdAt: 'Created at',
       transaction: 'Transaction',
     },
+    countries: {
+      finland: 'Finland',
+      sweden: 'Sweden',
+      estonia: 'Estonia',
+      russia: 'Russia',
+    },
+    shippingMethods: {
+      collectionPoint: 'Collection point parcel',
+      postParcel: 'Postal parcel',
+      nearParcel: 'Near parcel',
+    },
   },
   fi: {
     translation: {
@@ -160,6 +171,17 @@ const resources = {
       createdAt: 'Luotu',
       transaction: 'Lähetys',
     },
+    countries: {
+      finland: 'Suomi',
+      sweden: 'Ruotsi',
+      estonia: 'Viro',
+      russia: 'Venäjä',
+    },
+    shippingMethods: {
+      collectionPoint: 'Noutopistepaketti',
+      postParcel: 'Postipaketti',
+      nearParcel: 'Lähellä-paketti',
+    },
   },
   se: {
     translation: {
@@ -215,9 +237,20 @@ const resources = {
       deliveryCompany: 'Leveransföretag',
       status: 'Status',
       reference: 'Referens',
-      latestEvent: 'Senaste eventet',
+      latestEvent: 'Senaste händelsen',
       invoiceNumber: 'Fakturanummer',
-      shippingMethod: 'Frakt method',
+      shippingMethod: 'Fraktmetod',
+    },
+    countries: {
+      finland: 'Finland',
+      sweden: 'Sverige',
+      estonia: 'Estland',
+      russia: 'Ryssland',
+    },
+    shippingMethods: {
+      collectionPoint: 'Collection point paket',
+      postParcel: 'Postpaket',
+      nearParcel: 'Närpaket',
     },
   },
 }
