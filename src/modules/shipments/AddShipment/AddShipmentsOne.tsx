@@ -36,7 +36,6 @@ export default function AddShipmentsOne({
     label: t(c.value),
     value: c.value,
   }))
-
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       {FieldsOne({ pageOne }).map((field) =>
