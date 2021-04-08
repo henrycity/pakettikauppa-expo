@@ -1,8 +1,8 @@
 export const countryList = [
-  { value: 'finland' },
-  { value: 'sweden' },
-  { value: 'estonia' },
-  { value: 'russia' },
+  { value: 'FI' },
+  { value: 'SE' },
+  { value: 'EE' },
+  { value: 'RU' },
 ]
 
 export const shippingMethodList = [

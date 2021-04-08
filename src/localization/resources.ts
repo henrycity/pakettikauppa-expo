@@ -82,10 +82,10 @@ const resources = {
       transaction: 'Transaction',
     },
     countries: {
-      finland: 'Finland',
-      sweden: 'Sweden',
-      estonia: 'Estonia',
-      russia: 'Russia',
+      FI: 'Finland',
+      SE: 'Sweden',
+      EE: 'Estonia',
+      RU: 'Russia',
     },
     shippingMethods: {
       collectionPoint: 'Collection point parcel',
@@ -172,10 +172,10 @@ const resources = {
       transaction: 'Lähetys',
     },
     countries: {
-      finland: 'Suomi',
-      sweden: 'Ruotsi',
-      estonia: 'Viro',
-      russia: 'Venäjä',
+      FI: 'Suomi',
+      SE: 'Ruotsi',
+      EE: 'Viro',
+      RU: 'Venäjä',
     },
     shippingMethods: {
       collectionPoint: 'Noutopistepaketti',
@@ -242,10 +242,10 @@ const resources = {
       shippingMethod: 'Fraktmetod',
     },
     countries: {
-      finland: 'Finland',
-      sweden: 'Sverige',
-      estonia: 'Estland',
-      russia: 'Ryssland',
+      FI: 'Finland',
+      SE: 'Sverige',
+      EE: 'Estland',
+      RU: 'Ryssland',
     },
     shippingMethods: {
       collectionPoint: 'Collection point paket',
