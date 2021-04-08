@@ -50,6 +50,7 @@ export default function AddShipmentsTwo({
           />
         ) : (
           <SelectionPicker
+            key={field.name}
             defaultValue={field.defaultValue}
             control={control}
             name={field.name}

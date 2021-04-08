@@ -31,7 +31,7 @@ const pageOneInit = {
   businessID: '',
   senderAddress: '',
   senderCity: '',
-  senderCountry: '',
+  senderCountry: 'FI',
   senderEmail: '',
   senderName: '',
   senderPhoneNumber: '',
@@ -41,7 +41,7 @@ const pageOneInit = {
 const pageTwoInit = {
   receiverAddress: '',
   receiverCity: '',
-  receiverCountry: '',
+  receiverCountry: 'FI',
   receiverEmail: '',
   receiverName: '',
   receiverPhoneNumber: '',
