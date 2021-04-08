@@ -1,3 +1,6 @@
+import { StyleProp, ViewStyle } from 'react-native'
+import { DebouncedState } from 'use-debounce/lib/useDebouncedCallback'
+
 export type FormDataOne = {
   businessID: string
   senderName: string
@@ -84,6 +87,15 @@ export interface Shipment {
   latestEvent: string
   status: string
   price: string
+}
+
+export interface SearchInputProps {
+  style: StyleProp<ViewStyle>
+  onSearch: DebouncedState<React.Dispatch<React.SetStateAction<string>>>
+}
+
+export interface SearchProps {
+  search: string
 }
 
 type Next = {

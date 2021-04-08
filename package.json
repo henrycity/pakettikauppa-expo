@@ -52,6 +52,7 @@
     "googleapis": "^66.0.0",
     "i18next": "^19.8.4",
     "jest-enzyme": "^7.1.2",
+    "query-string": "^7.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.15.1",
@@ -66,6 +67,7 @@
     "react-native-web": "^0.14.9",
     "react-native-web-hover": "^0.2.9",
     "swr": "^0.3.9",
+    "use-debounce": "^6.0.0",
     "yarn": "^1.22.10"
   },
   "devDependencies": {

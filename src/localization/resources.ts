@@ -17,7 +17,7 @@ const resources = {
       email: 'Email:',
       submit: 'Submit',
       close: 'Close',
-      vatID: 'Vat ID',
+      vatID: 'Vat ID:',
       loginText: 'Log in or register with a Google account',
       newShipment: 'New shipment',
       pickup: 'Pickup orders',
@@ -49,6 +49,7 @@ const resources = {
       language: 'Language',
       selection: 'English',
       shipmentAdded: 'Shipment added!',
+      search: 'Search',
     },
     shipments: {
       createdOn: 'Date',
@@ -128,6 +129,7 @@ const resources = {
       createShipment: 'Luo uusi lähetys',
       language: 'Kieli',
       selection: 'Suomi',
+      search: 'Hae',
     },
     shipments: {
       createdOn: 'Päivämäärä',
@@ -203,6 +205,7 @@ const resources = {
       receiver: 'Mottagarinformation',
       other: 'Annan information',
       createShipment: 'Skapa leverans',
+      search: 'Sök',
       language: 'Språk',
     },
     shipments: {

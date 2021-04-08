@@ -1,15 +1,18 @@
+import queryString from 'query-string'
 import useSWR from 'swr'
 
 import { Shipment } from '../types'
 
-interface UseShipments {
+interface UseShipmentsReturnType {
   shipments: Shipment[] | undefined
   isLoading: boolean
   isRefreshing: boolean
 }
 
-const useShipments = (): UseShipments => {
-  const { data, error, isValidating } = useSWR<Shipment[]>('/shipments')
+const useShipments = (search: string): UseShipmentsReturnType => {
+  const { data, error, isValidating } = useSWR<Shipment[]>(
+    `/shipments${search && '?' + queryString.stringify({ search })}`
+  )
   const isLoading = !error && !data
   const isRefreshing = Boolean(data && isValidating)
 
