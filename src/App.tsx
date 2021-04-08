@@ -23,6 +23,7 @@ export default function App(): null | JSX.Element {
     colors: {
       ...DefaultTheme.colors,
       text: themed.text,
+      surface: themed.background,
     },
   }
 

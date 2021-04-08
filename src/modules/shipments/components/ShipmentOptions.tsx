@@ -24,7 +24,7 @@ const ShipmentOptions = (): JSX.Element => {
         onDismiss={closeMenu}
         anchor={
           <Feather
-            name="more-vertical"
+            name="chevron-down"
             size={26}
             color={themed.buttonColor}
             onPress={openMenu}
@@ -39,23 +39,23 @@ const ShipmentOptions = (): JSX.Element => {
           }}
           title={t('newShipment')}
           testID="AddShipment"
-          titleStyle={[Styles.body, { color: themed.text }]}
+          titleStyle={Styles.body}
         />
         <Menu.Item
           title={t('pickup')}
           testID="pickup"
-          titleStyle={[Styles.body, { color: themed.text }]}
+          titleStyle={Styles.body}
         />
         <Menu.Item
           title={t('lineHaul')}
           testID="lineHaul"
-          titleStyle={[Styles.body, { color: themed.text }]}
+          titleStyle={Styles.body}
         />
         <Divider />
         <Menu.Item
           title={t('multipleLabels')}
           testID="multipleLabels"
-          titleStyle={[Styles.body]}
+          titleStyle={Styles.body}
           disabled
         />
         <Menu.Item
