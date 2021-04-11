@@ -6,9 +6,9 @@ export function handleIOSAndroidToken(idToken: string): Promise<void> {
   }
 }
 
-export default function useLogin() {
+export default function useLogin(): { login: jest.Mock; disabled: boolean } {
   return {
-    login: jest.fn,
+    login: jest.fn(),
     disabled: false,
   }
 }

@@ -5,8 +5,7 @@ import resources from '../resources'
 
 export { languages } from '../resources'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const useSelectedLanguage = () => ['en', (_selected: string) => {}]
+// export const useSelectedLanguage = () => ['en', (_selected: string) => {}]
 
 export async function initializeLocalization(): Promise<void> {
   i18n

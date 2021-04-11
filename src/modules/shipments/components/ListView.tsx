@@ -89,8 +89,12 @@ function ShipmentListItem({
   const color = hovered ? '#fff' : themed.text
 
   useEffect(() => {
-    checked ? addSelectedId(shipment.id) : removeSelectedId(shipment.id)
-  }, [checked])
+    if (checked) {
+      addSelectedId(shipment.id)
+    } else {
+      removeSelectedId(shipment.id)
+    }
+  }, [checked, addSelectedId, removeSelectedId, shipment])
 
   return (
     <TouchableOpacity

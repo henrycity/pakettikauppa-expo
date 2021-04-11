@@ -63,8 +63,12 @@ function Row({
     : themed.drawerBackground
 
   useEffect(() => {
-    checked ? addSelectedId(shipment.id) : removeSelectedId(shipment.id)
-  }, [checked])
+    if (checked) {
+      addSelectedId(shipment.id)
+    } else {
+      removeSelectedId(shipment.id)
+    }
+  }, [checked, addSelectedId, removeSelectedId, shipment])
 
   return (
     <TouchableOpacity
